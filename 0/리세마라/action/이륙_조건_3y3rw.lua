@@ -75,4 +75,10 @@ if shakur then
 else
  Print("¿¡¾î »þÄ¿ X")
 end
+if ship then
+ Print("°ñµå ½± O")
+else
+ Print("°ñµå ½± X")
+end
+Print(SSR_count)
 Print("------------------------------")

@@ -1,5 +1,5 @@
--- 히비키 이오리 하루나
-if hibiki and iori and haruna then
+-- SSR 개수 4개 이상
+if SSR_count >= 4 then
  SendKakaoTalk(0, "", true)
  Stop()
 end
