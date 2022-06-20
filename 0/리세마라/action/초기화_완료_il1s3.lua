@@ -12,3 +12,4 @@ creek = false
 sky = false
 teio = false
 falcon = false
+shakur = false

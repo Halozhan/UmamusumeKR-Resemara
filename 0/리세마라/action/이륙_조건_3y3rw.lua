@@ -70,4 +70,9 @@ if falcon then
 else
  Print("스마트 팔콘 X")
 end
+if shakur then
+ Print("에어 샤커 O")
+else
+ Print("에어 샤커 X")
+end
 Print("------------------------------")
