@@ -28,8 +28,8 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>22675975</PickPos>
-        <TWHandle>0x480A40</TWHandle>
+        <PickPos>32833850</PickPos>
+        <TWHandle>0xF0824</TWHandle>
         <TargetWnd.left>41</TargetWnd.left>
         <TargetWnd.top>56</TargetWnd.top>
         <TargetWnd.right>581</TargetWnd.right>
@@ -4083,32 +4083,6 @@
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
         </Image_156>
-        <Image_157>
-            <Name>선물_들어가기</Name>
-            <Rect>(502, 664, 2, 9)</Rect>
-            <ROI>(502, 664, 2, 9)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>9175040</Param1>
-            <Param2>15347</Param2>
-            <Param3>0</Param3>
-            <Param4>1655731767</Param4>
-            <Enable>1</Enable>
-            <Group>2</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>1</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 0 0 0 0  3 1  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="3" Rand_y="1" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_2>
-        </Image_157>
         <Image_158>
             <Name>선물_일괄_수령</Name>
             <Rect>(344, 872, 85, 29)</Rect>
@@ -5733,5 +5707,31 @@
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
         </Image_216>
+        <Image_157>
+            <Name>선물_들어가기</Name>
+            <Rect>(502, 662, 1, 9)</Rect>
+            <ROI>(502, 662, 1, 9)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>9175040</Param1>
+            <Param2>15347</Param2>
+            <Param3>0</Param3>
+            <Param4>1655735195</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 -15 17 0 0  3 1  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-15" Coord_y1="17" Coord_x2="0" Coord_y2="0" Rand_x="3" Rand_y="1" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_157>
     </GENERAL>
 </ROOT>
