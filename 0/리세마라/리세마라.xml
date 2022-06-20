@@ -3107,13 +3107,13 @@
         </Image_117>
         <Image_118>
             <Name>레이스로</Name>
-            <Rect>(363, 851, 62, 95)</Rect>
-            <ROI>(363, 851, 62, 95)</ROI>
+            <Rect>(366, 837, 53, 22)</Rect>
+            <ROI>(348, 821, 82, 59)</ROI>
             <FullROI>0</FullROI>
-            <Param1>9633792</Param1>
-            <Param2>2964466</Param2>
+            <Param1>8126464</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655722475</Param4>
+            <Param4>1655744644</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3127,8 +3127,8 @@
             <Act_2>
                 <Name>마우스 입력</Name>
                 <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+                <Param>Mouse( 0 0 1  0 0 72 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="72" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_118>
         <Image_119>
@@ -4929,6 +4929,26 @@
                 <Attr LuaFile="초기화_완료_nyyvi" Text="EnableImage(false, &quot;초기화_완료&quot;)"/>
             </Act_4>
         </Image_189>
+        <Image_190>
+            <Name>SSR종류</Name>
+            <Rect>(0, 0, 0, 0)</Rect>
+            <ROI>(0, 0, 0, 0)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>0</Param1>
+            <Param2>0</Param2>
+            <Param3>0</Param3>
+            <Param4>0</Param4>
+            <Enable>0</Enable>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>1</ActCount>
+            <Act_1>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( SSR종류_xbvq0 -- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p )</Param>
+                <Attr LuaFile="SSR종류_xbvq0" Text="-- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p"/>
+            </Act_1>
+        </Image_190>
         <Image_191>
             <Name>이륙_조건</Name>
             <Rect>(0, 0, 0, 0)</Rect>
@@ -5893,25 +5913,5 @@
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
         </Image_219>
-        <Image_190>
-            <Name>SSR종류</Name>
-            <Rect>(0, 0, 0, 0)</Rect>
-            <ROI>(0, 0, 0, 0)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>0</Param1>
-            <Param2>0</Param2>
-            <Param3>0</Param3>
-            <Param4>0</Param4>
-            <Enable>0</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>1</ActCount>
-            <Act_1>
-                <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( SSR종류_xbvq0 -- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p )</Param>
-                <Attr LuaFile="SSR종류_xbvq0" Text="-- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p"/>
-            </Act_1>
-        </Image_190>
     </GENERAL>
 </ROOT>
