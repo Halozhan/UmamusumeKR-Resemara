@@ -1,0 +1,1 @@
+EnableImage(false, "¼³Á¤")
