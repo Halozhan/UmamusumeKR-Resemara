@@ -15,3 +15,4 @@ teio = false
 falcon = false
 shakur = false
 ship = false
+flower = false

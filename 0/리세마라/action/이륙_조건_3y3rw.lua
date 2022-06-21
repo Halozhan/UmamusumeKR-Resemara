@@ -80,5 +80,10 @@ if ship then
 else
  Print("골드 쉽 X")
 end
+if flower then
+ Print("니시노 플라워 O")
+else
+ Print("니시노 플라워 X")
+end
 Print(SSR_count)
 Print("------------------------------")
