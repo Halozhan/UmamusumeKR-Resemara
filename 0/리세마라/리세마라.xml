@@ -863,32 +863,6 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="22" Coord_y1="68" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_32>
-        <Image_33>
-            <Name>육성하기</Name>
-            <Rect>(375, 698, 68, 43)</Rect>
-            <ROI>(375, 698, 68, 43)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>8781824</Param1>
-            <Param2>277494</Param2>
-            <Param3>0</Param3>
-            <Param4>1655694161</Param4>
-            <Enable>1</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>1</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 -5 93 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-5" Coord_y1="93" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_2>
-        </Image_33>
         <Image_34>
             <Name>육성_시나리오를</Name>
             <Rect>(85, 657, 371, 52)</Rect>
@@ -915,32 +889,6 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="2" Coord_y1="225" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_34>
-        <Image_35>
-            <Name>예측불허의_꼬마</Name>
-            <Rect>(83, 641, 200, 24)</Rect>
-            <ROI>(83, 641, 200, 24)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>7536640</Param1>
-            <Param2>80882</Param2>
-            <Param3>0</Param3>
-            <Param4>1655694249</Param4>
-            <Enable>1</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>1</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 85 156 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="85" Coord_y1="156" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_2>
-        </Image_35>
         <Image_36>
             <Name>트윙클_시리즈에_도전</Name>
             <Rect>(77, 612, 389, 95)</Rect>
@@ -1721,32 +1669,6 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-81" Coord_y1="228" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_65>
-        <Image_66>
-            <Name>파란_역삼각형</Name>
-            <Rect>(452, 836, 29, 12)</Rect>
-            <ROI>(442, 820, 49, 44)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>11927552</Param1>
-            <Param2>80882</Param2>
-            <Param3>0</Param3>
-            <Param4>1655695344</Param4>
-            <Enable>1</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>1</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_2>
-        </Image_66>
         <Image_67>
             <Name>약속_물음표</Name>
             <Rect>(63, 612, 54, 24)</Rect>
@@ -6081,5 +6003,88 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="202" Coord_y1="281" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_3>
         </Image_6>
+        <Image_33>
+            <Name>육성하기</Name>
+            <Rect>(375, 698, 68, 43)</Rect>
+            <ROI>(375, 698, 68, 43)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>8781824</Param1>
+            <Param2>277494</Param2>
+            <Param3>0</Param3>
+            <Param4>1655694161</Param4>
+            <Enable>1</Enable>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 -5 93 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-5" Coord_y1="93" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_33>
+        <Image_35>
+            <Name>예측불허의_꼬마</Name>
+            <Rect>(83, 641, 200, 24)</Rect>
+            <ROI>(83, 641, 200, 24)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>7536640</Param1>
+            <Param2>80882</Param2>
+            <Param3>0</Param3>
+            <Param4>1655694249</Param4>
+            <Enable>1</Enable>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="95" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 85 156 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="85" Coord_y1="156" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_35>
+        <Image_66>
+            <Name>파란_역삼각형</Name>
+            <Rect>(452, 836, 29, 12)</Rect>
+            <ROI>(442, 820, 49, 44)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>11927552</Param1>
+            <Param2>80882</Param2>
+            <Param3>0</Param3>
+            <Param4>1655695344</Param4>
+            <Enable>1</Enable>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_66>
     </GENERAL>
+    <SO>
+        <CheckImageName>1</CheckImageName>
+        <CheckActTarget>1</CheckActTarget>
+        <CheckScriptText>1</CheckScriptText>
+    </SO>
 </ROOT>
