@@ -16,3 +16,4 @@ falcon = false
 shakur = false
 ship = false
 flower = false
+wonder = false

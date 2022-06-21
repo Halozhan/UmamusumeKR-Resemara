@@ -85,5 +85,10 @@ if flower then
 else
  Print("니시노 플라워 X")
 end
+if wonder then
+ Print("그래스 원더 O")
+else
+ Print("그래스 원더 X")
+end
 Print(SSR_count)
 Print("------------------------------")
