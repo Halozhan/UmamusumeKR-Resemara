@@ -17,7 +17,7 @@
         <Mdpi>96</Mdpi>
         <Tdpi>96</Tdpi>
         <AuthorID>test</AuthorID>
-        <IniDelimiter>689461966081453236</IniDelimiter>
+        <IniDelimiter>6894630801921452826</IniDelimiter>
     </MAIN>
     <TW>
         <TWAName>BlueStacks 1</TWAName>
@@ -28,7 +28,7 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>32047445</PickPos>
+        <PickPos>32833850</PickPos>
         <TWHandle>0xF0824</TWHandle>
         <TargetWnd.left>8</TargetWnd.left>
         <TargetWnd.top>43</TargetWnd.top>
@@ -319,7 +319,7 @@
             <Param1>9633792</Param1>
             <Param2>1129316</Param2>
             <Param3>0</Param3>
-            <Param4>1655692857</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -879,7 +879,7 @@
             <Param1>13434881</Param1>
             <Param2>1063914</Param2>
             <Param3>0</Param3>
-            <Param4>1655693977</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1075,7 +1075,7 @@
             <Param1>10420224</Param1>
             <Param2>5389266</Param2>
             <Param3>0</Param3>
-            <Param4>1655694323</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1127,7 +1127,7 @@
             <Param1>10878976</Param1>
             <Param2>408540</Param2>
             <Param3>0</Param3>
-            <Param4>1655694413</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1762,10 +1762,10 @@
             <Rect>(112, 553, 124, 17)</Rect>
             <ROI>(52, 393, 230, 365)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7340032</Param1>
+            <Param1>1048576</Param1>
             <Param2>343036</Param2>
             <Param3>0</Param3>
-            <Param4>1655695222</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1869,7 +1869,7 @@
             <Param1>13107201</Param1>
             <Param2>605117</Param2>
             <Param3>0</Param3>
-            <Param4>1655695395</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2259,7 +2259,7 @@
             <Param1>12517376</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655695915</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2285,7 +2285,7 @@
             <Param1>11927552</Param1>
             <Param2>736176</Param2>
             <Param3>0</Param3>
-            <Param4>1655695956</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2519,7 +2519,7 @@
             <Param1>11665408</Param1>
             <Param2>80794</Param2>
             <Param3>0</Param3>
-            <Param4>1655696166</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2649,7 +2649,7 @@
             <Param1>7143424</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696301</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3625,7 +3625,7 @@
             <Param1>9633792</Param1>
             <Param2>3161050</Param2>
             <Param3>0</Param3>
-            <Param4>1655705808</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3870,10 +3870,10 @@
             <Rect>(236, 897, 33, 33)</Rect>
             <ROI>(0, 800, 536, 160)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14811137</Param1>
-            <Param2>1653736</Param2>
+            <Param1>2949120</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655709482</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4095,7 +4095,7 @@
             <Param1>5701632</Param1>
             <Param2>736166</Param2>
             <Param3>0</Param3>
-            <Param4>1655699240</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4305,7 +4305,7 @@
             <Param1>10354688</Param1>
             <Param2>211744</Param2>
             <Param3>0</Param3>
-            <Param4>1655714821</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4377,8 +4377,14 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 도감_닫기_1f19j EnableImage(false, "메뉴로")\n EnableImage(false, "도감열기")\n EnableImage(true, "뽑기_이동")\n read_book = true )</Param>
-                <Attr LuaFile="도감_닫기_1f19j" Text="EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;도감열기&quot;)\n EnableImage(true, &quot;뽑기_이동&quot;)\n read_book = true"/>
+                <Param>Script( 도감_닫기_1f19j EnableImage(false, "메뉴로")
+EnableImage(false, "도감열기")
+EnableImage(true, "뽑기_이동")
+read_book = true )</Param>
+                <Attr LuaFile="도감_닫기_1f19j" Text="EnableImage(false, &quot;메뉴로&quot;)
+EnableImage(false, &quot;도감열기&quot;)
+EnableImage(true, &quot;뽑기_이동&quot;)
+read_book = true"/>
             </Act_3>
         </Image_170>
         <Image_171>
@@ -4411,8 +4417,16 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 초기화_활성화_xhvw7 EnableImage(false, "시작")\n EnableImage(true, "게임_닫기")\n EnableImage(true, "설정")\n \n EnableImage(false, "초기화_활성화") )</Param>
-                <Attr LuaFile="초기화_활성화_xhvw7" Text="EnableImage(false, &quot;시작&quot;)\n EnableImage(true, &quot;게임_닫기&quot;)\n EnableImage(true, &quot;설정&quot;)\n \n EnableImage(false, &quot;초기화_활성화&quot;)"/>
+                <Param>Script( 초기화_활성화_xhvw7 EnableImage(false, "시작")
+EnableImage(true, "게임_닫기")
+EnableImage(true, "설정")
+
+EnableImage(false, "초기화_활성화") )</Param>
+                <Attr LuaFile="초기화_활성화_xhvw7" Text="EnableImage(false, &quot;시작&quot;)
+EnableImage(true, &quot;게임_닫기&quot;)
+EnableImage(true, &quot;설정&quot;)
+
+EnableImage(false, &quot;초기화_활성화&quot;)"/>
             </Act_1>
         </Image_172>
         <Image_173>
@@ -4463,8 +4477,10 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 모두_지우기_c0b16 EnableImage(false, "게임_닫기")\n EnableImage(false, "카카오_게임_닫기") )</Param>
-                <Attr LuaFile="모두_지우기_c0b16" Text="EnableImage(false, &quot;게임_닫기&quot;)\n EnableImage(false, &quot;카카오_게임_닫기&quot;)"/>
+                <Param>Script( 모두_지우기_c0b16 EnableImage(false, "게임_닫기")
+EnableImage(false, "카카오_게임_닫기") )</Param>
+                <Attr LuaFile="모두_지우기_c0b16" Text="EnableImage(false, &quot;게임_닫기&quot;)
+EnableImage(false, &quot;카카오_게임_닫기&quot;)"/>
             </Act_3>
         </Image_174>
         <Image_175>
@@ -4787,8 +4803,14 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 연동_성공_70aa1 EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "계정_정보") )</Param>
-                <Attr LuaFile="연동_성공_70aa1" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
+                <Param>Script( 연동_성공_70aa1 EnableImage(true, "카카오_초기화_활성화")
+
+EnableImage(false, "메뉴로")
+EnableImage(false, "계정_정보") )</Param>
+                <Attr LuaFile="연동_성공_70aa1" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)
+
+EnableImage(false, &quot;메뉴로&quot;)
+EnableImage(false, &quot;계정_정보&quot;)"/>
             </Act_4>
         </Image_186>
         <Image_187>
@@ -4819,8 +4841,14 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 연동됨을_확인_3i4hw EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "계정_정보") )</Param>
-                <Attr LuaFile="연동됨을_확인_3i4hw" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
+                <Param>Script( 연동됨을_확인_3i4hw EnableImage(true, "카카오_초기화_활성화")
+
+EnableImage(false, "메뉴로")
+EnableImage(false, "계정_정보") )</Param>
+                <Attr LuaFile="연동됨을_확인_3i4hw" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)
+
+EnableImage(false, &quot;메뉴로&quot;)
+EnableImage(false, &quot;계정_정보&quot;)"/>
             </Act_3>
         </Image_187>
         <Image_188>
@@ -4853,8 +4881,16 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 카카오_초기화_활성화_7487j EnableImage(false, "시작")\n EnableImage(true, "카카오_게임_닫기")\n EnableImage(true, "크롬")\n \n EnableImage(false, "카카오_초기화_활성화") )</Param>
-                <Attr LuaFile="카카오_초기화_활성화_7487j" Text="EnableImage(false, &quot;시작&quot;)\n EnableImage(true, &quot;카카오_게임_닫기&quot;)\n EnableImage(true, &quot;크롬&quot;)\n \n EnableImage(false, &quot;카카오_초기화_활성화&quot;)"/>
+                <Param>Script( 카카오_초기화_활성화_7487j EnableImage(false, "시작")
+EnableImage(true, "카카오_게임_닫기")
+EnableImage(true, "크롬")
+
+EnableImage(false, "카카오_초기화_활성화") )</Param>
+                <Attr LuaFile="카카오_초기화_활성화_7487j" Text="EnableImage(false, &quot;시작&quot;)
+EnableImage(true, &quot;카카오_게임_닫기&quot;)
+EnableImage(true, &quot;크롬&quot;)
+
+EnableImage(false, &quot;카카오_초기화_활성화&quot;)"/>
             </Act_1>
         </Image_189>
         <Image_190>
@@ -4960,10 +4996,10 @@
             <Rect>(225, 385, 88, 19)</Rect>
             <ROI>(182, 356, 165, 76)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16711681</Param1>
+            <Param1>1048576</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655726659</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5165,8 +5201,14 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 초기화_완료_6sq6s EnableImage(true, "시작")\n \n EnableImage(false, "크롬")\n read_book = false )</Param>
-                <Attr LuaFile="초기화_완료_6sq6s" Text="EnableImage(true, &quot;시작&quot;)\n \n EnableImage(false, &quot;크롬&quot;)\n read_book = false"/>
+                <Param>Script( 초기화_완료_6sq6s EnableImage(true, "시작")
+
+EnableImage(false, "크롬")
+read_book = false )</Param>
+                <Attr LuaFile="초기화_완료_6sq6s" Text="EnableImage(true, &quot;시작&quot;)
+
+EnableImage(false, &quot;크롬&quot;)
+read_book = false"/>
             </Act_1>
             <Act_2>
                 <Name>키보드 입력</Name>
@@ -5177,14 +5219,52 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 초기화_완료_il1s3 SSR_count = 0\n pasa = false\n city = false\n motion = false\n pegasus = false\n bakushin = false\n week = false\n fujin = false\n tazuna = false\n cross = false\n suzuka = false\n creek = false\n sk )</Param>
-                <Attr LuaFile="초기화_완료_il1s3" Text="SSR_count = 0\n pasa = false\n city = false\n motion = false\n pegasus = false\n bakushin = false\n week = false\n fujin = false\n tazuna = false\n cross = false\n suzuka = false\n creek = false\n sk"/>
+                <Param>Script( 초기화_완료_il1s3 SSR_count = 0
+pasa = false
+city = false
+motion = false
+pegasus = false
+bakushin = false
+week = false
+fujin = false
+tazuna = false
+cross = false
+suzuka = false
+creek = false
+sky = false
+teio = false
+f )</Param>
+                <Attr LuaFile="초기화_완료_il1s3" Text="SSR_count = 0
+pasa = false
+city = false
+motion = false
+pegasus = false
+bakushin = false
+week = false
+fujin = false
+tazuna = false
+cross = false
+suzuka = false
+creek = false
+sky = false
+teio = false
+f"/>
             </Act_3>
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 초기화_완료_nyyvi -- 튜토리얼 끄기\n EnableImage(false, "튜토리얼1")\n EnableImage(false, "튜토리얼2")\n EnableImage(false, "튜토리얼3")\n EnableImage(false, "튜토리얼4")\n EnableImage(false, "튜토리얼5") )</Param>
-                <Attr LuaFile="초기화_완료_nyyvi" Text="-- 튜토리얼 끄기\n EnableImage(false, &quot;튜토리얼1&quot;)\n EnableImage(false, &quot;튜토리얼2&quot;)\n EnableImage(false, &quot;튜토리얼3&quot;)\n EnableImage(false, &quot;튜토리얼4&quot;)\n EnableImage(false, &quot;튜토리얼5&quot;)"/>
+                <Param>Script( 초기화_완료_nyyvi -- 튜토리얼 끄기
+EnableImage(false, "튜토리얼1")
+EnableImage(false, "튜토리얼2")
+EnableImage(false, "튜토리얼3")
+EnableImage(false, "튜토리얼4")
+EnableImage(false, "튜토리얼5") )</Param>
+                <Attr LuaFile="초기화_완료_nyyvi" Text="-- 튜토리얼 끄기
+EnableImage(false, &quot;튜토리얼1&quot;)
+EnableImage(false, &quot;튜토리얼2&quot;)
+EnableImage(false, &quot;튜토리얼3&quot;)
+EnableImage(false, &quot;튜토리얼4&quot;)
+EnableImage(false, &quot;튜토리얼5&quot;)"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
@@ -5209,8 +5289,32 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( SSR종류_xbvq0 -- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p )</Param>
-                <Attr LuaFile="SSR종류_xbvq0" Text="-- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p"/>
+                <Param>Script( SSR종류_xbvq0 -- 뽑힌 캐릭터 종류 개수
+SSR_count = 0
+if pasa then
+ SSR_count = SSR_count + 1
+end
+if city then
+ SSR_count = SSR_count + 1
+end
+if motion then
+ SSR_count = SSR_count + 1
+end
+if pegasus then
+ SSR_count )</Param>
+                <Attr LuaFile="SSR종류_xbvq0" Text="-- 뽑힌 캐릭터 종류 개수
+SSR_count = 0
+if pasa then
+ SSR_count = SSR_count + 1
+end
+if city then
+ SSR_count = SSR_count + 1
+end
+if motion then
+ SSR_count = SSR_count + 1
+end
+if pegasus then
+ SSR_count"/>
             </Act_1>
         </Image_202>
         <Image_203>
@@ -5229,44 +5333,118 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_3y3rw -- 뽑힌 캐릭터 8초 간격으로 출력\n Print("------------------------------")\n if pasa then\n  Print("엘 콘도르 파사 O")\n else\n  Print("엘 콘도르 파사 X")\n end\n if city then\n  Print("골드 시티 O") )</Param>
-                <Attr LuaFile="이륙_조건_3y3rw" Text="-- 뽑힌 캐릭터 8초 간격으로 출력\n Print(&quot;------------------------------&quot;)\n if pasa then\n  Print(&quot;엘 콘도르 파사 O&quot;)\n else\n  Print(&quot;엘 콘도르 파사 X&quot;)\n end\n if city then\n  Print(&quot;골드 시티 O&quot;)"/>
+                <Param>Script( 이륙_조건_3y3rw -- 뽑힌 캐릭터 8초 간격으로 출력
+Print("------------------------------")
+if pasa then
+ Print("엘 콘도르 파사 O")
+else
+ Print("엘 콘도르 파사 X")
+end
+if city then
+ Print("골드 시티 O")
+else
+ Print(" )</Param>
+                <Attr LuaFile="이륙_조건_3y3rw" Text="-- 뽑힌 캐릭터 8초 간격으로 출력
+Print(&quot;------------------------------&quot;)
+if pasa then
+ Print(&quot;엘 콘도르 파사 O&quot;)
+else
+ Print(&quot;엘 콘도르 파사 X&quot;)
+end
+if city then
+ Print(&quot;골드 시티 O&quot;)
+else
+ Print(&quot;"/>
             </Act_1>
             <Act_2>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_w24w9 -- SSR 개수 5개 이상\n if SSR_count == nil then\n   SSR_count = 0\n end\n if SSR_count &gt;= 5 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_w24w9" Text="-- SSR 개수 5개 이상\n if SSR_count == nil then\n   SSR_count = 0\n end\n if SSR_count &gt;= 5 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_w24w9 -- SSR 개수 5개 이상
+if SSR_count == nil then
+  SSR_count = 0
+end
+if SSR_count &gt;= 5 then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_w24w9" Text="-- SSR 개수 5개 이상
+if SSR_count == nil then
+  SSR_count = 0
+end
+if SSR_count &gt;= 5 then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_2>
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_4j0zg -- 파인 타즈나 슈퍼크릭\n if motion and creek and tazuna then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_4j0zg" Text="-- 파인 타즈나 슈퍼크릭\n if motion and creek and tazuna then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_4j0zg -- 파인 타즈나 슈퍼크릭
+if motion and creek and tazuna then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_4j0zg" Text="-- 파인 타즈나 슈퍼크릭
+if motion and creek and tazuna then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_3>
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_laspj -- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_laspj -- 모션 타즈나
+if motion and tazuna then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 타즈나
+if motion and tazuna then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_uovul -- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_uovul" Text="-- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_uovul -- 모션 크릭
+if motion and creek then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_uovul" Text="-- 모션 크릭
+if motion and creek then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_5>
             <Act_6>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 이륙_조건_zqt6u -- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_zqt6u -- 파인 페가
+if motion and pegasus then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 페가
+if motion and pegasus then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_6>
             <Act_7>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 이륙_조건_9mada -- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_9mada" Text="-- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_9mada -- 모션 박신
+if motion and bakushin then
+ SendKakaoTalk(0, "", true)
+ Stop()
+end )</Param>
+                <Attr LuaFile="이륙_조건_9mada" Text="-- 모션 박신
+if motion and bakushin then
+ SendKakaoTalk(0, &quot;&quot;, true)
+ Stop()
+end"/>
             </Act_7>
         </Image_203>
         <Image_204>
@@ -5739,7 +5917,7 @@
             <Param1>12845056</Param1>
             <Param2>80457</Param2>
             <Param3>0</Param3>
-            <Param4>1655732627</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5783,7 +5961,7 @@
             <Param1>12713984</Param1>
             <Param2>408305</Param2>
             <Param3>0</Param3>
-            <Param4>1655732931</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6047,7 +6225,7 @@
             <Param1>13434881</Param1>
             <Param2>5782255</Param2>
             <Param3>0</Param3>
-            <Param4>1655747970</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6135,7 +6313,7 @@
             <Param1>11993088</Param1>
             <Param2>277490</Param2>
             <Param3>0</Param3>
-            <Param4>1655802055</Param4>
+            <Param4>1655835204</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6341,20 +6519,54 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 쥬얼_부족_kb1p9 -- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, "뽑기_이동")\n EnableImage(true, "메뉴로")\n EnableImage(true, "계정_정보") )</Param>
-                <Attr LuaFile="쥬얼_부족_kb1p9" Text="-- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, &quot;뽑기_이동&quot;)\n EnableImage(true, &quot;메뉴로&quot;)\n EnableImage(true, &quot;계정_정보&quot;)"/>
+                <Param>Script( 쥬얼_부족_kb1p9 -- 카카오판 도감 미열람 초기화
+-- 쥬얼이 부족할 떄 이 밑에 not 지우기
+EnableImage(false, "뽑기_이동")
+EnableImage(true, "메뉴로")
+EnableImage(true, "계정_정보") )</Param>
+                <Attr LuaFile="쥬얼_부족_kb1p9" Text="-- 카카오판 도감 미열람 초기화
+-- 쥬얼이 부족할 떄 이 밑에 not 지우기
+EnableImage(false, &quot;뽑기_이동&quot;)
+EnableImage(true, &quot;메뉴로&quot;)
+EnableImage(true, &quot;계정_정보&quot;)"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 쥬얼_부족_2bngo -- 게스트판 초기화\n if read_book then\n   EnableImage(true, "초기화_활성화")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n end )</Param>
-                <Attr LuaFile="쥬얼_부족_2bngo" Text="-- 게스트판 초기화\n if read_book then\n   EnableImage(true, &quot;초기화_활성화&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n end"/>
+                <Param>Script( 쥬얼_부족_2bngo -- 게스트판 초기화
+if read_book then
+  EnableImage(true, "초기화_활성화")
+else
+  EnableImage(false, "뽑기_이동")
+  EnableImage(true, "메뉴로")
+end )</Param>
+                <Attr LuaFile="쥬얼_부족_2bngo" Text="-- 게스트판 초기화
+if read_book then
+  EnableImage(true, &quot;초기화_활성화&quot;)
+else
+  EnableImage(false, &quot;뽑기_이동&quot;)
+  EnableImage(true, &quot;메뉴로&quot;)
+end"/>
             </Act_5>
             <Act_6>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화\n if read_book then\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "계정_정보")\n else\n --  EnableImage(false, "뽑기_이동")\n --  Enable )</Param>
-                <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화\n if read_book then\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;계정_정보&quot;)\n else\n --  EnableImage(false, &quot;뽑기_이동&quot;)\n --  Enable"/>
+                <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화
+if read_book then
+  EnableImage(false, "뽑기_이동")
+  EnableImage(true, "메뉴로")
+  EnableImage(true, "계정_정보")
+else
+--  EnableImage(false, "뽑기_이동")
+--  EnableImage(true, " )</Param>
+                <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화
+if read_book then
+  EnableImage(false, &quot;뽑기_이동&quot;)
+  EnableImage(true, &quot;메뉴로&quot;)
+  EnableImage(true, &quot;계정_정보&quot;)
+else
+--  EnableImage(false, &quot;뽑기_이동&quot;)
+--  EnableImage(true, &quot;"/>
             </Act_6>
         </Image_231>
         <Image_232>
@@ -6431,8 +6643,26 @@
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
-                <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
+                <Param>Script( 잠수_boe7f -- set/get delay timer
+function setClock()
+    return os.clock()
+end
+
+function getClock(clock)
+    if clock ~= nil then
+        return os.clock() - clock
+    else
+        print(clock..' is null value )</Param>
+                <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer
+function setClock()
+    return os.clock()
+end
+
+function getClock(clock)
+    if clock ~= nil then
+        return os.clock() - clock
+    else
+        print(clock..&apos; is null value"/>
             </Act_1>
         </Image_234>
         <Image_235>
