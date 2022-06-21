@@ -13,8 +13,8 @@ end
 
 
 -- 앱 동작 정지 감시 판단 시간, 검사 간격 (단위:초)
-STOP_JUDGE_SV = 90
-STOP_CHECK_PERIOD_SV = 20
+STOP_JUDGE_SV = 40
+STOP_CHECK_PERIOD_SV = 5
 
 -- 사용하는 앱의 해상도나 사이즈에 따라 변경 필수! 가로폭, 높이(w,h)
 local screen_size = {w = 540, h = 960}
