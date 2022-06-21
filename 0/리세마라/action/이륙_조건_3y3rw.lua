@@ -90,5 +90,10 @@ if wonder then
 else
  Print("그래스 원더 X")
 end
+if ticket then
+ Print("위닝 티켓 O")
+else
+ Print("위닝 티켓 X")
+end
 Print(SSR_count)
 Print("------------------------------")

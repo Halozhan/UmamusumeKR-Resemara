@@ -17,3 +17,4 @@ shakur = false
 ship = false
 flower = false
 wonder = false
+ticket = false
