@@ -95,5 +95,10 @@ if ticket then
 else
  Print("위닝 티켓 X")
 end
+if vodka then
+ Print("보드카 O")
+else
+ Print("보드카 X")
+end
 Print(SSR_count)
 Print("------------------------------")

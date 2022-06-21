@@ -44,7 +44,7 @@
         <CaptureMode>1</CaptureMode>
         <ReactSpeed>0</ReactSpeed>
         <InputType>1</InputType>
-        <ImageCount>230</ImageCount>
+        <ImageCount>231</ImageCount>
         <Image_1>
             <Name>스킵</Name>
             <Rect>(474, 897, 33, 30)</Rect>
@@ -5053,6 +5053,32 @@
                 <Attr LuaFile="카카오_확인_fyqmj" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
             </Act_3>
         </Image_194>
+        <Image_195>
+            <Name>초기화_확인</Name>
+            <Rect>(18, 241, 276, 322)</Rect>
+            <ROI>(1, 190, 315, 402)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>16449537</Param1>
+            <Param2>11811783</Param2>
+            <Param3>0</Param3>
+            <Param4>1655803847</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="99" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 초기화_확인_tp561 EnableImage(true, "초기화_완료") )</Param>
+                <Attr LuaFile="초기화_확인_tp561" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
+            </Act_2>
+        </Image_195>
         <Image_196>
             <Name>초기화_완료</Name>
             <Rect>(0, 0, 0, 0)</Rect>
@@ -6070,6 +6096,50 @@
             </Act_5>
         </Image_220>
         <Image_221>
+            <Name>보드카</Name>
+            <Rect>(10, 712, 373, 149)</Rect>
+            <ROI>(10, 712, 373, 149)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>12910592</Param1>
+            <Param2>539320</Param2>
+            <Param3>0</Param3>
+            <Param4>1655804865</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>5</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>딜레이(지연)</Name>
+                <Enable>1</Enable>
+                <Param>Delay( 0 2.000000 0 0 0.000000 )</Param>
+                <Attr DelayMin="0" DelaySec="2" CheckDelayRand="0" DelayRandMin="0" DelayRandSec="0"/>
+            </Act_2>
+            <Act_3>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_3>
+            <Act_4>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 보드카_v1qmz vodka = true )</Param>
+                <Attr LuaFile="보드카_v1qmz" Text="vodka = true"/>
+            </Act_4>
+            <Act_5>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 보드카_93d68 SSR_count = SSR_count + 1 )</Param>
+                <Attr LuaFile="보드카_93d68" Text="SSR_count = SSR_count + 1"/>
+            </Act_5>
+        </Image_221>
+        <Image_222>
             <Name>뽑기.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6082,8 +6152,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_221>
-        <Image_222>
+        </Image_222>
+        <Image_223>
             <Name>뽑기_이동</Name>
             <Rect>(485, 588, 44, 119)</Rect>
             <ROI>(485, 588, 44, 119)</ROI>
@@ -6108,8 +6178,8 @@
                 <Param>Mouse( 0 0 1  0 -24 274 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-24" Coord_y1="274" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_222>
-        <Image_223>
+        </Image_223>
+        <Image_224>
             <Name>3확정</Name>
             <Rect>(169, 543, 197, 68)</Rect>
             <ROI>(169, 543, 197, 68)</ROI>
@@ -6134,8 +6204,8 @@
                 <Param>Mouse( 0 0 1  0 -231 7 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-231" Coord_y1="7" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_223>
-        <Image_224>
+        </Image_224>
+        <Image_225>
             <Name>서포트_카드_뽑기</Name>
             <Rect>(177, 543, 140, 60)</Rect>
             <ROI>(177, 543, 140, 60)</ROI>
@@ -6160,8 +6230,8 @@
                 <Param>Mouse( 0 0 1  0 183 192 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="183" Coord_y1="192" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_224>
-        <Image_225>
+        </Image_225>
+        <Image_226>
             <Name>쥬얼_부족</Name>
             <Rect>(186, 562, 163, 21)</Rect>
             <ROI>(162, 543, 214, 54)</ROI>
@@ -6210,8 +6280,8 @@
                 <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화\n if read_book then\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "계정_정보")\n else\n --  EnableImage(false, "뽑기_이동")\n --  Enable )</Param>
                 <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화\n if read_book then\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;계정_정보&quot;)\n else\n --  EnableImage(false, &quot;뽑기_이동&quot;)\n --  Enable"/>
             </Act_6>
-        </Image_225>
-        <Image_226>
+        </Image_226>
+        <Image_227>
             <Name>쥬얼을_사용해_뽑기</Name>
             <Rect>(123, 357, 295, 46)</Rect>
             <ROI>(98, 345, 349, 133)</ROI>
@@ -6242,8 +6312,8 @@
                 <Param>Script( 쥬얼을_사용해_뽑기_v754s EnableImage(false, "스킵") )</Param>
                 <Attr LuaFile="쥬얼을_사용해_뽑기_v754s" Text="EnableImage(false, &quot;스킵&quot;)"/>
             </Act_3>
-        </Image_226>
-        <Image_227>
+        </Image_227>
+        <Image_228>
             <Name>한_번_더_뽑기</Name>
             <Rect>(324, 884, 120, 28)</Rect>
             <ROI>(300, 873, 163, 54)</ROI>
@@ -6268,8 +6338,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_227>
-        <Image_228>
+        </Image_228>
+        <Image_229>
             <Name>잠수</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6288,8 +6358,8 @@
                 <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
                 <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
             </Act_1>
-        </Image_228>
-        <Image_229>
+        </Image_229>
+        <Image_230>
             <Name>아무거나클릭</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6308,8 +6378,8 @@
                 <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
-        </Image_229>
-        <Image_230>
+        </Image_230>
+        <Image_231>
             <Name>임시_점검</Name>
             <Rect>(408, 544, 38, 29)</Rect>
             <ROI>(408, 544, 38, 29)</ROI>
@@ -6334,33 +6404,7 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_230>
-        <Image_195>
-            <Name>초기화_확인</Name>
-            <Rect>(18, 241, 276, 322)</Rect>
-            <ROI>(1, 190, 315, 402)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>16449537</Param1>
-            <Param2>11811783</Param2>
-            <Param3>0</Param3>
-            <Param4>1655803847</Param4>
-            <Enable>1</Enable>
-            <Group>2</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="99" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>1</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( 초기화_확인_tp561 EnableImage(true, "초기화_완료") )</Param>
-                <Attr LuaFile="초기화_확인_tp561" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
-            </Act_2>
-        </Image_195>
+        </Image_231>
     </GENERAL>
     <SO>
         <CheckImageName>1</CheckImageName>

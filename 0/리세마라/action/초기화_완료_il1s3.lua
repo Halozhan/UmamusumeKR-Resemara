@@ -18,3 +18,4 @@ ship = false
 flower = false
 wonder = false
 ticket = false
+vodka = false
