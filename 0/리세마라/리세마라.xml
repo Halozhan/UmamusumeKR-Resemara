@@ -17,43 +17,44 @@
         <Mdpi>96</Mdpi>
         <Tdpi>96</Tdpi>
         <AuthorID>test</AuthorID>
-        <IniDelimiter>689461966081453236</IniDelimiter>
+        <IniDelimiter>28309196608938703</IniDelimiter>
     </MAIN>
     <TW>
-        <TWAName>BlueStacks 1</TWAName>
+        <TWAName>BlueStacks 2</TWAName>
         <TWAClass>Qt5154QWindowOwnDCIcon</TWAClass>
-        <TWBName>BlueStacks 1</TWBName>
+        <TWBName>BlueStacks 2</TWBName>
         <TWBClass>Qt5154QWindowOwnDCIcon</TWBClass>
         <TWCName>HD-Player</TWCName>
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>21758404</PickPos>
-        <TWHandle>0x87025C</TWHandle>
-        <TargetWnd.left>4</TargetWnd.left>
-        <TargetWnd.top>36</TargetWnd.top>
-        <TargetWnd.right>544</TargetWnd.right>
-        <TargetWnd.bottom>996</TargetWnd.bottom>
-        <TarfrmWnd.left>3</TarfrmWnd.left>
-        <TarfrmWnd.top>3</TarfrmWnd.top>
-        <TarfrmWnd.right>577</TarfrmWnd.right>
-        <TarfrmWnd.bottom>997</TarfrmWnd.bottom>
+        <PickPos>20382147</PickPos>
+        <TWHandle>0xAC0E46</TWHandle>
+        <TargetWnd.left>128</TargetWnd.left>
+        <TargetWnd.top>43</TargetWnd.top>
+        <TargetWnd.right>668</TargetWnd.right>
+        <TargetWnd.bottom>1003</TargetWnd.bottom>
+        <TarfrmWnd.left>127</TarfrmWnd.left>
+        <TarfrmWnd.top>10</TarfrmWnd.top>
+        <TarfrmWnd.right>701</TarfrmWnd.right>
+        <TarfrmWnd.bottom>1004</TarfrmWnd.bottom>
+        <TWDGuid>{F9665A33-4642-4320-8164-A0F967CFB875}</TWDGuid>
         <TWInc/>
     </TW>
     <GENERAL>
         <CaptureMode>1</CaptureMode>
         <ReactSpeed>0</ReactSpeed>
         <InputType>1</InputType>
-        <ImageCount>239</ImageCount>
+        <ImageCount>240</ImageCount>
         <Image_1>
             <Name>스킵</Name>
             <Rect>(474, 897, 33, 30)</Rect>
             <ROI>(458, 889, 79, 71)</ROI>
             <FullROI>0</FullROI>
-            <Param1>8585216</Param1>
+            <Param1>9568256</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655692887</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -76,10 +77,10 @@
             <Rect>(73, 66, 60, 58)</Rect>
             <ROI>(40, 51, 459, 713)</ROI>
             <FullROI>0</FullROI>
-            <Param1>9633792</Param1>
-            <Param2>1915845</Param2>
+            <Param1>13762561</Param1>
+            <Param2>80857</Param2>
             <Param3>0</Param3>
-            <Param4>1655692648</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -105,7 +106,7 @@
             <Param1>8585216</Param1>
             <Param2>670665</Param2>
             <Param3>0</Param3>
-            <Param4>1655727251</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -131,7 +132,7 @@
             <Param1>9240576</Param1>
             <Param2>211888</Param2>
             <Param3>0</Param3>
-            <Param4>1655692693</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -157,7 +158,7 @@
             <Param1>14745601</Param1>
             <Param2>1063713</Param2>
             <Param3>0</Param3>
-            <Param4>1655692723</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -183,7 +184,7 @@
             <Param1>15597569</Param1>
             <Param2>736195</Param2>
             <Param3>0</Param3>
-            <Param4>1655692758</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -215,7 +216,7 @@
             <Param1>9437184</Param1>
             <Param2>277492</Param2>
             <Param3>0</Param3>
-            <Param4>1655692798</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -241,7 +242,7 @@
             <Param1>13434881</Param1>
             <Param2>605149</Param2>
             <Param3>0</Param3>
-            <Param4>1655727355</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -267,7 +268,7 @@
             <Param1>14221313</Param1>
             <Param2>801686</Param2>
             <Param3>0</Param3>
-            <Param4>1655727408</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -293,7 +294,7 @@
             <Param1>14155777</Param1>
             <Param2>1784791</Param2>
             <Param3>0</Param3>
-            <Param4>1655692835</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -319,7 +320,7 @@
             <Param1>9633792</Param1>
             <Param2>1129316</Param2>
             <Param3>0</Param3>
-            <Param4>1655692857</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -359,7 +360,7 @@
             <Param1>10616832</Param1>
             <Param2>343039</Param2>
             <Param3>0</Param3>
-            <Param4>1655692969</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -385,7 +386,7 @@
             <Param1>7274496</Param1>
             <Param2>670716</Param2>
             <Param3>0</Param3>
-            <Param4>1655693101</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -411,7 +412,7 @@
             <Param1>9568256</Param1>
             <Param2>408436</Param2>
             <Param3>0</Param3>
-            <Param4>1655693144</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -437,7 +438,7 @@
             <Param1>8388608</Param1>
             <Param2>277401</Param2>
             <Param3>0</Param3>
-            <Param4>1655693259</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -463,7 +464,7 @@
             <Param1>8978432</Param1>
             <Param2>211967</Param2>
             <Param3>0</Param3>
-            <Param4>1655693275</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -489,7 +490,7 @@
             <Param1>15073281</Param1>
             <Param2>408564</Param2>
             <Param3>0</Param3>
-            <Param4>1655693297</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -515,7 +516,7 @@
             <Param1>8847360</Param1>
             <Param2>605180</Param2>
             <Param3>0</Param3>
-            <Param4>1655693335</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -541,7 +542,7 @@
             <Param1>9830400</Param1>
             <Param2>539561</Param2>
             <Param3>0</Param3>
-            <Param4>1655693355</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -567,7 +568,7 @@
             <Param1>9830400</Param1>
             <Param2>670718</Param2>
             <Param3>0</Param3>
-            <Param4>1655693376</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -593,7 +594,7 @@
             <Param1>8847360</Param1>
             <Param2>474061</Param2>
             <Param3>0</Param3>
-            <Param4>1655693414</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -619,7 +620,7 @@
             <Param1>13303809</Param1>
             <Param2>408470</Param2>
             <Param3>0</Param3>
-            <Param4>1655693443</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -657,7 +658,7 @@
             <Param1>13172737</Param1>
             <Param2>539549</Param2>
             <Param3>0</Param3>
-            <Param4>1655693588</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -697,7 +698,7 @@
             <Param1>9568256</Param1>
             <Param2>605103</Param2>
             <Param3>0</Param3>
-            <Param4>1655693631</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -723,7 +724,7 @@
             <Param1>6553600</Param1>
             <Param2>474044</Param2>
             <Param3>0</Param3>
-            <Param4>1655693670</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -749,7 +750,7 @@
             <Param1>5177344</Param1>
             <Param2>605024</Param2>
             <Param3>0</Param3>
-            <Param4>1655693695</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -775,7 +776,7 @@
             <Param1>9895936</Param1>
             <Param2>539515</Param2>
             <Param3>0</Param3>
-            <Param4>1655693791</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -801,7 +802,7 @@
             <Param1>9371648</Param1>
             <Param2>342995</Param2>
             <Param3>0</Param3>
-            <Param4>1655693851</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -827,7 +828,7 @@
             <Param1>6488064</Param1>
             <Param2>605116</Param2>
             <Param3>0</Param3>
-            <Param4>1655693874</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -853,7 +854,7 @@
             <Param1>9437184</Param1>
             <Param2>474091</Param2>
             <Param3>0</Param3>
-            <Param4>1655694083</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -879,7 +880,7 @@
             <Param1>13434881</Param1>
             <Param2>1063914</Param2>
             <Param3>0</Param3>
-            <Param4>1655693977</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -905,7 +906,7 @@
             <Param1>8323072</Param1>
             <Param2>80885</Param2>
             <Param3>0</Param3>
-            <Param4>1655694032</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -931,7 +932,7 @@
             <Param1>8781824</Param1>
             <Param2>277494</Param2>
             <Param3>0</Param3>
-            <Param4>1655694161</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -957,7 +958,7 @@
             <Param1>11796480</Param1>
             <Param2>80628</Param2>
             <Param3>0</Param3>
-            <Param4>1655694223</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -983,7 +984,7 @@
             <Param1>7536640</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694249</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="95" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1023,7 +1024,7 @@
             <Param1>11862016</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694278</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1049,7 +1050,7 @@
             <Param1>12451840</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694301</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1075,7 +1076,7 @@
             <Param1>10420224</Param1>
             <Param2>5389266</Param2>
             <Param3>0</Param3>
-            <Param4>1655694323</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1101,7 +1102,7 @@
             <Param1>6553600</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694375</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1127,7 +1128,7 @@
             <Param1>10878976</Param1>
             <Param2>408540</Param2>
             <Param3>0</Param3>
-            <Param4>1655694413</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1153,7 +1154,7 @@
             <Param1>10092544</Param1>
             <Param2>670640</Param2>
             <Param3>0</Param3>
-            <Param4>1655694464</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1179,7 +1180,7 @@
             <Param1>6094848</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694500</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1205,7 +1206,7 @@
             <Param1>9568256</Param1>
             <Param2>539622</Param2>
             <Param3>0</Param3>
-            <Param4>1655694524</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1231,7 +1232,7 @@
             <Param1>7274496</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694549</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1257,7 +1258,7 @@
             <Param1>13107201</Param1>
             <Param2>1915899</Param2>
             <Param3>0</Param3>
-            <Param4>1655694570</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1283,7 +1284,7 @@
             <Param1>8716288</Param1>
             <Param2>4996073</Param2>
             <Param3>0</Param3>
-            <Param4>1655705077</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1309,7 +1310,7 @@
             <Param1>12976128</Param1>
             <Param2>5520369</Param2>
             <Param3>0</Param3>
-            <Param4>1655694649</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1335,7 +1336,7 @@
             <Param1>12320768</Param1>
             <Param2>2374334</Param2>
             <Param3>0</Param3>
-            <Param4>1655694672</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1361,7 +1362,7 @@
             <Param1>11599872</Param1>
             <Param2>80630</Param2>
             <Param3>0</Param3>
-            <Param4>1655694696</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1387,7 +1388,7 @@
             <Param1>7929856</Param1>
             <Param2>7093147</Param2>
             <Param3>0</Param3>
-            <Param4>1655694732</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1413,7 +1414,7 @@
             <Param1>8257536</Param1>
             <Param2>1719285</Param2>
             <Param3>0</Param3>
-            <Param4>1655694781</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1436,10 +1437,10 @@
             <Rect>(202, 778, 151, 21)</Rect>
             <ROI>(140, 760, 239, 51)</ROI>
             <FullROI>0</FullROI>
-            <Param1>8388608</Param1>
+            <Param1>8192000</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694817</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1465,7 +1466,7 @@
             <Param1>12845056</Param1>
             <Param2>867298</Param2>
             <Param3>0</Param3>
-            <Param4>1655694853</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1491,7 +1492,7 @@
             <Param1>12451840</Param1>
             <Param2>801778</Param2>
             <Param3>0</Param3>
-            <Param4>1655694881</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1517,7 +1518,7 @@
             <Param1>12845056</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694910</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1540,10 +1541,10 @@
             <Rect>(452, 837, 31, 25)</Rect>
             <ROI>(441, 821, 54, 60)</ROI>
             <FullROI>0</FullROI>
-            <Param1>6684672</Param1>
+            <Param1>11796480</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655694952</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1569,7 +1570,7 @@
             <Param1>9109504</Param1>
             <Param2>408567</Param2>
             <Param3>0</Param3>
-            <Param4>1655694987</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1609,7 +1610,7 @@
             <Param1>12648448</Param1>
             <Param2>80797</Param2>
             <Param3>0</Param3>
-            <Param4>1655695055</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1635,7 +1636,7 @@
             <Param1>12910592</Param1>
             <Param2>80761</Param2>
             <Param3>0</Param3>
-            <Param4>1655695071</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1658,10 +1659,10 @@
             <Rect>(112, 459, 145, 18)</Rect>
             <ROI>(67, 405, 317, 339)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7012352</Param1>
-            <Param2>80820</Param2>
+            <Param1>13959169</Param1>
+            <Param2>736208</Param2>
             <Param3>0</Param3>
-            <Param4>1655695096</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1684,10 +1685,10 @@
             <Rect>(111, 461, 88, 17)</Rect>
             <ROI>(75, 424, 221, 345)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7733248</Param1>
+            <Param1>8912896</Param1>
             <Param2>80847</Param2>
             <Param3>0</Param3>
-            <Param4>1655695116</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1710,10 +1711,10 @@
             <Rect>(113, 459, 86, 17)</Rect>
             <ROI>(75, 393, 212, 367)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7471104</Param1>
+            <Param1>12910592</Param1>
             <Param2>80837</Param2>
             <Param3>0</Param3>
-            <Param4>1655695129</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1736,10 +1737,10 @@
             <Rect>(113, 561, 104, 17)</Rect>
             <ROI>(82, 361, 190, 417)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7405568</Param1>
+            <Param1>9240576</Param1>
             <Param2>670625</Param2>
             <Param3>0</Param3>
-            <Param4>1655695151</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1762,10 +1763,10 @@
             <Rect>(112, 553, 124, 17)</Rect>
             <ROI>(52, 393, 230, 365)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7340032</Param1>
+            <Param1>9502720</Param1>
             <Param2>343036</Param2>
             <Param3>0</Param3>
-            <Param4>1655695222</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1791,7 +1792,7 @@
             <Param1>12517376</Param1>
             <Param2>80862</Param2>
             <Param3>0</Param3>
-            <Param4>1655695247</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1814,10 +1815,10 @@
             <Rect>(452, 836, 29, 12)</Rect>
             <ROI>(442, 820, 49, 44)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11927552</Param1>
+            <Param1>11665408</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655695344</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1843,7 +1844,7 @@
             <Param1>13828097</Param1>
             <Param2>277475</Param2>
             <Param3>0</Param3>
-            <Param4>1655695378</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1869,7 +1870,7 @@
             <Param1>13107201</Param1>
             <Param2>605117</Param2>
             <Param3>0</Param3>
-            <Param4>1655695395</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1895,7 +1896,7 @@
             <Param1>12845056</Param1>
             <Param2>80892</Param2>
             <Param3>0</Param3>
-            <Param4>1655695419</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1921,7 +1922,7 @@
             <Param1>12517376</Param1>
             <Param2>146309</Param2>
             <Param3>0</Param3>
-            <Param4>1655698164</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1947,7 +1948,7 @@
             <Param1>11796480</Param1>
             <Param2>801720</Param2>
             <Param3>0</Param3>
-            <Param4>1655695468</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1973,7 +1974,7 @@
             <Param1>11599872</Param1>
             <Param2>867314</Param2>
             <Param3>0</Param3>
-            <Param4>1655695573</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -1999,7 +2000,7 @@
             <Param1>11665408</Param1>
             <Param2>605088</Param2>
             <Param3>0</Param3>
-            <Param4>1655695596</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2025,7 +2026,7 @@
             <Param1>12320768</Param1>
             <Param2>80817</Param2>
             <Param3>0</Param3>
-            <Param4>1655695620</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2051,7 +2052,7 @@
             <Param1>11206656</Param1>
             <Param2>80895</Param2>
             <Param3>0</Param3>
-            <Param4>1655695636</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2077,7 +2078,7 @@
             <Param1>11927552</Param1>
             <Param2>998394</Param2>
             <Param3>0</Param3>
-            <Param4>1655695673</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2103,7 +2104,7 @@
             <Param1>12189696</Param1>
             <Param2>867319</Param2>
             <Param3>0</Param3>
-            <Param4>1655695722</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2129,7 +2130,7 @@
             <Param1>12713984</Param1>
             <Param2>211899</Param2>
             <Param3>0</Param3>
-            <Param4>1655695763</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2155,7 +2156,7 @@
             <Param1>12255232</Param1>
             <Param2>80893</Param2>
             <Param3>0</Param3>
-            <Param4>1655695789</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2181,7 +2182,7 @@
             <Param1>12386304</Param1>
             <Param2>80825</Param2>
             <Param3>0</Param3>
-            <Param4>1655695822</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2207,7 +2208,7 @@
             <Param1>8847360</Param1>
             <Param2>4668390</Param2>
             <Param3>0</Param3>
-            <Param4>1655695861</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2233,7 +2234,7 @@
             <Param1>7340032</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655695892</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2259,7 +2260,7 @@
             <Param1>12517376</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655695915</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2285,7 +2286,7 @@
             <Param1>11927552</Param1>
             <Param2>736176</Param2>
             <Param3>0</Param3>
-            <Param4>1655695956</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2311,7 +2312,7 @@
             <Param1>13369345</Param1>
             <Param2>408565</Param2>
             <Param3>0</Param3>
-            <Param4>1655695980</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2337,7 +2338,7 @@
             <Param1>12713984</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655695997</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2363,7 +2364,7 @@
             <Param1>7536640</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696036</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2389,7 +2390,7 @@
             <Param1>13369345</Param1>
             <Param2>342951</Param2>
             <Param3>0</Param3>
-            <Param4>1655696062</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2415,7 +2416,7 @@
             <Param1>12386304</Param1>
             <Param2>80877</Param2>
             <Param3>0</Param3>
-            <Param4>1655696106</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2441,7 +2442,7 @@
             <Param1>12189696</Param1>
             <Param2>277480</Param2>
             <Param3>0</Param3>
-            <Param4>1655696124</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2467,7 +2468,7 @@
             <Param1>11665408</Param1>
             <Param2>146361</Param2>
             <Param3>0</Param3>
-            <Param4>1655696136</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2493,7 +2494,7 @@
             <Param1>11468800</Param1>
             <Param2>277487</Param2>
             <Param3>0</Param3>
-            <Param4>1655696152</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2519,7 +2520,7 @@
             <Param1>11665408</Param1>
             <Param2>80794</Param2>
             <Param3>0</Param3>
-            <Param4>1655696166</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2545,7 +2546,7 @@
             <Param1>12058624</Param1>
             <Param2>80768</Param2>
             <Param3>0</Param3>
-            <Param4>1655696183</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2571,7 +2572,7 @@
             <Param1>12255232</Param1>
             <Param2>80879</Param2>
             <Param3>0</Param3>
-            <Param4>1655696202</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2597,7 +2598,7 @@
             <Param1>8781824</Param1>
             <Param2>4471783</Param2>
             <Param3>0</Param3>
-            <Param4>1655696233</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2623,7 +2624,7 @@
             <Param1>11862016</Param1>
             <Param2>80859</Param2>
             <Param3>0</Param3>
-            <Param4>1655696249</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2649,7 +2650,7 @@
             <Param1>7143424</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696301</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2675,7 +2676,7 @@
             <Param1>13631489</Param1>
             <Param2>343039</Param2>
             <Param3>0</Param3>
-            <Param4>1655696328</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2701,7 +2702,7 @@
             <Param1>13697025</Param1>
             <Param2>539506</Param2>
             <Param3>0</Param3>
-            <Param4>1655696349</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2727,7 +2728,7 @@
             <Param1>13500417</Param1>
             <Param2>146221</Param2>
             <Param3>0</Param3>
-            <Param4>1655696383</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2753,7 +2754,7 @@
             <Param1>12910592</Param1>
             <Param2>80789</Param2>
             <Param3>0</Param3>
-            <Param4>1655696415</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2779,7 +2780,7 @@
             <Param1>12058624</Param1>
             <Param2>1063845</Param2>
             <Param3>0</Param3>
-            <Param4>1655696438</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2805,7 +2806,7 @@
             <Param1>11927552</Param1>
             <Param2>998308</Param2>
             <Param3>0</Param3>
-            <Param4>1655696452</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2831,7 +2832,7 @@
             <Param1>11927552</Param1>
             <Param2>80824</Param2>
             <Param3>0</Param3>
-            <Param4>1655696468</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2857,7 +2858,7 @@
             <Param1>11468800</Param1>
             <Param2>801742</Param2>
             <Param3>0</Param3>
-            <Param4>1655696482</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2883,7 +2884,7 @@
             <Param1>7405568</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696517</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2909,7 +2910,7 @@
             <Param1>12451840</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696548</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2935,7 +2936,7 @@
             <Param1>12779520</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696564</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2961,7 +2962,7 @@
             <Param1>12648448</Param1>
             <Param2>342992</Param2>
             <Param3>0</Param3>
-            <Param4>1655696580</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -2987,7 +2988,7 @@
             <Param1>12779520</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655696604</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3013,7 +3014,7 @@
             <Param1>12779520</Param1>
             <Param2>146284</Param2>
             <Param3>0</Param3>
-            <Param4>1655696617</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3039,7 +3040,7 @@
             <Param1>5373952</Param1>
             <Param2>408502</Param2>
             <Param3>0</Param3>
-            <Param4>1655698628</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3065,7 +3066,7 @@
             <Param1>6881280</Param1>
             <Param2>80834</Param2>
             <Param3>0</Param3>
-            <Param4>1655696700</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3091,7 +3092,7 @@
             <Param1>11993088</Param1>
             <Param2>80723</Param2>
             <Param3>0</Param3>
-            <Param4>1655696729</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3131,7 +3132,7 @@
             <Param1>11141120</Param1>
             <Param2>605110</Param2>
             <Param3>0</Param3>
-            <Param4>1655696887</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3154,10 +3155,10 @@
             <Rect>(366, 837, 53, 22)</Rect>
             <ROI>(348, 821, 82, 59)</ROI>
             <FullROI>0</FullROI>
-            <Param1>8126464</Param1>
-            <Param2>80882</Param2>
+            <Param1>16252929</Param1>
+            <Param2>932828</Param2>
             <Param3>0</Param3>
-            <Param4>1655744644</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3183,7 +3184,7 @@
             <Param1>11337728</Param1>
             <Param2>80818</Param2>
             <Param3>0</Param3>
-            <Param4>1655696946</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3209,7 +3210,7 @@
             <Param1>11206656</Param1>
             <Param2>5389298</Param2>
             <Param3>0</Param3>
-            <Param4>1655696970</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3235,7 +3236,7 @@
             <Param1>10092544</Param1>
             <Param2>6503201</Param2>
             <Param3>0</Param3>
-            <Param4>1655696986</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3261,7 +3262,7 @@
             <Param1>10944512</Param1>
             <Param2>539339</Param2>
             <Param3>0</Param3>
-            <Param4>1655697005</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3287,7 +3288,7 @@
             <Param1>10944512</Param1>
             <Param2>3029882</Param2>
             <Param3>0</Param3>
-            <Param4>1655697029</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3313,7 +3314,7 @@
             <Param1>15138817</Param1>
             <Param2>1457133</Param2>
             <Param3>0</Param3>
-            <Param4>1655697045</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3339,7 +3340,7 @@
             <Param1>10878976</Param1>
             <Param2>474065</Param2>
             <Param3>0</Param3>
-            <Param4>1655697063</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3365,7 +3366,7 @@
             <Param1>10944512</Param1>
             <Param2>408529</Param2>
             <Param3>0</Param3>
-            <Param4>1655697078</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3391,7 +3392,7 @@
             <Param1>11206656</Param1>
             <Param2>277443</Param2>
             <Param3>0</Param3>
-            <Param4>1655697092</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3417,7 +3418,7 @@
             <Param1>8716288</Param1>
             <Param2>8010744</Param2>
             <Param3>0</Param3>
-            <Param4>1655697125</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3443,7 +3444,7 @@
             <Param1>9568256</Param1>
             <Param2>2833329</Param2>
             <Param3>0</Param3>
-            <Param4>1655697156</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3469,7 +3470,7 @@
             <Param1>8650752</Param1>
             <Param2>4799462</Param2>
             <Param3>0</Param3>
-            <Param4>1655697176</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3495,7 +3496,7 @@
             <Param1>10420224</Param1>
             <Param2>3226592</Param2>
             <Param3>0</Param3>
-            <Param4>1655697195</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3521,7 +3522,7 @@
             <Param1>8912896</Param1>
             <Param2>4537300</Param2>
             <Param3>0</Param3>
-            <Param4>1655697221</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3547,7 +3548,7 @@
             <Param1>7340032</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655697240</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3573,7 +3574,7 @@
             <Param1>6094848</Param1>
             <Param2>1653287</Param2>
             <Param3>0</Param3>
-            <Param4>1655697259</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3599,7 +3600,7 @@
             <Param1>11862016</Param1>
             <Param2>3095546</Param2>
             <Param3>0</Param3>
-            <Param4>1655697281</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3625,7 +3626,7 @@
             <Param1>9633792</Param1>
             <Param2>3161050</Param2>
             <Param3>0</Param3>
-            <Param4>1655705808</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3648,10 +3649,10 @@
             <Rect>(497, 24, 20, 17)</Rect>
             <ROI>(473, 0, 67, 62)</ROI>
             <FullROI>0</FullROI>
-            <Param1>8126464</Param1>
-            <Param2>80882</Param2>
+            <Param1>13959169</Param1>
+            <Param2>80884</Param2>
             <Param3>0</Param3>
-            <Param4>1655697413</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3674,10 +3675,10 @@
             <Rect>(164, 522, 212, 22)</Rect>
             <ROI>(120, 132, 283, 690)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14090241</Param1>
-            <Param2>801724</Param2>
+            <Param1>10551296</Param1>
+            <Param2>801597</Param2>
             <Param3>0</Param3>
-            <Param4>1655698919</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3703,7 +3704,7 @@
             <Param1>12648448</Param1>
             <Param2>80890</Param2>
             <Param3>0</Param3>
-            <Param4>1655698992</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3743,7 +3744,7 @@
             <Param1>12320768</Param1>
             <Param2>408562</Param2>
             <Param3>0</Param3>
-            <Param4>1655704736</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3769,7 +3770,7 @@
             <Param1>11862016</Param1>
             <Param2>80886</Param2>
             <Param3>0</Param3>
-            <Param4>1655704751</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3795,7 +3796,7 @@
             <Param1>12124160</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655706067</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3821,7 +3822,7 @@
             <Param1>13107201</Param1>
             <Param2>408547</Param2>
             <Param3>0</Param3>
-            <Param4>1655706102</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3847,7 +3848,7 @@
             <Param1>12189696</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655709471</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3870,10 +3871,10 @@
             <Rect>(236, 897, 33, 33)</Rect>
             <ROI>(0, 800, 536, 160)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14811137</Param1>
-            <Param2>1653736</Param2>
+            <Param1>12124160</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655709482</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3899,7 +3900,7 @@
             <Param1>7798784</Param1>
             <Param2>670714</Param2>
             <Param3>0</Param3>
-            <Param4>1655710692</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3925,7 +3926,7 @@
             <Param1>13762561</Param1>
             <Param2>4602878</Param2>
             <Param3>0</Param3>
-            <Param4>1655710713</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3965,7 +3966,7 @@
             <Param1>9175040</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655699743</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -3991,7 +3992,7 @@
             <Param1>9175040</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655699125</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4017,7 +4018,7 @@
             <Param1>9175040</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655699787</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4043,7 +4044,7 @@
             <Param1>9699328</Param1>
             <Param2>736163</Param2>
             <Param3>0</Param3>
-            <Param4>1655699151</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="95" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4066,10 +4067,10 @@
             <Rect>(171, 522, 197, 21)</Rect>
             <ROI>(90, 52, 339, 827)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14680065</Param1>
+            <Param1>13697025</Param1>
             <Param2>998226</Param2>
             <Param3>0</Param3>
-            <Param4>1655699188</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4095,7 +4096,7 @@
             <Param1>5701632</Param1>
             <Param2>736166</Param2>
             <Param3>0</Param3>
-            <Param4>1655699240</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4135,7 +4136,7 @@
             <Param1>9175040</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655735195</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4167,7 +4168,7 @@
             <Param1>9633792</Param1>
             <Param2>1129419</Param2>
             <Param3>0</Param3>
-            <Param4>1655699371</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4190,10 +4191,10 @@
             <Rect>(170, 822, 196, 19)</Rect>
             <ROI>(74, 47, 371, 883)</ROI>
             <FullROI>0</FullROI>
-            <Param1>15073281</Param1>
-            <Param2>605119</Param2>
+            <Param1>9764864</Param1>
+            <Param2>736076</Param2>
             <Param3>0</Param3>
-            <Param4>1655699415</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4219,7 +4220,7 @@
             <Param1>5636096</Param1>
             <Param2>1063880</Param2>
             <Param3>0</Param3>
-            <Param4>1655699440</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4245,7 +4246,7 @@
             <Param1>8519680</Param1>
             <Param2>539641</Param2>
             <Param3>0</Param3>
-            <Param4>1655733770</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4285,7 +4286,7 @@
             <Param1>15073281</Param1>
             <Param2>80812</Param2>
             <Param3>0</Param3>
-            <Param4>1655714777</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4311,7 +4312,7 @@
             <Param1>10354688</Param1>
             <Param2>211744</Param2>
             <Param3>0</Param3>
-            <Param4>1655714821</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4337,7 +4338,7 @@
             <Param1>12845056</Param1>
             <Param2>80710</Param2>
             <Param3>0</Param3>
-            <Param4>1655714873</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4363,7 +4364,7 @@
             <Param1>8126464</Param1>
             <Param2>736250</Param2>
             <Param3>0</Param3>
-            <Param4>1655714897</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4449,7 +4450,7 @@
             <Param1>2883584</Param1>
             <Param2>605138</Param2>
             <Param3>0</Param3>
-            <Param4>1655699967</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4478,10 +4479,10 @@
             <Rect>(255, 130, 29, 18)</Rect>
             <ROI>(19, 32, 508, 711)</ROI>
             <FullROI>0</FullROI>
-            <Param1>1376256</Param1>
-            <Param2>408551</Param2>
+            <Param1>11796480</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655699999</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4507,7 +4508,7 @@
             <Param1>14811137</Param1>
             <Param2>670664</Param2>
             <Param3>0</Param3>
-            <Param4>1655703110</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4536,10 +4537,10 @@
             <Rect>(19, 672, 131, 18)</Rect>
             <ROI>(0, 135, 185, 806)</ROI>
             <FullROI>0</FullROI>
-            <Param1>15466497</Param1>
+            <Param1>13107201</Param1>
             <Param2>343031</Param2>
             <Param3>0</Param3>
-            <Param4>1655731359</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4565,7 +4566,7 @@
             <Param1>13238273</Param1>
             <Param2>408533</Param2>
             <Param3>0</Param3>
-            <Param4>1655703523</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4591,7 +4592,7 @@
             <Param1>12320768</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655703547</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4617,7 +4618,7 @@
             <Param1>13697025</Param1>
             <Param2>670551</Param2>
             <Param3>0</Param3>
-            <Param4>1655703575</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4663,7 +4664,7 @@
             <Param1>13500417</Param1>
             <Param2>670682</Param2>
             <Param3>0</Param3>
-            <Param4>1655797429</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4686,10 +4687,10 @@
             <Rect>(209, 438, 116, 26)</Rect>
             <ROI>(161, 360, 209, 178)</ROI>
             <FullROI>0</FullROI>
-            <Param1>1048576</Param1>
+            <Param1>10354688</Param1>
             <Param2>1260533</Param2>
             <Param3>0</Param3>
-            <Param4>1655797407</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4712,10 +4713,10 @@
             <Rect>(208, 618, 121, 26)</Rect>
             <ROI>(197, 609, 140, 43)</ROI>
             <FullROI>0</FullROI>
-            <Param1>9961472</Param1>
+            <Param1>13762561</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655974163</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4738,10 +4739,10 @@
             <Rect>(117, 727, 65, 22)</Rect>
             <ROI>(89, 709, 115, 56)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16252929</Param1>
-            <Param2>670713</Param2>
+            <Param1>4390912</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655974212</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4764,10 +4765,10 @@
             <Rect>(206, 615, 125, 29)</Rect>
             <ROI>(108, 524, 303, 184)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11665408</Param1>
+            <Param1>11337728</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655727298</Param4>
+            <Param4>1655988549</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4793,7 +4794,7 @@
             <Param1>14352385</Param1>
             <Param2>1194972</Param2>
             <Param3>0</Param3>
-            <Param4>1655803082</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4819,7 +4820,7 @@
             <Param1>14483457</Param1>
             <Param2>1457064</Param2>
             <Param3>0</Param3>
-            <Param4>1655797602</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="97" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4857,7 +4858,7 @@
             <Param1>8781824</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655799161</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4940,10 +4941,10 @@
             <Rect>(75, 254, 59, 17)</Rect>
             <ROI>(15, 39, 510, 560)</ROI>
             <FullROI>0</FullROI>
-            <Param1>1441792</Param1>
-            <Param2>277502</Param2>
+            <Param1>14024705</Param1>
+            <Param2>605127</Param2>
             <Param3>0</Param3>
-            <Param4>1655726785</Param4>
+            <Param4>1655988525</Param4>
             <Enable>0</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4966,10 +4967,10 @@
             <Rect>(20, 779, 115, 21)</Rect>
             <ROI>(0, 99, 249, 833)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16449537</Param1>
-            <Param2>474035</Param2>
+            <Param1>9961472</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655726597</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4992,10 +4993,10 @@
             <Rect>(29, 410, 21, 20)</Rect>
             <ROI>(0, 310, 170, 171)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16449537</Param1>
-            <Param2>80882</Param2>
+            <Param1>6094848</Param1>
+            <Param2>932850</Param2>
             <Param3>0</Param3>
-            <Param4>1655726641</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5018,10 +5019,10 @@
             <Rect>(225, 385, 88, 19)</Rect>
             <ROI>(182, 356, 165, 76)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16711681</Param1>
+            <Param1>11206656</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655726659</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5044,10 +5045,10 @@
             <Rect>(64, 500, 163, 24)</Rect>
             <ROI>(23, 441, 252, 141)</ROI>
             <FullROI>0</FullROI>
-            <Param1>1048576</Param1>
-            <Param2>80882</Param2>
+            <Param1>13303809</Param1>
+            <Param2>473971</Param2>
             <Param3>0</Param3>
-            <Param4>1655726710</Param4>
+            <Param4>1655988549</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5076,10 +5077,10 @@
             <Rect>(231, 553, 80, 21)</Rect>
             <ROI>(208, 535, 119, 51)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11206656</Param1>
+            <Param1>12713984</Param1>
             <Param2>408535</Param2>
             <Param3>0</Param3>
-            <Param4>1655726748</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5105,7 +5106,7 @@
             <Param1>16187393</Param1>
             <Param2>867280</Param2>
             <Param3>0</Param3>
-            <Param4>1655726841</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5124,14 +5125,14 @@
             </Act_2>
         </Image_199>
         <Image_200>
-            <Name>구글_자동완성</Name>
+            <Name>구글_자동완성_ENG</Name>
             <Rect>(25, 913, 126, 25)</Rect>
             <ROI>(25, 913, 126, 25)</ROI>
             <FullROI>0</FullROI>
             <Param1>8126464</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655731545</Param4>
+            <Param4>1655988549</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5150,6 +5151,32 @@
             </Act_2>
         </Image_200>
         <Image_201>
+            <Name>구글_자동완성KR</Name>
+            <Rect>(253, 901, 34, 20)</Rect>
+            <ROI>(253, 901, 34, 20)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>8060928</Param1>
+            <Param2>343012</Param2>
+            <Param3>0</Param3>
+            <Param4>1655989019</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>1</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_201>
+        <Image_202>
             <Name>카카오_확인</Name>
             <Rect>(53, 347, 145, 30)</Rect>
             <ROI>(53, 347, 145, 30)</ROI>
@@ -5157,7 +5184,7 @@
             <Param1>10551296</Param1>
             <Param2>15347</Param2>
             <Param3>0</Param3>
-            <Param4>1655731606</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5180,16 +5207,16 @@
                 <Param>Script( 카카오_확인_fyqmj EnableImage(true, "초기화_완료") )</Param>
                 <Attr LuaFile="카카오_확인_fyqmj" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
             </Act_3>
-        </Image_201>
-        <Image_202>
+        </Image_202>
+        <Image_203>
             <Name>초기화_확인</Name>
             <Rect>(18, 241, 276, 322)</Rect>
             <ROI>(1, 190, 315, 402)</ROI>
             <FullROI>0</FullROI>
-            <Param1>16449537</Param1>
+            <Param1>14024705</Param1>
             <Param2>11811783</Param2>
             <Param3>0</Param3>
-            <Param4>1655803847</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="99" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5206,8 +5233,8 @@
                 <Param>Script( 초기화_확인_tp561 EnableImage(true, "초기화_완료") )</Param>
                 <Attr LuaFile="초기화_확인_tp561" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
             </Act_2>
-        </Image_202>
-        <Image_203>
+        </Image_203>
+        <Image_204>
             <Name>초기화_완료</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5250,8 +5277,8 @@
                 <Param>Script( 초기화_완료_hgk2n EnableImage(false, "초기화_완료") )</Param>
                 <Attr LuaFile="초기화_완료_hgk2n" Text="EnableImage(false, &quot;초기화_완료&quot;)"/>
             </Act_5>
-        </Image_203>
-        <Image_204>
+        </Image_204>
+        <Image_205>
             <Name>SSR종류</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5270,8 +5297,8 @@
                 <Param>Script( SSR종류_xbvq0 -- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p )</Param>
                 <Attr LuaFile="SSR종류_xbvq0" Text="-- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p"/>
             </Act_1>
-        </Image_204>
-        <Image_205>
+        </Image_205>
+        <Image_206>
             <Name>이륙_조건</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5326,8 +5353,8 @@
                 <Param>Script( 이륙_조건_9mada -- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
                 <Attr LuaFile="이륙_조건_9mada" Text="-- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_7>
-        </Image_205>
-        <Image_206>
+        </Image_206>
+        <Image_207>
             <Name>서포트카드.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5340,16 +5367,16 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_206>
-        <Image_207>
+        </Image_207>
+        <Image_208>
             <Name>R랭크</Name>
             <Rect>(39, 733, 47, 49)</Rect>
             <ROI>(0, 678, 159, 152)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11730944</Param1>
+            <Param1>5701632</Param1>
             <Param2>408554</Param2>
             <Param3>0</Param3>
-            <Param4>1655729592</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5366,16 +5393,16 @@
                 <Param>Mouse( 0 0 1  0 431 150 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="431" Coord_y1="150" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_207>
-        <Image_208>
+        </Image_208>
+        <Image_209>
             <Name>SR랭크</Name>
             <Rect>(28, 732, 72, 53)</Rect>
             <ROI>(0, 635, 168, 193)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11730944</Param1>
+            <Param1>9306112</Param1>
             <Param2>342983</Param2>
             <Param3>0</Param3>
-            <Param4>1655729627</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5392,8 +5419,8 @@
                 <Param>Mouse( 0 0 1  0 429 154 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="429" Coord_y1="154" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_208>
-        <Image_209>
+        </Image_209>
+        <Image_210>
             <Name>엘_콘도르_파사</Name>
             <Rect>(13, 719, 481, 159)</Rect>
             <ROI>(13, 719, 481, 159)</ROI>
@@ -5401,7 +5428,7 @@
             <Param1>13041664</Param1>
             <Param2>80531</Param2>
             <Param3>0</Param3>
-            <Param4>1655701856</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5436,8 +5463,8 @@
                 <Param>Script( 엘_콘도르_파사_ervy8 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="엘_콘도르_파사_ervy8" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_209>
-        <Image_210>
+        </Image_210>
+        <Image_211>
             <Name>골드_시티</Name>
             <Rect>(6, 710, 432, 172)</Rect>
             <ROI>(6, 710, 432, 172)</ROI>
@@ -5445,7 +5472,7 @@
             <Param1>12058624</Param1>
             <Param2>867031</Param2>
             <Param3>0</Param3>
-            <Param4>1655701977</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5480,8 +5507,8 @@
                 <Param>Script( 골드_시티_jbe4k SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="골드_시티_jbe4k" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_210>
-        <Image_211>
+        </Image_211>
+        <Image_212>
             <Name>파인_모션</Name>
             <Rect>(11, 704, 413, 161)</Rect>
             <ROI>(11, 704, 413, 161)</ROI>
@@ -5489,7 +5516,7 @@
             <Param1>12648448</Param1>
             <Param2>473737</Param2>
             <Param3>0</Param3>
-            <Param4>1655702010</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5524,8 +5551,8 @@
                 <Param>Script( 파인_모션_autt2 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="파인_모션_autt2" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_211>
-        <Image_212>
+        </Image_212>
+        <Image_213>
             <Name>비코_페가수스</Name>
             <Rect>(12, 705, 471, 170)</Rect>
             <ROI>(12, 705, 471, 170)</ROI>
@@ -5533,7 +5560,7 @@
             <Param1>13500417</Param1>
             <Param2>7355114</Param2>
             <Param3>0</Param3>
-            <Param4>1655708869</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5568,8 +5595,8 @@
                 <Param>Script( 비코_페가수스_in9bz SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="비코_페가수스_in9bz" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_212>
-        <Image_213>
+        </Image_213>
+        <Image_214>
             <Name>사쿠라_바쿠신_오</Name>
             <Rect>(12, 704, 508, 170)</Rect>
             <ROI>(12, 704, 508, 170)</ROI>
@@ -5577,7 +5604,7 @@
             <Param1>12779520</Param1>
             <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655708914</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5612,8 +5639,8 @@
                 <Param>Script( 사쿠라_바쿠신_오_e1n9k SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="사쿠라_바쿠신_오_e1n9k" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_213>
-        <Image_214>
+        </Image_214>
+        <Image_215>
             <Name>스페셜_위크</Name>
             <Rect>(14, 714, 434, 153)</Rect>
             <ROI>(14, 714, 434, 153)</ROI>
@@ -5621,7 +5648,7 @@
             <Param1>13434881</Param1>
             <Param2>6634249</Param2>
             <Param3>0</Param3>
-            <Param4>1655713504</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5656,8 +5683,8 @@
                 <Param>Script( 스페셜_위크_3ysts SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="스페셜_위크_3ysts" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_214>
-        <Image_215>
+        </Image_215>
+        <Image_216>
             <Name>아이네스_후진</Name>
             <Rect>(8, 709, 473, 161)</Rect>
             <ROI>(8, 709, 473, 161)</ROI>
@@ -5665,7 +5692,7 @@
             <Param1>13369345</Param1>
             <Param2>7420665</Param2>
             <Param3>0</Param3>
-            <Param4>1655713991</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5700,8 +5727,8 @@
                 <Param>Script( 아이네스_후진_07bee SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="아이네스_후진_07bee" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_215>
-        <Image_216>
+        </Image_216>
+        <Image_217>
             <Name>하야카와_타즈나</Name>
             <Rect>(13, 701, 502, 174)</Rect>
             <ROI>(13, 701, 502, 174)</ROI>
@@ -5709,7 +5736,7 @@
             <Param1>13500417</Param1>
             <Param2>8010486</Param2>
             <Param3>0</Param3>
-            <Param4>1655719967</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5744,8 +5771,8 @@
                 <Param>Script( 하야카와_타즈나_fhtnl SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="하야카와_타즈나_fhtnl" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_216>
-        <Image_217>
+        </Image_217>
+        <Image_218>
             <Name>타마노_크로스</Name>
             <Rect>(12, 697, 471, 174)</Rect>
             <ROI>(12, 697, 471, 174)</ROI>
@@ -5753,7 +5780,7 @@
             <Param1>12648448</Param1>
             <Param2>80623</Param2>
             <Param3>0</Param3>
-            <Param4>1655728961</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5788,8 +5815,8 @@
                 <Param>Script( 타마노_크로스_e2o3j SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="타마노_크로스_e2o3j" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_217>
-        <Image_218>
+        </Image_218>
+        <Image_219>
             <Name>사일런스_스즈카</Name>
             <Rect>(13, 704, 497, 170)</Rect>
             <ROI>(13, 704, 497, 170)</ROI>
@@ -5797,7 +5824,7 @@
             <Param1>12845056</Param1>
             <Param2>80457</Param2>
             <Param3>0</Param3>
-            <Param4>1655732627</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5832,8 +5859,8 @@
                 <Param>Script( 사일런스_스즈카_7mtmz SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="사일런스_스즈카_7mtmz" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_218>
-        <Image_219>
+        </Image_219>
+        <Image_220>
             <Name>슈퍼_크릭</Name>
             <Rect>(14, 720, 404, 153)</Rect>
             <ROI>(14, 720, 404, 153)</ROI>
@@ -5841,7 +5868,7 @@
             <Param1>12713984</Param1>
             <Param2>408305</Param2>
             <Param3>0</Param3>
-            <Param4>1655732931</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5876,8 +5903,8 @@
                 <Param>Script( 슈퍼_크릭_eooat SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="슈퍼_크릭_eooat" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_219>
-        <Image_220>
+        </Image_220>
+        <Image_221>
             <Name>세이운_스카이</Name>
             <Rect>(12, 711, 466, 163)</Rect>
             <ROI>(12, 711, 466, 163)</ROI>
@@ -5885,7 +5912,7 @@
             <Param1>13828097</Param1>
             <Param2>7224025</Param2>
             <Param3>0</Param3>
-            <Param4>1655733291</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5920,8 +5947,8 @@
                 <Param>Script( 세이운_스카이_kpptd SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="세이운_스카이_kpptd" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_220>
-        <Image_221>
+        </Image_221>
+        <Image_222>
             <Name>토카이_테이오</Name>
             <Rect>(12, 699, 465, 171)</Rect>
             <ROI>(12, 699, 465, 171)</ROI>
@@ -5929,7 +5956,7 @@
             <Param1>12910592</Param1>
             <Param2>80873</Param2>
             <Param3>0</Param3>
-            <Param4>1655733426</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5964,8 +5991,8 @@
                 <Param>Script( 토카이_테이오_t80xi SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="토카이_테이오_t80xi" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_221>
-        <Image_222>
+        </Image_222>
+        <Image_223>
             <Name>스마트_팔콘</Name>
             <Rect>(12, 699, 442, 166)</Rect>
             <ROI>(12, 699, 442, 166)</ROI>
@@ -5973,7 +6000,7 @@
             <Param1>13369345</Param1>
             <Param2>8272609</Param2>
             <Param3>0</Param3>
-            <Param4>1655734552</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6008,8 +6035,8 @@
                 <Param>Script( 스마트_팔콘_4bxt2 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="스마트_팔콘_4bxt2" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_222>
-        <Image_223>
+        </Image_223>
+        <Image_224>
             <Name>에어_샤커</Name>
             <Rect>(11, 706, 412, 162)</Rect>
             <ROI>(11, 706, 412, 162)</ROI>
@@ -6017,7 +6044,7 @@
             <Param1>12779520</Param1>
             <Param2>80879</Param2>
             <Param3>0</Param3>
-            <Param4>1655735766</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6052,8 +6079,8 @@
                 <Param>Script( 에어_샤커_2rd6e SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="에어_샤커_2rd6e" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_223>
-        <Image_224>
+        </Image_224>
+        <Image_225>
             <Name>골드_쉽</Name>
             <Rect>(13, 720, 372, 152)</Rect>
             <ROI>(13, 720, 372, 152)</ROI>
@@ -6061,7 +6088,7 @@
             <Param1>13238273</Param1>
             <Param2>5651184</Param2>
             <Param3>0</Param3>
-            <Param4>1655742488</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6096,8 +6123,8 @@
                 <Param>Script( 골드_쉽_kydr9 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="골드_쉽_kydr9" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_224>
-        <Image_225>
+        </Image_225>
+        <Image_226>
             <Name>니시노_플라워</Name>
             <Rect>(13, 706, 466, 164)</Rect>
             <ROI>(13, 706, 466, 164)</ROI>
@@ -6105,7 +6132,7 @@
             <Param1>13434881</Param1>
             <Param2>5782255</Param2>
             <Param3>0</Param3>
-            <Param4>1655747970</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6140,8 +6167,8 @@
                 <Param>Script( 니시노_플라워_flls1 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="니시노_플라워_flls1" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_225>
-        <Image_226>
+        </Image_226>
+        <Image_227>
             <Name>그래스_원더</Name>
             <Rect>(14, 692, 467, 172)</Rect>
             <ROI>(14, 692, 467, 172)</ROI>
@@ -6149,7 +6176,7 @@
             <Param1>12582912</Param1>
             <Param2>80807</Param2>
             <Param3>0</Param3>
-            <Param4>1655799527</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6184,8 +6211,8 @@
                 <Param>Script( 그래스_원더_clvlj SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="그래스_원더_clvlj" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_226>
-        <Image_227>
+        </Image_227>
+        <Image_228>
             <Name>위닝_티켓</Name>
             <Rect>(12, 712, 405, 155)</Rect>
             <ROI>(12, 712, 405, 155)</ROI>
@@ -6193,7 +6220,7 @@
             <Param1>11993088</Param1>
             <Param2>277490</Param2>
             <Param3>0</Param3>
-            <Param4>1655802055</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6228,8 +6255,8 @@
                 <Param>Script( 위닝_티켓_uz63l SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="위닝_티켓_uz63l" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_227>
-        <Image_228>
+        </Image_228>
+        <Image_229>
             <Name>보드카</Name>
             <Rect>(10, 712, 373, 149)</Rect>
             <ROI>(10, 712, 373, 149)</ROI>
@@ -6237,7 +6264,7 @@
             <Param1>12910592</Param1>
             <Param2>539320</Param2>
             <Param3>0</Param3>
-            <Param4>1655804865</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6272,8 +6299,8 @@
                 <Param>Script( 보드카_93d68 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="보드카_93d68" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_228>
-        <Image_229>
+        </Image_229>
+        <Image_230>
             <Name>뽑기.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6286,8 +6313,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_229>
-        <Image_230>
+        </Image_230>
+        <Image_231>
             <Name>뽑기_이동</Name>
             <Rect>(484, 653, 44, 52)</Rect>
             <ROI>(484, 653, 44, 52)</ROI>
@@ -6295,7 +6322,7 @@
             <Param1>13172737</Param1>
             <Param2>2898935</Param2>
             <Param3>0</Param3>
-            <Param4>1655825069</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6312,8 +6339,8 @@
                 <Param>Mouse( 0 0 1  0 -24 274 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-24" Coord_y1="274" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_230>
-        <Image_231>
+        </Image_231>
+        <Image_232>
             <Name>3확정</Name>
             <Rect>(169, 543, 197, 68)</Rect>
             <ROI>(169, 543, 197, 68)</ROI>
@@ -6321,7 +6348,7 @@
             <Param1>12058624</Param1>
             <Param2>670628</Param2>
             <Param3>0</Param3>
-            <Param4>1655712584</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6338,8 +6365,8 @@
                 <Param>Mouse( 0 0 1  0 -231 7 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-231" Coord_y1="7" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_231>
-        <Image_232>
+        </Image_232>
+        <Image_233>
             <Name>SSR_메이크데뷔뽑기</Name>
             <Rect>(145, 552, 247, 57)</Rect>
             <ROI>(145, 552, 247, 57)</ROI>
@@ -6347,7 +6374,7 @@
             <Param1>12648448</Param1>
             <Param2>211859</Param2>
             <Param3>0</Param3>
-            <Param4>1655970671</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6364,8 +6391,8 @@
                 <Param>Mouse( 0 0 1  0 -230 6 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-230" Coord_y1="6" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_232>
-        <Image_233>
+        </Image_233>
+        <Image_234>
             <Name>서포트_카드_뽑기</Name>
             <Rect>(177, 543, 140, 60)</Rect>
             <ROI>(177, 543, 140, 60)</ROI>
@@ -6373,7 +6400,7 @@
             <Param1>12517376</Param1>
             <Param2>2440146</Param2>
             <Param3>0</Param3>
-            <Param4>1655712632</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6390,16 +6417,16 @@
                 <Param>Mouse( 0 0 1  0 183 192 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="183" Coord_y1="192" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_233>
-        <Image_234>
+        </Image_234>
+        <Image_235>
             <Name>쥬얼_부족</Name>
             <Rect>(186, 562, 163, 21)</Rect>
             <ROI>(162, 543, 214, 54)</ROI>
             <FullROI>0</FullROI>
-            <Param1>15532033</Param1>
-            <Param2>342913</Param2>
+            <Param1>12648448</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655714104</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6440,16 +6467,16 @@
                 <Param>Script( 쥬얼_부족_2bngo -- 게스트판 초기화\n if read_book then\n   EnableImage(true, "초기화_활성화")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n end )</Param>
                 <Attr LuaFile="쥬얼_부족_2bngo" Text="-- 게스트판 초기화\n if read_book then\n   EnableImage(true, &quot;초기화_활성화&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n end"/>
             </Act_6>
-        </Image_234>
-        <Image_235>
+        </Image_235>
+        <Image_236>
             <Name>쥬얼을_사용해_뽑기</Name>
             <Rect>(123, 357, 295, 46)</Rect>
             <ROI>(98, 345, 349, 133)</ROI>
             <FullROI>0</FullROI>
-            <Param1>15663105</Param1>
-            <Param2>670622</Param2>
+            <Param1>11599872</Param1>
+            <Param2>80882</Param2>
             <Param3>0</Param3>
-            <Param4>1655712657</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6472,16 +6499,16 @@
                 <Param>Script( 쥬얼을_사용해_뽑기_v754s EnableImage(false, "스킵") )</Param>
                 <Attr LuaFile="쥬얼을_사용해_뽑기_v754s" Text="EnableImage(false, &quot;스킵&quot;)"/>
             </Act_3>
-        </Image_235>
-        <Image_236>
+        </Image_236>
+        <Image_237>
             <Name>한_번_더_뽑기</Name>
             <Rect>(324, 884, 120, 28)</Rect>
             <ROI>(300, 873, 163, 54)</ROI>
             <FullROI>0</FullROI>
-            <Param1>11665408</Param1>
+            <Param1>11993088</Param1>
             <Param2>670685</Param2>
             <Param3>0</Param3>
-            <Param4>1655713389</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6498,8 +6525,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_236>
-        <Image_237>
+        </Image_237>
+        <Image_238>
             <Name>잠수</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6518,8 +6545,8 @@
                 <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
                 <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
             </Act_1>
-        </Image_237>
-        <Image_238>
+        </Image_238>
+        <Image_239>
             <Name>아무거나클릭</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6538,8 +6565,8 @@
                 <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
-        </Image_238>
-        <Image_239>
+        </Image_239>
+        <Image_240>
             <Name>임시_점검</Name>
             <Rect>(408, 544, 38, 29)</Rect>
             <ROI>(408, 544, 38, 29)</ROI>
@@ -6547,7 +6574,7 @@
             <Param1>4980736</Param1>
             <Param2>867321</Param2>
             <Param3>0</Param3>
-            <Param4>1655745016</Param4>
+            <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -6564,7 +6591,7 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_239>
+        </Image_240>
     </GENERAL>
     <SO>
         <CheckImageName>1</CheckImageName>
