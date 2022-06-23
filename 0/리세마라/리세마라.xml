@@ -3952,7 +3952,7 @@
             <Param2>0</Param2>
             <Param3>0</Param3>
             <Param4>0</Param4>
-            <Enable>1</Enable>
+            <Enable>0</Enable>
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
@@ -6424,13 +6424,13 @@
             </Act_3>
             <Act_4>
                 <Name>스크립트 입력</Name>
-                <Enable>0</Enable>
+                <Enable>1</Enable>
                 <Param>Script( 쥬얼_부족_kb1p9 -- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, "뽑기_이동")\n EnableImage(true, "메뉴로")\n EnableImage(true, "계정_정보") )</Param>
                 <Attr LuaFile="쥬얼_부족_kb1p9" Text="-- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, &quot;뽑기_이동&quot;)\n EnableImage(true, &quot;메뉴로&quot;)\n EnableImage(true, &quot;계정_정보&quot;)"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화\n if read_book then\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "계정_정보")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImag )</Param>
                 <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화\n if read_book then\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;계정_정보&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImag"/>
             </Act_5>
