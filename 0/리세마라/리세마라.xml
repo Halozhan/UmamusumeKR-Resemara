@@ -57,7 +57,7 @@
             <Param4>1655988525</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <Trg Interval="1" CheckInherit1="1" Acc="95" CheckInherit2="0" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
@@ -5268,8 +5268,8 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 초기화_완료_nyyvi -- 튜토리얼 끄기\n EnableImage(false, "튜토리얼1")\n EnableImage(false, "튜토리얼2")\n EnableImage(false, "튜토리얼3")\n EnableImage(false, "튜토리얼4")\n EnableImage(false, "튜토리얼5") )</Param>
-                <Attr LuaFile="초기화_완료_nyyvi" Text="-- 튜토리얼 끄기\n EnableImage(false, &quot;튜토리얼1&quot;)\n EnableImage(false, &quot;튜토리얼2&quot;)\n EnableImage(false, &quot;튜토리얼3&quot;)\n EnableImage(false, &quot;튜토리얼4&quot;)\n EnableImage(false, &quot;튜토리얼5&quot;)"/>
+                <Param>Script( 초기화_완료_nyyvi -- 튜토리얼 끄기\n EnableImage(false, "튜토리얼1")\n EnableImage(false, "튜토리얼2")\n EnableImage(false, "튜토리얼3")\n EnableImage(false, "튜토리얼4")\n EnableImage(false, "튜토리얼5")\n EnableImag )</Param>
+                <Attr LuaFile="초기화_완료_nyyvi" Text="-- 튜토리얼 끄기\n EnableImage(false, &quot;튜토리얼1&quot;)\n EnableImage(false, &quot;튜토리얼2&quot;)\n EnableImage(false, &quot;튜토리얼3&quot;)\n EnableImage(false, &quot;튜토리얼4&quot;)\n EnableImage(false, &quot;튜토리얼5&quot;)\n EnableImag"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
