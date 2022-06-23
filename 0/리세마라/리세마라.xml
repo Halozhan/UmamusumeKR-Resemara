@@ -17,27 +17,27 @@
         <Mdpi>96</Mdpi>
         <Tdpi>96</Tdpi>
         <AuthorID>test</AuthorID>
-        <IniDelimiter>28309196608938703</IniDelimiter>
+        <IniDelimiter>689461966081453236</IniDelimiter>
     </MAIN>
     <TW>
-        <TWAName>BlueStacks 2</TWAName>
+        <TWAName>BlueStacks 1</TWAName>
         <TWAClass>Qt5154QWindowOwnDCIcon</TWAClass>
-        <TWBName>BlueStacks 2</TWBName>
+        <TWBName>BlueStacks 1</TWBName>
         <TWBClass>Qt5154QWindowOwnDCIcon</TWBClass>
         <TWCName>HD-Player</TWCName>
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>20382147</PickPos>
-        <TWHandle>0xAC0E46</TWHandle>
-        <TargetWnd.left>128</TargetWnd.left>
-        <TargetWnd.top>43</TargetWnd.top>
-        <TargetWnd.right>668</TargetWnd.right>
-        <TargetWnd.bottom>1003</TargetWnd.bottom>
-        <TarfrmWnd.left>127</TarfrmWnd.left>
-        <TarfrmWnd.top>10</TarfrmWnd.top>
-        <TarfrmWnd.right>701</TarfrmWnd.right>
-        <TarfrmWnd.bottom>1004</TarfrmWnd.bottom>
+        <PickPos>21758404</PickPos>
+        <TWHandle>0x87025C</TWHandle>
+        <TargetWnd.left>4</TargetWnd.left>
+        <TargetWnd.top>36</TargetWnd.top>
+        <TargetWnd.right>544</TargetWnd.right>
+        <TargetWnd.bottom>996</TargetWnd.bottom>
+        <TarfrmWnd.left>3</TarfrmWnd.left>
+        <TarfrmWnd.top>3</TarfrmWnd.top>
+        <TarfrmWnd.right>577</TarfrmWnd.right>
+        <TarfrmWnd.bottom>997</TarfrmWnd.bottom>
         <TWDGuid>{F9665A33-4642-4320-8164-A0F967CFB875}</TWDGuid>
         <TWInc/>
     </TW>
@@ -5332,26 +5332,26 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_laspj -- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_9mada -- 파인모션 타즈나 비코\n if motion and tazuna and pegasus then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_9mada" Text="-- 파인모션 타즈나 비코\n if motion and tazuna and pegasus then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( 이륙_조건_uovul -- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_uovul" Text="-- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Enable>0</Enable>
+                <Param>Script( 이륙_조건_laspj -- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 타즈나\n if motion and tazuna then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_5>
             <Act_6>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 이륙_조건_zqt6u -- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_uovul -- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_uovul" Text="-- 모션 크릭\n if motion and creek then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_6>
             <Act_7>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 이륙_조건_9mada -- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_9mada" Text="-- 모션 박신\n if motion and bakushin then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_zqt6u -- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 페가\n if motion and pegasus then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_7>
         </Image_206>
         <Image_207>
