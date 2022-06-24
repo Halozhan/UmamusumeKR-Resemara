@@ -28,7 +28,7 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>16646519</PickPos>
+        <PickPos>15204604</PickPos>
         <TWHandle>0x3D0FE8</TWHandle>
         <TargetWnd.left>0</TargetWnd.left>
         <TargetWnd.top>33</TargetWnd.top>
@@ -229,14 +229,14 @@
             </Act_2>
         </Image_7>
         <Image_8>
-            <Name>네트워크_에러가_발생</Name>
-            <Rect>(160, 459, 221, 40)</Rect>
-            <ROI>(160, 459, 221, 40)</ROI>
+            <Name>에러_재시도_해주세요</Name>
+            <Rect>(206, 479, 125, 20)</Rect>
+            <ROI>(188, 470, 158, 41)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14024705</Param1>
-            <Param2>2243498</Param2>
+            <Param1>14614529</Param1>
+            <Param2>932824</Param2>
             <Param3>0</Param3>
-            <Param4>1656069994</Param4>
+            <Param4>1656074581</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -250,8 +250,8 @@
             <Act_2>
                 <Name>마우스 입력</Name>
                 <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 2 143 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="2" Coord_y1="143" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+                <Param>Mouse( 0 0 1  0 0 132 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="132" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_8>
         <Image_9>
