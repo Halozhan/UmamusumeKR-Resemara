@@ -1,1 +1,1 @@
-motion = true
+motion = motion + 1

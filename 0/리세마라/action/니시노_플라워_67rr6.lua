@@ -1,1 +1,1 @@
-flower = true
+flower = flower + 1

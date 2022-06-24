@@ -1,1 +1,1 @@
-fujin = true
+fujin = fujin + 1

@@ -1,1 +1,1 @@
-sky = true
+sky = sky + 1

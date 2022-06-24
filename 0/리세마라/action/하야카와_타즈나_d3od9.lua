@@ -1,1 +1,1 @@
-tazuna = true
+tazuna = tazuna + 1

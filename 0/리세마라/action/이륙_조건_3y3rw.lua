@@ -1,104 +1,25 @@
 -- 뽑힌 캐릭터 8초 간격으로 출력
 Print("------------------------------")
-if pasa then
- Print("엘 콘도르 파사 O")
-else
- Print("엘 콘도르 파사 X")
-end
-if city then
- Print("골드 시티 O")
-else
- Print("골드 시티 X")
-end
-if motion then
- Print("파인 모션 O")
-else
- Print("파인 모션 X")
-end
-if pegasus then
- Print("비코 페가수스 O")
-else
- Print("비코 페가수스 X")
-end
-if bakushin then
- Print("사쿠라 바쿠신 오 O")
-else
- Print("사쿠라 바쿠신 오 X")
-end
-if week then
- Print("스페셜 위크 O")
-else
- Print("스페셜 위크 X")
-end
-if fujin then
- Print("아이네스 후진 O")
-else
- Print("아이네스 후진 X")
-end
-if tazuna then
- Print("하야카와 타즈나 O")
-else
- Print("하야카와 타즈나 X")
-end
-if cross then
- Print("타마노 크로스 O")
-else
- Print("타마노 크로스 X")
-end
-if suzuka then
- Print("사일런스 스즈카 O")
-else
- Print("사일런스 스즈카 X")
-end
-if creek then
- Print("슈퍼 크릭 O")
-else
- Print("슈퍼 크릭 X")
-end
-if sky then
- Print("세이운 스카이 O")
-else
- Print("세이운 스카이 X")
-end
-if teio then
- Print("토카이 테이오 O")
-else
- Print("토카이 테이오 X")
-end
-if falcon then
- Print("스마트 팔콘 O")
-else
- Print("스마트 팔콘 X")
-end
-if shakur then
- Print("에어 샤커 O")
-else
- Print("에어 샤커 X")
-end
-if ship then
- Print("골드 쉽 O")
-else
- Print("골드 쉽 X")
-end
-if flower then
- Print("니시노 플라워 O")
-else
- Print("니시노 플라워 X")
-end
-if wonder then
- Print("그래스 원더 O")
-else
- Print("그래스 원더 X")
-end
-if ticket then
- Print("위닝 티켓 O")
-else
- Print("위닝 티켓 X")
-end
-if vodka then
- Print("보드카 O")
-else
- Print("보드카 X")
-end
-Print(SSR_count)
+Print("엘 콘도르 파사 " .. pasa .. "장")
+Print("골드 시티 " .. city .. "장")
+Print("파인 모션 " .. motion .. "장")
+Print("비코 페가수스 " .. pegasus .. "장")
+Print("사쿠라 바쿠신 오 " .. bakushin .. "장")
+Print("스페셜 위크 " .. week .. "장")
+Print("아이네스 후진 " .. fujin .. "장")
+Print("하야카와 타즈나 " .. tazuna .. "장")
+Print("타마노 크로스 " .. cross .. "장")
+Print("사일런스 스즈카 " .. suzuka .. "장")
+Print("슈퍼 크릭 " .. creek .. "장")
+Print("세이운 스카이 " .. sky .. "장")
+Print("토카이 테이오 " .. teio .. "장")
+Print("스마트 팔콘 " .. falcon .. "장")
+Print("에어 샤커 " .. shakur .. "장")
+Print("골드 쉽 " .. ship .. "장")
+Print("니시노 플라워 " .. flower .. "장")
+Print("그래스 원더 " .. wonder .. "장")
+Print("위닝 티켓 " .. ticket .. "장")
+Print("보드카 " .. vodka .. "장")
+Print("------------------------------")
+Print("총 SSR 합 " .. SSR_count .. "장")
 Print("------------------------------")

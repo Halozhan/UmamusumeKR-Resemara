@@ -1,5 +1,5 @@
--- 크릭 2장
-if creek >= 2 then
+-- 타즈나 1장
+if tazuna >= 1 then
  SendKakaoTalk(0, "", true)
  Stop()
 end

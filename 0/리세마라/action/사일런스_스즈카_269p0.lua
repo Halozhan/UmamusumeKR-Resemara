@@ -1,1 +1,1 @@
-suzuka = true
+suzuka = suzuka + 1

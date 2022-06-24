@@ -1,1 +1,1 @@
-bakushin = true
+bakushin = bakushin + 1

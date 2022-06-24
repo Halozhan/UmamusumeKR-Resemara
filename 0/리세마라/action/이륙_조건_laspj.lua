@@ -1,5 +1,5 @@
--- 모션 타즈나
-if motion and tazuna then
+-- 모션 2장
+if motion >= 2 then
  SendKakaoTalk(0, "", true)
  Stop()
 end

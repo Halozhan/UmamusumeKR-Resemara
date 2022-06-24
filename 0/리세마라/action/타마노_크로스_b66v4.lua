@@ -1,1 +1,1 @@
-cross = true
+cross = cross + 1

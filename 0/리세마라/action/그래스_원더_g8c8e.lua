@@ -1,1 +1,1 @@
-wonder = true
+wonder = wonder + 1

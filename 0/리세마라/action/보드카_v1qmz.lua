@@ -1,1 +1,1 @@
-vodka = true
+vodka = vodka + 1

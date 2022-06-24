@@ -1,1 +1,1 @@
-week = true
+week = week + 1

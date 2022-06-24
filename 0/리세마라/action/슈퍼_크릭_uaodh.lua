@@ -1,1 +1,1 @@
-creek = true
+creek = creek + 1

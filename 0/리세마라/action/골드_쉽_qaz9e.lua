@@ -1,1 +1,1 @@
-ship = true
+ship = ship + 1

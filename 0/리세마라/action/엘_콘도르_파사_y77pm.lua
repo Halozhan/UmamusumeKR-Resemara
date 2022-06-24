@@ -1,1 +1,1 @@
-pasa = true
+pasa = pasa + 1

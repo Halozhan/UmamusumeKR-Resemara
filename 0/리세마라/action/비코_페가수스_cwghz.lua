@@ -1,1 +1,1 @@
-pegasus = true
+pegasus = pegasus + 1
