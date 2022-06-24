@@ -87,7 +87,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -113,7 +113,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -165,7 +165,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -191,7 +191,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -217,7 +217,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -243,7 +243,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -269,7 +269,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -301,7 +301,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -327,7 +327,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -353,7 +353,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -379,7 +379,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -405,7 +405,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -431,7 +431,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -731,7 +731,7 @@
             <ActCount>4</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -769,7 +769,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -1681,7 +1681,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -3763,7 +3763,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -3789,7 +3789,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -3815,7 +3815,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4247,7 +4247,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4279,7 +4279,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4305,7 +4305,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4331,7 +4331,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4357,7 +4357,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4775,7 +4775,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4801,7 +4801,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4827,7 +4827,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4853,7 +4853,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4879,7 +4879,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4905,7 +4905,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4931,7 +4931,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4957,7 +4957,7 @@
             <ActCount>4</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -4995,7 +4995,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5081,7 +5081,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5107,7 +5107,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5133,7 +5133,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5159,7 +5159,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5185,7 +5185,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5217,7 +5217,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5243,7 +5243,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5269,7 +5269,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5295,7 +5295,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5321,7 +5321,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5353,7 +5353,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5440,7 +5440,7 @@
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="8" CheckInherit1="0" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>10</ActCount>
+            <ActCount>12</ActCount>
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
@@ -5450,57 +5450,69 @@
             <Act_2>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_w24w9 -- SSR 개수 5개 이상 및\n -- 파인모션 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 5 and motion &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_w24w9" Text="-- SSR 개수 5개 이상 및\n -- 파인모션 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 5 and motion &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_4j0zg -- 파인 타즈나 슈퍼크릭\n if motion &gt;= 1 and creek &gt;= 1 and tazuna &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_4j0zg" Text="-- 파인 타즈나 슈퍼크릭\n if motion &gt;= 1 and creek &gt;= 1 and tazuna &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_2>
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_d2car -- SSR 개수 5개 이상 및\n -- 파인모션 1장 이상 및\n -- 슈퍼크릭 1장 이상\n if SSR_count &gt;= 5 and motion &gt;= 1 and creek &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_d2car" Text="-- SSR 개수 5개 이상 및\n -- 파인모션 1장 이상 및\n -- 슈퍼크릭 1장 이상\n if SSR_count &gt;= 5 and motion &gt;= 1 and creek &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_9mada -- 파인모션 타즈나 비코\n if motion &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_9mada" Text="-- 파인모션 타즈나 비코\n if motion &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_3>
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_4j0zg -- 파인 타즈나 슈퍼크릭\n if motion &gt;= 1 and creek &gt;= 1 and tazuna &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_4j0zg" Text="-- 파인 타즈나 슈퍼크릭\n if motion &gt;= 1 and creek &gt;= 1 and tazuna &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_49mbr -- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_49mbr" Text="-- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_9mada -- 파인모션 타즈나 비코\n if motion &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_9mada" Text="-- 파인모션 타즈나 비코\n if motion &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_w24w9 -- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_w24w9" Text="-- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_5>
             <Act_6>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_laspj -- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_d2car -- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 슈퍼크릭 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and creek &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_d2car" Text="-- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 슈퍼크릭 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and creek &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_6>
             <Act_7>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_uovul -- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_uovul" Text="-- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_0cyel -- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_0cyel" Text="-- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_7>
             <Act_8>
                 <Name>스크립트 입력</Name>
-                <Enable>0</Enable>
-                <Param>Script( 이륙_조건_zqt6u -- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Enable>1</Enable>
+                <Param>Script( 이륙_조건_laspj -- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_8>
             <Act_9>
                 <Name>스크립트 입력</Name>
-                <Enable>0</Enable>
-                <Param>Script( 이륙_조건_qplnj -- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_qplnj" Text="-- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Enable>1</Enable>
+                <Param>Script( 이륙_조건_uovul -- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_uovul" Text="-- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_9>
             <Act_10>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
+                <Param>Script( 이륙_조건_zqt6u -- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+            </Act_10>
+            <Act_11>
+                <Name>스크립트 입력</Name>
+                <Enable>0</Enable>
+                <Param>Script( 이륙_조건_qplnj -- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_qplnj" Text="-- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+            </Act_11>
+            <Act_12>
+                <Name>스크립트 입력</Name>
+                <Enable>0</Enable>
                 <Param>Script( 이륙_조건_4wqjt -- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
                 <Attr LuaFile="이륙_조건_4wqjt" Text="-- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
-            </Act_10>
+            </Act_12>
         </Image_211>
         <Image_212>
             <Name>서포트카드.grp</Name>
@@ -5531,7 +5543,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5557,7 +5569,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5583,7 +5595,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5627,7 +5639,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5803,7 +5815,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5847,7 +5859,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5935,7 +5947,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5979,7 +5991,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6067,7 +6079,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6111,7 +6123,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6155,7 +6167,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6199,7 +6211,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6243,7 +6255,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6287,7 +6299,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6331,7 +6343,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6375,7 +6387,7 @@
             <ActCount>5</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6477,7 +6489,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6503,7 +6515,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6529,7 +6541,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6555,7 +6567,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6581,7 +6593,7 @@
             <ActCount>6</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6631,7 +6643,7 @@
             <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -6663,7 +6675,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
