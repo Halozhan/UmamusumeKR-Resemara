@@ -4357,7 +4357,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
