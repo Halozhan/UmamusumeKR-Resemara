@@ -28,8 +28,8 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>7995696</PickPos>
-        <TWHandle>0x3D0FE8</TWHandle>
+        <PickPos>5898602</PickPos>
+        <TWHandle>0x5A3147E</TWHandle>
         <TargetWnd.left>2</TargetWnd.left>
         <TargetWnd.top>34</TargetWnd.top>
         <TargetWnd.right>542</TargetWnd.right>
@@ -45,7 +45,7 @@
         <CaptureMode>1</CaptureMode>
         <ReactSpeed>0</ReactSpeed>
         <InputType>1</InputType>
-        <ImageCount>245</ImageCount>
+        <ImageCount>246</ImageCount>
         <Image_1>
             <Name>init</Name>
             <Rect>(0, 0, 0, 0)</Rect>
@@ -4344,6 +4344,32 @@
         </Image_168>
         <Image_169>
             <Name>메뉴로</Name>
+            <Rect>(476, 41, 32, 21)</Rect>
+            <ROI>(467, 34, 51, 38)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>7929856</Param1>
+            <Param2>539641</Param2>
+            <Param3>0</Param3>
+            <Param4>1656156975</Param4>
+            <Enable>0</Enable>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>0</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+        </Image_169>
+        <Image_170>
+            <Name>메뉴로_단축</Name>
             <Rect>(523, 46, 4, 12)</Rect>
             <ROI>(498, 18, 42, 82)</ROI>
             <FullROI>0</FullROI>
@@ -4367,8 +4393,8 @@
                 <Param>Mouse( 0 0 1  0 7 0 0 0  0 0  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="7" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="0" Rand_y="0" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_169>
-        <Image_170>
+        </Image_170>
+        <Image_171>
             <Name>도감쥬얼_보상부족시.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -4381,8 +4407,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_170>
-        <Image_171>
+        </Image_171>
+        <Image_172>
             <Name>도감열기</Name>
             <Rect>(141, 446, 97, 35)</Rect>
             <ROI>(141, 446, 97, 35)</ROI>
@@ -4407,8 +4433,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_171>
-        <Image_172>
+        </Image_172>
+        <Image_173>
             <Name>노려라_명트레이너</Name>
             <Rect>(46, 617, 447, 89)</Rect>
             <ROI>(46, 617, 447, 89)</ROI>
@@ -4433,8 +4459,8 @@
                 <Param>Mouse( 0 0 1  0 5 248 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="5" Coord_y1="248" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_172>
-        <Image_173>
+        </Image_173>
+        <Image_174>
             <Name>도감_LvUP</Name>
             <Rect>(142, 263, 261, 62)</Rect>
             <ROI>(142, 263, 261, 62)</ROI>
@@ -4459,8 +4485,8 @@
                 <Param>Mouse( 0 0 1  0 1 520 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="1" Coord_y1="520" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_173>
-        <Image_174>
+        </Image_174>
+        <Image_175>
             <Name>도감_닫기</Name>
             <Rect>(15, 10, 34, 23)</Rect>
             <ROI>(15, 10, 34, 23)</ROI>
@@ -4488,11 +4514,11 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 도감_닫기_1f19j EnableImage(false, "메뉴로")\n EnableImage(false, "도감열기")\n EnableImage(true, "뽑기_이동")\n read_book = true )</Param>
-                <Attr LuaFile="도감_닫기_1f19j" Text="EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;도감열기&quot;)\n EnableImage(true, &quot;뽑기_이동&quot;)\n read_book = true"/>
+                <Param>Script( 도감_닫기_1f19j EnableImage(false, "메뉴로")\n EnableImage(false, "메뉴로_단축")\n EnableImage(false, "도감열기")\n EnableImage(true, "뽑기_이동")\n read_book = true )</Param>
+                <Attr LuaFile="도감_닫기_1f19j" Text="EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;메뉴로_단축&quot;)\n EnableImage(false, &quot;도감열기&quot;)\n EnableImage(true, &quot;뽑기_이동&quot;)\n read_book = true"/>
             </Act_3>
-        </Image_174>
-        <Image_175>
+        </Image_175>
+        <Image_176>
             <Name>게스트_초기화.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -4505,8 +4531,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_175>
-        <Image_176>
+        </Image_176>
+        <Image_177>
             <Name>초기화_활성화</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -4525,8 +4551,8 @@
                 <Param>Script( 초기화_활성화_xhvw7 EnableImage(false, "시작")\n EnableImage(true, "게임_닫기")\n EnableImage(true, "설정")\n \n EnableImage(false, "초기화_활성화") )</Param>
                 <Attr LuaFile="초기화_활성화_xhvw7" Text="EnableImage(false, &quot;시작&quot;)\n EnableImage(true, &quot;게임_닫기&quot;)\n EnableImage(true, &quot;설정&quot;)\n \n EnableImage(false, &quot;초기화_활성화&quot;)"/>
             </Act_1>
-        </Image_176>
-        <Image_177>
+        </Image_177>
+        <Image_178>
             <Name>게임_닫기</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -4545,8 +4571,8 @@
                 <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
-        </Image_177>
-        <Image_178>
+        </Image_178>
+        <Image_179>
             <Name>모두_지우기</Name>
             <Rect>(456, 34, 69, 22)</Rect>
             <ROI>(456, 34, 69, 22)</ROI>
@@ -4577,8 +4603,8 @@
                 <Param>Script( 모두_지우기_c0b16 EnableImage(false, "게임_닫기")\n EnableImage(false, "카카오_게임_닫기") )</Param>
                 <Attr LuaFile="모두_지우기_c0b16" Text="EnableImage(false, &quot;게임_닫기&quot;)\n EnableImage(false, &quot;카카오_게임_닫기&quot;)"/>
             </Act_3>
-        </Image_178>
-        <Image_179>
+        </Image_179>
+        <Image_180>
             <Name>설정</Name>
             <Rect>(255, 130, 29, 18)</Rect>
             <ROI>(19, 32, 508, 711)</ROI>
@@ -4603,8 +4629,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_179>
-        <Image_180>
+        </Image_180>
+        <Image_181>
             <Name>애플리케이션</Name>
             <Rect>(331, 153, 105, 24)</Rect>
             <ROI>(331, 153, 105, 24)</ROI>
@@ -4635,8 +4661,8 @@
                 <Param>Script( 애플리케이션_dqspd EnableImage(false, "설정") )</Param>
                 <Attr LuaFile="애플리케이션_dqspd" Text="EnableImage(false, &quot;설정&quot;)"/>
             </Act_3>
-        </Image_180>
-        <Image_181>
+        </Image_181>
+        <Image_182>
             <Name>우마무스메_앱</Name>
             <Rect>(19, 672, 131, 18)</Rect>
             <ROI>(0, 135, 185, 806)</ROI>
@@ -4661,8 +4687,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_181>
-        <Image_182>
+        </Image_182>
+        <Image_183>
             <Name>저장소</Name>
             <Rect>(15, 242, 45, 18)</Rect>
             <ROI>(15, 242, 45, 18)</ROI>
@@ -4687,8 +4713,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_182>
-        <Image_183>
+        </Image_183>
+        <Image_184>
             <Name>데이터_지우기</Name>
             <Rect>(86, 285, 82, 23)</Rect>
             <ROI>(86, 285, 82, 23)</ROI>
@@ -4713,8 +4739,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_183>
-        <Image_184>
+        </Image_184>
+        <Image_185>
             <Name>앱_데이터를_삭제</Name>
             <Rect>(86, 430, 259, 25)</Rect>
             <ROI>(86, 430, 259, 25)</ROI>
@@ -4726,7 +4752,7 @@
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>3</ActCount>
+            <ActCount>4</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
                 <Enable>0</Enable>
@@ -4742,11 +4768,17 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
+                <Param>Script( 앱_데이터를_삭제_7hq8h EnableImage(true, "뽑기_이동") )</Param>
+                <Attr LuaFile="앱_데이터를_삭제_7hq8h" Text="EnableImage(true, &quot;뽑기_이동&quot;)"/>
+            </Act_3>
+            <Act_4>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
                 <Param>Script( 앱_데이터를_삭제_qtvgi EnableImage(true, "초기화_완료") )</Param>
                 <Attr LuaFile="앱_데이터를_삭제_qtvgi" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
-            </Act_3>
-        </Image_184>
-        <Image_185>
+            </Act_4>
+        </Image_185>
+        <Image_186>
             <Name>카카오_연동.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -4759,8 +4791,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_185>
-        <Image_186>
+        </Image_186>
+        <Image_187>
             <Name>계정_정보</Name>
             <Rect>(374, 625, 91, 29)</Rect>
             <ROI>(374, 625, 91, 29)</ROI>
@@ -4785,8 +4817,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_186>
-        <Image_187>
+        </Image_187>
+        <Image_188>
             <Name>카카오_로그인_연동</Name>
             <Rect>(209, 438, 116, 26)</Rect>
             <ROI>(161, 360, 209, 178)</ROI>
@@ -4811,8 +4843,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_187>
-        <Image_188>
+        </Image_188>
+        <Image_189>
             <Name>말딸에_로그인</Name>
             <Rect>(146, 519, 246, 44)</Rect>
             <ROI>(146, 519, 246, 44)</ROI>
@@ -4837,8 +4869,8 @@
                 <Param>Mouse( 0 0 1  0 1 78 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="1" Coord_y1="78" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_188>
-        <Image_189>
+        </Image_189>
+        <Image_190>
             <Name>첫_확인하고_계속하기</Name>
             <Rect>(208, 618, 121, 26)</Rect>
             <ROI>(197, 609, 140, 43)</ROI>
@@ -4863,8 +4895,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_189>
-        <Image_190>
+        </Image_190>
+        <Image_191>
             <Name>Not_now</Name>
             <Rect>(117, 727, 65, 22)</Rect>
             <ROI>(89, 709, 115, 56)</ROI>
@@ -4889,8 +4921,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_190>
-        <Image_191>
+        </Image_191>
+        <Image_192>
             <Name>확인하고_계속하기</Name>
             <Rect>(206, 615, 125, 29)</Rect>
             <ROI>(108, 524, 303, 184)</ROI>
@@ -4915,8 +4947,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_191>
-        <Image_192>
+        </Image_192>
+        <Image_193>
             <Name>연동_실패</Name>
             <Rect>(129, 455, 278, 48)</Rect>
             <ROI>(129, 455, 278, 48)</ROI>
@@ -4941,8 +4973,8 @@
                 <Param>Mouse( 0 0 1  0 3 154 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="3" Coord_y1="154" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_192>
-        <Image_193>
+        </Image_193>
+        <Image_194>
             <Name>인증되지_않는_로그인</Name>
             <Rect>(95, 458, 351, 43)</Rect>
             <ROI>(95, 458, 351, 43)</ROI>
@@ -4967,8 +4999,8 @@
                 <Param>Mouse( 0 0 1  0 -1 147 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-1" Coord_y1="147" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_193>
-        <Image_194>
+        </Image_194>
+        <Image_195>
             <Name>연동_성공</Name>
             <Rect>(86, 451, 370, 56)</Rect>
             <ROI>(86, 451, 370, 56)</ROI>
@@ -5005,8 +5037,8 @@
                 <Param>Script( 연동_성공_70aa1 EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "계정_정보") )</Param>
                 <Attr LuaFile="연동_성공_70aa1" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
             </Act_4>
-        </Image_194>
-        <Image_195>
+        </Image_195>
+        <Image_196>
             <Name>연동됨을_확인</Name>
             <Rect>(225, 437, 86, 29)</Rect>
             <ROI>(225, 437, 86, 29)</ROI>
@@ -5034,11 +5066,11 @@
             <Act_3>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 연동됨을_확인_3i4hw EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "계정_정보") )</Param>
-                <Attr LuaFile="연동됨을_확인_3i4hw" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
+                <Param>Script( 연동됨을_확인_3i4hw EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "메뉴로_단축")\n EnableImage(false, "계정_정보") )</Param>
+                <Attr LuaFile="연동됨을_확인_3i4hw" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;메뉴로_단축&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
             </Act_3>
-        </Image_195>
-        <Image_196>
+        </Image_196>
+        <Image_197>
             <Name>카카오_초기화.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5051,8 +5083,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_196>
-        <Image_197>
+        </Image_197>
+        <Image_198>
             <Name>카카오_초기화_활성화</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5071,8 +5103,8 @@
                 <Param>Script( 카카오_초기화_활성화_7487j EnableImage(false, "시작")\n EnableImage(true, "카카오_게임_닫기")\n EnableImage(true, "크롬")\n \n EnableImage(false, "카카오_초기화_활성화") )</Param>
                 <Attr LuaFile="카카오_초기화_활성화_7487j" Text="EnableImage(false, &quot;시작&quot;)\n EnableImage(true, &quot;카카오_게임_닫기&quot;)\n EnableImage(true, &quot;크롬&quot;)\n \n EnableImage(false, &quot;카카오_초기화_활성화&quot;)"/>
             </Act_1>
-        </Image_197>
-        <Image_198>
+        </Image_198>
+        <Image_199>
             <Name>카카오_게임_닫기</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5091,8 +5123,8 @@
                 <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_1>
-        </Image_198>
-        <Image_199>
+        </Image_199>
+        <Image_200>
             <Name>크롬</Name>
             <Rect>(75, 254, 59, 17)</Rect>
             <ROI>(15, 39, 510, 560)</ROI>
@@ -5117,8 +5149,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_199>
-        <Image_200>
+        </Image_200>
+        <Image_201>
             <Name>연결된_서비스_관리</Name>
             <Rect>(20, 779, 115, 21)</Rect>
             <ROI>(0, 99, 249, 833)</ROI>
@@ -5143,8 +5175,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_200>
-        <Image_201>
+        </Image_201>
+        <Image_202>
             <Name>카카오_우마무스메</Name>
             <Rect>(29, 410, 21, 20)</Rect>
             <ROI>(0, 310, 170, 171)</ROI>
@@ -5169,8 +5201,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_201>
-        <Image_202>
+        </Image_202>
+        <Image_203>
             <Name>모든_정보_삭제</Name>
             <Rect>(225, 385, 88, 19)</Rect>
             <ROI>(182, 356, 165, 76)</ROI>
@@ -5195,8 +5227,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_202>
-        <Image_203>
+        </Image_203>
+        <Image_204>
             <Name>서비스_이름을_입력</Name>
             <Rect>(64, 500, 163, 24)</Rect>
             <ROI>(23, 441, 252, 141)</ROI>
@@ -5227,8 +5259,8 @@
                 <Param>Keybd( 0 0 우마무스메&lt;Space&gt;프리티&lt;Space&gt;더비 )</Param>
                 <Attr Speed="0" Clipboard="0" Text="우마무스메&lt;Space&gt;프리티&lt;Space&gt;더비"/>
             </Act_3>
-        </Image_203>
-        <Image_204>
+        </Image_204>
+        <Image_205>
             <Name>모든_정보_삭제_빨간</Name>
             <Rect>(231, 553, 80, 21)</Rect>
             <ROI>(208, 535, 119, 51)</ROI>
@@ -5253,8 +5285,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_204>
-        <Image_205>
+        </Image_205>
+        <Image_206>
             <Name>비번_자동완성필수</Name>
             <Rect>(16, 230, 59, 30)</Rect>
             <ROI>(16, 230, 59, 30)</ROI>
@@ -5279,8 +5311,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_205>
-        <Image_206>
+        </Image_206>
+        <Image_207>
             <Name>구글_자동완성_ENG</Name>
             <Rect>(25, 913, 126, 25)</Rect>
             <ROI>(25, 913, 126, 25)</ROI>
@@ -5305,8 +5337,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_206>
-        <Image_207>
+        </Image_207>
+        <Image_208>
             <Name>구글_자동완성KR</Name>
             <Rect>(253, 901, 34, 20)</Rect>
             <ROI>(253, 901, 34, 20)</ROI>
@@ -5331,8 +5363,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_207>
-        <Image_208>
+        </Image_208>
+        <Image_209>
             <Name>카카오_확인</Name>
             <Rect>(53, 347, 145, 30)</Rect>
             <ROI>(53, 347, 145, 30)</ROI>
@@ -5363,8 +5395,8 @@
                 <Param>Script( 카카오_확인_fyqmj EnableImage(true, "초기화_완료") )</Param>
                 <Attr LuaFile="카카오_확인_fyqmj" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
             </Act_3>
-        </Image_208>
-        <Image_209>
+        </Image_209>
+        <Image_210>
             <Name>초기화_확인</Name>
             <Rect>(18, 241, 276, 322)</Rect>
             <ROI>(1, 190, 315, 402)</ROI>
@@ -5389,8 +5421,8 @@
                 <Param>Script( 초기화_확인_tp561 EnableImage(true, "초기화_완료") )</Param>
                 <Attr LuaFile="초기화_확인_tp561" Text="EnableImage(true, &quot;초기화_완료&quot;)"/>
             </Act_2>
-        </Image_209>
-        <Image_210>
+        </Image_210>
+        <Image_211>
             <Name>초기화_완료</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5433,8 +5465,8 @@
                 <Param>Script( 초기화_완료_hgk2n EnableImage(false, "초기화_완료") )</Param>
                 <Attr LuaFile="초기화_완료_hgk2n" Text="EnableImage(false, &quot;초기화_완료&quot;)"/>
             </Act_5>
-        </Image_210>
-        <Image_211>
+        </Image_211>
+        <Image_212>
             <Name>SSR종류_미사용</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5453,8 +5485,8 @@
                 <Param>Script( SSR종류_미사용_gh7q4 -- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p )</Param>
                 <Attr LuaFile="SSR종류_미사용_gh7q4" Text="-- 뽑힌 캐릭터 종류 개수\n SSR_count = 0\n if pasa then\n  SSR_count = SSR_count + 1\n end\n if city then\n  SSR_count = SSR_count + 1\n end\n if motion then\n  SSR_count = SSR_count + 1\n end\n if p"/>
             </Act_1>
-        </Image_211>
-        <Image_212>
+        </Image_212>
+        <Image_213>
             <Name>이륙_조건</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5539,8 +5571,8 @@
                 <Param>Script( 이륙_조건_4wqjt -- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
                 <Attr LuaFile="이륙_조건_4wqjt" Text="-- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_12>
-        </Image_212>
-        <Image_213>
+        </Image_213>
+        <Image_214>
             <Name>서포트카드.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -5553,8 +5585,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_213>
-        <Image_214>
+        </Image_214>
+        <Image_215>
             <Name>R랭크</Name>
             <Rect>(39, 733, 47, 49)</Rect>
             <ROI>(0, 678, 159, 152)</ROI>
@@ -5579,8 +5611,8 @@
                 <Param>Mouse( 0 0 1  0 431 150 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="431" Coord_y1="150" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_214>
-        <Image_215>
+        </Image_215>
+        <Image_216>
             <Name>SR랭크</Name>
             <Rect>(28, 732, 72, 53)</Rect>
             <ROI>(0, 635, 168, 193)</ROI>
@@ -5605,8 +5637,8 @@
                 <Param>Mouse( 0 0 1  0 429 154 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="429" Coord_y1="154" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_215>
-        <Image_216>
+        </Image_216>
+        <Image_217>
             <Name>엘_콘도르_파사</Name>
             <Rect>(13, 719, 481, 159)</Rect>
             <ROI>(13, 719, 481, 159)</ROI>
@@ -5649,8 +5681,8 @@
                 <Param>Script( 엘_콘도르_파사_ervy8 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="엘_콘도르_파사_ervy8" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_216>
-        <Image_217>
+        </Image_217>
+        <Image_218>
             <Name>골드_시티</Name>
             <Rect>(6, 710, 432, 172)</Rect>
             <ROI>(6, 710, 432, 172)</ROI>
@@ -5693,8 +5725,8 @@
                 <Param>Script( 골드_시티_jbe4k SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="골드_시티_jbe4k" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_217>
-        <Image_218>
+        </Image_218>
+        <Image_219>
             <Name>파인_모션</Name>
             <Rect>(11, 704, 413, 161)</Rect>
             <ROI>(11, 704, 413, 161)</ROI>
@@ -5737,8 +5769,8 @@
                 <Param>Script( 파인_모션_autt2 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="파인_모션_autt2" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_218>
-        <Image_219>
+        </Image_219>
+        <Image_220>
             <Name>비코_페가수스</Name>
             <Rect>(12, 705, 471, 170)</Rect>
             <ROI>(12, 705, 471, 170)</ROI>
@@ -5781,8 +5813,8 @@
                 <Param>Script( 비코_페가수스_in9bz SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="비코_페가수스_in9bz" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_219>
-        <Image_220>
+        </Image_220>
+        <Image_221>
             <Name>사쿠라_바쿠신_오</Name>
             <Rect>(12, 704, 508, 170)</Rect>
             <ROI>(12, 704, 508, 170)</ROI>
@@ -5825,8 +5857,8 @@
                 <Param>Script( 사쿠라_바쿠신_오_e1n9k SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="사쿠라_바쿠신_오_e1n9k" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_220>
-        <Image_221>
+        </Image_221>
+        <Image_222>
             <Name>스페셜_위크</Name>
             <Rect>(14, 714, 434, 153)</Rect>
             <ROI>(14, 714, 434, 153)</ROI>
@@ -5869,8 +5901,8 @@
                 <Param>Script( 스페셜_위크_3ysts SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="스페셜_위크_3ysts" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_221>
-        <Image_222>
+        </Image_222>
+        <Image_223>
             <Name>아이네스_후진</Name>
             <Rect>(8, 709, 473, 161)</Rect>
             <ROI>(8, 709, 473, 161)</ROI>
@@ -5913,8 +5945,8 @@
                 <Param>Script( 아이네스_후진_07bee SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="아이네스_후진_07bee" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_222>
-        <Image_223>
+        </Image_223>
+        <Image_224>
             <Name>하야카와_타즈나</Name>
             <Rect>(13, 701, 502, 174)</Rect>
             <ROI>(13, 701, 502, 174)</ROI>
@@ -5957,8 +5989,8 @@
                 <Param>Script( 하야카와_타즈나_fhtnl SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="하야카와_타즈나_fhtnl" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_223>
-        <Image_224>
+        </Image_224>
+        <Image_225>
             <Name>타마노_크로스</Name>
             <Rect>(12, 697, 471, 174)</Rect>
             <ROI>(12, 697, 471, 174)</ROI>
@@ -6001,8 +6033,8 @@
                 <Param>Script( 타마노_크로스_e2o3j SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="타마노_크로스_e2o3j" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_224>
-        <Image_225>
+        </Image_225>
+        <Image_226>
             <Name>사일런스_스즈카</Name>
             <Rect>(13, 704, 497, 170)</Rect>
             <ROI>(13, 704, 497, 170)</ROI>
@@ -6045,8 +6077,8 @@
                 <Param>Script( 사일런스_스즈카_7mtmz SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="사일런스_스즈카_7mtmz" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_225>
-        <Image_226>
+        </Image_226>
+        <Image_227>
             <Name>슈퍼_크릭</Name>
             <Rect>(14, 720, 404, 153)</Rect>
             <ROI>(14, 720, 404, 153)</ROI>
@@ -6089,8 +6121,8 @@
                 <Param>Script( 슈퍼_크릭_eooat SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="슈퍼_크릭_eooat" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_226>
-        <Image_227>
+        </Image_227>
+        <Image_228>
             <Name>세이운_스카이</Name>
             <Rect>(12, 711, 466, 163)</Rect>
             <ROI>(12, 711, 466, 163)</ROI>
@@ -6133,8 +6165,8 @@
                 <Param>Script( 세이운_스카이_kpptd SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="세이운_스카이_kpptd" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_227>
-        <Image_228>
+        </Image_228>
+        <Image_229>
             <Name>토카이_테이오</Name>
             <Rect>(12, 699, 465, 171)</Rect>
             <ROI>(12, 699, 465, 171)</ROI>
@@ -6177,8 +6209,8 @@
                 <Param>Script( 토카이_테이오_t80xi SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="토카이_테이오_t80xi" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_228>
-        <Image_229>
+        </Image_229>
+        <Image_230>
             <Name>스마트_팔콘</Name>
             <Rect>(12, 699, 442, 166)</Rect>
             <ROI>(12, 699, 442, 166)</ROI>
@@ -6221,8 +6253,8 @@
                 <Param>Script( 스마트_팔콘_4bxt2 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="스마트_팔콘_4bxt2" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_229>
-        <Image_230>
+        </Image_230>
+        <Image_231>
             <Name>에어_샤커</Name>
             <Rect>(11, 706, 412, 162)</Rect>
             <ROI>(11, 706, 412, 162)</ROI>
@@ -6265,8 +6297,8 @@
                 <Param>Script( 에어_샤커_2rd6e SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="에어_샤커_2rd6e" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_230>
-        <Image_231>
+        </Image_231>
+        <Image_232>
             <Name>골드_쉽</Name>
             <Rect>(13, 720, 372, 152)</Rect>
             <ROI>(13, 720, 372, 152)</ROI>
@@ -6309,8 +6341,8 @@
                 <Param>Script( 골드_쉽_kydr9 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="골드_쉽_kydr9" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_231>
-        <Image_232>
+        </Image_232>
+        <Image_233>
             <Name>니시노_플라워</Name>
             <Rect>(13, 706, 466, 164)</Rect>
             <ROI>(13, 706, 466, 164)</ROI>
@@ -6353,8 +6385,8 @@
                 <Param>Script( 니시노_플라워_flls1 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="니시노_플라워_flls1" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_232>
-        <Image_233>
+        </Image_233>
+        <Image_234>
             <Name>그래스_원더</Name>
             <Rect>(14, 692, 467, 172)</Rect>
             <ROI>(14, 692, 467, 172)</ROI>
@@ -6397,8 +6429,8 @@
                 <Param>Script( 그래스_원더_clvlj SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="그래스_원더_clvlj" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_233>
-        <Image_234>
+        </Image_234>
+        <Image_235>
             <Name>위닝_티켓</Name>
             <Rect>(12, 712, 405, 155)</Rect>
             <ROI>(12, 712, 405, 155)</ROI>
@@ -6441,8 +6473,8 @@
                 <Param>Script( 위닝_티켓_uz63l SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="위닝_티켓_uz63l" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_234>
-        <Image_235>
+        </Image_235>
+        <Image_236>
             <Name>보드카</Name>
             <Rect>(10, 712, 373, 149)</Rect>
             <ROI>(10, 712, 373, 149)</ROI>
@@ -6485,8 +6517,8 @@
                 <Param>Script( 보드카_93d68 SSR_count = SSR_count + 1 )</Param>
                 <Attr LuaFile="보드카_93d68" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
-        </Image_235>
-        <Image_236>
+        </Image_236>
+        <Image_237>
             <Name>뽑기.grp</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6499,8 +6531,8 @@
             <Group>1</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>0</ActCount>
-        </Image_236>
-        <Image_237>
+        </Image_237>
+        <Image_238>
             <Name>뽑기_이동</Name>
             <Rect>(484, 653, 44, 52)</Rect>
             <ROI>(484, 653, 44, 52)</ROI>
@@ -6525,8 +6557,8 @@
                 <Param>Mouse( 0 0 1  0 -24 274 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-24" Coord_y1="274" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_237>
-        <Image_238>
+        </Image_238>
+        <Image_239>
             <Name>3확정</Name>
             <Rect>(169, 543, 197, 68)</Rect>
             <ROI>(169, 543, 197, 68)</ROI>
@@ -6551,8 +6583,8 @@
                 <Param>Mouse( 0 0 1  0 -231 7 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-231" Coord_y1="7" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_238>
-        <Image_239>
+        </Image_239>
+        <Image_240>
             <Name>SSR_메이크데뷔뽑기</Name>
             <Rect>(145, 552, 247, 57)</Rect>
             <ROI>(145, 552, 247, 57)</ROI>
@@ -6577,8 +6609,8 @@
                 <Param>Mouse( 0 0 1  0 -230 6 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-230" Coord_y1="6" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_239>
-        <Image_240>
+        </Image_240>
+        <Image_241>
             <Name>서포트_카드_뽑기</Name>
             <Rect>(177, 543, 140, 60)</Rect>
             <ROI>(177, 543, 140, 60)</ROI>
@@ -6603,8 +6635,8 @@
                 <Param>Mouse( 0 0 1  0 183 192 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="183" Coord_y1="192" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_240>
-        <Image_241>
+        </Image_241>
+        <Image_242>
             <Name>쥬얼_부족</Name>
             <Rect>(186, 562, 163, 21)</Rect>
             <ROI>(162, 543, 214, 54)</ROI>
@@ -6638,23 +6670,23 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 쥬얼_부족_kb1p9 -- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, "뽑기_이동")\n EnableImage(true, "메뉴로")\n EnableImage(true, "계정_정보") )</Param>
-                <Attr LuaFile="쥬얼_부족_kb1p9" Text="-- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, &quot;뽑기_이동&quot;)\n EnableImage(true, &quot;메뉴로&quot;)\n EnableImage(true, &quot;계정_정보&quot;)"/>
+                <Param>Script( 쥬얼_부족_kb1p9 -- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, "뽑기_이동")\n EnableImage(true, "메뉴로")\n EnableImage(true, "메뉴로_단축")\n EnableImage(true, "계정_ )</Param>
+                <Attr LuaFile="쥬얼_부족_kb1p9" Text="-- 카카오판 도감 미열람 초기화\n -- 쥬얼이 부족할 떄 이 밑에 not 지우기\n EnableImage(false, &quot;뽑기_이동&quot;)\n EnableImage(true, &quot;메뉴로&quot;)\n EnableImage(true, &quot;메뉴로_단축&quot;)\n EnableImage(true, &quot;계정_"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화\n if read_book then\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "계정_정보")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImag )</Param>
-                <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화\n if read_book then\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;계정_정보&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImag"/>
+                <Param>Script( 쥬얼_부족_jhji1 -- 카카오판 초기화\n if read_book then\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "메뉴로_단축")\n   EnableImage(true, "계정_정보")\n else\n   EnableIma )</Param>
+                <Attr LuaFile="쥬얼_부족_jhji1" Text="-- 카카오판 초기화\n if read_book then\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;메뉴로_단축&quot;)\n   EnableImage(true, &quot;계정_정보&quot;)\n else\n   EnableIma"/>
             </Act_5>
             <Act_6>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 쥬얼_부족_2bngo -- 게스트판 초기화\n if read_book then\n   EnableImage(true, "초기화_활성화")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n end )</Param>
-                <Attr LuaFile="쥬얼_부족_2bngo" Text="-- 게스트판 초기화\n if read_book then\n   EnableImage(true, &quot;초기화_활성화&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n end"/>
+                <Param>Script( 쥬얼_부족_2bngo -- 게스트판 초기화\n if read_book then\n   EnableImage(true, "초기화_활성화")\n else\n   EnableImage(false, "뽑기_이동")\n   EnableImage(true, "메뉴로")\n   EnableImage(true, "메뉴로_단축")\n end )</Param>
+                <Attr LuaFile="쥬얼_부족_2bngo" Text="-- 게스트판 초기화\n if read_book then\n   EnableImage(true, &quot;초기화_활성화&quot;)\n else\n   EnableImage(false, &quot;뽑기_이동&quot;)\n   EnableImage(true, &quot;메뉴로&quot;)\n   EnableImage(true, &quot;메뉴로_단축&quot;)\n end"/>
             </Act_6>
-        </Image_241>
-        <Image_242>
+        </Image_242>
+        <Image_243>
             <Name>쥬얼을_사용해_뽑기</Name>
             <Rect>(123, 357, 295, 46)</Rect>
             <ROI>(98, 345, 349, 133)</ROI>
@@ -6685,8 +6717,8 @@
                 <Param>Script( 쥬얼을_사용해_뽑기_v754s EnableImage(false, "스킵") )</Param>
                 <Attr LuaFile="쥬얼을_사용해_뽑기_v754s" Text="EnableImage(false, &quot;스킵&quot;)"/>
             </Act_3>
-        </Image_242>
-        <Image_243>
+        </Image_243>
+        <Image_244>
             <Name>한_번_더_뽑기</Name>
             <Rect>(324, 884, 120, 28)</Rect>
             <ROI>(300, 873, 163, 54)</ROI>
@@ -6711,8 +6743,8 @@
                 <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
-        </Image_243>
-        <Image_244>
+        </Image_244>
+        <Image_245>
             <Name>잠수</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6731,8 +6763,8 @@
                 <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
                 <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
             </Act_1>
-        </Image_244>
-        <Image_245>
+        </Image_245>
+        <Image_246>
             <Name>아무거나클릭</Name>
             <Rect>(0, 0, 0, 0)</Rect>
             <ROI>(0, 0, 0, 0)</ROI>
@@ -6757,7 +6789,7 @@
                 <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
                 <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_2>
-        </Image_245>
+        </Image_246>
     </GENERAL>
     <SO>
         <CheckImageName>1</CheckImageName>

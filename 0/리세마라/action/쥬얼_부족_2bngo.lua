@@ -4,4 +4,5 @@ if read_book then
 else
   EnableImage(false, "뽑기_이동")
   EnableImage(true, "메뉴로")
+  EnableImage(true, "메뉴로_단축")
 end
