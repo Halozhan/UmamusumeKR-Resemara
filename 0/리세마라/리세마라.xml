@@ -4390,8 +4390,8 @@
             <Act_2>
                 <Name>마우스 입력</Name>
                 <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 7 0 0 0  0 0  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="7" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="0" Rand_y="0" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+                <Param>Mouse( 0 0 1  0 2 0 0 0  0 0  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="2" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="0" Rand_y="0" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_170>
         <Image_171>
