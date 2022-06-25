@@ -31,11 +31,11 @@ end
 if getClock(stop_check_period) >= STOP_CHECK_PERIOD_SV then
     local acc, fx, fy = BitsSearch({bits = screen, w = screen_size.w, h= screen_size.h}, roi)
     print('>> 앱 정지 체크 시작 ('..STOP_CHECK_PERIOD_SV..'초 마다 검사)')
-    print('( 화면유사도(acc)가 99 이상일 경우 동작 정지 의심 )')
+    print('( 화면유사도(acc)가 98 이상일 경우 동작 정지 의심 )')
     print('[ acc : '..acc, 'fx : '..fx, 'fy : '..fy..' ]')
 
-    -- 유사도가 99 이상일시 앱 정지로 판단
-    if acc >= 99 then
+    -- 유사도가 98 이상일시 앱 정지로 판단
+    if acc >= 98 then
         if stop_check_time == nil then
             stop_check_time = setClock()
         end
@@ -53,7 +53,7 @@ if getClock(stop_check_period) >= STOP_CHECK_PERIOD_SV then
         end
         
     else
-        -- 유사도가 90 미만일시 앱 정상동작으로 판단, 초기화
+        -- 유사도가 98 미만일시 앱 정상동작으로 판단, 초기화
         ReleaseBits(screen)
         screen = nil
         stop_check_period = nil

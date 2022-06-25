@@ -6746,16 +6746,16 @@
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>2</ActCount>
             <Act_1>
-                <Name>키보드 입력</Name>
-                <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
-            </Act_1>
-            <Act_2>
                 <Name>마우스 입력</Name>
                 <Enable>1</Enable>
                 <Param>Mouse( 0 0 1  1 267 627 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="1" Coord_x1="267" Coord_y1="627" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_1>
+            <Act_2>
+                <Name>키보드 입력</Name>
+                <Enable>1</Enable>
+                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
             </Act_2>
         </Image_245>
     </GENERAL>
