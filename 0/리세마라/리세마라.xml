@@ -17,7 +17,7 @@
         <Mdpi>96</Mdpi>
         <Tdpi>96</Tdpi>
         <AuthorID>test</AuthorID>
-        <IniDelimiter>689461966081453236</IniDelimiter>
+        <IniDelimiter>28309262144938703</IniDelimiter>
     </MAIN>
     <TW>
         <TWAName>BlueStacks 1</TWAName>
@@ -28,17 +28,17 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>7995685</PickPos>
-        <TWHandle>0x11086E</TWHandle>
-        <TargetWnd.left>2</TargetWnd.left>
-        <TargetWnd.top>34</TargetWnd.top>
-        <TargetWnd.right>542</TargetWnd.right>
-        <TargetWnd.bottom>994</TargetWnd.bottom>
-        <TarfrmWnd.left>1</TarfrmWnd.left>
-        <TarfrmWnd.top>1</TarfrmWnd.top>
-        <TarfrmWnd.right>575</TarfrmWnd.right>
-        <TarfrmWnd.bottom>995</TarfrmWnd.bottom>
-        <TWDGuid>{F9665A33-4642-4320-8164-A0F967CFB875}</TWDGuid>
+        <PickPos>5571348</PickPos>
+        <TWHandle>0xC4038A</TWHandle>
+        <TargetWnd.left>451</TargetWnd.left>
+        <TargetWnd.top>38</TargetWnd.top>
+        <TargetWnd.right>991</TargetWnd.right>
+        <TargetWnd.bottom>998</TargetWnd.bottom>
+        <TarfrmWnd.left>450</TarfrmWnd.left>
+        <TarfrmWnd.top>5</TarfrmWnd.top>
+        <TarfrmWnd.right>1024</TarfrmWnd.right>
+        <TarfrmWnd.bottom>999</TarfrmWnd.bottom>
+        <TWDGuid>{027FC2C7-F75F-45FD-B205-AE5E00DDBF7C}</TWDGuid>
         <TWInc/>
     </TW>
     <GENERAL>
@@ -320,7 +320,7 @@
             <Param1>13828097</Param1>
             <Param2>80853</Param2>
             <Param3>0</Param3>
-            <Param4>1656011883</Param4>
+            <Param4>1656061880</Param4>
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4347,10 +4347,10 @@
             <Rect>(476, 41, 32, 21)</Rect>
             <ROI>(467, 34, 51, 38)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7929856</Param1>
-            <Param2>539641</Param2>
+            <Param1>15663105</Param1>
+            <Param2>80888</Param2>
             <Param3>0</Param3>
-            <Param4>1656156975</Param4>
+            <Param4>1656163622</Param4>
             <Enable>0</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4373,10 +4373,10 @@
             <Rect>(523, 46, 4, 12)</Rect>
             <ROI>(498, 18, 42, 82)</ROI>
             <FullROI>0</FullROI>
-            <Param1>7405568</Param1>
-            <Param2>605170</Param2>
+            <Param1>16515073</Param1>
+            <Param2>670706</Param2>
             <Param3>0</Param3>
-            <Param4>1656133338</Param4>
+            <Param4>1656163622</Param4>
             <Enable>0</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4568,8 +4568,8 @@
             <Act_1>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
+                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
             </Act_1>
         </Image_178>
         <Image_179>
@@ -4852,7 +4852,7 @@
             <Param1>15269889</Param1>
             <Param2>539558</Param2>
             <Param3>0</Param3>
-            <Param4>1656093169</Param4>
+            <Param4>1656136676</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -4982,7 +4982,7 @@
             <Param1>13959169</Param1>
             <Param2>408483</Param2>
             <Param3>0</Param3>
-            <Param4>1656063255</Param4>
+            <Param4>1656075100</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -5120,8 +5120,8 @@
             <Act_1>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
+                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
             </Act_1>
         </Image_199>
         <Image_200>
@@ -5444,8 +5444,8 @@
             <Act_2>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
+                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
             </Act_2>
             <Act_3>
                 <Name>스크립트 입력</Name>
@@ -6786,8 +6786,8 @@
             <Act_2>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Shift_Press&gt;5&lt;Shift_Release&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Shift_Press&gt;5&lt;Shift_Release&gt;"/>
+                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
             </Act_2>
         </Image_246>
     </GENERAL>
