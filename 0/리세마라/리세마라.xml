@@ -28,8 +28,8 @@
         <TWCClass>Qt5154QWindowIcon</TWCClass>
         <CheckTWInc>0</CheckTWInc>
         <CheckTWHide>0</CheckTWHide>
-        <PickPos>5898602</PickPos>
-        <TWHandle>0x5A3147E</TWHandle>
+        <PickPos>7995685</PickPos>
+        <TWHandle>0x11086E</TWHandle>
         <TargetWnd.left>2</TargetWnd.left>
         <TargetWnd.top>34</TargetWnd.top>
         <TargetWnd.right>542</TargetWnd.right>
@@ -744,8 +744,8 @@
             <Act_3>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 우마뾰이 )</Param>
-                <Attr Speed="1" Clipboard="0" Text="우마뾰이"/>
+                <Param>Keybd( 0 0 UmaPyoi )</Param>
+                <Attr Speed="0" Clipboard="0" Text="UmaPyoi"/>
             </Act_3>
             <Act_4>
                 <Name>마우스 입력</Name>
@@ -4379,7 +4379,7 @@
             <Param4>1656133338</Param4>
             <Enable>0</Enable>
             <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="0" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <Trg Interval="1" CheckInherit1="1" Acc="90" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
@@ -4859,7 +4859,7 @@
             <ActCount>2</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
-                <Enable>1</Enable>
+                <Enable>0</Enable>
                 <Param/>
                 <Attr/>
             </Act_1>
@@ -5034,8 +5034,8 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 연동_성공_70aa1 EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "계정_정보") )</Param>
-                <Attr LuaFile="연동_성공_70aa1" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
+                <Param>Script( 연동_성공_70aa1 EnableImage(true, "카카오_초기화_활성화")\n \n EnableImage(false, "메뉴로")\n EnableImage(false, "메뉴로_단축")\n EnableImage(false, "계정_정보") )</Param>
+                <Attr LuaFile="연동_성공_70aa1" Text="EnableImage(true, &quot;카카오_초기화_활성화&quot;)\n \n EnableImage(false, &quot;메뉴로&quot;)\n EnableImage(false, &quot;메뉴로_단축&quot;)\n EnableImage(false, &quot;계정_정보&quot;)"/>
             </Act_4>
         </Image_195>
         <Image_196>
