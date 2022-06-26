@@ -30,14 +30,14 @@
         <CheckTWHide>0</CheckTWHide>
         <PickPos>33489345</PickPos>
         <TWHandle>0x280C6C</TWHandle>
-        <TargetWnd.left>2</TargetWnd.left>
-        <TargetWnd.top>34</TargetWnd.top>
-        <TargetWnd.right>542</TargetWnd.right>
-        <TargetWnd.bottom>994</TargetWnd.bottom>
-        <TarfrmWnd.left>1</TarfrmWnd.left>
-        <TarfrmWnd.top>1</TarfrmWnd.top>
-        <TarfrmWnd.right>575</TarfrmWnd.right>
-        <TarfrmWnd.bottom>995</TarfrmWnd.bottom>
+        <TargetWnd.left>1</TargetWnd.left>
+        <TargetWnd.top>33</TargetWnd.top>
+        <TargetWnd.right>541</TargetWnd.right>
+        <TargetWnd.bottom>993</TargetWnd.bottom>
+        <TarfrmWnd.left>0</TarfrmWnd.left>
+        <TarfrmWnd.top>0</TarfrmWnd.top>
+        <TarfrmWnd.right>574</TarfrmWnd.right>
+        <TarfrmWnd.bottom>994</TarfrmWnd.bottom>
         <TWDGuid>{027FC2C7-F75F-45FD-B205-AE5E00DDBF7C}</TWDGuid>
         <TWInc/>
     </TW>
@@ -4974,6 +4974,32 @@
                 <Attr Speed="1" Clipboard="0" Text="&lt;Esc&gt;&lt;Delay_500&gt;&lt;Esc&gt;"/>
             </Act_2>
         </Image_193>
+        <Image_194>
+            <Name>구글_계정으로_로그인</Name>
+            <Rect>(126, 159, 167, 22)</Rect>
+            <ROI>(126, 159, 167, 22)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>14614529</Param1>
+            <Param2>801731</Param2>
+            <Param3>0</Param3>
+            <Param4>1656227833</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>2</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>0</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>키보드 입력</Name>
+                <Enable>1</Enable>
+                <Param>Keybd( 1 0 &lt;Esc&gt;&lt;Delay_500&gt;&lt;Esc&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;Esc&gt;&lt;Delay_500&gt;&lt;Esc&gt;"/>
+            </Act_2>
+        </Image_194>
         <Image_195>
             <Name>연동_실패</Name>
             <Rect>(129, 455, 278, 48)</Rect>
@@ -5524,7 +5550,7 @@
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="8" CheckInherit1="0" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>12</ActCount>
+            <ActCount>15</ActCount>
             <Act_1>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
@@ -5546,8 +5572,8 @@
             <Act_4>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_49mbr -- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_49mbr" Text="-- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_1mfmw -- 파인모션 타즈나 박신\n if motion &gt;= 1 and tazuna &gt;= 1 and bakushin &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_1mfmw" Text="-- 파인모션 타즈나 박신\n if motion &gt;= 1 and tazuna &gt;= 1 and bakushin &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_4>
             <Act_5>
                 <Name>스크립트 입력</Name>
@@ -5564,39 +5590,57 @@
             <Act_7>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_0cyel -- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_0cyel" Text="-- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_5wyb3 -- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 박신 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and bakushin &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_5wyb3" Text="-- SSR 개수 6개 이상 및\n -- 파인모션 1장 이상 및\n -- 박신 1장 이상\n if SSR_count &gt;= 6 and motion &gt;= 1 and bakushin &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_7>
             <Act_8>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_laspj -- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 2장\n if motion &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_laspj -- 모션 3장\n if motion &gt;= 3 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_laspj" Text="-- 모션 3장\n if motion &gt;= 3 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_8>
             <Act_9>
                 <Name>스크립트 입력</Name>
                 <Enable>1</Enable>
-                <Param>Script( 이륙_조건_uovul -- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_uovul" Text="-- 크릭 2장\n if creek &gt;= 2 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_uovul -- 크릭 3장\n if creek &gt;= 3 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_uovul" Text="-- 크릭 3장\n if creek &gt;= 3 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_9>
             <Act_10>
                 <Name>스크립트 입력</Name>
-                <Enable>0</Enable>
-                <Param>Script( 이륙_조건_zqt6u -- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Enable>1</Enable>
+                <Param>Script( 이륙_조건_cm3gy -- 박신 3장\n if bakushin &gt;= 3 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_cm3gy" Text="-- 박신 3장\n if bakushin &gt;= 3 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_10>
             <Act_11>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
-                <Param>Script( 이륙_조건_qplnj -- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
-                <Attr LuaFile="이륙_조건_qplnj" Text="-- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+                <Param>Script( 이륙_조건_49mbr -- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_49mbr" Text="-- 슈퍼크릭 타즈나 비코\n if creek &gt;= 1 and tazuna &gt;= 1 and pegasus &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
             </Act_11>
             <Act_12>
                 <Name>스크립트 입력</Name>
                 <Enable>0</Enable>
+                <Param>Script( 이륙_조건_0cyel -- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_0cyel" Text="-- SSR 개수 6개 이상 및\n -- 슈퍼크릭 1장 이상 및\n -- 타즈나 1장 이상\n if SSR_count &gt;= 6 and creek &gt;= 1 and tazuna &gt;=1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+            </Act_12>
+            <Act_13>
+                <Name>스크립트 입력</Name>
+                <Enable>0</Enable>
+                <Param>Script( 이륙_조건_zqt6u -- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_zqt6u" Text="-- 파인 1장\n if motion &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+            </Act_13>
+            <Act_14>
+                <Name>스크립트 입력</Name>
+                <Enable>0</Enable>
+                <Param>Script( 이륙_조건_qplnj -- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
+                <Attr LuaFile="이륙_조건_qplnj" Text="-- 슈퍼크릭 1장\n if creek &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
+            </Act_14>
+            <Act_15>
+                <Name>스크립트 입력</Name>
+                <Enable>0</Enable>
                 <Param>Script( 이륙_조건_4wqjt -- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, "", true)\n  Stop()\n end )</Param>
                 <Attr LuaFile="이륙_조건_4wqjt" Text="-- 타즈나 1장\n if tazuna &gt;= 1 then\n  SendKakaoTalk(0, &quot;&quot;, true)\n  Stop()\n end"/>
-            </Act_12>
+            </Act_15>
         </Image_215>
         <Image_216>
             <Name>서포트카드.grp</Name>
@@ -5928,52 +5972,6 @@
                 <Attr LuaFile="스페셜_위크_3ysts" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
         </Image_224>
-        <Image_248>
-            <Name>잠수</Name>
-            <Rect>(0, 0, 0, 0)</Rect>
-            <ROI>(0, 0, 0, 0)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>0</Param1>
-            <Param2>0</Param2>
-            <Param3>0</Param3>
-            <Param4>0</Param4>
-            <Enable>1</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>1</ActCount>
-            <Act_1>
-                <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
-                <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
-            </Act_1>
-        </Image_248>
-        <Image_249>
-            <Name>아무거나클릭</Name>
-            <Rect>(0, 0, 0, 0)</Rect>
-            <ROI>(0, 0, 0, 0)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>0</Param1>
-            <Param2>0</Param2>
-            <Param3>0</Param3>
-            <Param4>0</Param4>
-            <Enable>0</Enable>
-            <Group>0</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
-            <Act_1>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  1 267 627 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="1" Coord_x1="267" Coord_y1="627" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_1>
-            <Act_2>
-                <Name>키보드 입력</Name>
-                <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
-            </Act_2>
-        </Image_249>
         <Image_225>
             <Name>스페쨩시작인식하지마</Name>
             <Rect>(189, 29, 162, 107)</Rect>
@@ -6848,32 +6846,52 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_247>
-        <Image_194>
-            <Name>구글_계정으로_로그인</Name>
-            <Rect>(126, 159, 167, 22)</Rect>
-            <ROI>(126, 159, 167, 22)</ROI>
+        <Image_248>
+            <Name>잠수</Name>
+            <Rect>(0, 0, 0, 0)</Rect>
+            <ROI>(0, 0, 0, 0)</ROI>
             <FullROI>0</FullROI>
-            <Param1>14614529</Param1>
-            <Param2>801731</Param2>
+            <Param1>0</Param1>
+            <Param2>0</Param2>
             <Param3>0</Param3>
-            <Param4>1656227833</Param4>
+            <Param4>0</Param4>
             <Enable>1</Enable>
-            <Group>2</Group>
+            <Group>0</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>1</ActCount>
+            <Act_1>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 잠수_boe7f -- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc )</Param>
+                <Attr LuaFile="잠수_boe7f" Text="-- set/get delay timer\n function setClock()\n     return os.clock()\n end\n \n function getClock(clock)\n     if clock ~= nil then\n         return os.clock() - clock\n     else\n         print(cloc"/>
+            </Act_1>
+        </Image_248>
+        <Image_249>
+            <Name>아무거나클릭</Name>
+            <Rect>(0, 0, 0, 0)</Rect>
+            <ROI>(0, 0, 0, 0)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>0</Param1>
+            <Param2>0</Param2>
+            <Param3>0</Param3>
+            <Param4>0</Param4>
+            <Enable>0</Enable>
+            <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
             <ActCount>2</ActCount>
             <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>0</Enable>
-                <Param/>
-                <Attr/>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  1 267 627 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="1" Coord_x1="267" Coord_y1="627" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_1>
             <Act_2>
                 <Name>키보드 입력</Name>
                 <Enable>1</Enable>
-                <Param>Keybd( 1 0 &lt;Esc&gt;&lt;Delay_500&gt;&lt;Esc&gt; )</Param>
-                <Attr Speed="1" Clipboard="0" Text="&lt;Esc&gt;&lt;Delay_500&gt;&lt;Esc&gt;"/>
+                <Param>Keybd( 1 0 &lt;ScrollLock&gt; )</Param>
+                <Attr Speed="1" Clipboard="0" Text="&lt;ScrollLock&gt;"/>
             </Act_2>
-        </Image_194>
+        </Image_249>
     </GENERAL>
     <SO>
         <CheckImageName>1</CheckImageName>

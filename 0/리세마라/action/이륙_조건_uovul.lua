@@ -1,5 +1,5 @@
--- 크릭 2장
-if creek >= 2 then
+-- 크릭 3장
+if creek >= 3 then
  SendKakaoTalk(0, "", true)
  Stop()
 end
