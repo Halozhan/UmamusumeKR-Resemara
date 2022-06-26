@@ -3786,7 +3786,7 @@
             <Enable>1</Enable>
             <Group>0</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>2</ActCount>
+            <ActCount>3</ActCount>
             <Act_1>
                 <Name>이미지 표시</Name>
                 <Enable>0</Enable>
@@ -3796,9 +3796,15 @@
             <Act_2>
                 <Name>마우스 입력</Name>
                 <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 243 -500 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="243" Coord_y1="-500" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_2>
+            <Act_3>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
                 <Param>Mouse( 0 0 1  0 -4 93 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="-4" Coord_y1="93" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_2>
+            </Act_3>
         </Image_146>
         <Image_147>
             <Name>여러_스토리를_해방할</Name>
