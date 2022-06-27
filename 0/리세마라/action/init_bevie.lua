@@ -21,6 +21,7 @@ if init == nil then
   wonder = 0
   ticket = 0
   vodka = 0
+  cap = 0
 
   init = true
 end
