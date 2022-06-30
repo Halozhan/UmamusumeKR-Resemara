@@ -6124,6 +6124,50 @@
                 <Attr LuaFile="하야카와_타즈나_fhtnl" Text="SSR_count = SSR_count + 1"/>
             </Act_5>
         </Image_228>
+        <Image_229>
+            <Name>타마모_크로스</Name>
+            <Rect>(12, 697, 471, 174)</Rect>
+            <ROI>(12, 697, 471, 174)</ROI>
+            <FullROI>0</FullROI>
+            <Param1>12648448</Param1>
+            <Param2>80623</Param2>
+            <Param3>0</Param3>
+            <Param4>1655988525</Param4>
+            <Enable>1</Enable>
+            <Group>2</Group>
+            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
+            <ActCount>5</ActCount>
+            <Act_1>
+                <Name>이미지 표시</Name>
+                <Enable>0</Enable>
+                <Param/>
+                <Attr/>
+            </Act_1>
+            <Act_2>
+                <Name>딜레이(지연)</Name>
+                <Enable>1</Enable>
+                <Param>Delay( 0 1.000000 0 0 0.000000 )</Param>
+                <Attr DelayMin="0" DelaySec="1" CheckDelayRand="0" DelayRandMin="0" DelayRandSec="0"/>
+            </Act_2>
+            <Act_3>
+                <Name>마우스 입력</Name>
+                <Enable>1</Enable>
+                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
+                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
+            </Act_3>
+            <Act_4>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 타마모_크로스_n5x3q cross = cross + 1 )</Param>
+                <Attr LuaFile="타마모_크로스_n5x3q" Text="cross = cross + 1"/>
+            </Act_4>
+            <Act_5>
+                <Name>스크립트 입력</Name>
+                <Enable>1</Enable>
+                <Param>Script( 타마모_크로스_tmrep SSR_count = SSR_count + 1 )</Param>
+                <Attr LuaFile="타마모_크로스_tmrep" Text="SSR_count = SSR_count + 1"/>
+            </Act_5>
+        </Image_229>
         <Image_230>
             <Name>사일런스_스즈카</Name>
             <Rect>(13, 704, 497, 170)</Rect>
@@ -6668,13 +6712,13 @@
         </Image_242>
         <Image_243>
             <Name>뽑기_이동</Name>
-            <Rect>(484, 653, 44, 52)</Rect>
-            <ROI>(484, 653, 44, 52)</ROI>
+            <Rect>(485, 667, 23, 28)</Rect>
+            <ROI>(485, 667, 23, 28)</ROI>
             <FullROI>0</FullROI>
-            <Param1>13172737</Param1>
-            <Param2>2898935</Param2>
+            <Param1>11796480</Param1>
+            <Param2>343034</Param2>
             <Param3>0</Param3>
-            <Param4>1655988525</Param4>
+            <Param4>1656624477</Param4>
             <Enable>1</Enable>
             <Group>2</Group>
             <Trg Interval="1" CheckInherit1="1" Acc="100" CheckInherit2="0" CheckShade="0" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
@@ -7002,50 +7046,6 @@
                 <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="147" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
             </Act_2>
         </Image_254>
-        <Image_229>
-            <Name>타마모_크로스</Name>
-            <Rect>(12, 697, 471, 174)</Rect>
-            <ROI>(12, 697, 471, 174)</ROI>
-            <FullROI>0</FullROI>
-            <Param1>12648448</Param1>
-            <Param2>80623</Param2>
-            <Param3>0</Param3>
-            <Param4>1655988525</Param4>
-            <Enable>1</Enable>
-            <Group>2</Group>
-            <Trg Interval="1" CheckInherit1="1" Acc="80" CheckInherit2="1" CheckShade="1" CheckEdge="0" CheckGauge="0" Gauge="70" ComboGauge="0" CheckAnimated="0" AnimatedSec="2" CheckLuaVar="0" LuaVar="" CheckNotFound="0" CheckPrint="0" ComboPrint="1"/>
-            <ActCount>5</ActCount>
-            <Act_1>
-                <Name>이미지 표시</Name>
-                <Enable>0</Enable>
-                <Param/>
-                <Attr/>
-            </Act_1>
-            <Act_2>
-                <Name>딜레이(지연)</Name>
-                <Enable>1</Enable>
-                <Param>Delay( 0 1.000000 0 0 0.000000 )</Param>
-                <Attr DelayMin="0" DelaySec="1" CheckDelayRand="0" DelayRandMin="0" DelayRandSec="0"/>
-            </Act_2>
-            <Act_3>
-                <Name>마우스 입력</Name>
-                <Enable>1</Enable>
-                <Param>Mouse( 0 0 1  0 0 0 0 0  5 5  0.000000 0.000000  0.500000 1 )</Param>
-                <Attr Input="0" Button="0" Speed="1" Base="0" Coord_x1="0" Coord_y1="0" Coord_x2="0" Coord_y2="0" Rand_x="5" Rand_y="5" PressSec1="0" PressSec2="0" Delay="0.5" Iter="1"/>
-            </Act_3>
-            <Act_4>
-                <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( 타마모_크로스_n5x3q cross = cross + 1 )</Param>
-                <Attr LuaFile="타마모_크로스_n5x3q" Text="cross = cross + 1"/>
-            </Act_4>
-            <Act_5>
-                <Name>스크립트 입력</Name>
-                <Enable>1</Enable>
-                <Param>Script( 타마모_크로스_tmrep SSR_count = SSR_count + 1 )</Param>
-                <Attr LuaFile="타마모_크로스_tmrep" Text="SSR_count = SSR_count + 1"/>
-            </Act_5>
-        </Image_229>
     </GENERAL>
     <SO>
         <CheckImageName>1</CheckImageName>
