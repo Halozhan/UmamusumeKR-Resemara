@@ -5,10 +5,10 @@ import win32gui
 from OpenCV_imread import imreadUnicode
 import adbInput
 
-def hwndImageSearch(hwnd, template, threshold=0.8, Grayscale=False, isExport=False):
+def hwndImageSearch(hwnd, template, confidence=0.8, grayscale=False, isExport=False):
     try:
         img = np.array(screenshot(hwnd, isExport=False))
-        if Grayscale:
+        if grayscale:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             h, w = template.shape # 가져올 이미지의 해상도 (세로, 가로)
@@ -17,7 +17,7 @@ def hwndImageSearch(hwnd, template, threshold=0.8, Grayscale=False, isExport=Fal
             h, w = template.shape[:-1] # 가져올 이미지의 해상도 (세로, 가로, 채널)
                 
         res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
-        # threshold = 0.8 # 인자에서 사용됨
+        threshold = confidence # 정확도
         loc = np.where(res >= threshold) # 정확도 threshold % 이상 이미지 좌표 반환
         count = 0 # 찾은 갯수
         position = [] # 찾은 위치
@@ -29,7 +29,7 @@ def hwndImageSearch(hwnd, template, threshold=0.8, Grayscale=False, isExport=Fal
                 mask[pt[1]:pt[1]+h, pt[0]:pt[0]+w] = 255
                 
                 count += 1
-                position.append((str(pt[0] + w/2), str(pt[1] + h/2))) # 목표의 중앙 좌표
+                position.append((pt[0] + w/2, pt[1] + h/2)) # 목표의 중앙 좌표
                 if isExport:
                     cv2.rectangle(img, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
                 # print("pt의 좌표" + str(pt))
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     hwndMain = win32gui.FindWindow(None, "Bluestacks Dev")
     # hwndImageSearch(hwndMain, imreadUnicode('./Images/test.png'), 0.8, True) 테스트용
     # count, position = hwndImageSearch(hwndMain, imreadUnicode("./Images/test.png"), 0.8, True, True)
-    count, position = hwndImageSearch(hwndMain, imreadUnicode("./Images/우마.png"), 0.8, True, True)
+    count, position = hwndImageSearch(hwndMain, imreadUnicode("./Images/우마.png"), 0.8, grayscale=False, isExport=False)
     print("갯수는 " + str(count) + "개")
     print(position)
     # print(position[0][1])
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     instancePort = 6205
     device = adbInput.AdbConnect(instancePort)
     while 1:
-        x, y = adbInput.BlueStacksOffset(int(float(position[0][0])), int(float(position[0][1])))
+        x, y = adbInput.BlueStacksOffset(position[0][0], position[0][1])
         x, y = adbInput.RandomPosition(x, y, 5, 5)
         # AdbTap(device, x, y)
         adbInput.AdbSwipe(device, x, y, x, y, adbInput.random.randint(50, 150))

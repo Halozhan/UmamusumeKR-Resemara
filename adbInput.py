@@ -12,10 +12,15 @@ def AdbConnect(instancePort):
 
 
 def RandomPosition(x, y, deltaX, deltaY):
-    x = random.randint(x - deltaX, x + deltaX)
-    y = random.randint(y - deltaY, y + deltaY)
+    try:
+        x = int(x)
+        y = int(y)
+        x = random.randint(x - deltaX, x + deltaX)
+        y = random.randint(y - deltaY, y + deltaY)
     
-    return x, y
+        return x, y
+    except:
+        pass
 
 
 def BlueStacksOffset(x, y): # 블루스택 이미지 서칭에서 가져온 위치로 터치하기 위해 블루스택 좌표로 변환
