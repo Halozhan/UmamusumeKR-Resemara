@@ -41,6 +41,18 @@ def AdbSwipe(device, x, y, toX, toY, delay): # 딜레이를 줘서 누름
     device.shell("input swipe " + str(x) + " " + str(y) + " " + str(toX) + " " + str(toY) + " " + str(delay))
 
 
+def BlueStacksClick(device, position, deltaX = 0, deltaY = 0):
+    try:
+        x, y, width, height = position
+        x += width/2
+        y += height/2
+        x, y = BlueStacksOffset(x, y)
+        x, y = RandomPosition(x, y, deltaX, deltaY)
+        AdbSwipe(device, x, y, x, y, random.randint(50, 150))
+        return True
+    except:
+        return False
+
 if __name__ == "__main__":
 
     instancePort = 6205

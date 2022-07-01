@@ -1,19 +1,32 @@
 import cv2
 import numpy as np
 from screenshot import screenshot
-import win32gui
-from OpenCV_imread import imreadUnicode
-import adbInput
 
-def hwndImageSearch(hwnd, template, confidence=0.8, grayscale=False, isExport=False):
+def screenshotToOpenCVImg(hwnd):
+    img = np.array(screenshot(hwnd, isExport=False))
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # RGB순의 이미지를 OpenCV에 맞게 BGR순으로 변경
+    return img
+
+
+def hwndImageSearch(img, template, roiLeft = 0, roiTop = 0, roiWidth = -1, roiHeight = -1,\
+                    confidence=0.8, grayscale=False, isExport=False):
     try:
-        img = np.array(screenshot(hwnd, isExport=False))
+        # roiLeft = 0
+        # roiTop = 0
+        # roiWidth = -1
+        # roiHeight = -1
+        
+        if roiWidth == -1 and roiHeight == -1:
+            img = img[roiTop:-1, roiLeft:-1] # Region of Interest, 관심 영역
+        else:
+            img = img[roiTop:roiTop+roiHeight, roiLeft:roiLeft+roiWidth] # Region of Interest, 관심 영역
+            
+        
         if grayscale:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             h, w = template.shape # 가져올 이미지의 해상도 (세로, 가로)
         else:
-            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # RGB순의 이미지를 OpenCV에 맞게 BGR순으로 변경
             h, w = template.shape[:-1] # 가져올 이미지의 해상도 (세로, 가로, 채널)
                 
         res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
@@ -29,7 +42,7 @@ def hwndImageSearch(hwnd, template, confidence=0.8, grayscale=False, isExport=Fa
                 mask[pt[1]:pt[1]+h, pt[0]:pt[0]+w] = 255
                 
                 count += 1
-                position.append((pt[0] + w/2, pt[1] + h/2)) # 목표의 중앙 좌표
+                position.append((roiLeft + pt[0], roiTop + pt[1], w, h)) # 목표의 박스 (ROI로 잘린 영역 보정)
                 if isExport:
                     cv2.rectangle(img, pt, (pt[0] + w, pt[1] + h), (0, 0, 255), 2)
                 # print("pt의 좌표" + str(pt))
@@ -45,21 +58,22 @@ def hwndImageSearch(hwnd, template, confidence=0.8, grayscale=False, isExport=Fa
 
 
 if __name__ == "__main__":
-    hwndMain = win32gui.FindWindow(None, "Bluestacks Dev")
-    # hwndImageSearch(hwndMain, imreadUnicode('./Images/test.png'), 0.8, True) 테스트용
-    # count, position = hwndImageSearch(hwndMain, imreadUnicode("./Images/test.png"), 0.8, True, True)
-    count, position = hwndImageSearch(hwndMain, imreadUnicode("./Images/우마.png"), 0.8, grayscale=False, isExport=False)
-    print("갯수는 " + str(count) + "개")
-    print(position)
-    # print(position[0][1])
+    import win32gui
+    from OpenCV_imread import imreadUnicode
+    import adbInput
     
-    instancePort = 6205
-    device = adbInput.AdbConnect(instancePort)
+    hwndMain = win32gui.FindWindow(None, "Bluestacks Dev") # hwnd ID 찾기
+    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+    우마 = imreadUnicode("./Images/우마.png") # 찾을 이미지
+    count, position = hwndImageSearch(img, 우마, roiLeft = 206, roiTop = 604, roiWidth = 52, roiHeight = 58,\
+                                      confidence=0.8, grayscale=False, isExport=True) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
+    print("갯수는 " + str(count) + "개") # 찾은 갯수
+    print(position) # 박스 위치 출력
+    
+    instancePort = 6205 # adb instance 포트
+    device = adbInput.AdbConnect(instancePort) # 연결
     while 1:
-        x, y = adbInput.BlueStacksOffset(position[0][0], position[0][1])
-        x, y = adbInput.RandomPosition(x, y, 5, 5)
-        # AdbTap(device, x, y)
-        adbInput.AdbSwipe(device, x, y, x, y, adbInput.random.randint(50, 150))
+        adbInput.BlueStacksClick(device, position[0], 5, 5)
     
 
 # reference: https://stackoverflow.com/questions/7853628/how-do-i-find-an-image-contained-within-an-image
