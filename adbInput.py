@@ -33,6 +33,12 @@ def BlueStacksOffset(x, y): # 블루스택 이미지 서칭에서 가져온 위�
         pass
 
 
+def Offset(x, y, offsetX, offsetY):
+    x += offsetX
+    y += offsetY
+    return x, y
+
+
 def AdbTap(device, x, y): # 0초 동안 누름
     device.shell("input touchscreen tap " + str(x) + " " + str(y))
 
@@ -41,12 +47,13 @@ def AdbSwipe(device, x, y, toX, toY, delay): # 딜레이를 줘서 누름
     device.shell("input swipe " + str(x) + " " + str(y) + " " + str(toX) + " " + str(toY) + " " + str(delay))
 
 
-def BlueStacksClick(device, position, deltaX = 0, deltaY = 0):
+def BlueStacksClick(device, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
         x += width/2
         y += height/2
         x, y = BlueStacksOffset(x, y)
+        x, y = Offset(x, y, offsetX, offsetY)
         x, y = RandomPosition(x, y, deltaX, deltaY)
         AdbSwipe(device, x, y, x, y, random.randint(50, 150))
         return True
@@ -58,10 +65,7 @@ if __name__ == "__main__":
     instancePort = 6205
     device = AdbConnect(instancePort)
     while 1:
-        x, y = RandomPosition(300, 500, 150, 150)
-        # BlueStacksOffset(x, y)
-        # AdbTap(device, x, y)
-        AdbSwipe(device, x, y, x, y, random.randint(50, 150))
+        BlueStacksClick(device, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
         
         # time.sleep(0.15)
         
