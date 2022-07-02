@@ -1,3 +1,4 @@
+# pip install pure-python-adb
 import WindowsAPIInput
 import adbInput
 from OpenCV_imread import imreadUnicode
@@ -161,20 +162,25 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 카카오_로그인 = imreadUnicode(r"./Images/카카오_로그인.png")
 확인하고_계속하기 = imreadUnicode(r"./Images/확인하고_계속하기.png")
 확인하고_계속하기2 = imreadUnicode(r"./Images/확인하고_계속하기2.png")
+확인하고_계속하기3 = imreadUnicode(r"./Images/확인하고_계속하기3.png")
 정보_확인_중 = imreadUnicode(r"./Images/정보_확인_중.png")
 Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로그인.png")
 카카오_로그인_연동에_성공하였습니다 = imreadUnicode(r"./Images/카카오_로그인_연동에_성공하였습니다.png")
+로그아웃 = imreadUnicode(r"./Images/로그아웃.png")
 
 # 초기화
 모두_지우기 = imreadUnicode(r"./Images/모두_지우기.png")
 크롬_실행 = imreadUnicode(r"./Images/크롬_실행.png")
+크롬_실행2 = imreadUnicode(r"./Images/크롬_실행2.png")
 연결된_서비스_관리 = imreadUnicode(r"./Images/연결된_서비스_관리.png")
 우마무스메_서비스 = imreadUnicode(r"./Images/우마무스메_서비스.png")
 모든_정보_삭제 = imreadUnicode(r"./Images/모든_정보_삭제.png")
 이_서비스의_모든_정보를_삭제하시겠습니까 = imreadUnicode(r"./Images/이_서비스의_모든_정보를_삭제하시겠습니까.png")
+이_서비스의_모든_정보를_삭제하시겠습니까2 = imreadUnicode(r"./Images/이_서비스의_모든_정보를_삭제하시겠습니까2.png")
 모든_정보_삭제_빨간_박스 = imreadUnicode(r"./Images/모든_정보_삭제_빨간_박스.png")
 비밀번호 = imreadUnicode(r"./Images/비밀번호.png")
 자동완성_Continue = imreadUnicode(r"./Images/자동완성_Continue.png")
+자동완성_계속 = imreadUnicode(r"./Images/자동완성_계속.png")
 비밀번호_확인 = imreadUnicode(r"./Images/비밀번호_확인.png")
 삭제_완료 = imreadUnicode(r"./Images/삭제_완료.png")
 
@@ -215,9 +221,9 @@ isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 �
 
 
 def main():
-    hwndMain = WindowsAPIInput.GetHwnd("BlueStacks Dev") # hwnd ID 찾기
+    hwndMain = WindowsAPIInput.GetHwnd("BlueStacks 4") # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
-    instancePort = 6205
+    instancePort = 5895
     device = adbInput.AdbConnect(instancePort)
     isPAUSED = False
     is뽑기_이동 = True
@@ -1623,8 +1629,8 @@ def main():
             SSR_파인_모션_count = 0
             SSR_하야카와_타즈나_count = 0
             
-            for i in range(3):
-                time.sleep(0.5)
+            for i in range(5):
+                time.sleep(0.25)
                 img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
@@ -1919,7 +1925,7 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
-        if count and is연동하기:
+        if count:
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("카카오_로그인 " + str(count) + "개")
             print(position)
@@ -1942,6 +1948,16 @@ def main():
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기2 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+            
+        count = 0
+        count, position = ImageSearch(img, 확인하고_계속하기3)
+        if count:
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+            print("확인하고_계속하기3 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
@@ -1978,7 +1994,19 @@ def main():
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
-            
+
+        count = 0
+        count, position = ImageSearch(img, 로그아웃)
+        if count:
+            is초기화하기 = True
+            # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
+            WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+            print("로그아웃 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+
         count = 0
         count, position = ImageSearch(img, 모두_지우기, 428, 40, 96, 48)
         if count:
@@ -1991,6 +2019,7 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 크롬_실행)
+        count, position = ImageSearch(img, 크롬_실행2)
         if count and is초기화하기:
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("크롬_실행 " + str(count) + "개")
@@ -2030,6 +2059,7 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
+        count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
@@ -2062,6 +2092,7 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
+        count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_Continue " + str(count) + "개")
