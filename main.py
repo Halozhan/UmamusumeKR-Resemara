@@ -1895,9 +1895,6 @@ def main():
             if SSR_파인_모션_total >= 1 and SSR_사쿠라_바쿠신_오_total >= 1 and SSR_하야카와_타즈나_total >= 1:
                 exit()
             
-            if SSR_스페셜_위크_total >= 1:
-                exit()
-            
             if SSR_토카이_테이오_total >= 1:
                 exit()
             
