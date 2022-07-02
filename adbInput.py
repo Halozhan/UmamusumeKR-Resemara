@@ -59,7 +59,7 @@ def BlueStacksClick(device, position, offsetX = 0, offsetY = 0, deltaX = 0, delt
         x, y = BlueStacksOffset(x, y)
         x, y = Offset(x, y, offsetX, offsetY)
         x, y = RandomPosition(x, y, deltaX, deltaY)
-        AdbSwipe(device, x, y, x, y, random.randint(50, 150))
+        AdbSwipe(device, x, y, x, y, random.randint(25, 75))
         return True
     except:
         return False
