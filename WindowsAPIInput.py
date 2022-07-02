@@ -18,8 +18,9 @@ def SetWindowSize(hwnd, width, height):
 
 def WindowsAPIKeyboardInput(hwnd, key):
     hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
-
-    win32api.PostMessage(hwndChild, win32con.WM_CHAR, key, 0)
+  
+    win32api.PostMessage(hwndChild, win32con.WM_KEYDOWN, key, 0) 
+    win32api.PostMessage(hwndChild, win32con.WM_KEYUP, key, 0)
         
         
 def WindowsAPIKeyboardInputString(hwnd, contents):

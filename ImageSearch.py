@@ -26,7 +26,7 @@ def ImageSearch(img, template, roiLeft = 0, roiTop = 0, roiWidth = -1, roiHeight
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY) # BGR순의 이미지를 흑백으로 변경
             h, w = template.shape # 가져올 이미지의 해상도 (세로, 가로)
-        else:
+        elif grayscale == False:
             h, w = template.shape[:-1] # 가져올 이미지의 해상도 (세로, 가로, 채널)
                 
         res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)

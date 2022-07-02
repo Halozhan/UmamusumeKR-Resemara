@@ -47,6 +47,10 @@ def AdbSwipe(device, x, y, toX, toY, delay): # 딜레이를 줘서 누름
     device.shell("input swipe " + str(x) + " " + str(y) + " " + str(toX) + " " + str(toY) + " " + str(delay))
 
 
+def Key_event(device, key_code:str):
+    device.shell("input " + str(key_code))
+
+
 def BlueStacksClick(device, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
