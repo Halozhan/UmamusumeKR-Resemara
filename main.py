@@ -1898,7 +1898,7 @@ def main(InstanceName, InstancePort):
             if SSR_파인_모션_total >= 1 and SSR_사쿠라_바쿠신_오_total >= 1 and SSR_하야카와_타즈나_total >= 1:
                 exit()
             
-            if SR_스윕_토쇼_total >= 5:
+            if SSR_파인_모션_total >= 1 and SR_스윕_토쇼_total >= 5:
                 exit()
             
             
