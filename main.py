@@ -194,6 +194,7 @@ _2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
 
 
 # 서포트 카드
+SR_스윕_토쇼 = imreadUnicode(r"./Supporter_cards/SR_스윕_토쇼.png")
 SSR_골드_쉽 = imreadUnicode(r"./Supporter_cards/SSR_골드_쉽.png")
 SSR_골드_시티 = imreadUnicode(r"./Supporter_cards/SSR_골드_시티.png")
 SSR_그래스_원더 = imreadUnicode(r"./Supporter_cards/SSR_그래스_원더.png")
@@ -234,6 +235,7 @@ def main():
     is초기화하기 = False
     
     # 서포트 카드 총 갯수
+    SR_스윕_토쇼_total = 0
     SSR_골드_쉽_total = 0
     SSR_골드_시티_total = 0
     SSR_그래스_원더_total = 0
@@ -1608,6 +1610,7 @@ def main():
             print("뽑기_결과 " + str(count) + "개")
             print(position)
             
+            SR_스윕_토쇼_count = 0
             SSR_골드_쉽_count = 0
             SSR_골드_시티_count = 0
             SSR_그래스_원더_count = 0
@@ -1634,6 +1637,14 @@ def main():
                 time.sleep(0.25)
                 img = screenshotToOpenCVImg(hwndMain)
                 
+                count = 0
+                count, position = ImageSearch(img, SR_스윕_토쇼, grayscale=False)
+                if count:
+                    print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
+                    print(position)
+                    if SR_스윕_토쇼_count < count:
+                        SR_스윕_토쇼_count = count
+                        
                 count = 0
                 count, position = ImageSearch(img, SSR_골드_쉽, grayscale=False)
                 if count:
@@ -1802,6 +1813,7 @@ def main():
                     if SSR_하야카와_타즈나_count < count:
                         SSR_하야카와_타즈나_count = count
             
+            SR_스윕_토쇼_total += SR_스윕_토쇼_count
             SSR_골드_쉽_total += SSR_골드_쉽_count
             SSR_골드_시티_total += SSR_골드_시티_count
             SSR_그래스_원더_total += SSR_그래스_원더_count
@@ -1826,6 +1838,8 @@ def main():
 
             
             print("-"*50)
+            if SR_스윕_토쇼_total:
+                print("SR_스윕_토쇼_total:", SR_스윕_토쇼_total)
             if SSR_골드_쉽_total:
                 print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
             if SSR_골드_시티_total:
@@ -1887,9 +1901,8 @@ def main():
             if SSR_토카이_테이오_total >= 1:
                 exit()
             
-            if SSR_파인_모션_total >= 1:
+            if SR_스윕_토쇼_total >= 5:
                 exit()
-            
             
             
             
