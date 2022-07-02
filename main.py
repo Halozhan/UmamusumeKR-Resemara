@@ -5,6 +5,8 @@ from OpenCV_imread import imreadUnicode
 from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
+import argparse
+
 
  # 찾을 이미지
 우마무스메_실행 = imreadUnicode(r"./Images/우마무스메_실행.png")
@@ -223,10 +225,10 @@ SSR_하야카와_타즈나 = imreadUnicode(r"./Supporter_cards/SSR_하야카와_
 isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
 
 
-def main():
-    hwndMain = WindowsAPIInput.GetHwnd("BlueStacks Dev") # hwnd ID 찾기
+def main(InstanceName, InstancePort):
+    hwndMain = WindowsAPIInput.GetHwnd(InstanceName) # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
-    instancePort = 6205
+    instancePort = int(InstancePort)
     device = adbInput.AdbConnect(instancePort)
     isPAUSED = False
     is뽑기_이동 = True
@@ -2240,8 +2242,14 @@ def main():
             
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="메인 함수입니다. 매개변수에 (윈도우 이름, ADB 포트)를 적어서 사용하세요")
+    
+    parser.add_argument("--InstanceName", required=True, help="윈도우의 이름을 적어주세요")
+    parser.add_argument("--InstancePort", required=True, help="인스턴스의 고유 adb포트를 적어주세요")
+    args = parser.parse_args()
+    
     while 1:
-        main()
+        main(args.InstanceName, args.InstancePort)
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
