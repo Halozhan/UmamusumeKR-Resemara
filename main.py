@@ -225,7 +225,7 @@ SSR_하야카와_타즈나 = imreadUnicode(r"./Supporter_cards/SSR_하야카와_
 isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
 
 
-def main(InstanceName, InstancePort):
+def main(InstanceName="BlueStacks Dev", InstancePort=6205):
     hwndMain = WindowsAPIInput.GetHwnd(InstanceName) # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
     instancePort = int(InstancePort)
@@ -236,6 +236,7 @@ def main(InstanceName, InstancePort):
     is쥬얼부족 = False
     is연동하기 = False
     is초기화하기 = False
+    updateTime = time.time() # 타임 아웃 터치
     
     # 서포트 카드 총 갯수
     SR_스윕_토쇼_total = 0
@@ -263,11 +264,25 @@ def main(InstanceName, InstancePort):
     
     
     while 1:
+        # 잠수 클릭 40초 터치락 해제
+        if time.time() >= updateTime + 40:
+            print("40초 정지 터치락 해제!!! "*3)
+            adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
+            time.sleep(2)
+        
+        # 잠수 클릭 60초 이상 앱정지
+        if time.time() >= updateTime + 60:
+            print("60초 정지 앱 강제종료!!! "*3)
+            WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+            time.sleep(2)
+            
+        
         img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
         
         count = 0
         count, position = ImageSearch(img, 우마무스메_실행, confidence=0.99, grayscale=False)
         if count and is초기화하기 == False:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("우마무스메_실행 " + str(count) + "개")
             print(position)
@@ -277,6 +292,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 게스트_로그인, 232, 926, 77, 14)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("게스트_로그인 " + str(count) + "개")
             print(position)
@@ -286,6 +302,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 게스트로_로그인_하시겠습니까, 162, 534, 218, 17, confidence = 0.9)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 120, offsetY = 117, deltaX=5, deltaY=5)
             print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
             print(position)
@@ -295,6 +312,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 전체_동의, 23, 117, 22, 22, confidence=0.95, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 0, offsetY = 0, deltaX=5, deltaY=5)
             print("전체_동의 " + str(count) + "개")
             print(position)
@@ -304,6 +322,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 시작하기, 237, 396, 67, 23, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("시작하기 " + str(count) + "개")
             print(position)
@@ -313,6 +332,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, TAP_TO_START, 150, 860, 241, 34)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("TAP_TO_START " + str(count) + "개")
             print(position)
@@ -322,6 +342,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 계정_연동_설정_요청, 176, 327, 186, 29)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
             print("계정_연동_설정_요청 " + str(count) + "개")
             print(position)
@@ -331,6 +352,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 게임_데이터_다운로드, 170, 329, 200, 27)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 132, offsetY = 316, deltaX=5, deltaY=5)
             print("게임_데이터_다운로드 " + str(count) + "개")
             print(position)
@@ -340,6 +362,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, SKIP, confidence=0.85)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("SKIP " + str(count) + "개")
             print(position)
@@ -349,6 +372,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 트레이너_정보를_입력해주세요)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=61, deltaX=5)
             time.sleep(0.5)
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=555, deltaX=5)
@@ -367,6 +391,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 등록한다, 206, 620, 106, 52)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("등록한다 " + str(count) + "개")
             print(position)
@@ -376,6 +401,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 이_내용으로_등록합니다_등록하시겠습니까, 72, 569, 333, 49)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
             print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
             print(position)
@@ -385,6 +411,7 @@ def main(InstanceName, InstancePort):
         
         global isDoneTutorial
         if isDoneTutorial == False:
+            updateTime = time.time() # 귀찮아서 튜토리얼 멈추면 알아서 하셈
             count = 0
             count, position = ImageSearch(img, 출전)
             if count:
@@ -1505,6 +1532,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 공지사항_X, 495, 52, 23, 22)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("공지사항_X " + str(count) + "개")
             print(position)
@@ -1515,6 +1543,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 메인_스토리가_해방되었습니다)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=90, deltaX=5, deltaY=5)
             print("메인_스토리가_해방되었습니다 " + str(count) + "개")
             print(position)
@@ -1524,6 +1553,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 여러_스토리를_해방할_수_있게_되었습니다)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
             print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
             print(position)
@@ -1535,6 +1565,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 선물_이동, 456, 672, 47, 53)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("선물_이동 " + str(count) + "개")
             print(position)
@@ -1544,6 +1575,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 선물_일괄_수령, 319, 879, 115, 54, confidence=0.99, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("선물_일괄_수령 " + str(count) + "개")
             print(position)
@@ -1553,6 +1585,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 상기의_선물을_수령했습니다)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
             print("상기의_선물을_수령했습니다 " + str(count) + "개")
             print(position)
@@ -1562,6 +1595,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 받을_수_있는_선물이_없습니다, 143, 460, 231, 51)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-125, offsetY=420, deltaX=5, deltaY=5)
             print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
             print(position)
@@ -1571,6 +1605,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 뽑기_이동, 464, 666, 52, 62)
         if count and is뽑기_이동:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=245, deltaX=5, deltaY=5)
             print("뽑기_이동 " + str(count) + "개")
             print(position)
@@ -1580,6 +1615,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=254, deltaX=5, deltaY=5)
             print("프리티_더비_뽑기 " + str(count) + "개")
             print(position)
@@ -1589,6 +1625,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
             print("서포트_카드_뽑기 " + str(count) + "개")
             print(position)
@@ -1598,6 +1635,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다)
         if count:
+            updateTime = time.time()
             is뽑기_결과 = True
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
             print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
@@ -1609,6 +1647,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
         if count and is뽑기_결과:
+            updateTime = time.time()
             is뽑기_결과 = False
             print("뽑기_결과 " + str(count) + "개")
             print(position)
@@ -1637,6 +1676,7 @@ def main(InstanceName, InstancePort):
             SSR_하야카와_타즈나_count = 0
             
             for i in range(3):
+                updateTime = time.time()
                 time.sleep(0.25)
                 img = screenshotToOpenCVImg(hwndMain)
                 
@@ -1906,6 +1946,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 한_번_더_뽑기)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("한_번_더_뽑기 " + str(count) + "개")
             print(position)
@@ -1916,6 +1957,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 쥬얼이_부족합니다)
         if count:
+            updateTime = time.time()
             # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             is쥬얼부족 = True
             is뽑기_이동 = False
@@ -1932,6 +1974,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 상점_화면을_표시할_수_없습니다)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=147, deltaX=5, deltaY=5)
             print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
             print(position)
@@ -1942,6 +1985,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 메뉴, 452, 48, 57, 48)
         if count and is연동하기:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=5, offsetY=5)
             print("메뉴 " + str(count) + "개")
             print(position)
@@ -1952,6 +1996,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 메뉴_단축, 511, 73, 19, 31, confidence=0.98, grayscale=False)
         if count and is연동하기:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=4)
             print("메뉴_단축 " + str(count) + "개")
             print(position)
@@ -1962,6 +2007,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 계정_정보, 354, 635, 111, 51)
         if count and is연동하기:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("계정_정보 " + str(count) + "개")
             print(position)
@@ -1972,6 +2018,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("카카오_로그인 " + str(count) + "개")
             print(position)
@@ -1982,6 +2029,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 확인하고_계속하기, 186, 623, 144, 53)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기 " + str(count) + "개")
             print(position)
@@ -1992,6 +2040,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 확인하고_계속하기2, 186, 625, 143, 50)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기2 " + str(count) + "개")
             print(position)
@@ -2002,6 +2051,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 확인하고_계속하기3)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기3 " + str(count) + "개")
             print(position)
@@ -2012,6 +2062,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 정보_확인_중, 105, 167, 188, 49)
         if count:
+            updateTime = time.time()
             adbInput.Key_event(device=device, key_code="keyevent 4")
             print("정보_확인_중 " + str(count) + "개")
             print(position)
@@ -2022,6 +2073,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, Google_계정으로_로그인)
         if count:
+            updateTime = time.time()
             adbInput.Key_event(device=device, key_code="keyevent 4")
             print("Google_계정으로_로그인 " + str(count) + "개")
             print(position)
@@ -2032,6 +2084,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 인증되지_않는_로그인_방법_입니다)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=143, deltaX=5, deltaY=5)
             print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
             print(position)
@@ -2042,6 +2095,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 카카오_로그인_연동에_성공하였습니다, 68, 469, 384, 65)
         if count:
+            updateTime = time.time()
             is초기화하기 = True
             # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
@@ -2054,6 +2108,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 로그아웃)
         if count:
+            updateTime = time.time()
             is초기화하기 = True
             # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
@@ -2066,6 +2121,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 모두_지우기, 428, 40, 96, 48)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("모두_지우기 " + str(count) + "개")
             print(position)
@@ -2076,6 +2132,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 크롬_실행)
         if count and is초기화하기:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("크롬_실행 " + str(count) + "개")
             print(position)
@@ -2086,6 +2143,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 크롬_실행2)
         if count and is초기화하기:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("크롬_실행 " + str(count) + "개")
             print(position)
@@ -2096,6 +2154,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 연결된_서비스_관리)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("연결된_서비스_관리 " + str(count) + "개")
             print(position)
@@ -2106,6 +2165,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 우마무스메_서비스)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("우마무스메_서비스 " + str(count) + "개")
             print(position)
@@ -2116,6 +2176,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 모든_정보_삭제, 202, 390, 116, 50)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("모든_정보_삭제 " + str(count) + "개")
             print(position)
@@ -2125,6 +2186,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
             WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
@@ -2137,6 +2199,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
             WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
@@ -2149,6 +2212,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, 204, 559, 108, 50, confidence=0.99, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
             print(position)
@@ -2159,6 +2223,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 비밀번호, 0, 242, 78, 51, confidence=0.99, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호 " + str(count) + "개")
             print(position)
@@ -2169,6 +2234,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_Continue " + str(count) + "개")
             print(position)
@@ -2179,6 +2245,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_계속 " + str(count) + "개")
             print(position)
@@ -2189,6 +2256,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 비밀번호_확인, 231, 356, 55, 46, confidence=0.99, grayscale=False)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호_확인 " + str(count) + "개")
             print(position)
@@ -2199,6 +2267,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 삭제_완료, confidence=0.99)
         if count:
+            updateTime = time.time()
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
             print("삭제_완료 " + str(count) + "개")
             isDoneTutorial = True
@@ -2213,6 +2282,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 튜토리얼을_스킵하시겠습니까)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
             print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
             print(position)
@@ -2221,6 +2291,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, 타이틀_화면으로)
         if count:
+            updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("타이틀_화면으로 " + str(count) + "개")
             print(position)
@@ -2229,6 +2300,7 @@ def main(InstanceName, InstancePort):
         count = 0
         count, position = ImageSearch(img, _2단계_인증)
         if count:
+            updateTime = time.time()
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
             print("_2단계_인증 " + str(count) + "개")
             print(position)
@@ -2246,10 +2318,19 @@ if __name__ == "__main__":
     
     parser.add_argument("--InstanceName", required=True, help="윈도우의 이름을 적어주세요")
     parser.add_argument("--InstancePort", required=True, help="인스턴스의 고유 adb포트를 적어주세요")
-    args = parser.parse_args()
+    isParsed = False
+    try:
+        args = parser.parse_args()
+        isParsed = True
+    except SystemExit:
+        isParsed = False
+        pass
     
     while 1:
-        main(args.InstanceName, args.InstancePort)
+        if isParsed:
+            main(args.InstanceName, args.InstancePort)
+        else:
+            main()            
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
