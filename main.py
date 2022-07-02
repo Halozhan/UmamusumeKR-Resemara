@@ -181,6 +181,7 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 # 특수 이벤트
 튜토리얼을_스킵하시겠습니까 = imreadUnicode(r"./Images/튜토리얼을_스킵하시겠습니까.png")
 타이틀_화면으로 = imreadUnicode(r"./Images/타이틀_화면으로.png")
+_2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
 
 
 
@@ -216,8 +217,8 @@ def main():
     instancePort = 6205
     device = adbInput.AdbConnect(instancePort)
     isPAUSED = False
-    is뽑기_결과 = False
     is뽑기_이동 = True
+    is뽑기_결과 = True
     is쥬얼부족 = False
     is연동하기 = False
     is초기화하기 = False
@@ -479,6 +480,8 @@ def main():
             time.sleep(0.5)
             continue
             
+            
+        # 트레이너 정보 입력
         count = 0
         count, position = ImageSearch(img, 트레이너_정보를_입력해주세요)
         if count:
@@ -486,6 +489,7 @@ def main():
             time.sleep(0.5)
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=555, deltaX=5)
             print("트레이너_정보를_입력해주세요 " + str(count) + "개")
+            time.sleep(0.2)
             print(position)
             for _ in range(10):
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
@@ -494,7 +498,7 @@ def main():
             time.sleep(0.5)
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             time.sleep(0.5)
-            img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+            img = screenshotToOpenCVImg(hwndMain)
         
         count = 0
         count, position = ImageSearch(img, 등록한다, 206, 620, 106, 52)
@@ -513,6 +517,8 @@ def main():
             print(position)
             time.sleep(0.5)
             continue
+            
+        # -----------------------------
         
         count = 0
         count, position = ImageSearch(img, 자네는_트레센_학원의_일원일세, 150, 833, 282, 49)
@@ -1543,7 +1549,8 @@ def main():
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=245, deltaX=5, deltaY=5)
             print("뽑기_이동 " + str(count) + "개")
             print(position)
-            time.sleep(0.5)
+            time.sleep(1)
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93)
@@ -1564,10 +1571,10 @@ def main():
             continue
 
         count = 0
-        count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다) # 수정해야함
-        if count and is쥬얼부족 == False:
-            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
+        count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다)
+        if count:
             is뽑기_결과 = True
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
             print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -1576,6 +1583,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
         if count and is뽑기_결과:
+            is뽑기_결과 = False
             print("뽑기_결과 " + str(count) + "개")
             print(position)
             
@@ -1602,7 +1610,8 @@ def main():
             SSR_하야카와_타즈나_count = 0
             
             for i in range(3):
-                time.sleep(0.5)
+                time.sleep(0.25)
+                img = screenshotToOpenCVImg(hwndMain)
                 count = 0
                 count, position = ImageSearch(img, SSR_골드_쉽, grayscale=False)
                 if count:
@@ -1770,7 +1779,7 @@ def main():
                     print(position)
                     if SSR_하야카와_타즈나_count < count:
                         SSR_하야카와_타즈나_count = count
-                        
+            
             SSR_골드_쉽_total += SSR_골드_쉽_count
             SSR_골드_시티_total += SSR_골드_시티_count
             SSR_그래스_원더_total += SSR_그래스_원더_count
@@ -1793,27 +1802,48 @@ def main():
             SSR_파인_모션_total += SSR_파인_모션_count
             SSR_하야카와_타즈나_total +=  SSR_하야카와_타즈나_count
 
-            print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
-            print("SSR_골드_시티_total:", SSR_골드_시티_total)
-            print("SSR_그래스_원더_total:", SSR_그래스_원더_total)
-            print("SSR_니시노_플라워_total:", SSR_니시노_플라워_total)
-            print("SSR_보드카_total:", SSR_보드카_total)
-            print("SSR_비코_페가수스_total:", SSR_비코_페가수스_total)
-            print("SSR_사일런스_스즈카_total:", SSR_사일런스_스즈카_total)
-            print("SSR_사쿠라_바쿠신_오_total:", SSR_사쿠라_바쿠신_오_total)
-            print("SSR_세이운_스카이_total:", SSR_세이운_스카이_total)
-            print("SSR_슈퍼_크릭_total:", SSR_슈퍼_크릭_total)
-            print("SSR_스마트_팔콘_total:", SSR_스마트_팔콘_total)
-            print("SSR_스페셜_위크_total:", SSR_스페셜_위크_total)
-            print("SSR_아이네스_후진_total:", SSR_아이네스_후진_total)
-            print("SSR_에어_샤커_total:", SSR_에어_샤커_total)
-            print("SSR_엘_콘도르_파사_total:", SSR_엘_콘도르_파사_total)
-            print("SSR_오구리_캡_total:", SSR_오구리_캡_total)
-            print("SSR_위닝_티켓_total:", SSR_위닝_티켓_total)
-            print("SSR_타마모_크로스_total:", SSR_타마모_크로스_total)
-            print("SSR_토카이_테이오_total:", SSR_토카이_테이오_total)
-            print("SSR_파인_모션_total:", SSR_파인_모션_total)
-            print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
+            if SSR_골드_쉽_total:
+                print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
+            if SSR_골드_시티_total:
+                print("SSR_골드_시티_total:", SSR_골드_시티_total)
+            if SSR_그래스_원더_total:
+                print("SSR_그래스_원더_total:", SSR_그래스_원더_total)
+            if SSR_니시노_플라워_total:
+                print("SSR_니시노_플라워_total:", SSR_니시노_플라워_total)
+            if SSR_보드카_total:
+                print("SSR_보드카_total:", SSR_보드카_total)
+            if SSR_비코_페가수스_total:
+                print("SSR_비코_페가수스_total:", SSR_비코_페가수스_total)
+            if SSR_사일런스_스즈카_total:
+                print("SSR_사일런스_스즈카_total:", SSR_사일런스_스즈카_total)
+            if SSR_사쿠라_바쿠신_오_total:
+                print("SSR_사쿠라_바쿠신_오_total:", SSR_사쿠라_바쿠신_오_total)
+            if SSR_세이운_스카이_total:
+                print("SSR_세이운_스카이_total:", SSR_세이운_스카이_total)
+            if SSR_슈퍼_크릭_total:
+                print("SSR_슈퍼_크릭_total:", SSR_슈퍼_크릭_total)
+            if SSR_스마트_팔콘_total:
+                print("SSR_스마트_팔콘_total:", SSR_스마트_팔콘_total)
+            if SSR_스페셜_위크_total:
+                print("SSR_스페셜_위크_total:", SSR_스페셜_위크_total)
+            if SSR_아이네스_후진_total:
+                print("SSR_아이네스_후진_total:", SSR_아이네스_후진_total)
+            if SSR_에어_샤커_total:
+                print("SSR_에어_샤커_total:", SSR_에어_샤커_total)
+            if SSR_엘_콘도르_파사_total:
+                print("SSR_엘_콘도르_파사_total:", SSR_엘_콘도르_파사_total)
+            if SSR_오구리_캡_total:
+                print("SSR_오구리_캡_total:", SSR_오구리_캡_total)
+            if SSR_위닝_티켓_total:
+                print("SSR_위닝_티켓_total:", SSR_위닝_티켓_total)
+            if SSR_타마모_크로스_total:
+                print("SSR_타마모_크로스_total:", SSR_타마모_크로스_total)
+            if SSR_토카이_테이오_total:
+                print("SSR_토카이_테이오_total:", SSR_토카이_테이오_total)
+            if SSR_파인_모션_total:
+                print("SSR_파인_모션_total:", SSR_파인_모션_total)
+            if SSR_하야카와_타즈나_total:
+                print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
             
             
         count = 0
@@ -1831,7 +1861,6 @@ def main():
             # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             is쥬얼부족 = True
             is뽑기_이동 = False
-            is뽑기_결과 = False
             is연동하기 = True
             adbInput.Key_event(device=device, key_code="keyevent 4") # "KEYCODE_BACK" 
             time.sleep(0.5)
@@ -1957,7 +1986,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 연결된_서비스_관리)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("연결된_서비스_관리 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -1967,7 +1996,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 우마무스메_서비스)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("우마무스메_서비스 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -1977,7 +2006,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 모든_정보_삭제, 202, 390, 116, 50)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("모든_정보_삭제 " + str(count) + "개")
             print(position)
             time.sleep(0.2)
@@ -1986,7 +2015,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92)
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
             WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
             print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
@@ -1998,7 +2027,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, 204, 559, 108, 50, confidence=0.99, grayscale=False)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2008,7 +2037,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 비밀번호, 0, 242, 78, 51, confidence=0.99, grayscale=False)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2018,7 +2047,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_Continue " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2028,7 +2057,7 @@ def main():
         count = 0
         count, position = ImageSearch(img, 비밀번호_확인, 231, 356, 55, 46, confidence=0.99, grayscale=False)
         if count:
-            adbInput.BlueStacksClick(device=device, position=position[0])
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호_확인 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2062,6 +2091,15 @@ def main():
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("타이틀_화면으로 " + str(count) + "개")
             print(position)
+            continue
+        
+        count = 0
+        count, position = ImageSearch(img, _2단계_인증)
+        if count:
+            WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+            print("_2단계_인증 " + str(count) + "개")
+            print(position)
+            time.sleep(0.5)
             continue
             
             
