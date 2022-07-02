@@ -1927,7 +1927,11 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205):
                 print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
             print("-"*50)
             
-            # 이륙 조건식
+            
+            # 이륙 조건식 -----------------------------------------------
+            # 이륙 조건식 -----------------------------------------------
+            # 이륙 조건식 -----------------------------------------------
+
             
             if SSR_파인_모션_total >= 1 and SSR_슈퍼_크릭_total >= 1 and SSR_하야카와_타즈나_total >= 1:
                 exit()
@@ -1937,6 +1941,34 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205):
             
             if SSR_파인_모션_total >= 1 and SSR_사쿠라_바쿠신_오_total >= 1 and SSR_하야카와_타즈나_total >= 1:
                 exit()
+                
+            if SSR_파인_모션_total >= 2 and (SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+                exit()
+                
+            if SSR_슈퍼_크릭_total >= 2 and (SSR_파인_모션_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+                exit()
+                
+            if SSR_비코_페가수스_total >= 2 and (SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+                exit()
+                
+            if SSR_사쿠라_바쿠신_오_total >= 2 and (SSR_파인_모션_total >= 1 or SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+                exit()
+                
+            if SSR_파인_모션_total >= 3:
+                exit()
+                
+            if SSR_슈퍼_크릭_total >= 3:
+                exit()
+                
+            if SSR_비코_페가수스_total >= 3:
+                exit()
+                
+            if SSR_사쿠라_바쿠신_오_total >= 3:
+                exit()
+                
+            if SSR_하야카와_타즈나_total >= 3:
+                exit()
+                
             
             if SSR_파인_모션_total >= 1 and SR_스윕_토쇼_total >= 5:
                 exit()
