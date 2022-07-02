@@ -1497,7 +1497,7 @@ def main():
             print("공지사항_X " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
         
             
         count = 0
@@ -1507,7 +1507,7 @@ def main():
             print("메인_스토리가_해방되었습니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 여러_스토리를_해방할_수_있게_되었습니다)
@@ -1516,7 +1516,7 @@ def main():
             print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
         
         
         # 가챠
@@ -1527,7 +1527,7 @@ def main():
             print("선물_이동 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 선물_일괄_수령, 319, 879, 115, 54, confidence=0.99, grayscale=False)
@@ -1536,7 +1536,7 @@ def main():
             print("선물_일괄_수령 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 상기의_선물을_수령했습니다)
@@ -1545,7 +1545,7 @@ def main():
             print("상기의_선물을_수령했습니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 받을_수_있는_선물이_없습니다, 143, 460, 231, 51)
@@ -1554,7 +1554,7 @@ def main():
             print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 뽑기_이동, 464, 666, 52, 62)
@@ -1572,7 +1572,7 @@ def main():
             print("프리티_더비_뽑기 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94)
@@ -1581,7 +1581,7 @@ def main():
             print("서포트_카드_뽑기 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다)
@@ -1592,6 +1592,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
         count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
@@ -1625,6 +1626,7 @@ def main():
             for i in range(3):
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
+                
                 count = 0
                 count, position = ImageSearch(img, SSR_골드_쉽, grayscale=False)
                 if count:
@@ -1867,6 +1869,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 쥬얼이_부족합니다)
@@ -1882,7 +1885,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 상점_화면을_표시할_수_없습니다)
@@ -1892,7 +1895,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 메뉴_단축, 511, 73, 19, 31, confidence=0.98, grayscale=False)
@@ -1902,7 +1905,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 계정_정보, 354, 635, 111, 51)
@@ -1912,7 +1915,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
@@ -1922,7 +1925,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 확인하고_계속하기, 186, 623, 144, 53)
@@ -1932,7 +1935,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 확인하고_계속하기2, 186, 625, 143, 50)
@@ -1942,7 +1945,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 정보_확인_중, 105, 167, 188, 49)
@@ -1952,7 +1955,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, Google_계정으로_로그인)
@@ -1962,7 +1965,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 카카오_로그인_연동에_성공하였습니다, 68, 469, 384, 65)
@@ -1974,7 +1977,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 모두_지우기, 428, 40, 96, 48)
@@ -1984,7 +1987,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 크롬_실행)
@@ -1994,7 +1997,7 @@ def main():
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
         count = 0
         count, position = ImageSearch(img, 연결된_서비스_관리)
@@ -2097,7 +2100,7 @@ def main():
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
             print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
             print(position)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
         
         count = 0
         count, position = ImageSearch(img, 타이틀_화면으로)
@@ -2105,7 +2108,7 @@ def main():
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("타이틀_화면으로 " + str(count) + "개")
             print(position)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
         
         count = 0
         count, position = ImageSearch(img, _2단계_인증)
@@ -2114,8 +2117,10 @@ def main():
             print("_2단계_인증 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
-            continue
+            img = screenshotToOpenCVImg(hwndMain)
             
+    
+        time.sleep(0.5)
             
             
             
