@@ -166,6 +166,7 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 확인하고_계속하기3 = imreadUnicode(r"./Images/확인하고_계속하기3.png")
 정보_확인_중 = imreadUnicode(r"./Images/정보_확인_중.png")
 Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로그인.png")
+인증되지_않는_로그인_방법_입니다 = imreadUnicode(r"./Images/인증되지_않는_로그인_방법_입니다.png")
 카카오_로그인_연동에_성공하였습니다 = imreadUnicode(r"./Images/카카오_로그인_연동에_성공하였습니다.png")
 로그아웃 = imreadUnicode(r"./Images/로그아웃.png")
 
@@ -1895,9 +1896,6 @@ def main():
             if SSR_파인_모션_total >= 1 and SSR_사쿠라_바쿠신_오_total >= 1 and SSR_하야카와_타즈나_total >= 1:
                 exit()
             
-            if SSR_토카이_테이오_total >= 1:
-                exit()
-            
             if SR_스윕_토쇼_total >= 5:
                 exit()
             
@@ -2024,6 +2022,16 @@ def main():
         if count:
             adbInput.Key_event(device=device, key_code="keyevent 4")
             print("Google_계정으로_로그인 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+            
+        count = 0
+        count, position = ImageSearch(img, 인증되지_않는_로그인_방법_입니다)
+        if count:
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=143, deltaX=5, deltaY=5)
+            print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
