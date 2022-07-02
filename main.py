@@ -157,6 +157,7 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 상점_화면을_표시할_수_없습니다 = imreadUnicode(r"./Images/상점_화면을_표시할_수_없습니다.png")
 
 # 연동하기
+메뉴 = imreadUnicode(r"./Images/메뉴.png")
 메뉴_단축 = imreadUnicode(r"./Images/메뉴_단축.png")
 계정_정보 = imreadUnicode(r"./Images/계정_정보.png")
 카카오_로그인 = imreadUnicode(r"./Images/카카오_로그인.png")
@@ -221,9 +222,9 @@ isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 �
 
 
 def main():
-    hwndMain = WindowsAPIInput.GetHwnd("BlueStacks 4") # hwnd ID 찾기
+    hwndMain = WindowsAPIInput.GetHwnd("BlueStacks Dev") # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
-    instancePort = 5895
+    instancePort = 6205
     device = adbInput.AdbConnect(instancePort)
     isPAUSED = False
     is뽑기_이동 = True
@@ -1597,7 +1598,7 @@ def main():
             print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-            time.sleep(0.5)
+            time.sleep(1.5)
             img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
@@ -1629,7 +1630,7 @@ def main():
             SSR_파인_모션_count = 0
             SSR_하야카와_타즈나_count = 0
             
-            for i in range(5):
+            for i in range(3):
                 time.sleep(0.25)
                 img = screenshotToOpenCVImg(hwndMain)
                 
@@ -1823,6 +1824,8 @@ def main():
             SSR_파인_모션_total += SSR_파인_모션_count
             SSR_하야카와_타즈나_total +=  SSR_하야카와_타즈나_count
 
+            
+            print("-"*50)
             if SSR_골드_쉽_total:
                 print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
             if SSR_골드_시티_total:
@@ -1865,6 +1868,25 @@ def main():
                 print("SSR_파인_모션_total:", SSR_파인_모션_total)
             if SSR_하야카와_타즈나_total:
                 print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
+            print("-"*50)
+            
+            # 이륙 조건식
+            
+            if SSR_파인_모션_total >= 1 and SSR_슈퍼_크릭_total >= 1 and SSR_하야카와_타즈나_total >= 1:
+                exit()
+            
+            if SSR_파인_모션_total >= 1 and SSR_비코_페가수스_total >= 1 and SSR_하야카와_타즈나_total >= 1:
+                exit()
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
         count = 0
@@ -1898,6 +1920,16 @@ def main():
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=147, deltaX=5, deltaY=5)
             print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+            
+        count = 0
+        count, position = ImageSearch(img, 메뉴, 452, 48, 57, 48)
+        if count and is연동하기:
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=5, offsetY=5)
+            print("메뉴 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
@@ -2019,6 +2051,15 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 크롬_실행)
+        if count and is초기화하기:
+            adbInput.BlueStacksClick(device=device, position=position[0])
+            print("크롬_실행 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+            
+        count = 0
         count, position = ImageSearch(img, 크롬_실행2)
         if count and is초기화하기:
             adbInput.BlueStacksClick(device=device, position=position[0])
@@ -2059,6 +2100,17 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
+        if count:
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
+            time.sleep(0.5)
+            WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
+            print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.2)
+            img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+
+        count = 0
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
@@ -2092,10 +2144,19 @@ def main():
             
         count = 0
         count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
-        count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
         if count:
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_Continue " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+            
+        count = 0
+        count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
+        if count:
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+            print("자동완성_계속 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
