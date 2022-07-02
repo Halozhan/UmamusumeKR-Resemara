@@ -2085,7 +2085,7 @@ def main():
             isDoneTutorial = True
             print(position)
             time.sleep(0.5)
-            main()
+            break
             
             
             
@@ -2121,7 +2121,8 @@ def main():
             
 
 if __name__ == "__main__":
-    main()
+    while 1:
+        main()
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
