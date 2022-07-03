@@ -201,6 +201,7 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 _2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
 확인 = imreadUnicode(r"./Images/확인.png")
 앱_닫기 = imreadUnicode(r"./Images/앱_닫기.png")
+날짜가_변경됐습니다 = imreadUnicode(r"./Images/날짜가_변경됐습니다.png")
 
 
 # 서포트 카드
@@ -2358,6 +2359,16 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("앱_닫기 " + str(count) + "개")
+            print(position)
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+        
+        count = 0
+        count, position = ImageSearch(img, 날짜가_변경됐습니다)
+        if count:
+            updateTime = time.time()
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=142, deltaX=5, deltaY=5)
+            print("날짜가_변경됐습니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
