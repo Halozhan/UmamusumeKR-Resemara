@@ -1,5 +1,4 @@
 # pip install pure-python-adb
-from turtle import st
 import WindowsAPIInput
 import adbInput
 from OpenCV_imread import imreadUnicode
