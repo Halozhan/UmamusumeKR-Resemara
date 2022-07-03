@@ -1,4 +1,5 @@
 # pip install pure-python-adb
+from turtle import st
 import WindowsAPIInput
 import adbInput
 from OpenCV_imread import imreadUnicode
@@ -166,6 +167,7 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 확인하고_계속하기 = imreadUnicode(r"./Images/확인하고_계속하기.png")
 확인하고_계속하기2 = imreadUnicode(r"./Images/확인하고_계속하기2.png")
 확인하고_계속하기3 = imreadUnicode(r"./Images/확인하고_계속하기3.png")
+계속하기 = imreadUnicode(r"./Images/계속하기.png")
 정보_확인_중 = imreadUnicode(r"./Images/정보_확인_중.png")
 Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로그인.png")
 인증되지_않는_로그인_방법_입니다 = imreadUnicode(r"./Images/인증되지_않는_로그인_방법_입니다.png")
@@ -224,7 +226,7 @@ SSR_하야카와_타즈나 = imreadUnicode(r"./Supporter_cards/SSR_하야카와_
 def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
     hwndMain = WindowsAPIInput.GetHwnd(InstanceName) # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
-    instancePort = int(InstancePort)
+    instancePort = InstancePort
     device = adbInput.AdbConnect(instancePort)
     isPAUSED = False
     is뽑기_이동 = True
@@ -403,9 +405,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             print(position)
             time.sleep(0.5)
             continue
-        
-        
-        global isDoneTutorial
+              
         if isDoneTutorial == False:
             updateTime = time.time() # 귀찮아서 튜토리얼 멈추면 알아서 하셈
             count = 0
@@ -1679,178 +1679,178 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
                 count = 0
                 count, position = ImageSearch(img, SR_스윕_토쇼, grayscale=False)
                 if count:
-                    print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
-                    print(position)
                     if SR_스윕_토쇼_count < count:
                         SR_스윕_토쇼_count = count
+                    print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_골드_쉽, grayscale=False)
                 if count:
-                    print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
-                    print(position)
                     if SSR_골드_쉽_count < count:
                         SSR_골드_쉽_count = count
+                    print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_골드_시티, grayscale=False)
                 if count:
-                    print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
-                    print(position)
                     if SSR_골드_시티_count < count:
                         SSR_골드_시티_count = count
+                    print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_그래스_원더, grayscale=False)
                 if count:
-                    print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
-                    print(position)
                     if SSR_그래스_원더_count < count:
                         SSR_그래스_원더_count = count
+                    print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_니시노_플라워, grayscale=False)
                 if count:
-                    print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
-                    print(position)
                     if SSR_니시노_플라워_count < count:
                         SSR_니시노_플라워_count = count
+                    print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_보드카, grayscale=False)
                 if count:
-                    print("SSR_보드카 " + str(SSR_보드카_count) + "개")
-                    print(position)
                     if SSR_보드카_count < count:
                         SSR_보드카_count = count
+                    print("SSR_보드카 " + str(SSR_보드카_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_비코_페가수스, grayscale=False)
                 if count:
-                    print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
-                    print(position)
                     if SSR_비코_페가수스_count < count:
                         SSR_비코_페가수스_count = count
+                    print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_사일런스_스즈카, grayscale=False)
                 if count:
-                    print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
-                    print(position)
                     if SSR_사일런스_스즈카_count < count:
                         SSR_사일런스_스즈카_count = count
+                    print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_사쿠라_바쿠신_오, grayscale=False)
                 if count:
-                    print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
-                    print(position)
                     if SSR_사쿠라_바쿠신_오_count < count:
                         SSR_사쿠라_바쿠신_오_count = count
+                    print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_세이운_스카이, grayscale=False)
                 if count:
-                    print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
-                    print(position)
                     if SSR_세이운_스카이_count < count:
                         SSR_세이운_스카이_count = count
+                    print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_슈퍼_크릭, grayscale=False)
                 if count:
-                    print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
-                    print(position)
                     if SSR_슈퍼_크릭_count < count:
                         SSR_슈퍼_크릭_count = count
+                    print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_스마트_팔콘, grayscale=False)
                 if count:
-                    print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
-                    print(position)
                     if SSR_스마트_팔콘_count < count:
                         SSR_스마트_팔콘_count = count
+                    print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_스페셜_위크, grayscale=False)
                 if count:
-                    print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
-                    print(position)
                     if SSR_스페셜_위크_count < count:
                         SSR_스페셜_위크_count = count
+                    print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_아이네스_후진, grayscale=False)
                 if count:
-                    print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
-                    print(position)
                     if SSR_아이네스_후진_count < count:
                         SSR_아이네스_후진_count = count
+                    print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_에어_샤커, grayscale=False)
                 if count:
-                    print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
-                    print(position)
                     if SSR_에어_샤커_count < count:
                         SSR_에어_샤커_count = count
+                    print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_엘_콘도르_파사, grayscale=False)
                 if count:
-                    print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
-                    print(position)
                     if SSR_엘_콘도르_파사_count < count:
                         SSR_엘_콘도르_파사_count = count
+                    print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_오구리_캡, grayscale=False)
                 if count:
-                    print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
-                    print(position)
                     if SSR_오구리_캡_count < count:
                         SSR_오구리_캡_count = count
+                    print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_위닝_티켓, grayscale=False)
                 if count:
-                    print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
-                    print(position)
                     if SSR_위닝_티켓_count < count:
                         SSR_위닝_티켓_count = count
+                    print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_타마모_크로스, grayscale=False)
                 if count:
-                    print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
-                    print(position)
                     if SSR_타마모_크로스_count < count:
                         SSR_타마모_크로스_count = count
+                    print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_토카이_테이오, grayscale=False)
                 if count:
-                    print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
-                    print(position)
                     if SSR_토카이_테이오_count < count:
                         SSR_토카이_테이오_count = count
+                    print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_파인_모션, grayscale=False)
                 if count:
-                    print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
-                    print(position)
                     if SSR_파인_모션_count < count:
                         SSR_파인_모션_count = count
+                    print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
+                    print(position)
                         
                 count = 0
                 count, position = ImageSearch(img, SSR_하야카와_타즈나, grayscale=False)
                 if count:
-                    print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
-                    print(position)
                     if SSR_하야카와_타즈나_count < count:
                         SSR_하야카와_타즈나_count = count
+                    print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
+                    print(position)
             
             SR_스윕_토쇼_total += SR_스윕_토쇼_count
             SSR_골드_쉽_total += SSR_골드_쉽_count
@@ -1927,27 +1927,26 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             # 이륙 조건식 -----------------------------------------------
             # 이륙 조건식 -----------------------------------------------
             # 이륙 조건식 -----------------------------------------------
-
             
-            if SSR_파인_모션_total >= 1 and SSR_슈퍼_크릭_total >= 1 and SSR_하야카와_타즈나_total >= 1:
-                exit()
-            
-            if SSR_파인_모션_total >= 1 and SSR_비코_페가수스_total >= 1 and SSR_하야카와_타즈나_total >= 1:
+            if SSR_파인_모션_total and SSR_슈퍼_크릭_total and SSR_하야카와_타즈나_total:
                 exit()
             
-            if SSR_파인_모션_total >= 1 and SSR_사쿠라_바쿠신_오_total >= 1 and SSR_하야카와_타즈나_total >= 1:
+            if SSR_파인_모션_total and SSR_비코_페가수스_total and SSR_하야카와_타즈나_total :
+                exit()
+            
+            if SSR_파인_모션_total and SSR_사쿠라_바쿠신_오_total and SSR_하야카와_타즈나_total:
                 exit()
                 
-            if SSR_파인_모션_total >= 2 and (SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+            if SSR_파인_모션_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
                 exit()
                 
-            if SSR_슈퍼_크릭_total >= 2 and (SSR_파인_모션_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+            if SSR_슈퍼_크릭_total >= 2 and (SSR_파인_모션_total or SSR_하야카와_타즈나_total):
                 exit()
                 
-            if SSR_비코_페가수스_total >= 2 and (SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+            if SSR_비코_페가수스_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
                 exit()
                 
-            if SSR_사쿠라_바쿠신_오_total >= 2 and (SSR_파인_모션_total >= 1 or SSR_슈퍼_크릭_total >= 1 or SSR_하야카와_타즈나_total >= 1):
+            if SSR_사쿠라_바쿠신_오_total >= 2 and (SSR_파인_모션_total or SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
                 exit()
                 
             if SSR_파인_모션_total >= 3:
@@ -1965,8 +1964,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             if SSR_하야카와_타즈나_total >= 3:
                 exit()
                 
-            
-            if SSR_파인_모션_total >= 1 and SR_스윕_토쇼_total >= 5:
+            if SSR_파인_모션_total and SR_스윕_토쇼_total >= 5 and (SSR_슈퍼_크릭_total or SSR_비코_페가수스_total or SSR_하야카와_타즈나_total):
                 exit()
             
             
@@ -2017,7 +2015,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=5, offsetY=5)
             print("메뉴 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2028,7 +2025,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=4)
             print("메뉴_단축 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2039,7 +2035,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("계정_정보 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2050,7 +2045,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("카카오_로그인 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2061,7 +2055,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2072,7 +2065,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기2 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2082,6 +2074,17 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("확인하고_계속하기3 " + str(count) + "개")
+            print(position)
+            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+            
+        count = 0
+        count, position = ImageSearch(img, 계속하기, 214, 620, 85, 47)
+        if count:
+            updateTime = time.time()
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+            print("계속하기 " + str(count) + "개")
             print(position)
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
@@ -2129,7 +2132,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
             print("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
 
@@ -2153,7 +2155,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("모두_지우기 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2164,7 +2165,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("크롬_실행 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2175,7 +2175,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0])
             print("크롬_실행 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
             
@@ -2244,7 +2243,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.2)
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
@@ -2255,8 +2253,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-            time.sleep(0.2)
+            time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
         count = 0
@@ -2266,7 +2263,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_Continue " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
@@ -2277,7 +2273,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("자동완성_계속 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
@@ -2288,7 +2283,6 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
             print("비밀번호_확인 " + str(count) + "개")
             print(position)
-            print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
@@ -2344,21 +2338,13 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="메인 함수입니다. 매개변수에 (윈도우 이름, ADB 포트)를 적어서 사용하세요")
     
-    parser.add_argument("--InstanceName", required=True, help="윈도우의 이름을 적어주세요")
-    parser.add_argument("--InstancePort", required=True, help="인스턴스의 고유 adb포트를 적어주세요")
-    isParsed = False
-    try:
-        args = parser.parse_args()
-        isParsed = True
-    except SystemExit:
-        isParsed = False
-        pass
+    parser.add_argument("--InstanceName", type=str, default="BlueStacks Dev", help="윈도우의 이름을 적어주세요")
+    parser.add_argument("--InstancePort", type=int, default=6205, help="인스턴스의 고유 adb포트를 적어주세요")
+    parser.add_argument("--isDoneTutorial", type=bool, default=True, help="튜토리얼 완료 여부") # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
+    args = parser.parse_args()
     
     while 1:
-        if isParsed:
-            main(args.InstanceName, args.InstancePort, isDoneTutorial=True) # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
-        else:
-            main(isDoneTutorial=True)            
+        main(args.InstanceName, args.InstancePort, args.isDoneTutorial)
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
