@@ -6,7 +6,7 @@ from PIL import Image
 def screenshot(hwnd, isExport):
     
     # Change the line below depending on whether you want the whole window
-    # or just the client area.
+    # or just the client area.    
     left, top, right, bottom = win32gui.GetWindowRect(hwnd)
     width = right - left
     height = bottom - top
@@ -41,8 +41,8 @@ def screenshot(hwnd, isExport):
         # PrintWindow Succeeded
         if isExport:
             im.save("test.png") # 이미지 파일로 내보내기
-        else:
-            return im
+        
+        return im
     else:
         return False
     

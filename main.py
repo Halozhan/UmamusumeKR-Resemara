@@ -221,11 +221,7 @@ SSR_파인_모션 = imreadUnicode(r"./Supporter_cards/SSR_파인_모션.png")
 SSR_하야카와_타즈나 = imreadUnicode(r"./Supporter_cards/SSR_하야카와_타즈나.png")
 
 
-# 전역변수
-isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
-
-
-def main(InstanceName="BlueStacks Dev", InstancePort=6205):
+def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
     hwndMain = WindowsAPIInput.GetHwnd(InstanceName) # hwnd ID 찾기
     WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
     instancePort = int(InstancePort)
@@ -264,15 +260,15 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205):
     
     
     while 1:
-        # 잠수 클릭 40초 터치락 해제
-        if time.time() >= updateTime + 40:
-            print("40초 정지 터치락 해제!!! "*3)
+        # 잠수 클릭 20초 터치락 해제
+        if isDoneTutorial and time.time() >= updateTime + 20:
+            print("20초 정지 터치락 해제!!! "*3)
             adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
             time.sleep(2)
         
-        # 잠수 클릭 60초 이상 앱정지
-        if time.time() >= updateTime + 60:
-            print("60초 정지 앱 강제종료!!! "*3)
+        # 잠수 클릭 40초 이상 앱정지
+        if isDoneTutorial and time.time() >= updateTime + 40:
+            print("40초 정지 앱 강제종료!!! "*3)
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
             time.sleep(2)
             
@@ -346,7 +342,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205):
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
             print("계정_연동_설정_요청 " + str(count) + "개")
             print(position)
-            time.sleep(0.5)
+            time.sleep(2) # 빨리 터치하면 튜토리얼 하기 부분에서도 같은 부분 클릭해버림
             continue
         
         count = 0
@@ -2360,9 +2356,9 @@ if __name__ == "__main__":
     
     while 1:
         if isParsed:
-            main(args.InstanceName, args.InstancePort)
+            main(args.InstanceName, args.InstancePort, isDoneTutorial=True) # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
         else:
-            main()            
+            main(isDoneTutorial=True)            
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
