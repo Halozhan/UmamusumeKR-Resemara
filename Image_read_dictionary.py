@@ -26,3 +26,6 @@ for img in glob.glob("Supporter_cards/*.png"):
 #     cv2.imshow("123", value)
 #     cv2.waitKey(0)
 #     cv2.destroyAllWindows()
+
+
+# https://stackoverflow.com/questions/60408517/how-to-clustering-multiple-images-by-the-name-in-python

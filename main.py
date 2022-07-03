@@ -9,7 +9,7 @@ import argparse
 from datetime import datetime
 
 
- # 찾을 이미지
+# 찾을 이미지
 우마무스메_실행 = imreadUnicode(r"./Images/우마무스메_실행.png")
 게스트_로그인 = imreadUnicode(r"./Images/게스트_로그인.png")
 게스트로_로그인_하시겠습니까 = imreadUnicode(r"./Images/게스트로_로그인_하시겠습니까.png")
@@ -45,6 +45,7 @@ SKIP = imreadUnicode(r"./Images/SKIP.png")
 프리티_더비_뽑기_5번_뽑기_무료 = imreadUnicode(r"./Images/프리티_더비_뽑기_5번_뽑기_무료.png")
 튜토리얼_용_프리티_더비_뽑기 = imreadUnicode(r"./Images/튜토리얼_용_프리티_더비_뽑기.png")
 서포트_카드_화살표 = imreadUnicode(r"./Images/서포트_카드_화살표.png")
+서포트_카드_화살표2 = imreadUnicode(r"./Images/서포트_카드_화살표2.png")
 서포트_카드_뽑기_10번_뽑기_무료 = imreadUnicode(r"./Images/서포트_카드_뽑기_10번_뽑기_무료.png")
 튜토리얼_용_서포트_카드_뽑기 = imreadUnicode(r"./Images/튜토리얼_용_서포트_카드_뽑기.png")
 육성_화살표 = imreadUnicode(r"./Images/육성_화살표.png")
@@ -145,6 +146,7 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 메인_스토리가_해방되었습니다 = imreadUnicode(r"./Images/메인_스토리가_해방되었습니다.png")
 여러_스토리를_해방할_수_있게_되었습니다 = imreadUnicode(r"./Images/여러_스토리를_해방할_수_있게_되었습니다.png")
 
+
 # 가챠
 선물_이동 = imreadUnicode(r"./Images/선물_이동.png")
 선물_일괄_수령 = imreadUnicode(r"./Images/선물_일괄_수령.png")
@@ -158,6 +160,7 @@ _3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Im
 한_번_더_뽑기 = imreadUnicode(r"./Images/한_번_더_뽑기.png")
 쥬얼이_부족합니다 = imreadUnicode(r"./Images/쥬얼이_부족합니다.png")
 상점_화면을_표시할_수_없습니다 = imreadUnicode(r"./Images/상점_화면을_표시할_수_없습니다.png")
+
 
 # 연동하기
 메뉴 = imreadUnicode(r"./Images/메뉴.png")
@@ -173,6 +176,7 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 인증되지_않는_로그인_방법_입니다 = imreadUnicode(r"./Images/인증되지_않는_로그인_방법_입니다.png")
 카카오_로그인_연동에_성공하였습니다 = imreadUnicode(r"./Images/카카오_로그인_연동에_성공하였습니다.png")
 로그아웃 = imreadUnicode(r"./Images/로그아웃.png")
+
 
 # 초기화
 모두_지우기 = imreadUnicode(r"./Images/모두_지우기.png")
@@ -190,14 +194,13 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 비밀번호_확인 = imreadUnicode(r"./Images/비밀번호_확인.png")
 삭제_완료 = imreadUnicode(r"./Images/삭제_완료.png")
 
+
 # 특수 이벤트
 튜토리얼을_스킵하시겠습니까 = imreadUnicode(r"./Images/튜토리얼을_스킵하시겠습니까.png")
 타이틀_화면으로 = imreadUnicode(r"./Images/타이틀_화면으로.png")
 _2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
 확인 = imreadUnicode(r"./Images/확인.png")
 앱_닫기 = imreadUnicode(r"./Images/앱_닫기.png")
-
-
 
 
 # 서포트 카드
@@ -408,8 +411,9 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             time.sleep(0.5)
             continue
               
-        if isDoneTutorial == False:
-            updateTime = time.time() # 귀찮아서 튜토리얼 멈추면 알아서 하셈
+        if isDoneTutorial == False: # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
+            updateTime = time.time()
+            
             count = 0
             count, position = ImageSearch(img, 출전)
             if count:
@@ -641,6 +645,15 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             if count:
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("서포트_카드_화살표 " + str(count) + "개") # 느림
+                print(position)
+                time.sleep(0.5)
+                continue
+                
+            count = 0
+            count, position = ImageSearch(img, 서포트_카드_화살표2, 410, 508, 124, 135)
+            if count:
+                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                print("서포트_카드_화살표2 " + str(count) + "개") # 느림
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -1966,7 +1979,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             if SSR_하야카와_타즈나_total >= 3:
                 return True
                 
-            if SSR_파인_모션_total and SR_스윕_토쇼_total >= 5 and (SSR_슈퍼_크릭_total or SSR_비코_페가수스_total or SSR_하야카와_타즈나_total):
+            if SR_스윕_토쇼_total >= 5 and SSR_파인_모션_total and SSR_하야카와_타즈나_total and (SSR_슈퍼_크릭_total or SSR_비코_페가수스_total or SSR_사쿠라_바쿠신_오_total):
                 return True
                         
         count = 0
@@ -2292,7 +2305,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             updateTime = time.time()
             WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
             print("삭제_완료 " + str(count) + "개")
-            isDoneTutorial = True
+            GlobalisDoneTutorial = True
             print(position)
             time.sleep(0.5)
             return False
@@ -2351,9 +2364,23 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             
         time.sleep(0.5)
             
+            
+            
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+    # https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
+
+
 
 # 전역변수
-isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
+GlobalisDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
 
 
 if __name__ == "__main__":
@@ -2361,23 +2388,20 @@ if __name__ == "__main__":
     
     parser.add_argument("--InstanceName", type=str, default="BlueStacks Dev", help="윈도우의 이름을 적어주세요")
     parser.add_argument("--InstancePort", type=int, default=6205, help="인스턴스의 고유 adb포트를 적어주세요")
-    parser.add_argument("--isDoneTutorial", type=bool, default=True, help="튜토리얼 완료 여부")
+    parser.add_argument("--isDoneTutorial", type=str2bool, default=True, help="튜토리얼 완료 여부")
     args = parser.parse_args()
     
-    if args.isDoneTutorial:
-        isDoneTutorial = True
-    else:
-        isDoneTutorial = False
+    GlobalisDoneTutorial = args.isDoneTutorial
     
     resetCount = 0
         
     while 1:
-        isDone = main(args.InstanceName, args.InstancePort, isDoneTutorial)
+        isDone = main(args.InstanceName, args.InstancePort, isDoneTutorial=GlobalisDoneTutorial)
         resetCount += 1
         now = datetime.now()
         print("-"*50)
         print(now.strftime("%Y-%m-%d %H:%M:%S"))
-        print("튜토리얼 스킵 여부:", isDoneTutorial)
+        print("튜토리얼 스킵 여부:", GlobalisDoneTutorial)
         print("리세 횟수:", resetCount)
         print("-"*50)
         if isDone:
