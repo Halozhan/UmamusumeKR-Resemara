@@ -7,6 +7,7 @@ from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
 import argparse
+from datetime import datetime
 
 
  # 찾을 이미지
@@ -194,6 +195,8 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 튜토리얼을_스킵하시겠습니까 = imreadUnicode(r"./Images/튜토리얼을_스킵하시겠습니까.png")
 타이틀_화면으로 = imreadUnicode(r"./Images/타이틀_화면으로.png")
 _2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
+확인 = imreadUnicode(r"./Images/확인.png")
+앱_닫기 = imreadUnicode(r"./Images/앱_닫기.png")
 
 
 
@@ -1639,7 +1642,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
             time.sleep(1.5)
             img = screenshotToOpenCVImg(hwndMain)
-
+            
         count = 0
         count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
         if count and is뽑기_결과:
@@ -1929,46 +1932,44 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             # 이륙 조건식 -----------------------------------------------
             
             if SSR_파인_모션_total and SSR_슈퍼_크릭_total and SSR_하야카와_타즈나_total:
-                exit()
+                return True
             
             if SSR_파인_모션_total and SSR_비코_페가수스_total and SSR_하야카와_타즈나_total :
-                exit()
+                return True
             
             if SSR_파인_모션_total and SSR_사쿠라_바쿠신_오_total and SSR_하야카와_타즈나_total:
-                exit()
+                return True
                 
             if SSR_파인_모션_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
-                exit()
+                return True
                 
             if SSR_슈퍼_크릭_total >= 2 and (SSR_파인_모션_total or SSR_하야카와_타즈나_total):
-                exit()
+                return True
                 
             if SSR_비코_페가수스_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
-                exit()
+                return True
                 
             if SSR_사쿠라_바쿠신_오_total >= 2 and (SSR_파인_모션_total or SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
-                exit()
+                return True
                 
             if SSR_파인_모션_total >= 3:
-                exit()
+                return True
                 
             if SSR_슈퍼_크릭_total >= 3:
-                exit()
+                return True
                 
             if SSR_비코_페가수스_total >= 3:
-                exit()
+                return True
                 
             if SSR_사쿠라_바쿠신_오_total >= 3:
-                exit()
+                return True
                 
             if SSR_하야카와_타즈나_total >= 3:
-                exit()
+                return True
                 
             if SSR_파인_모션_total and SR_스윕_토쇼_total >= 5 and (SSR_슈퍼_크릭_total or SSR_비코_페가수스_total or SSR_하야카와_타즈나_total):
-                exit()
-            
-            
-            
+                return True
+                        
         count = 0
         count, position = ImageSearch(img, 한_번_더_뽑기)
         if count:
@@ -2295,7 +2296,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             isDoneTutorial = True
             print(position)
             time.sleep(0.5)
-            break
+            return False
             
             
             
@@ -2328,23 +2329,62 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             print(position)
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
+        
+        count = 0
+        count, position = ImageSearch(img, 확인)
+        if count:
+            updateTime = time.time()
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+            print("확인 " + str(count) + "개")
+            print(position)
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+        
+        count = 0
+        count, position = ImageSearch(img, 앱_닫기, 78, 425, 391, 205)
+        if count:
+            updateTime = time.time()
+            adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+            print("앱_닫기 " + str(count) + "개")
+            print(position)
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
             
-    
         time.sleep(0.5)
             
-            
-            
+
+# 전역변수
+isDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="메인 함수입니다. 매개변수에 (윈도우 이름, ADB 포트)를 적어서 사용하세요")
     
     parser.add_argument("--InstanceName", type=str, default="BlueStacks Dev", help="윈도우의 이름을 적어주세요")
     parser.add_argument("--InstancePort", type=int, default=6205, help="인스턴스의 고유 adb포트를 적어주세요")
-    parser.add_argument("--isDoneTutorial", type=bool, default=True, help="튜토리얼 완료 여부") # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
+    parser.add_argument("--isDoneTutorial", type=bool, default=True, help="튜토리얼 완료 여부")
     args = parser.parse_args()
     
+    if args.isDoneTutorial:
+        isDoneTutorial = True
+    else:
+        isDoneTutorial = False
+    
+    resetCount = 0
+        
     while 1:
-        main(args.InstanceName, args.InstancePort, args.isDoneTutorial)
+        isDone = main(args.InstanceName, args.InstancePort, isDoneTutorial)
+        resetCount += 1
+        now = datetime.now()
+        print("-"*50)
+        print(now.strftime("%Y-%m-%d %H:%M:%S"))
+        print("튜토리얼 스킵 여부:", isDoneTutorial)
+        print("리세 횟수:", resetCount)
+        print("-"*50)
+        if isDone:
+            break
+        
+    print("리세 종료")
         
 # count = 0
 # count, position = ImageSearch(img, 우마무스메_실행) # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
