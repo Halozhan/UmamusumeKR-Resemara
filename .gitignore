@@ -6,6 +6,7 @@ for test/
 4/
 UmamusumeKR-Resemara.zip/
 __pycache__/
+.qt_for_python/
 platform-tools/
 test.png
 result.png

@@ -2243,8 +2243,11 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
         if count:
             updateTime = time.time()
-            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=258, offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
+            for _ in range(15):
+                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+            time.sleep(0.2)
             WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
             print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
             print(position)
@@ -2256,8 +2259,11 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
         count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
         if count:
             updateTime = time.time()
-            adbInput.BlueStacksClick(device=device, position=position[0], offsetY=92, deltaX=5, deltaY=5)
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=258, offsetY=92, deltaX=5, deltaY=5)
             time.sleep(0.5)
+            for _ in range(15):
+                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+            time.sleep(0.2)
             WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
             print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
             print(position)
@@ -2422,8 +2428,8 @@ GlobalisDoneTutorial = True # 미리 튜토리얼 진행했으면 활성화하�
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="메인 함수입니다. 매개변수에 (윈도우 이름, ADB 포트)를 적어서 사용하세요")
     
-    parser.add_argument("--InstanceName", type=str, default="BlueStacks Dev", help="윈도우의 이름을 적어주세요")
-    parser.add_argument("--InstancePort", type=int, default=6205, help="인스턴스의 고유 adb포트를 적어주세요")
+    parser.add_argument("--InstanceName", type=str, default="BlueStacks 8", help="윈도우의 이름을 적어주세요")
+    parser.add_argument("--InstancePort", type=int, default=6165, help="인스턴스의 고유 adb포트를 적어주세요")
     parser.add_argument("--isDoneTutorial", type=str2bool, default=True, help="튜토리얼 완료 여부")
     args = parser.parse_args()
     
