@@ -202,6 +202,7 @@ _2단계_인증 = imreadUnicode(r"./Images/_2단계_인증.png")
 확인 = imreadUnicode(r"./Images/확인.png")
 앱_닫기 = imreadUnicode(r"./Images/앱_닫기.png")
 날짜가_변경됐습니다 = imreadUnicode(r"./Images/날짜가_변경됐습니다.png")
+추가_데이터를_다운로드합니다 = imreadUnicode(r"./Images/추가_데이터를_다운로드합니다.png")
 
 
 # 서포트 카드
@@ -225,6 +226,7 @@ SSR_오구리_캡 = imreadUnicode(r"./Supporter_cards/SSR_오구리_캡.png")
 SSR_위닝_티켓 = imreadUnicode(r"./Supporter_cards/SSR_위닝_티켓.png")
 SSR_타마모_크로스 = imreadUnicode(r"./Supporter_cards/SSR_타마모_크로스.png")
 SSR_토카이_테이오 = imreadUnicode(r"./Supporter_cards/SSR_토카이_테이오.png")
+SSR_트윈_터보 = imreadUnicode(r"./Supporter_cards/SSR_트윈_터보.png")
 SSR_파인_모션 = imreadUnicode(r"./Supporter_cards/SSR_파인_모션.png")
 SSR_하야카와_타즈나 = imreadUnicode(r"./Supporter_cards/SSR_하야카와_타즈나.png")
 
@@ -263,6 +265,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
     SSR_위닝_티켓_total = 0
     SSR_타마모_크로스_total = 0
     SSR_토카이_테이오_total = 0
+    SSR_트윈_터보_total = 0
     SSR_파인_모션_total = 0
     SSR_하야카와_타즈나_total = 0
     
@@ -1684,6 +1687,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             SSR_위닝_티켓_count = 0
             SSR_타마모_크로스_count = 0
             SSR_토카이_테이오_count = 0
+            SSR_트윈_터보_count = 0
             SSR_파인_모션_count = 0
             SSR_하야카와_타즈나_count = 0
             
@@ -1853,6 +1857,14 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
                     print(position)
                         
                 count = 0
+                count, position = ImageSearch(img, SSR_트윈_터보, grayscale=False)
+                if count:
+                    if SSR_트윈_터보_count < count:
+                        SSR_트윈_터보_count = count
+                    print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
+                    print(position)
+                        
+                count = 0
                 count, position = ImageSearch(img, SSR_파인_모션, grayscale=False)
                 if count:
                     if SSR_파인_모션_count < count:
@@ -1888,6 +1900,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             SSR_위닝_티켓_total += SSR_위닝_티켓_count
             SSR_타마모_크로스_total += SSR_타마모_크로스_count
             SSR_토카이_테이오_total += SSR_토카이_테이오_count
+            SSR_트윈_터보_total += SSR_트윈_터보_count
             SSR_파인_모션_total += SSR_파인_모션_count
             SSR_하야카와_타즈나_total +=  SSR_하야카와_타즈나_count
 
@@ -1933,6 +1946,8 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
                 print("SSR_타마모_크로스_total:", SSR_타마모_크로스_total)
             if SSR_토카이_테이오_total:
                 print("SSR_토카이_테이오_total:", SSR_토카이_테이오_total)
+            if SSR_트윈_터보_total:
+                print("SSR_트윈_터보_total:", SSR_트윈_터보_total)
             if SSR_파인_모션_total:
                 print("SSR_파인_모션_total:", SSR_파인_모션_total)
             if SSR_하야카와_타즈나_total:
@@ -2369,6 +2384,16 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetY=142, deltaX=5, deltaY=5)
             print("날짜가_변경됐습니다 " + str(count) + "개")
+            print(position)
+            time.sleep(0.5)
+            img = screenshotToOpenCVImg(hwndMain)
+        
+        count = 0
+        count, position = ImageSearch(img, 추가_데이터를_다운로드합니다)
+        if count:
+            updateTime = time.time()
+            adbInput.BlueStacksClick(device=device, position=position[0], offsetX=125, offsetY=155, deltaX=5, deltaY=5)
+            print("추가_데이터를_다운로드합니다 " + str(count) + "개")
             print(position)
             time.sleep(0.5)
             img = screenshotToOpenCVImg(hwndMain)
