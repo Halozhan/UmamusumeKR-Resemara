@@ -1625,7 +1625,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
-        count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93)
+        count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93, confidence=0.6)
         if count:
             updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=254, deltaX=5, deltaY=5)
@@ -1635,7 +1635,7 @@ def main(InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
             img = screenshotToOpenCVImg(hwndMain)
 
         count = 0
-        count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94)
+        count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6)
         if count:
             updateTime = time.time()
             adbInput.BlueStacksClick(device=device, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
