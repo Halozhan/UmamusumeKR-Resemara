@@ -77,52 +77,50 @@ class WindowClass(QMainWindow, form_class) :
     class newTab(QMainWindow):
         def __init__(self):
             super().__init__()
+            self.Instance = QComboBox()
+            self.InstanceRefresh = QPushButton("새로고침", self)
+            
+            
             self.start = QPushButton("시작", self)
             self.stop = QPushButton("정지", self)
-            self.start.setChecked(False)
             self.reset = QPushButton("초기화", self)
             self.isDoneTutorial = QCheckBox("튜토리얼 스킵 여부", self)
             self.isDoneTutorial.setChecked(True)
+            
             self.logs = QTextBrowser()
-            self.Instance = QComboBox()
             
-            lines = []
-
-            try:
-                f = open("Instances.txt", "r", encoding="UTF-8")
-                while True:
-                    line = f.readline()
-                    if not line:
-                        break
-                    line = line.strip() # 줄 끝의 줄 바꿈 문자를 제거한다.
-                    lines.append(line)
-                f.close()
-                self.Instance.addItems(lines)
-            except:
-                self.Instance.addItem("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
-                pass
+            # 처음 설정
+            self.InstanceRefreshFunction()
+            self.InstanceFunction()
             
+            
+            self.Instance.currentIndexChanged.connect(self.InstanceFunction)
+            self.InstanceRefresh.clicked.connect(self.InstanceRefreshFunction)
             
             self.start.clicked.connect(self.startFunction)
             self.stop.clicked.connect(self.stopFunction)
             self.reset.clicked.connect(self.resetFunction)
             self.isDoneTutorial.clicked.connect(self.isDoneTutorialFunction)
             
-            self.Instance.currentIndexChanged.connect(self.InstanceFunction)
             
             # self.newTab()
             
         def newTab(self):
-            self.hbox = QHBoxLayout()
-            self.hbox.addWidget(self.start)
-            self.hbox.addWidget(self.stop)
-            self.hbox.addWidget(self.reset)
-            self.hbox.addWidget(self.isDoneTutorial)
+            
+            self.hbox1 = QHBoxLayout()
+            self.hbox1.addWidget(self.Instance, stretch=2)
+            self.hbox1.addWidget(self.InstanceRefresh, stretch=1)
+            
+            self.hbox2 = QHBoxLayout()
+            self.hbox2.addWidget(self.start)
+            self.hbox2.addWidget(self.stop)
+            self.hbox2.addWidget(self.reset)
+            self.hbox2.addWidget(self.isDoneTutorial)
             
             self.vbox = QVBoxLayout()
             
-            self.vbox.addWidget(self.Instance)
-            self.vbox.addLayout(self.hbox)
+            self.vbox.addLayout(self.hbox1)
+            self.vbox.addLayout(self.hbox2)
             self.vbox.addWidget(self.logs)
             
             # vbox.addWidget()
@@ -133,6 +131,62 @@ class WindowClass(QMainWindow, form_class) :
             return self.tab
         
         # events
+        def InstanceFunction(self):
+            if self.Instance.count() == 0:
+                self.start.setEnabled(False)
+                self.stop.setEnabled(False)
+                self.reset.setEnabled(False)
+                self.isDoneTutorial.setEnabled(False)
+                return
+            
+            self.logs.append("-"*50)
+            if self.Instance.currentText() == "선택 안함":
+                self.logs.append("선택해주세요")
+                
+                self.start.setEnabled(False)
+                self.stop.setEnabled(False)
+                self.reset.setEnabled(False)
+                self.isDoneTutorial.setEnabled(False)
+                
+            else:
+                try:
+                    self.SelectedInstance = self.Instance.currentText()
+                    self.SelectedInstance = self.SelectedInstance.split(",")
+                    self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
+                    self.SelectedInstance[1] = self.SelectedInstance[1].strip()
+                    self.WindowName, self.InstancePort = self.SelectedInstance
+                    self.InstancePort = int(self.InstancePort)
+                    self.logs.append(str(self.WindowName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
+                    
+                    self.start.setEnabled(True)
+                    self.stop.setEnabled(True)
+                    self.reset.setEnabled(True)
+                    self.isDoneTutorial.setEnabled(True)
+                
+                except:
+                    self.logs.append("선택 실패")
+            self.logs.append("-"*50)
+                
+            
+        def InstanceRefreshFunction(self):
+            self.Instance.clear()
+            
+            lines = ["선택 안함"]
+            try:
+                f = open("Instances.txt", "r", encoding="UTF-8")
+                while True:
+                    line = f.readline()
+                    if not line:
+                        break
+                    line = line.strip() # 줄 끝의 줄 바꿈 문자를 제거한다.
+                    lines.append(line)
+                f.close()
+                self.Instance.addItems(lines)
+                self.logs.append("불러오기 성공")
+            except:
+                self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
+                pass
+            
         
         def startFunction(self):
             self.start.setEnabled(False)
@@ -170,18 +224,6 @@ class WindowClass(QMainWindow, form_class) :
                 self.logs.append("튜토리얼 진행 (다소 렉 유발)")
             self.logs.append("-"*50)
         
-        def InstanceFunction(self):
-            self.logs.append("-"*50)
-            self.SelectedInstance = self.Instance.currentText()
-            self.SelectedInstance = self.SelectedInstance.split(",")
-            self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
-            self.SelectedInstance[1] = self.SelectedInstance[1].strip()
-            self.WindowName, self.InstancePort = self.SelectedInstance
-            self.InstancePort = int(self.InstancePort)
-            # print(SelectedInstance)
-            self.logs.append(str(self.WindowName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
-            
-            self.logs.append("-"*50)
 
     
         

@@ -78,6 +78,13 @@
         </item>
        </layout>
       </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>자 보여드렸습니다. 옆쪽 탭으로 이동해주세요</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </widget>
