@@ -2290,7 +2290,7 @@ class Umamusume:
             count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=258, offsetY=92, deltaX=5, deltaY=5)
+                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
                 time.sleep(0.5)
                 for _ in range(15):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
@@ -2306,7 +2306,7 @@ class Umamusume:
             count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=258, offsetY=92, deltaX=5, deltaY=5)
+                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
                 time.sleep(0.5)
                 for _ in range(15):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
