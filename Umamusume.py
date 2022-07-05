@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 from threading import Thread, Event
 from ImageVariables import * # 이미지
-# from Tab import *
+
 from pyqtWidget import newTab
 
 
@@ -15,40 +15,62 @@ class Umamusume(newTab):
     # def __init__(self, InstanceName, InstancePort, isDoneTutorial):
     def __init__(self):
         super().__init__()
-        self.logs.append("ㅎㅇ")
         # self.InstanceName = InstanceName
         # self.InstancePort = InstancePort
         # self.GlobalisDoneTutorial = isDoneTutorial # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
         # self.output = output
         self.isAlive = False
-        
+        self.resetCount = 0
         
         # print(self.InstanceName, self.InstancePort, self.GlobalisDoneTutorial)
         
-        self.resetCount = 0
-        # output()
+        # 처음 설정
+        self.Instance.currentIndexChanged.connect(self.InstanceFunction)
+        self.InstanceRefresh.clicked.connect(self.InstanceRefreshFunction)
         
-        # Tab[0].logs.append("gd")
+        self.start.clicked.connect(self.startFunction)
+        self.stop.clicked.connect(self.stopFunction)
+        self.reset.clicked.connect(self.resetFunction)
+        self.isDoneTutorial.clicked.connect(self.isDoneTutorialFunction)
         
-        # messageSender("ㅎㅇㅎㅇ 보내보기", output)
-        # Thread.__init__(self)
         
         
-    def start(self):
+    def startFunction(self):
+        self.start.setEnabled(False)
+        self.stop.setEnabled(True)
+        self.reset.setEnabled(False)
+        self.isDoneTutorial.setEnabled(False)
+        self.logs.append("-"*50)
+        self.logs.append("시작!!")
+        self.run()
+        self.logs.append("-"*50)
+    
+    def stopFunction(self):
+        self.start.setEnabled(True)
+        self.stop.setEnabled(False)
+        self.reset.setEnabled(True)
+        self.isDoneTutorial.setEnabled(True)
+        self.logs.append("-"*50)
+        self.stopping()
+        self.logs.append("멈춤!!")
+        self.logs.append("-"*50)
+        
+        
+    def run(self):
         self.isAlive = True
         self.th = Thread(target=self.thread, daemon=True)
         self.th.start()
         
-    def stop(self):
+    def stopping(self):
         self.isAlive = False
     
     def thread(self):
         while self.isAlive:
-            isSuccessed = self.main(self.InstanceName, self.InstancePort, self.GlobalisDoneTutorial)
+            isSuccessed = self.main(self.InstanceName, self.InstancePort, self.isDoneTutorial)
             print("-"*50)
             now = datetime.now()
             print(now.strftime("%Y-%m-%d %H:%M:%S"))
-            print("튜토리얼 스킵 여부:", self.GlobalisDoneTutorial)
+            print("튜토리얼 스킵 여부:", self.isDoneTutorial.isChecked())
             if isSuccessed == "Failed":
                 self.resetCount += 1
             if isSuccessed == "Stop":
@@ -106,17 +128,20 @@ class Umamusume(newTab):
         SSR_파인_모션_total = 0
         SSR_하야카와_타즈나_total = 0
         
+        self.logs.append("SR_스윕_토쇼_total:" + str(SR_스윕_토쇼_total))
         
         while self.isAlive:
             
             # 잠수 클릭 20초 터치락 해제
             if isDoneTutorial and time.time() >= updateTime + 20:
+                self.logs.append("20초 정지 터치락 해제!!! "*3)
                 print("20초 정지 터치락 해제!!! "*3)
                 adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
                 time.sleep(2)
             
             # 잠수 클릭 40초 이상 앱정지
             if isDoneTutorial and time.time() >= updateTime + 40:
+                self.logs.append("40초 정지 앱 강제종료!!! "*3)
                 print("40초 정지 앱 강제종료!!! "*3)
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 time.sleep(2)
@@ -129,6 +154,7 @@ class Umamusume(newTab):
             if count and is초기화하기 == False:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
+                self.logs.append("우마무스메_실행 " + str(count) + "개")
                 print("우마무스메_실행 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1539,6 +1565,7 @@ class Umamusume(newTab):
                     if count:
                         if SR_스윕_토쇼_count < count:
                             SR_스윕_토쇼_count = count
+                        self.logs.append("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         print(position)
                             
@@ -1547,6 +1574,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_골드_쉽_count < count:
                             SSR_골드_쉽_count = count
+                        self.logs.append("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         print(position)
                             
@@ -1555,6 +1583,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_골드_시티_count < count:
                             SSR_골드_시티_count = count
+                        self.logs.append("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         print(position)
                             
@@ -1563,6 +1592,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_그래스_원더_count < count:
                             SSR_그래스_원더_count = count
+                        self.logs.append("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         print(position)
                             
@@ -1571,6 +1601,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_니시노_플라워_count < count:
                             SSR_니시노_플라워_count = count
+                        self.logs.append("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         print(position)
                             
@@ -1579,6 +1610,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_보드카_count < count:
                             SSR_보드카_count = count
+                        self.logs.append("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         print("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         print(position)
                             
@@ -1587,6 +1619,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_비코_페가수스_count < count:
                             SSR_비코_페가수스_count = count
+                        self.logs.append("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         print(position)
                             
@@ -1595,6 +1628,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_사일런스_스즈카_count < count:
                             SSR_사일런스_스즈카_count = count
+                        self.logs.append("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         print(position)
                             
@@ -1603,6 +1637,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_사쿠라_바쿠신_오_count < count:
                             SSR_사쿠라_바쿠신_오_count = count
+                        self.logs.append("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         print(position)
                             
@@ -1611,6 +1646,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_세이운_스카이_count < count:
                             SSR_세이운_스카이_count = count
+                        self.logs.append("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         print(position)
                             
@@ -1619,6 +1655,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_슈퍼_크릭_count < count:
                             SSR_슈퍼_크릭_count = count
+                        self.logs.append("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         print(position)
                             
@@ -1627,6 +1664,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_스마트_팔콘_count < count:
                             SSR_스마트_팔콘_count = count
+                        self.logs.append("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         print(position)
                             
@@ -1635,6 +1673,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_스페셜_위크_count < count:
                             SSR_스페셜_위크_count = count
+                        self.logs.append("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         print(position)
                             
@@ -1643,6 +1682,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_아이네스_후진_count < count:
                             SSR_아이네스_후진_count = count
+                        self.logs.append("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         print(position)
                             
@@ -1651,6 +1691,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_에어_샤커_count < count:
                             SSR_에어_샤커_count = count
+                        self.logs.append("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         print(position)
                             
@@ -1659,6 +1700,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_엘_콘도르_파사_count < count:
                             SSR_엘_콘도르_파사_count = count
+                        self.logs.append("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         print(position)
                             
@@ -1667,6 +1709,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_오구리_캡_count < count:
                             SSR_오구리_캡_count = count
+                        self.logs.append("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         print(position)
                             
@@ -1675,6 +1718,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_위닝_티켓_count < count:
                             SSR_위닝_티켓_count = count
+                        self.logs.append("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         print(position)
                             
@@ -1683,6 +1727,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_타마모_크로스_count < count:
                             SSR_타마모_크로스_count = count
+                        self.logs.append("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         print(position)
                             
@@ -1691,6 +1736,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_토카이_테이오_count < count:
                             SSR_토카이_테이오_count = count
+                        self.logs.append("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         print(position)
                             
@@ -1699,6 +1745,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_트윈_터보_count < count:
                             SSR_트윈_터보_count = count
+                        self.logs.append("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         print(position)
                             
@@ -1707,6 +1754,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_파인_모션_count < count:
                             SSR_파인_모션_count = count
+                        self.logs.append("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         print(position)
                             
@@ -1715,6 +1763,7 @@ class Umamusume(newTab):
                     if count:
                         if SSR_하야카와_타즈나_count < count:
                             SSR_하야카와_타즈나_count = count
+                        self.logs.append("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         print(position)
                 
@@ -1745,6 +1794,7 @@ class Umamusume(newTab):
                 
                 print("-"*50)
                 if SR_스윕_토쇼_total:
+                    self.logs.append("SR_스윕_토쇼_total:" + str(SR_스윕_토쇼_total))
                     print("SR_스윕_토쇼_total:", SR_스윕_토쇼_total)
                 if SSR_골드_쉽_total:
                     print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
