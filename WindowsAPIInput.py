@@ -8,12 +8,15 @@ def GetHwnd(windowName):
 
 
 def SetWindowSize(hwnd, width, height):
-    rect = win32gui.GetWindowRect(hwnd) # 창 크기 받기
-    if rect[2] == width and rect[3] == height: # 창 크기가 똑같은지
+    try:
+        rect = win32gui.GetWindowRect(hwnd) # 창 크기 받기
+        if rect[2] == width and rect[3] == height: # 창 크기가 똑같은지
+            return False
+        else:
+            win32gui.MoveWindow(hwnd, rect[0], rect[1], width, height, True) # 창 크기 변경
+            return True
+    except:
         return False
-    else:
-        win32gui.MoveWindow(hwnd, rect[0], rect[1], width, height, True) # 창 크기 변경
-        return True
 
 
 def WindowsAPIKeyboardInput(hwnd, key):
