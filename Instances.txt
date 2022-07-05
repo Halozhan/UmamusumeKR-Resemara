@@ -5,4 +5,4 @@
 "BlueStacks 5", 5955
 "BlueStacks 6", 6075
 "BlueStacks 7", 5925
-"BlueStacks 8", 5745
+"BlueStacks 8", 6095
