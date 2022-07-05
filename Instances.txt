@@ -1,8 +1,0 @@
-"BlueStacks 1", 6185
-"BlueStacks 2", 5565
-"BlueStacks 3", 6225
-"BlueStacks 4", 6065
-"BlueStacks 5", 5955
-"BlueStacks 6", 6075
-"BlueStacks 7", 5925
-"BlueStacks 8", 6095
