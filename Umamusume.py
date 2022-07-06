@@ -69,15 +69,21 @@ class Umamusume(newTab):
         while self.isAlive:
             isSuccessed = self.main(self.InstanceName, self.InstancePort, self.isDoneTutorial)
             print("-"*50)
+            self.logs.append("-"*50)
             now = datetime.now()
             print(now.strftime("%Y-%m-%d %H:%M:%S"))
+            self.logs.append(now.strftime("%Y-%m-%d %H:%M:%S"))
             print("튜토리얼 스킵 여부:", self.isDoneTutorial.isChecked())
+            self.logs.append("튜토리얼 스킵 여부: " + str(self.isDoneTutorial.isChecked()))
             if isSuccessed == "Failed":
                 self.resetCount += 1
             if isSuccessed == "Stop":
                 print("This thread was terminated.")
+                self.logs.append("This thread was terminated.")
             print("리세 횟수:", self.resetCount)
+            self.logs.append("리세 횟수:" + str(self.resetCount))
             print("-"*50)
+            self.logs.append("-"*50)
             if isSuccessed == True:
                 break
             if isSuccessed == "4080_에러_코드":
@@ -128,22 +134,20 @@ class Umamusume(newTab):
         SSR_트윈_터보_total = 0
         SSR_파인_모션_total = 0
         SSR_하야카와_타즈나_total = 0
-        
-        self.logs.append("SR_스윕_토쇼_total:" + str(SR_스윕_토쇼_total))
-        
+
         while self.isAlive:
             
             # 잠수 클릭 20초 터치락 해제
             if isDoneTutorial and time.time() >= updateTime + 20:
-                self.logs.append("20초 정지 터치락 해제!!! "*3)
                 print("20초 정지 터치락 해제!!! "*3)
+                self.logs.append("20초 정지 터치락 해제!!! "*3)
                 adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
                 time.sleep(2)
             
             # 잠수 클릭 40초 이상 앱정지
             if isDoneTutorial and time.time() >= updateTime + 40:
-                self.logs.append("40초 정지 앱 강제종료!!! "*3)
                 print("40초 정지 앱 강제종료!!! "*3)
+                self.logs.append("40초 정지 앱 강제종료!!! "*3)
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 time.sleep(2)
                 
@@ -155,8 +159,8 @@ class Umamusume(newTab):
             if count and is초기화하기 == False:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
-                self.logs.append("우마무스메_실행 " + str(count) + "개")
                 print("우마무스메_실행 " + str(count) + "개")
+                self.logs.append("우마무스메_실행 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -167,6 +171,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("게스트_로그인 " + str(count) + "개")
+                self.logs.append("게스트_로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -177,6 +182,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 120, offsetY = 117, deltaX=5, deltaY=5)
                 print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
+                self.logs.append("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -187,6 +193,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 0, offsetY = 0, deltaX=5, deltaY=5)
                 print("전체_동의 " + str(count) + "개")
+                self.logs.append("전체_동의 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -197,6 +204,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("시작하기 " + str(count) + "개")
+                self.logs.append("시작하기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -207,6 +215,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("TAP_TO_START " + str(count) + "개")
+                self.logs.append("TAP_TO_START " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -217,6 +226,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
                 print("계정_연동_설정_요청 " + str(count) + "개")
+                self.logs.append("계정_연동_설정_요청 " + str(count) + "개")
                 print(position)
                 time.sleep(2) # 빨리 터치하면 튜토리얼 하기 부분에서도 같은 부분 클릭해버림
                 continue
@@ -227,6 +237,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 132, offsetY = 316, deltaX=5, deltaY=5)
                 print("게임_데이터_다운로드 " + str(count) + "개")
+                self.logs.append("게임_데이터_다운로드 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -237,6 +248,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("SKIP " + str(count) + "개")
+                self.logs.append("SKIP " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -249,6 +261,7 @@ class Umamusume(newTab):
                 time.sleep(0.5)
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=555, deltaX=5)
                 print("트레이너_정보를_입력해주세요 " + str(count) + "개")
+                self.logs.append("트레이너_정보를_입력해주세요 " + str(count) + "개")
                 time.sleep(0.2)
                 print(position)
                 for _ in range(10):
@@ -266,6 +279,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("등록한다 " + str(count) + "개")
+                self.logs.append("등록한다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -276,6 +290,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
                 print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
+                self.logs.append("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 continue
@@ -288,6 +303,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("출전 " + str(count) + "개")
+                    self.logs.append("출전 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -302,6 +318,7 @@ class Umamusume(newTab):
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
                     adbInput.BlueStacksClick(device=device, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("울려라_팡파레 " + str(count) + "개")
+                    self.logs.append("울려라_팡파레 " + str(count) + "개")
                     print(position)
                     isPAUSED = True
                     time.sleep(0.5)
@@ -317,6 +334,7 @@ class Umamusume(newTab):
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
                     adbInput.BlueStacksClick(device=device, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("닿아라_골까지 " + str(count) + "개")
+                    self.logs.append("닿아라_골까지 " + str(count) + "개")
                     print(position)
                     isPAUSED = True
                     time.sleep(0.5)
@@ -332,6 +350,7 @@ class Umamusume(newTab):
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
                     adbInput.BlueStacksClick(device=device, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("라이브_메뉴 " + str(count) + "개")
+                    self.logs.append("라이브_메뉴 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -346,6 +365,7 @@ class Umamusume(newTab):
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
                     adbInput.BlueStacksClick(device=device, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("라이브_스킵 " + str(count) + "개")
+                    self.logs.append("라이브_스킵 " + str(count) + "개")
                     print(position)
                     isPAUSED = False
                     time.sleep(0.5)
@@ -356,6 +376,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
+                    self.logs.append("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -365,6 +386,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
+                    self.logs.append("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -374,6 +396,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
+                    self.logs.append("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -383,6 +406,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("환영 " + str(count) + "개")
+                    self.logs.append("환영 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -392,6 +416,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("느낌표물음표 " + str(count) + "개")
+                    self.logs.append("느낌표물음표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -401,6 +426,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("아키카와_이사장님 " + str(count) + "개")
+                    self.logs.append("아키카와_이사장님 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -410,6 +436,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("장래_유망한_트레이너의_등장에 " + str(count) + "개")
+                    self.logs.append("장래_유망한_트레이너의_등장에 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -419,6 +446,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("나는_이_학원의_이사장 " + str(count) + "개")
+                    self.logs.append("나는_이_학원의_이사장 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -428,6 +456,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("자네에_대해_가르쳐_주게나 " + str(count) + "개")
+                    self.logs.append("자네에_대해_가르쳐_주게나 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -441,6 +470,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레센_학원의_일원일세 " + str(count) + "개")
+                    self.logs.append("자네는_트레센_학원의_일원일세 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -450,6 +480,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("담당_우마무스메와_함께 " + str(count) + "개")
+                    self.logs.append("담당_우마무스메와_함께 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -459,6 +490,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("학원에_다니는_우마무스메의 " + str(count) + "개")
+                    self.logs.append("학원에_다니는_우마무스메의 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -468,6 +500,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
+                    self.logs.append("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -477,6 +510,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("가슴에_단_트레이너_배지에 " + str(count) + "개")
+                    self.logs.append("가슴에_단_트레이너_배지에 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -486,6 +520,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("실전_연수를_하러_가시죠 " + str(count) + "개")
+                    self.logs.append("실전_연수를_하러_가시죠 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -495,6 +530,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
+                    self.logs.append("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -504,6 +540,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
+                    self.logs.append("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
                     print(position)
                     print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
@@ -514,6 +551,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표 " + str(count) + "개") # 느림
+                    self.logs.append("서포트_카드_화살표 " + str(count) + "개") # 느림
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -523,6 +561,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표2 " + str(count) + "개") # 느림
+                    self.logs.append("서포트_카드_화살표2 " + str(count) + "개") # 느림
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -532,6 +571,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
+                    self.logs.append("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -541,6 +581,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
+                    self.logs.append("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -550,6 +591,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     print("육성_화살표 " + str(count) + "개")
+                    self.logs.append("육성_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -561,6 +603,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=223, deltaX=5, deltaY=5)
                     print("육성_시나리오를_공략하자 " + str(count) + "개")
+                    self.logs.append("육성_시나리오를_공략하자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -570,6 +613,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("다음_화살표 " + str(count) + "개")
+                    self.logs.append("다음_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -579,6 +623,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=248, deltaX=5, deltaY=5)
                     print("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
+                    self.logs.append("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -588,6 +633,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=217, deltaX=5, deltaY=5)
                     print("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
+                    self.logs.append("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -597,6 +643,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("다이와_스칼렛_클릭 " + str(count) + "개")
+                    self.logs.append("다이와_스칼렛_클릭 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -606,6 +653,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
+                    self.logs.append("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -615,6 +663,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
+                    self.logs.append("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -624,6 +673,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("계승_보드카_선택_화살표 " + str(count) + "개")
+                    self.logs.append("계승_보드카_선택_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -633,6 +683,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("보드카_결정_화살표 " + str(count) + "개")
+                    self.logs.append("보드카_결정_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -642,6 +693,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("자동_선택_화살표 " + str(count) + "개")
+                    self.logs.append("자동_선택_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -651,6 +703,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
+                    self.logs.append("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     print(position)
                     print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
@@ -661,6 +714,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=218, deltaX=5, deltaY=5)
                     print("마음을_이어서_꿈을_이루자 " + str(count) + "개")
+                    self.logs.append("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -670,6 +724,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=35, deltaX=5, deltaY=5)
                     print("계승_최종_다음_화살표 " + str(count) + "개")
+                    self.logs.append("계승_최종_다음_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -679,6 +734,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=247, deltaX=5, deltaY=5)
                     print("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
+                    self.logs.append("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -688,6 +744,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=225, deltaX=5, deltaY=5)
                     print("서포트_카드의_타입에_주목 " + str(count) + "개")
+                    self.logs.append("서포트_카드의_타입에_주목 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -697,6 +754,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=212, deltaX=5, deltaY=5)
                     print("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
+                    self.logs.append("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -706,6 +764,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("서포트_자동_편성_화살표 " + str(count) + "개")
+                    self.logs.append("서포트_자동_편성_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -715,6 +774,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("육성_시작_화살표 " + str(count) + "개")
+                    self.logs.append("육성_시작_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -724,6 +784,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
+                    self.logs.append("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -733,6 +794,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("초록색_역삼각형 " + str(count) + "개")
+                    self.logs.append("초록색_역삼각형 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                 
@@ -741,6 +803,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("TAP " + str(count) + "개")
+                    self.logs.append("TAP " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -750,6 +813,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("TAP " + str(count) + "개")
+                    self.logs.append("TAP " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -759,6 +823,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
+                    self.logs.append("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -768,6 +833,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
+                    self.logs.append("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -777,6 +843,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
+                    self.logs.append("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -786,6 +853,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=60, offsetY=178, deltaX=5, deltaY=5)
                     print("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
+                    self.logs.append("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -795,6 +863,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
+                    self.logs.append("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -804,6 +873,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-143, offsetY=228, deltaX=5, deltaY=5)
                     print("한_번_스피드를_골라_보세요 " + str(count) + "개")
+                    self.logs.append("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -813,6 +883,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("파란색_역삼각형 " + str(count) + "개")
+                    self.logs.append("파란색_역삼각형 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                 
@@ -821,6 +892,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("약속 " + str(count) + "개")
+                    self.logs.append("약속 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -830,6 +902,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("서둘러_가봐 " + str(count) + "개")
+                    self.logs.append("서둘러_가봐 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -839,6 +912,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("그때_번뜩였다 " + str(count) + "개")
+                    self.logs.append("그때_번뜩였다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -848,6 +922,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
+                    self.logs.append("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -857,6 +932,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
+                    self.logs.append("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -866,6 +942,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=90, offsetY=173, deltaX=5, deltaY=5)
                     print("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
+                    self.logs.append("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -875,6 +952,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("여기_실패율에_주목해_주세요 " + str(count) + "개")
+                    self.logs.append("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -884,6 +962,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
+                    self.logs.append("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -893,6 +972,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
+                    self.logs.append("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -902,6 +982,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("돌아간다_화살표 " + str(count) + "개")
+                    self.logs.append("돌아간다_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -911,6 +992,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-125, offsetY=180, deltaX=5, deltaY=5)
                     print("체력이_적을_때는_우마무스메를 " + str(count) + "개")
+                    self.logs.append("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -920,6 +1002,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-70, offsetY=170, deltaX=5, deltaY=5)
                     print("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
+                    self.logs.append("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -929,6 +1012,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
+                    self.logs.append("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -938,6 +1022,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=273, offsetY=183, deltaX=5, deltaY=5)
                     print("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
+                    self.logs.append("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -947,6 +1032,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("스킬_결정_화살표 " + str(count) + "개")
+                    self.logs.append("스킬_결정_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -956,6 +1042,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("스킬_획득_화살표 " + str(count) + "개")
+                    self.logs.append("스킬_획득_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -965,6 +1052,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("스킬_획득_돌아간다_화살표 " + str(count) + "개")
+                    self.logs.append("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -974,6 +1062,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=207, offsetY=168, deltaX=5, deltaY=5)
                     print("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
+                    self.logs.append("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -983,6 +1072,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("출전_화살표 " + str(count) + "개")
+                    self.logs.append("출전_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -992,6 +1082,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("1등이_되기_위해서도_말야 " + str(count) + "개")
+                    self.logs.append("1등이_되기_위해서도_말야 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1001,6 +1092,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
+                    self.logs.append("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1010,6 +1102,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
+                    self.logs.append("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1019,6 +1112,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
+                    self.logs.append("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1028,6 +1122,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
+                    self.logs.append("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1037,6 +1132,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
+                    self.logs.append("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1046,6 +1142,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=210, offsetY=157, deltaX=5, deltaY=5)
                     print("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
+                    self.logs.append("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1055,6 +1152,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("선행A_화살표 " + str(count) + "개")
+                    self.logs.append("선행A_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1064,6 +1162,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("작전_결정 " + str(count) + "개")
+                    self.logs.append("작전_결정 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1073,6 +1172,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=145, offsetY=161, deltaX=5, deltaY=5)
                     print("이것으로_준비는_다_됐어요 " + str(count) + "개")
+                    self.logs.append("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1082,6 +1182,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=847, deltaX=5, deltaY=5)
                     print("첫_우승_축하_드려요 " + str(count) + "개")
+                    self.logs.append("첫_우승_축하_드려요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1091,6 +1192,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("좋아 " + str(count) + "개")
+                    self.logs.append("좋아 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1100,6 +1202,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=578, deltaX=5, deltaY=5)
                     print("목표_달성 " + str(count) + "개")
+                    self.logs.append("목표_달성 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1109,6 +1212,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=578, deltaX=5, deltaY=5)
                     print("육성_목표_달성 " + str(count) + "개")
+                    self.logs.append("육성_목표_달성 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1118,6 +1222,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("육성_수고하셨습니다 " + str(count) + "개")
+                    self.logs.append("육성_수고하셨습니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1127,6 +1232,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_포인트가_남았다면 " + str(count) + "개")
+                    self.logs.append("스킬_포인트가_남았다면 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1136,6 +1242,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("육성은_이것으로_종료입니다 " + str(count) + "개")
+                    self.logs.append("육성은_이것으로_종료입니다 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1145,6 +1252,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("또_연수_기간은_짧았지만 " + str(count) + "개")
+                    self.logs.append("또_연수_기간은_짧았지만 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1154,6 +1262,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=40, deltaX=5, deltaY=5)
                     print("육성_완료_화살표 " + str(count) + "개")
+                    self.logs.append("육성_완료_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1163,6 +1272,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
+                    self.logs.append("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1172,6 +1282,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
+                    self.logs.append("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1181,6 +1292,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
+                    self.logs.append("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1190,6 +1302,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=837, deltaX=5, deltaY=5)
                     print("랭크_육성 " + str(count) + "개")
+                    self.logs.append("랭크_육성 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1199,6 +1312,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
+                    self.logs.append("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1208,6 +1322,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
+                    self.logs.append("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1217,6 +1332,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=829, deltaX=5, deltaY=5)
                     print("인자획득 " + str(count) + "개")
+                    self.logs.append("인자획득 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1226,6 +1342,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("우마무스메_상세_닫기_화살표 " + str(count) + "개")
+                    self.logs.append("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1235,6 +1352,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-75, offsetY=552, deltaX=5, deltaY=5)
                     print("평가점 " + str(count) + "개")
+                    self.logs.append("평가점 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1244,6 +1362,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=834, deltaX=5, deltaY=5)
                     print("보상획득 " + str(count) + "개")
+                    self.logs.append("보상획득 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1254,6 +1373,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("강화_편성_화살표 " + str(count) + "개")
+                    self.logs.append("강화_편성_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1264,6 +1384,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("레이스_화살표 " + str(count) + "개")
+                    self.logs.append("레이스_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1273,6 +1394,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     print("팀_경기장_화살표 " + str(count) + "개")
+                    self.logs.append("팀_경기장_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1282,6 +1404,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=244, deltaX=5, deltaY=5)
                     print("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
+                    self.logs.append("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1291,6 +1414,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=250, deltaX=5, deltaY=5)
                     print("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
+                    self.logs.append("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1300,6 +1424,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=236, deltaX=5, deltaY=5)
                     print("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
+                    self.logs.append("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1309,6 +1434,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=244, deltaX=5, deltaY=5)
                     print("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
+                    self.logs.append("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1318,6 +1444,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("팀_편성 " + str(count) + "개")
+                    self.logs.append("팀_편성 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1327,6 +1454,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=247, deltaX=5, deltaY=5)
                     print("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
+                    self.logs.append("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1336,6 +1464,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=238, deltaX=5, deltaY=5)
                     print("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
+                    self.logs.append("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1345,6 +1474,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=246, deltaX=5, deltaY=5)
                     print("팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠 " + str(count) + "개")
+                    self.logs.append("팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1354,6 +1484,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
+                    self.logs.append("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1363,6 +1494,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
+                    self.logs.append("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1372,6 +1504,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_편성_확정_화살표 " + str(count) + "개")
+                    self.logs.append("팀_편성_확정_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1381,6 +1514,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetX=121, offsetY=77, deltaX=5, deltaY=5)
                     print("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
+                    self.logs.append("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1390,6 +1524,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
+                    self.logs.append("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1399,6 +1534,7 @@ class Umamusume(newTab):
                 if count:
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("홈_화살표 " + str(count) + "개")
+                    self.logs.append("홈_화살표 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     continue
@@ -1415,6 +1551,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("공지사항_X " + str(count) + "개")
+                self.logs.append("공지사항_X " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1426,6 +1563,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                 print("메인_스토리가_해방되었습니다 " + str(count) + "개")
+                self.logs.append("메인_스토리가_해방되었습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1436,6 +1574,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                 print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
+                self.logs.append("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1448,6 +1587,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("선물_이동 " + str(count) + "개")
+                self.logs.append("선물_이동 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1458,6 +1598,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("선물_일괄_수령 " + str(count) + "개")
+                self.logs.append("선물_일괄_수령 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1468,6 +1609,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                 print("상기의_선물을_수령했습니다 " + str(count) + "개")
+                self.logs.append("상기의_선물을_수령했습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1478,6 +1620,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-125, offsetY=420, deltaX=5, deltaY=5)
                 print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
+                self.logs.append("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1488,6 +1631,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=245, deltaX=5, deltaY=5)
                 print("뽑기_이동 " + str(count) + "개")
+                self.logs.append("뽑기_이동 " + str(count) + "개")
                 print(position)
                 time.sleep(1)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1498,6 +1642,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=254, deltaX=5, deltaY=5)
                 print("프리티_더비_뽑기 " + str(count) + "개")
+                self.logs.append("프리티_더비_뽑기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1508,6 +1653,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
                 print("서포트_카드_뽑기 " + str(count) + "개")
+                self.logs.append("서포트_카드_뽑기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1519,6 +1665,7 @@ class Umamusume(newTab):
                 is뽑기_결과 = True
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
                 print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
+                self.logs.append("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(1.5)
@@ -1530,6 +1677,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 is뽑기_결과 = False
                 print("뽑기_결과 " + str(count) + "개")
+                self.logs.append("뽑기_결과 " + str(count) + "개")
                 print(position)
                 
                 SR_스윕_토쇼_count = 0
@@ -1566,8 +1714,8 @@ class Umamusume(newTab):
                     if count:
                         if SR_스윕_토쇼_count < count:
                             SR_스윕_토쇼_count = count
-                        self.logs.append("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
+                        self.logs.append("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1575,8 +1723,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_골드_쉽_count < count:
                             SSR_골드_쉽_count = count
-                        self.logs.append("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
+                        self.logs.append("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1584,8 +1732,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_골드_시티_count < count:
                             SSR_골드_시티_count = count
-                        self.logs.append("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
+                        self.logs.append("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1593,8 +1741,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_그래스_원더_count < count:
                             SSR_그래스_원더_count = count
-                        self.logs.append("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
+                        self.logs.append("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1602,8 +1750,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_니시노_플라워_count < count:
                             SSR_니시노_플라워_count = count
-                        self.logs.append("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
+                        self.logs.append("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1611,8 +1759,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_보드카_count < count:
                             SSR_보드카_count = count
-                        self.logs.append("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         print("SSR_보드카 " + str(SSR_보드카_count) + "개")
+                        self.logs.append("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1620,8 +1768,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_비코_페가수스_count < count:
                             SSR_비코_페가수스_count = count
-                        self.logs.append("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
+                        self.logs.append("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1629,8 +1777,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_사일런스_스즈카_count < count:
                             SSR_사일런스_스즈카_count = count
-                        self.logs.append("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
+                        self.logs.append("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1638,8 +1786,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_사쿠라_바쿠신_오_count < count:
                             SSR_사쿠라_바쿠신_오_count = count
-                        self.logs.append("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
+                        self.logs.append("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1647,8 +1795,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_세이운_스카이_count < count:
                             SSR_세이운_스카이_count = count
-                        self.logs.append("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
+                        self.logs.append("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1656,8 +1804,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_슈퍼_크릭_count < count:
                             SSR_슈퍼_크릭_count = count
-                        self.logs.append("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
+                        self.logs.append("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1665,8 +1813,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_스마트_팔콘_count < count:
                             SSR_스마트_팔콘_count = count
-                        self.logs.append("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
+                        self.logs.append("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1674,8 +1822,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_스페셜_위크_count < count:
                             SSR_스페셜_위크_count = count
-                        self.logs.append("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
+                        self.logs.append("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1683,8 +1831,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_아이네스_후진_count < count:
                             SSR_아이네스_후진_count = count
-                        self.logs.append("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
+                        self.logs.append("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1692,8 +1840,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_에어_샤커_count < count:
                             SSR_에어_샤커_count = count
-                        self.logs.append("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
+                        self.logs.append("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1701,8 +1849,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_엘_콘도르_파사_count < count:
                             SSR_엘_콘도르_파사_count = count
-                        self.logs.append("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
+                        self.logs.append("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1710,8 +1858,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_오구리_캡_count < count:
                             SSR_오구리_캡_count = count
-                        self.logs.append("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
+                        self.logs.append("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1719,8 +1867,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_위닝_티켓_count < count:
                             SSR_위닝_티켓_count = count
-                        self.logs.append("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
+                        self.logs.append("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1728,8 +1876,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_타마모_크로스_count < count:
                             SSR_타마모_크로스_count = count
-                        self.logs.append("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
+                        self.logs.append("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1737,8 +1885,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_토카이_테이오_count < count:
                             SSR_토카이_테이오_count = count
-                        self.logs.append("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
+                        self.logs.append("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1746,8 +1894,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_트윈_터보_count < count:
                             SSR_트윈_터보_count = count
-                        self.logs.append("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
+                        self.logs.append("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1755,8 +1903,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_파인_모션_count < count:
                             SSR_파인_모션_count = count
-                        self.logs.append("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
+                        self.logs.append("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         print(position)
                             
                     count = 0
@@ -1764,8 +1912,8 @@ class Umamusume(newTab):
                     if count:
                         if SSR_하야카와_타즈나_count < count:
                             SSR_하야카와_타즈나_count = count
-                        self.logs.append("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
+                        self.logs.append("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         print(position)
                 
                 SR_스윕_토쇼_total += SR_스윕_토쇼_count
@@ -1794,54 +1942,78 @@ class Umamusume(newTab):
 
                 
                 print("-"*50)
+                self.logs.append("-"*50)
                 if SR_스윕_토쇼_total:
-                    self.logs.append("SR_스윕_토쇼_total:" + str(SR_스윕_토쇼_total))
                     print("SR_스윕_토쇼_total:", SR_스윕_토쇼_total)
+                    self.logs.append("SR_스윕_토쇼_total: " + str(SR_스윕_토쇼_total))
                 if SSR_골드_쉽_total:
                     print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
+                    self.logs.append("SSR_골드_쉽_total: " + str(SSR_골드_쉽_total))
                 if SSR_골드_시티_total:
                     print("SSR_골드_시티_total:", SSR_골드_시티_total)
+                    self.logs.append("SSR_골드_시티_total: " + str(SSR_골드_시티_total))
                 if SSR_그래스_원더_total:
                     print("SSR_그래스_원더_total:", SSR_그래스_원더_total)
+                    self.logs.append("SSR_그래스_원더_total: " + str(SSR_그래스_원더_total))
                 if SSR_니시노_플라워_total:
                     print("SSR_니시노_플라워_total:", SSR_니시노_플라워_total)
+                    self.logs.append("SSR_니시노_플라워_total: " + str(SSR_니시노_플라워_total))
                 if SSR_보드카_total:
                     print("SSR_보드카_total:", SSR_보드카_total)
+                    self.logs.append("SSR_보드카_total: " + str(SSR_보드카_total))
                 if SSR_비코_페가수스_total:
                     print("SSR_비코_페가수스_total:", SSR_비코_페가수스_total)
+                    self.logs.append("SSR_비코_페가수스_total: " + str(SSR_비코_페가수스_total))
                 if SSR_사일런스_스즈카_total:
                     print("SSR_사일런스_스즈카_total:", SSR_사일런스_스즈카_total)
+                    self.logs.append("SSR_사일런스_스즈카_total: " + str(SSR_사일런스_스즈카_total))
                 if SSR_사쿠라_바쿠신_오_total:
                     print("SSR_사쿠라_바쿠신_오_total:", SSR_사쿠라_바쿠신_오_total)
+                    self.logs.append("SSR_사쿠라_바쿠신_오_total: " + str(SSR_사쿠라_바쿠신_오_total))
                 if SSR_세이운_스카이_total:
                     print("SSR_세이운_스카이_total:", SSR_세이운_스카이_total)
+                    self.logs.append("SSR_세이운_스카이_total: " + str(SSR_세이운_스카이_total))
                 if SSR_슈퍼_크릭_total:
                     print("SSR_슈퍼_크릭_total:", SSR_슈퍼_크릭_total)
+                    self.logs.append("SSR_슈퍼_크릭_total: " + str(SSR_슈퍼_크릭_total))
                 if SSR_스마트_팔콘_total:
                     print("SSR_스마트_팔콘_total:", SSR_스마트_팔콘_total)
+                    self.logs.append("SSR_스마트_팔콘_total: " + str(SSR_스마트_팔콘_total))
                 if SSR_스페셜_위크_total:
                     print("SSR_스페셜_위크_total:", SSR_스페셜_위크_total)
+                    self.logs.append("SSR_스페셜_위크_total: " + str(SSR_스페셜_위크_total))
                 if SSR_아이네스_후진_total:
                     print("SSR_아이네스_후진_total:", SSR_아이네스_후진_total)
+                    self.logs.append("SSR_아이네스_후진_total: " + str(SSR_아이네스_후진_total))
                 if SSR_에어_샤커_total:
                     print("SSR_에어_샤커_total:", SSR_에어_샤커_total)
+                    self.logs.append("SSR_에어_샤커_total: " + str(SSR_에어_샤커_total))
                 if SSR_엘_콘도르_파사_total:
                     print("SSR_엘_콘도르_파사_total:", SSR_엘_콘도르_파사_total)
+                    self.logs.append("SSR_엘_콘도르_파사_total: " + str(SSR_엘_콘도르_파사_total))
                 if SSR_오구리_캡_total:
                     print("SSR_오구리_캡_total:", SSR_오구리_캡_total)
+                    self.logs.append("SSR_오구리_캡_total: " + str(SSR_오구리_캡_total))
                 if SSR_위닝_티켓_total:
                     print("SSR_위닝_티켓_total:", SSR_위닝_티켓_total)
+                    self.logs.append("SSR_위닝_티켓_total: " + str(SSR_위닝_티켓_total))
                 if SSR_타마모_크로스_total:
                     print("SSR_타마모_크로스_total:", SSR_타마모_크로스_total)
+                    self.logs.append("SSR_타마모_크로스_total: " + str(SSR_타마모_크로스_total))
                 if SSR_토카이_테이오_total:
                     print("SSR_토카이_테이오_total:", SSR_토카이_테이오_total)
+                    self.logs.append("SSR_토카이_테이오_total: " + str(SSR_토카이_테이오_total))
                 if SSR_트윈_터보_total:
                     print("SSR_트윈_터보_total:", SSR_트윈_터보_total)
+                    self.logs.append("SSR_트윈_터보_total: " + str(SSR_트윈_터보_total))
                 if SSR_파인_모션_total:
                     print("SSR_파인_모션_total:", SSR_파인_모션_total)
+                    self.logs.append("SSR_파인_모션_total: " + str(SSR_파인_모션_total))
                 if SSR_하야카와_타즈나_total:
                     print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
+                    self.logs.append("SSR_하야카와_타즈나_total: " + str(SSR_하야카와_타즈나_total))
                 print("-"*50)
+                self.logs.append("-"*50)
                 
                 
                 # 이륙 조건식 -----------------------------------------------
@@ -1893,6 +2065,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("한_번_더_뽑기 " + str(count) + "개")
+                self.logs.append("한_번_더_뽑기 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -1910,6 +2083,7 @@ class Umamusume(newTab):
                 time.sleep(0.5)
                 adbInput.Key_event(device=device, key_code="keyevent 4")
                 print("쥬얼이_부족합니다 " + str(count) + "개")
+                self.logs.append("쥬얼이_부족합니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -1921,6 +2095,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=147, deltaX=5, deltaY=5)
                 print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
+                self.logs.append("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -1932,6 +2107,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=5, offsetY=5)
                 print("메뉴 " + str(count) + "개")
+                self.logs.append("메뉴 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1942,6 +2118,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=4)
                 print("메뉴_단축 " + str(count) + "개")
+                self.logs.append("메뉴_단축 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1952,6 +2129,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("계정_정보 " + str(count) + "개")
+                self.logs.append("계정_정보 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1962,6 +2140,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("카카오_로그인 " + str(count) + "개")
+                self.logs.append("카카오_로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1972,6 +2151,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("확인하고_계속하기 " + str(count) + "개")
+                self.logs.append("확인하고_계속하기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1982,6 +2162,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("확인하고_계속하기2 " + str(count) + "개")
+                self.logs.append("확인하고_계속하기2 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1992,6 +2173,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("확인하고_계속하기3 " + str(count) + "개")
+                self.logs.append("확인하고_계속하기3 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2003,6 +2185,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("계속하기 " + str(count) + "개")
+                self.logs.append("계속하기 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2014,6 +2197,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.Key_event(device=device, key_code="keyevent 4")
                 print("정보_확인_중 " + str(count) + "개")
+                self.logs.append("정보_확인_중 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2025,6 +2209,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.Key_event(device=device, key_code="keyevent 4")
                 print("Google_계정으로_로그인 " + str(count) + "개")
+                self.logs.append("Google_계정으로_로그인 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2036,6 +2221,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=143, deltaX=5, deltaY=5)
                 print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
+                self.logs.append("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2049,6 +2235,7 @@ class Umamusume(newTab):
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 print("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
+                self.logs.append("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2061,6 +2248,7 @@ class Umamusume(newTab):
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 print("로그아웃 " + str(count) + "개")
+                self.logs.append("로그아웃 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.5)
@@ -2072,6 +2260,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
                 print("모두_지우기 " + str(count) + "개")
+                self.logs.append("모두_지우기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2082,6 +2271,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
                 print("크롬_실행 " + str(count) + "개")
+                self.logs.append("크롬_실행 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2092,6 +2282,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
                 print("크롬_실행 " + str(count) + "개")
+                self.logs.append("크롬_실행 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2102,6 +2293,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("연결된_서비스_관리 " + str(count) + "개")
+                self.logs.append("연결된_서비스_관리 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.1)
@@ -2113,6 +2305,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("우마무스메_서비스 " + str(count) + "개")
+                self.logs.append("우마무스메_서비스 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.2)
@@ -2124,6 +2317,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("모든_정보_삭제 " + str(count) + "개")
+                self.logs.append("모든_정보_삭제 " + str(count) + "개")
                 print(position)
                 time.sleep(0.2)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2139,6 +2333,7 @@ class Umamusume(newTab):
                 time.sleep(0.2)
                 WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
                 print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                self.logs.append("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.2)
@@ -2155,6 +2350,7 @@ class Umamusume(newTab):
                 time.sleep(0.2)
                 WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
                 print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                self.logs.append("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                 time.sleep(0.2)
@@ -2166,6 +2362,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
+                self.logs.append("모든_정보_삭제_빨간_박스 " + str(count) + "개")
                 print(position)
                 time.sleep(0.2)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2176,6 +2373,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("비밀번호 " + str(count) + "개")
+                self.logs.append("비밀번호 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2186,6 +2384,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("자동완성_Continue " + str(count) + "개")
+                self.logs.append("자동완성_Continue " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2196,6 +2395,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("자동완성_계속 " + str(count) + "개")
+                self.logs.append("자동완성_계속 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2206,6 +2406,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("비밀번호_확인 " + str(count) + "개")
+                self.logs.append("비밀번호_확인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2216,6 +2417,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 print("삭제_완료 " + str(count) + "개")
+                self.logs.append("삭제_완료 " + str(count) + "개")
                 GlobalisDoneTutorial = True
                 print(position)
                 time.sleep(0.5)
@@ -2234,6 +2436,7 @@ class Umamusume(newTab):
                         pass
                     
                     print("로딩 " + str(count) + "개")
+                    self.logs.append("로딩 " + str(count) + "개")
                     print(position)
                     print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     print("무한 로딩 새로고침")
@@ -2253,6 +2456,7 @@ class Umamusume(newTab):
                 time.sleep(0.3)
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=45, deltaX=5, deltaY=5)
                 print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
+                self.logs.append("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                 GlobalisDoneTutorial = True
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2265,6 +2469,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("로그인 " + str(count) + "개")
+                self.logs.append("로그인 " + str(count) + "개")
                 GlobalisDoneTutorial = True
                 print(position)
                 time.sleep(0.5)
@@ -2279,6 +2484,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
                 print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
+                self.logs.append("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                 print(position)
                 img = screenshotToOpenCVImg(hwndMain)
             
@@ -2288,6 +2494,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("타이틀_화면으로 " + str(count) + "개")
+                self.logs.append("타이틀_화면으로 " + str(count) + "개")
                 print(position)
                 img = screenshotToOpenCVImg(hwndMain)
             
@@ -2297,6 +2504,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 print("2단계_인증 " + str(count) + "개")
+                self.logs.append("2단계_인증 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2307,6 +2515,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("확인 " + str(count) + "개")
+                self.logs.append("확인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2317,6 +2526,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 print("앱_닫기 " + str(count) + "개")
+                self.logs.append("앱_닫기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2327,6 +2537,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=142, deltaX=5, deltaY=5)
                 print("날짜가_변경됐습니다 " + str(count) + "개")
+                self.logs.append("날짜가_변경됐습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2337,6 +2548,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=125, offsetY=155, deltaX=5, deltaY=5)
                 print("추가_데이터를_다운로드합니다 " + str(count) + "개")
+                self.logs.append("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2347,6 +2559,7 @@ class Umamusume(newTab):
                 updateTime = time.time()
                 # adbInput.BlueStacksClick(device=device, position=position[0], offsetY=156, deltaX=5, deltaY=5)
                 print("4080_에러_코드 " + str(count) + "개")
+                self.logs.append("4080_에러_코드 " + str(count) + "개")
                 print(position)
                 return "4080_에러_코드"
                 
