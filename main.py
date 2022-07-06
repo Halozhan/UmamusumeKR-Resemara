@@ -1,4 +1,4 @@
-from Umamusume import *
+# from Umamusume import *
 from pyqtWidget import *
 
 
@@ -13,8 +13,8 @@ if __name__ =="__main__":
     Tab = []
     count = 8
     for i in range(count):
-        Tab.append(Umamusume()) # newTab을 상속받은 Umamusume
-        myWindow.verticalTabWidget.addTab(Umamusume.newTab(Tab[i]), "탭 %d" % (myWindow.verticalTabWidget.count()))
+        Tab.append(newTab(myWindow)) # myWindow을 상속받은 newTab
+        myWindow.verticalTabWidget.addTab(Tab[i].newTab(), "탭 %d" % (myWindow.verticalTabWidget.count()))
     
     
     # myWindow.TabSetup(Tab=Tab, count=8)

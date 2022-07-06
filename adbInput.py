@@ -5,10 +5,13 @@ from ppadb.client import Client as AdbClient
 
 
 def AdbConnect(instancePort):
-    client = AdbClient(host="127.0.0.1", port=5037)
-    client.remote_connect(host="localhost", port=instancePort)
-    device = client.device("localhost:"+str(instancePort))
-    return device
+    try:
+        client = AdbClient(host="127.0.0.1", port=5037)
+        client.remote_connect(host="localhost", port=instancePort)
+        device = client.device("localhost:"+str(instancePort))
+        return device
+    except:
+        return "Fail to connect to adb"
 
 
 def RandomPosition(x, y, deltaX, deltaY):

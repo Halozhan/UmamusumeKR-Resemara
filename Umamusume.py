@@ -6,84 +6,70 @@ from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
 from threading import Thread, Event
-from PyQt5.QtCore import QThread
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from ImageVariables import * # 이미지
 
-from pyqtWidget import newTab
+# from pyqtWidget import newTab
+
+import psutil
 
 
-class Umamusume(newTab):
-    # def __init__(self, InstanceName, InstancePort, isDoneTutorial):
-    def __init__(self):
+class Umamusume(QThread):
+    recvLog = pyqtSignal(str)
+    
+    def __init__(self, parent=None):
         super().__init__()
-        # self.InstanceName = InstanceName
-        # self.InstancePort = InstancePort
-        # self.GlobalisDoneTutorial = isDoneTutorial # 미리 튜토리얼 진행했으면 활성화하는게 작업 성능이 빨라짐
-        # self.output = output
+        self.parent = parent
+        
+        
+        
+        # print(self.parent.InstanceName, self.parent.InstancePort)
         self.isAlive = False
         self.resetCount = 0
+        self.sleepTime = 0.5
+        self.recvLog.connect(self.parent.sendLog)
         
-        # print(self.InstanceName, self.InstancePort, self.GlobalisDoneTutorial)
-        
-        # 처음 설정
-        self.Instance.currentIndexChanged.connect(self.InstanceFunction)
-        self.InstanceRefresh.clicked.connect(self.InstanceRefreshFunction)
-        
-        self.start.clicked.connect(self.startFunction)
-        self.stop.clicked.connect(self.stopFunction)
-        self.reset.clicked.connect(self.resetFunction)
-        self.isDoneTutorial.clicked.connect(self.isDoneTutorialFunction)
-        
-        
-        
-    def startFunction(self):
-        self.start.setEnabled(False)
-        self.stop.setEnabled(True)
-        self.reset.setEnabled(False)
-        self.isDoneTutorial.setEnabled(False)
-        self.logs.append("-"*50)
-        self.logs.append("시작!!")
-        self.run()
-        self.logs.append("-"*50)
-    
-    def stopFunction(self):
-        self.start.setEnabled(True)
-        self.stop.setEnabled(False)
-        self.reset.setEnabled(True)
-        self.isDoneTutorial.setEnabled(True)
-        self.logs.append("-"*50)
-        self.stopping()
-        self.logs.append("멈춤!!")
-        self.logs.append("-"*50)
-        
+    def log(self, text):
+        self.recvLog.emit(text)
         
     def run(self):
+        
+        self.InstanceName = self.parent.InstanceName
+        self.InstancePort = self.parent.InstancePort
+        self.isDoneTutorialCheckBox = self.parent.isDoneTutorialCheckBox
+        
         self.isAlive = True
-        self.th = Thread(target=self.thread, daemon=True)
-        self.th.start()
+        # self.th = Thread(target=self.thread, daemon=True)
+        # self.th.start()
+        
+        self.thread()
         
     def stopping(self):
         self.isAlive = False
     
     def thread(self):
         while self.isAlive:
-            isSuccessed = self.main(self.InstanceName, self.InstancePort, self.isDoneTutorial)
+            # isSuccessed = self.main(self.InstanceName, self.InstancePort)
+            isSuccessed = "Failed"
+            time.sleep(0.2)
             print("-"*50)
-            self.logs.append("-"*50)
+            self.log("-"*50)
             now = datetime.now()
             print(now.strftime("%Y-%m-%d %H:%M:%S"))
-            self.logs.append(now.strftime("%Y-%m-%d %H:%M:%S"))
-            print("튜토리얼 스킵 여부:", self.isDoneTutorial.isChecked())
-            self.logs.append("튜토리얼 스킵 여부: " + str(self.isDoneTutorial.isChecked()))
+            self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
+            print("튜토리얼 스킵 여부:", self.isDoneTutorialCheckBox.isChecked())
+            self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorialCheckBox.isChecked()))
             if isSuccessed == "Failed":
                 self.resetCount += 1
             if isSuccessed == "Stop":
                 print("This thread was terminated.")
-                self.logs.append("This thread was terminated.")
+                self.log("This thread was terminated.")
             print("리세 횟수:", self.resetCount)
-            self.logs.append("리세 횟수:" + str(self.resetCount))
+            self.log("리세 횟수:" + str(self.resetCount))
             print("-"*50)
-            self.logs.append("-"*50)
+            self.log("-"*50)
             if isSuccessed == True:
                 break
             if isSuccessed == "4080_에러_코드":
@@ -91,7 +77,7 @@ class Umamusume(newTab):
             
         print("리세 종료")
         
-    def main(self, InstanceName="BlueStacks Dev", InstancePort=6205, isDoneTutorial=True):
+    def main(self, InstanceName="BlueStacks Dev", InstancePort=6205):
         hwndMain = WindowsAPIInput.GetHwnd(InstanceName) # hwnd ID 찾기
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         instancePort = InstancePort
@@ -138,14 +124,14 @@ class Umamusume(newTab):
         while self.isAlive:
             try:
                 # 잠수 클릭 20초 터치락 해제
-                if isDoneTutorial and time.time() >= updateTime + 20:
+                if isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 20:
                     print("20초 정지 터치락 해제!!! "*3)
                     self.logs.append("20초 정지 터치락 해제!!! "*3)
                     adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
                     time.sleep(2)
                 
                 # 잠수 클릭 40초 이상 앱정지
-                if isDoneTutorial and time.time() >= updateTime + 40:
+                if isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 40:
                     print("40초 정지 앱 강제종료!!! "*3)
                     self.logs.append("40초 정지 앱 강제종료!!! "*3)
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
@@ -2239,6 +2225,16 @@ class Umamusume(newTab):
                     print(position)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
+                    
+                count = 0
+                count, position = ImageSearch(img, 카카오_로그인_연동에_실패하였습니다)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(device=device, position=position[0], offsetY=150, deltaX=5, deltaY=5)
+                    print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
+                    self.logs.append("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
+                    print(position)
+                    time.sleep(10)
 
                 count = 0
                 count, position = ImageSearch(img, 로그아웃)
@@ -2418,13 +2414,13 @@ class Umamusume(newTab):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                     print("삭제_완료 " + str(count) + "개")
                     self.logs.append("삭제_완료 " + str(count) + "개")
-                    GlobalisDoneTutorial = True
+                    self.isDoneTutorialCheckBox.setEnabled(True)
                     print(position)
                     time.sleep(0.5)
                     return "Failed"
                 
                 # 무한 로딩
-                if isDoneTutorial and time.time() >= updateTime + 5:
+                if time.time() >= updateTime + 5:
                     count = 0
                     count, position = ImageSearch(img, 로딩)
                     if count:
@@ -2457,7 +2453,6 @@ class Umamusume(newTab):
                     adbInput.BlueStacksClick(device=device, position=position[0], offsetY=45, deltaX=5, deltaY=5)
                     print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                     self.logs.append("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
-                    GlobalisDoneTutorial = True
                     print(position)
                     print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
@@ -2470,7 +2465,6 @@ class Umamusume(newTab):
                     adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                     print("로그인 " + str(count) + "개")
                     self.logs.append("로그인 " + str(count) + "개")
-                    GlobalisDoneTutorial = True
                     print(position)
                     time.sleep(0.5)
                     
@@ -2564,8 +2558,16 @@ class Umamusume(newTab):
                     return "4080_에러_코드"
             except:
                 pass
+            
+            # CPU 풀로드 완화
+            if psutil.cpu_percent() >= 80:
+                if self.sleepTime < 5: # 최고 지연
+                    self.sleepTime += 0.25
+            else:
+                if self.sleepTime > 0.25: # 최저 지연
+                    self.sleepTime -= 0.25
                 
-            time.sleep(0.5)
+            time.sleep(self.sleepTime)
             
         if self.isAlive == False:
                 return "Stop"

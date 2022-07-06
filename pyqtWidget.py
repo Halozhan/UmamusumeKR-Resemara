@@ -1,7 +1,9 @@
 import sys
 from PyQt5.QtWidgets import *
+# from PyQt5.QtCore import pyqtSlot, QObject, pyqtSignal
+# from PyQt5.QtCore import *
 from PyQt5 import uic
-# from Umamusume import *
+from Umamusume import *
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -20,43 +22,51 @@ class WindowClass(QMainWindow, form_class):
         
         
 class newTab(QMainWindow):
-    def __init__(self):
+    def __init__(self, parent=None):
         super().__init__()
-        self.Instance = QComboBox()
-        self.InstanceRefresh = QPushButton("새로고침", self)
+        self.parent = parent
         
-        self.start = QPushButton("시작", self)
-        self.stop = QPushButton("정지", self)
-        self.reset = QPushButton("초기화", self)
-        self.isDoneTutorial = QCheckBox("튜토리얼 스킵 여부", self)
-        self.isDoneTutorial.setChecked(True)
+        self.InstanceName = ""
+        self.InstancePort = 0
+        
+        self.InstanceComboBox = QComboBox()
+        self.InstanceRefreshButton = QPushButton("새로고침", self)
+        
+        self.startButton = QPushButton("시작", self)
+        self.stopButton = QPushButton("정지", self)
+        self.resetButton = QPushButton("초기화", self)
+        self.isDoneTutorialCheckBox = QCheckBox("튜토리얼 스킵 여부", self)
+        self.isDoneTutorialCheckBox.setChecked(True)
         
         self.logs = QTextBrowser()
+
+        self.umamusume = Umamusume(self)
         
-        # 처음 설정
-        # self.InstanceRefreshFunction()
-        # self.InstanceFunction()
         
-        # self.Instance.currentIndexChanged.connect(self.InstanceFunction)
-        # self.InstanceRefresh.clicked.connect(self.InstanceRefreshFunction)
+        # 시그널
+        self.InstanceComboBox.currentIndexChanged.connect(self.InstanceFunction)
+        self.InstanceRefreshButton.clicked.connect(self.InstanceRefreshFunction)
         
-        # self.start.clicked.connect(self.startFunction)
-        # self.stop.clicked.connect(self.stopFunction)
-        # self.reset.clicked.connect(self.resetFunction)
-        # self.isDoneTutorial.clicked.connect(self.isDoneTutorialFunction)
-                
+        self.startButton.clicked.connect(self.startFunction)
+        self.stopButton.clicked.connect(self.stopFunction)
+        self.resetButton.clicked.connect(self.resetFunction)
+        self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
+                        
+    @pyqtSlot(str)
+    def sendLog(self, text):
+        self.logs.append(text)
         
     def newTab(self):
         
         self.hbox1 = QHBoxLayout()
-        self.hbox1.addWidget(self.Instance, stretch=2)
-        self.hbox1.addWidget(self.InstanceRefresh, stretch=1)
+        self.hbox1.addWidget(self.InstanceComboBox, stretch=2)
+        self.hbox1.addWidget(self.InstanceRefreshButton, stretch=1)
         
         self.hbox2 = QHBoxLayout()
-        self.hbox2.addWidget(self.start)
-        self.hbox2.addWidget(self.stop)
-        self.hbox2.addWidget(self.reset)
-        self.hbox2.addWidget(self.isDoneTutorial)
+        self.hbox2.addWidget(self.startButton)
+        self.hbox2.addWidget(self.stopButton)
+        self.hbox2.addWidget(self.resetButton)
+        self.hbox2.addWidget(self.isDoneTutorialCheckBox)
         
         self.vbox = QVBoxLayout()
         
@@ -73,46 +83,42 @@ class newTab(QMainWindow):
     
     # events
     def InstanceFunction(self):
-        if self.Instance.count() == 0:
-            self.start.setEnabled(False)
-            self.stop.setEnabled(False)
-            self.reset.setEnabled(False)
-            self.isDoneTutorial.setEnabled(False)
+        if self.InstanceComboBox.count() == 0:
+            self.startButton.setEnabled(False)
+            self.stopButton.setEnabled(False)
+            self.resetButton.setEnabled(False)
+            self.isDoneTutorialCheckBox.setEnabled(False)
             return
         
         self.logs.append("-"*50)
-        if self.Instance.currentText() == "선택 안함":
+        if self.InstanceComboBox.currentText() == "선택 안함":
             self.logs.append("선택해주세요")
             
-            self.start.setEnabled(False)
-            self.stop.setEnabled(False)
-            self.reset.setEnabled(False)
-            self.isDoneTutorial.setEnabled(False)
+            self.startButton.setEnabled(False)
+            self.stopButton.setEnabled(False)
+            self.resetButton.setEnabled(False)
+            self.isDoneTutorialCheckBox.setEnabled(False)
             
         else:
-            try:
-                self.SelectedInstance = self.Instance.currentText()
-                self.SelectedInstance = self.SelectedInstance.split(",")
-                self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
-                self.SelectedInstance[1] = self.SelectedInstance[1].strip()
-                self.InstanceName, self.InstancePort = self.SelectedInstance
-                
-                self.InstancePort = int(self.InstancePort)
-                self.InstancePort = int(self.InstancePort)
-                self.logs.append(str(self.InstanceName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
-                
-                self.start.setEnabled(True)
-                self.stop.setEnabled(True)
-                self.reset.setEnabled(True)
-                self.isDoneTutorial.setEnabled(True)
+            self.SelectedInstance = self.InstanceComboBox.currentText()
+            self.SelectedInstance = self.SelectedInstance.split(",")
+            self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
+            self.SelectedInstance[1] = self.SelectedInstance[1].strip()
+            self.InstanceName, self.InstancePort = self.SelectedInstance
             
-            except:
-                self.logs.append("선택 실패")
+            self.InstancePort = int(self.InstancePort)
+            self.logs.append(str(self.InstanceName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
+            self.umamusume = Umamusume(self)
+            self.startButton.setEnabled(True)
+            self.stopButton.setEnabled(True)
+            self.resetButton.setEnabled(True)
+            self.isDoneTutorialCheckBox.setEnabled(True)
+            
         self.logs.append("-"*50)
             
         
     def InstanceRefreshFunction(self):
-        self.Instance.clear()
+        self.InstanceComboBox.clear()
         
         lines = ["선택 안함"]
         try:
@@ -124,41 +130,42 @@ class newTab(QMainWindow):
                 line = line.strip() # 줄 끝의 줄 바꿈 문자를 제거한다.
                 lines.append(line)
             f.close()
-            self.Instance.addItems(lines)
+            self.InstanceComboBox.addItems(lines)
             self.logs.append("불러오기 성공")
         except:
             self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
             pass
-        
+    
+    
     def startFunction(self):
-        self.start.setEnabled(False)
-        self.stop.setEnabled(True)
-        self.reset.setEnabled(False)
-        self.isDoneTutorial.setEnabled(False)
+        self.startButton.setEnabled(False)
+        self.stopButton.setEnabled(True)
+        self.resetButton.setEnabled(False)
+        self.isDoneTutorialCheckBox.setEnabled(False)
         self.logs.append("-"*50)
         self.logs.append("시작!!")
-        # self.start()
+        self.umamusume.start()
         self.logs.append("-"*50)
     
     def stopFunction(self):
-        self.start.setEnabled(True)
-        self.stop.setEnabled(False)
-        self.reset.setEnabled(True)
-        self.isDoneTutorial.setEnabled(True)
+        self.startButton.setEnabled(True)
+        self.stopButton.setEnabled(False)
+        self.resetButton.setEnabled(True)
+        self.isDoneTutorialCheckBox.setEnabled(True)
         self.logs.append("-"*50)
-        # self.stop()
+        self.umamusume.stopping()
         self.logs.append("멈춤!!")
         self.logs.append("-"*50)
     
     def resetFunction(self):
-        self.reset.setEnabled(False)
+        self.resetButton.setEnabled(False)
         self.logs.append("-"*50)
         self.logs.append("초기화!!")
         self.logs.append("-"*50)
     
     def isDoneTutorialFunction(self):
         self.logs.append("-"*50)
-        if self.isDoneTutorial.isChecked():
+        if self.isDoneTutorialCheckBox.isChecked():
             self.logs.append("튜토리얼 스킵 활성화!!")
         else:
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")

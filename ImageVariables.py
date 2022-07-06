@@ -166,6 +166,7 @@ TAP = imreadUnicode(r"./Images/TAP.png")
 Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로그인.png")
 인증되지_않는_로그인_방법_입니다 = imreadUnicode(r"./Images/인증되지_않는_로그인_방법_입니다.png")
 카카오_로그인_연동에_성공하였습니다 = imreadUnicode(r"./Images/카카오_로그인_연동에_성공하였습니다.png")
+카카오_로그인_연동에_실패하였습니다 = imreadUnicode(r"./Images/카카오_로그인_연동에_실패하였습니다.png")
 로그아웃 = imreadUnicode(r"./Images/로그아웃.png")
 
 
