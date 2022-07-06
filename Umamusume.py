@@ -295,7 +295,7 @@ class Umamusume(newTab):
                 time.sleep(0.5)
                 continue
                 
-            if self.isDoneTutorial == False: # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
+            if self.isDoneTutorial.isChecked() == False: # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
                 updateTime = time.time()
                 
                 count = 0
