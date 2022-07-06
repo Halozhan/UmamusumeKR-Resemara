@@ -184,6 +184,9 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 자동완성_계속 = imreadUnicode(r"./Images/자동완성_계속.png")
 비밀번호_확인 = imreadUnicode(r"./Images/비밀번호_확인.png")
 삭제_완료 = imreadUnicode(r"./Images/삭제_완료.png")
+로딩 = imreadUnicode(r"./Images/로딩.png")
+카카오메일_아이디_이메일_전화번호 = imreadUnicode(r"./Images/카카오메일_아이디_이메일_전화번호.png")
+로그인 = imreadUnicode(r"./Images/로그인.png")
 
 
 # 특수 이벤트

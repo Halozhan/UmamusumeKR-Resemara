@@ -6,6 +6,7 @@ from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
 from threading import Thread, Event
+from PyQt5.QtCore import QThread
 from ImageVariables import * # 이미지
 
 from pyqtWidget import newTab
@@ -2219,6 +2220,54 @@ class Umamusume(newTab):
                 print(position)
                 time.sleep(0.5)
                 return "Failed"
+            
+            # 무한 로딩
+            if isDoneTutorial and time.time() >= updateTime + 5:
+                count = 0
+                count, position = ImageSearch(img, 로딩)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y = adbInput.RandomPosition(540 / 2, 960 / 3, 5, 5)
+                        adbInput.AdbSwipe(device, x, y, x, y + 960 / 3, adbInput.random.randint(25, 75))
+                    except:
+                        pass
+                    
+                    print("로딩 " + str(count) + "개")
+                    print(position)
+                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                    print("무한 로딩 새로고침")
+                    time.sleep(3)
+                    img = screenshotToOpenCVImg(hwndMain)
+            
+            
+            count = 0
+            count, position = ImageSearch(img, 카카오메일_아이디_이메일_전화번호, confidence=0.99)
+            if count:
+                updateTime = time.time()
+                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                time.sleep(0.3)
+                WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "a")
+                for _ in range(2):
+                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+                time.sleep(0.3)
+                adbInput.BlueStacksClick(device=device, position=position[0], offsetY=45, deltaX=5, deltaY=5)
+                print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
+                GlobalisDoneTutorial = True
+                print(position)
+                print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                time.sleep(0.5)
+                img = screenshotToOpenCVImg(hwndMain)
+            
+            count = 0
+            count, position = ImageSearch(img, 로그인, confidence=0.99, grayscale=False)
+            if count:
+                updateTime = time.time()
+                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                print("로그인 " + str(count) + "개")
+                GlobalisDoneTutorial = True
+                print(position)
+                time.sleep(0.5)
                 
                 
                 
@@ -2299,7 +2348,6 @@ class Umamusume(newTab):
                 # adbInput.BlueStacksClick(device=device, position=position[0], offsetY=156, deltaX=5, deltaY=5)
                 print("4080_에러_코드 " + str(count) + "개")
                 print(position)
-                time.sleep(0.5)
                 return "4080_에러_코드"
                 
             time.sleep(0.5)
