@@ -1671,15 +1671,13 @@ class Umamusume(newTab):
                 time.sleep(1.5)
                 img = screenshotToOpenCVImg(hwndMain)
                 
-            self.logs.append("SR_스윕_토쇼 " + str(SR_스윕_토쇼_total) + "개")
-
             count = 0
             count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
             if count and is뽑기_결과:
                 updateTime = time.time()
                 is뽑기_결과 = False
                 print("뽑기_결과 " + str(count) + "개")
-                # self.logs.append("뽑기_결과 " + str(count) + "개")
+                self.logs.append("뽑기_결과 " + str(count) + "개")
                 print(position)
                 
                 SR_스윕_토쇼_count = 0

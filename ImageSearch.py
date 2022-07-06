@@ -3,9 +3,12 @@ import numpy as np
 from screenshot import screenshot
 
 def screenshotToOpenCVImg(hwnd): # PIL image to OpenCV
-    img = np.array(screenshot(hwnd, isExport=False))
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # RGB순의 이미지를 OpenCV에 맞게 BGR순으로 변경
-    return img
+    try:
+        img = np.array(screenshot(hwnd, isExport=False))
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) # RGB순의 이미지를 OpenCV에 맞게 BGR순으로 변경
+        return img
+    except:
+        pass
     # reference: https://www.zinnunkebi.com/python-opencv-pil-convert/
 
 def ImageSearch(img, template, roiLeft = 0, roiTop = 0, roiWidth = -1, roiHeight = -1,\
