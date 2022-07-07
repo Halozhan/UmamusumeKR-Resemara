@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import *
 # from PyQt5.QtCore import pyqtSlot, QObject, pyqtSignal
 # from PyQt5.QtCore import *
 from PyQt5 import uic
+from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from Umamusume import *
+from ASUS_Router_Mac_Change import *
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -15,13 +17,29 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
+        self.Tab = []
+        count = 8 # 8개의 탭 생성
+        for i in range(count):
+            self.Tab.append(newTab(self)) # self를 상속받은 newTab
+            self.verticalTabWidget.addTab(self.Tab[i].newTab(), "탭 %d" % (self.verticalTabWidget.count()))
+
+        
         self.verticalTabWidget.setMovable(True)
         # print(len(Tab)) 탭 갯수
         
-        # self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
-        
+        self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
+    
+    @pyqtSlot()
+    def AllStopFunction(self):
+        for i in self.Tab:
+            i.umamusume.isDoingMAC_Change = True
+        Change_Mac_Address()
+        for i in self.Tab:
+            i.umamusume.isDoingMAC_Change = False
         
 class newTab(QMainWindow):
+    AllStop = pyqtSignal()
+    
     def __init__(self, parent=None):
         super().__init__()
         # 변수 초기화
@@ -56,10 +74,18 @@ class newTab(QMainWindow):
         self.stopButton.clicked.connect(self.stopFunction)
         self.resetButton.clicked.connect(self.resetFunction)
         self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
+        
+        # 커스텀 시그널 정의
+        self.AllStop.connect(self.parent.AllStopFunction)
                         
     @pyqtSlot(str)
     def sendLog(self, text):
         self.logs.append(text)
+        
+    @pyqtSlot()
+    def Error_4080(self):
+        pass
+        
         
     def newTab(self):
         

@@ -8,21 +8,8 @@ if __name__ =="__main__":
     #WindowClass의 인스턴스 생성
     myWindow = WindowClass()
     
-    Tab = []
-    count = 8
-    for i in range(count):
-        Tab.append(newTab(myWindow)) # myWindow을 상속받은 newTab
-        myWindow.verticalTabWidget.addTab(Tab[i].newTab(), "탭 %d" % (myWindow.verticalTabWidget.count()))
-    
-    
-    # myWindow.TabSetup(Tab=Tab, count=8)
-    # messageSender(0, "ㅎㅇ")
-
-    # if __name__ == "__main__" :
     #프로그램 화면을 보여주는 코드
     myWindow.show()
-    # messageSender("asdfasdfasdfddd", 0)
         
-
     #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
     app.exec_()

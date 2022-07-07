@@ -17,7 +17,8 @@ def Change_Mac_Address():
 
     try:
         driver.get(GATEWAY_ADDRESS)
-
+        driver.implicitly_wait(5)
+        
         id = driver.find_element_by_name("login_username")
         id.send_keys(ID)
 
@@ -26,8 +27,10 @@ def Change_Mac_Address():
 
         driver.find_element_by_class_name("button").click()
 
+        
         driver.get(GATEWAY_ADDRESS+"Advanced_WAN_Content.asp")
-
+        driver.implicitly_wait(5)
+        
         MACAdd = driver.find_element_by_name("wan_hwaddr_x")
         MAC_Address = MACAdd.get_attribute("value")
 
@@ -54,9 +57,8 @@ def Change_Mac_Address():
         MACAdd.clear()
         MACAdd.send_keys(MAC_Address)
 
-        driver.implicitly_wait(5)
         driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
-
+        
         time.sleep(10)
     except:
         pass

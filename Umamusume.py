@@ -7,16 +7,15 @@ import time
 from datetime import datetime
 from threading import Thread, Event
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+# from PyQt5.QtCore import *
 from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from ImageVariables import * # 이미지
-from ASUS_Router_Mac_Change import *
 import psutil
-
 
 
 class Umamusume(QThread):
     recvLog = pyqtSignal(str)
+    Error_4080 = pyqtSignal()
     
     def __init__(self, parent=None):
         super().__init__()
@@ -25,26 +24,26 @@ class Umamusume(QThread):
         self.isAlive = False
         self.resetCount = 0
         self.sleepTime = 0.5
+        self.isDoingMAC_Change = False
+        
+        # 커스텀 시그널 정의
+        
         self.recvLog.connect(self.parent.sendLog)
+        self.Error_4080.connect(self.parent.Error_4080)
         
     def log(self, text):
         self.recvLog.emit(text)
+    
+    def Error_4080Function(self):
+        self.Error_4080.emit()
         
     def run(self):
+        self.isAlive = True
         
         self.InstanceName = self.parent.InstanceName
         self.InstancePort = self.parent.InstancePort
         
-        self.isAlive = True
-        # self.th = Thread(target=self.thread, daemon=True)
-        # self.th.start()
         
-        self.thread()
-        
-    def stopping(self):
-        self.isAlive = False
-    
-    def thread(self):
         while self.isAlive:
             isSuccessed = self.main()
             print("-"*50)
@@ -66,10 +65,14 @@ class Umamusume(QThread):
             if isSuccessed == True:
                 break
             if isSuccessed == "4080_에러_코드":
-                Change_Mac_Address()
+                self.Error_4080Function()
                 time.sleep(20)
             
         print("리세 종료")
+        
+    def stopping(self):
+        self.isAlive = False 
+        
         
     def main(self):
         print(self.InstanceName, self.InstancePort)
@@ -2708,7 +2711,8 @@ class Umamusume(QThread):
                 print("4080_에러_코드 " + str(count) + "개")
                 self.log("4080_에러_코드 " + str(count) + "개")
                 # print(position)
-                return "4080_에러_코드"
+                if self.isDoingMAC_Change == False:
+                    return "4080_에러_코드"
             
         if self.isAlive == False:
                 return "Stop"
