@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from ImageVariables import * # 이미지
+from ASUS_Router_Mac_Change import *
 
 # from pyqtWidget import newTab
 
@@ -67,7 +68,8 @@ class Umamusume(QThread):
             if isSuccessed == True:
                 break
             if isSuccessed == "4080_에러_코드":
-                break
+                Change_Mac_Address()
+                time.sleep(20)
             
         print("리세 종료")
         
@@ -114,14 +116,14 @@ class Umamusume(QThread):
         while self.isAlive:
             # 잠수 클릭 20초 터치락 해제
             if self.parent.isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 20:
-                print("20초 정지 터치락 해제!!! "*3)
+                # print("20초 정지 터치락 해제!!! "*3)
                 self.log("20초 정지 터치락 해제!!! "*3)
                 adbInput.BlueStacksClick(device=device, position=(0,0,0,0))
                 time.sleep(2)
             
             # 잠수 클릭 40초 이상 앱정지
             if self.parent.isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 40:
-                print("40초 정지 앱 강제종료!!! "*3)
+                # print("40초 정지 앱 강제종료!!! "*3)
                 self.log("40초 정지 앱 강제종료!!! "*3)
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 time.sleep(2)
@@ -146,7 +148,7 @@ class Umamusume(QThread):
             if count and is초기화하기 == False:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
-                print("우마무스메_실행 " + str(count) + "개")
+                # print("우마무스메_실행 " + str(count) + "개")
                 self.log("우마무스메_실행 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -157,7 +159,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("게스트_로그인 " + str(count) + "개")
+                # print("게스트_로그인 " + str(count) + "개")
                 self.log("게스트_로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -168,7 +170,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 120, offsetY = 117, deltaX=5, deltaY=5)
-                print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
+                # print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                 self.log("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -179,7 +181,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 0, offsetY = 0, deltaX=5, deltaY=5)
-                print("전체_동의 " + str(count) + "개")
+                # print("전체_동의 " + str(count) + "개")
                 self.log("전체_동의 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -190,7 +192,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("시작하기 " + str(count) + "개")
+                # print("시작하기 " + str(count) + "개")
                 self.log("시작하기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -201,7 +203,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("TAP_TO_START " + str(count) + "개")
+                # print("TAP_TO_START " + str(count) + "개")
                 self.log("TAP_TO_START " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -212,7 +214,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
-                print("계정_연동_설정_요청 " + str(count) + "개")
+                # print("계정_연동_설정_요청 " + str(count) + "개")
                 self.log("계정_연동_설정_요청 " + str(count) + "개")
                 print(position)
                 time.sleep(2) # 빨리 터치하면 튜토리얼 하기 부분에서도 같은 부분 클릭해버림
@@ -223,7 +225,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX = 132, offsetY = 316, deltaX=5, deltaY=5)
-                print("게임_데이터_다운로드 " + str(count) + "개")
+                # print("게임_데이터_다운로드 " + str(count) + "개")
                 self.log("게임_데이터_다운로드 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -234,7 +236,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("SKIP " + str(count) + "개")
+                # print("SKIP " + str(count) + "개")
                 self.log("SKIP " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -247,7 +249,7 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=61, deltaX=5)
                 time.sleep(0.5)
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=555, deltaX=5)
-                print("트레이너_정보를_입력해주세요 " + str(count) + "개")
+                # print("트레이너_정보를_입력해주세요 " + str(count) + "개")
                 self.log("트레이너_정보를_입력해주세요 " + str(count) + "개")
                 time.sleep(0.2)
                 print(position)
@@ -265,7 +267,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("등록한다 " + str(count) + "개")
+                # print("등록한다 " + str(count) + "개")
                 self.log("등록한다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -276,7 +278,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
-                print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
+                # print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                 self.log("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1537,7 +1539,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("공지사항_X " + str(count) + "개")
+                # print("공지사항_X " + str(count) + "개")
                 self.log("공지사항_X " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1549,7 +1551,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=90, deltaX=5, deltaY=5)
-                print("메인_스토리가_해방되었습니다 " + str(count) + "개")
+                # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                 self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1560,7 +1562,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
-                print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
+                # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                 self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1573,7 +1575,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("선물_이동 " + str(count) + "개")
+                # print("선물_이동 " + str(count) + "개")
                 self.log("선물_이동 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1584,7 +1586,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("선물_일괄_수령 " + str(count) + "개")
+                # print("선물_일괄_수령 " + str(count) + "개")
                 self.log("선물_일괄_수령 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1595,7 +1597,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
-                print("상기의_선물을_수령했습니다 " + str(count) + "개")
+                # print("상기의_선물을_수령했습니다 " + str(count) + "개")
                 self.log("상기의_선물을_수령했습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1606,7 +1608,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=-125, offsetY=420, deltaX=5, deltaY=5)
-                print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
+                # print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                 self.log("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1617,7 +1619,7 @@ class Umamusume(QThread):
             if count and is뽑기_이동:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=245, deltaX=5, deltaY=5)
-                print("뽑기_이동 " + str(count) + "개")
+                # print("뽑기_이동 " + str(count) + "개")
                 self.log("뽑기_이동 " + str(count) + "개")
                 print(position)
                 time.sleep(1)
@@ -1628,7 +1630,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=254, deltaX=5, deltaY=5)
-                print("프리티_더비_뽑기 " + str(count) + "개")
+                # print("프리티_더비_뽑기 " + str(count) + "개")
                 self.log("프리티_더비_뽑기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1639,7 +1641,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
-                print("서포트_카드_뽑기 " + str(count) + "개")
+                # print("서포트_카드_뽑기 " + str(count) + "개")
                 self.log("서포트_카드_뽑기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -1651,7 +1653,7 @@ class Umamusume(QThread):
                 updateTime = time.time()
                 is뽑기_결과 = True
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
-                print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
+                # print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                 self.log("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -1663,7 +1665,7 @@ class Umamusume(QThread):
             if count and is뽑기_결과:
                 updateTime = time.time()
                 is뽑기_결과 = False
-                print("뽑기_결과 " + str(count) + "개")
+                # print("뽑기_결과 " + str(count) + "개")
                 self.log("뽑기_결과 " + str(count) + "개")
                 print(position)
                 
@@ -1701,7 +1703,7 @@ class Umamusume(QThread):
                     if count:
                         if SR_스윕_토쇼_count < count:
                             SR_스윕_토쇼_count = count
-                        print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
+                        # print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         self.log("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
                         print(position)
                             
@@ -1710,7 +1712,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_골드_쉽_count < count:
                             SSR_골드_쉽_count = count
-                        print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
+                        # print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         self.log("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
                         print(position)
                             
@@ -1719,7 +1721,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_골드_시티_count < count:
                             SSR_골드_시티_count = count
-                        print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
+                        # print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         self.log("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
                         print(position)
                             
@@ -1728,7 +1730,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_그래스_원더_count < count:
                             SSR_그래스_원더_count = count
-                        print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
+                        # print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         self.log("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
                         print(position)
                             
@@ -1737,7 +1739,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_니시노_플라워_count < count:
                             SSR_니시노_플라워_count = count
-                        print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
+                        # print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         self.log("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
                         print(position)
                             
@@ -1746,7 +1748,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_보드카_count < count:
                             SSR_보드카_count = count
-                        print("SSR_보드카 " + str(SSR_보드카_count) + "개")
+                        # print("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         self.log("SSR_보드카 " + str(SSR_보드카_count) + "개")
                         print(position)
                             
@@ -1755,7 +1757,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_비코_페가수스_count < count:
                             SSR_비코_페가수스_count = count
-                        print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
+                        # print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         self.log("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
                         print(position)
                             
@@ -1764,7 +1766,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_사일런스_스즈카_count < count:
                             SSR_사일런스_스즈카_count = count
-                        print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
+                        # print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         self.log("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
                         print(position)
                             
@@ -1773,7 +1775,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_사쿠라_바쿠신_오_count < count:
                             SSR_사쿠라_바쿠신_오_count = count
-                        print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
+                        # print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         self.log("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
                         print(position)
                             
@@ -1782,7 +1784,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_세이운_스카이_count < count:
                             SSR_세이운_스카이_count = count
-                        print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
+                        # print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         self.log("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
                         print(position)
                             
@@ -1791,7 +1793,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_슈퍼_크릭_count < count:
                             SSR_슈퍼_크릭_count = count
-                        print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
+                        # print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         self.log("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
                         print(position)
                             
@@ -1800,7 +1802,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_스마트_팔콘_count < count:
                             SSR_스마트_팔콘_count = count
-                        print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
+                        # print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         self.log("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
                         print(position)
                             
@@ -1809,7 +1811,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_스페셜_위크_count < count:
                             SSR_스페셜_위크_count = count
-                        print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
+                        # print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         self.log("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
                         print(position)
                             
@@ -1818,7 +1820,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_아이네스_후진_count < count:
                             SSR_아이네스_후진_count = count
-                        print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
+                        # print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         self.log("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
                         print(position)
                             
@@ -1827,7 +1829,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_에어_샤커_count < count:
                             SSR_에어_샤커_count = count
-                        print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
+                        # print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         self.log("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
                         print(position)
                             
@@ -1836,7 +1838,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_엘_콘도르_파사_count < count:
                             SSR_엘_콘도르_파사_count = count
-                        print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
+                        # print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         self.log("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
                         print(position)
                             
@@ -1845,7 +1847,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_오구리_캡_count < count:
                             SSR_오구리_캡_count = count
-                        print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
+                        # print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         self.log("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
                         print(position)
                             
@@ -1854,7 +1856,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_위닝_티켓_count < count:
                             SSR_위닝_티켓_count = count
-                        print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
+                        # print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         self.log("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
                         print(position)
                             
@@ -1863,7 +1865,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_타마모_크로스_count < count:
                             SSR_타마모_크로스_count = count
-                        print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
+                        # print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         self.log("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
                         print(position)
                             
@@ -1872,7 +1874,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_토카이_테이오_count < count:
                             SSR_토카이_테이오_count = count
-                        print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
+                        # print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         self.log("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
                         print(position)
                             
@@ -1881,7 +1883,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_트윈_터보_count < count:
                             SSR_트윈_터보_count = count
-                        print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
+                        # print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         self.log("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
                         print(position)
                             
@@ -1890,7 +1892,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_파인_모션_count < count:
                             SSR_파인_모션_count = count
-                        print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
+                        # print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         self.log("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
                         print(position)
                             
@@ -1899,7 +1901,7 @@ class Umamusume(QThread):
                     if count:
                         if SSR_하야카와_타즈나_count < count:
                             SSR_하야카와_타즈나_count = count
-                        print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
+                        # print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         self.log("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
                         print(position)
                 
@@ -2051,7 +2053,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("한_번_더_뽑기 " + str(count) + "개")
+                # print("한_번_더_뽑기 " + str(count) + "개")
                 self.log("한_번_더_뽑기 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2069,7 +2071,7 @@ class Umamusume(QThread):
                 adbInput.Key_event(device=device, key_code="keyevent 4") # "KEYCODE_BACK" 
                 time.sleep(0.5)
                 adbInput.Key_event(device=device, key_code="keyevent 4")
-                print("쥬얼이_부족합니다 " + str(count) + "개")
+                # print("쥬얼이_부족합니다 " + str(count) + "개")
                 self.log("쥬얼이_부족합니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2081,7 +2083,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=147, deltaX=5, deltaY=5)
-                print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
+                # print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
                 self.log("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2093,7 +2095,7 @@ class Umamusume(QThread):
             if count and is연동하기:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=5, offsetY=5)
-                print("메뉴 " + str(count) + "개")
+                # print("메뉴 " + str(count) + "개")
                 self.log("메뉴 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2104,7 +2106,7 @@ class Umamusume(QThread):
             if count and is연동하기:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=4)
-                print("메뉴_단축 " + str(count) + "개")
+                # print("메뉴_단축 " + str(count) + "개")
                 self.log("메뉴_단축 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2115,7 +2117,7 @@ class Umamusume(QThread):
             if count and is연동하기:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("계정_정보 " + str(count) + "개")
+                # print("계정_정보 " + str(count) + "개")
                 self.log("계정_정보 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2126,7 +2128,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("카카오_로그인 " + str(count) + "개")
+                # print("카카오_로그인 " + str(count) + "개")
                 self.log("카카오_로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2137,7 +2139,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("확인하고_계속하기 " + str(count) + "개")
+                # print("확인하고_계속하기 " + str(count) + "개")
                 self.log("확인하고_계속하기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2148,7 +2150,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("확인하고_계속하기2 " + str(count) + "개")
+                # print("확인하고_계속하기2 " + str(count) + "개")
                 self.log("확인하고_계속하기2 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2159,7 +2161,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("확인하고_계속하기3 " + str(count) + "개")
+                # print("확인하고_계속하기3 " + str(count) + "개")
                 self.log("확인하고_계속하기3 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2171,7 +2173,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("계속하기 " + str(count) + "개")
+                # print("계속하기 " + str(count) + "개")
                 self.log("계속하기 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2183,7 +2185,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.Key_event(device=device, key_code="keyevent 4")
-                print("정보_확인_중 " + str(count) + "개")
+                # print("정보_확인_중 " + str(count) + "개")
                 self.log("정보_확인_중 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2195,7 +2197,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.Key_event(device=device, key_code="keyevent 4")
-                print("Google_계정으로_로그인 " + str(count) + "개")
+                # print("Google_계정으로_로그인 " + str(count) + "개")
                 self.log("Google_계정으로_로그인 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2207,7 +2209,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=143, deltaX=5, deltaY=5)
-                print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
+                # print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
                 self.log("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2221,8 +2223,9 @@ class Umamusume(QThread):
                 is초기화하기 = True
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                print("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
+                # print("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
                 self.log("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
+                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2232,7 +2235,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=150, deltaX=5, deltaY=5)
-                print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
+                # print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
                 self.log("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(10)
@@ -2244,7 +2247,7 @@ class Umamusume(QThread):
                 is초기화하기 = True
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                print("로그아웃 " + str(count) + "개")
+                # print("로그아웃 " + str(count) + "개")
                 self.log("로그아웃 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2256,31 +2259,53 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
-                print("모두_지우기 " + str(count) + "개")
+                # print("모두_지우기 " + str(count) + "개")
                 self.log("모두_지우기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
                 
+            # count = 0
+            # count, position = ImageSearch(img, 크롬_실행)
+            # if count and is초기화하기:
+            #     updateTime = time.time()
+            #     adbInput.BlueStacksClick(device=device, position=position[0])
+            #     # print("크롬_실행 " + str(count) + "개")
+            #     self.log("크롬_실행 " + str(count) + "개")
+            #     print(position)
+            #     time.sleep(0.5)
+            #     img = screenshotToOpenCVImg(hwndMain)
+                
+            # count = 0
+            # count, position = ImageSearch(img, 크롬_실행2)
+            # if count and is초기화하기:
+            #     updateTime = time.time()
+            #     adbInput.BlueStacksClick(device=device, position=position[0])
+            #     # print("크롬_실행 " + str(count) + "개")
+            #     self.log("크롬_실행 " + str(count) + "개")
+            #     print(position)
+            #     time.sleep(0.5)
+            #     img = screenshotToOpenCVImg(hwndMain)
+                
             count = 0
-            count, position = ImageSearch(img, 크롬_실행)
+            count, position = ImageSearch(img, 파이어폭스_실행)
             if count and is초기화하기:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
-                print("크롬_실행 " + str(count) + "개")
-                self.log("크롬_실행 " + str(count) + "개")
-                print(position)
-                time.sleep(0.5)
+                # print("파이어폭스_실행 " + str(count) + "개")
+                self.log("파이어폭스_실행 " + str(count) + "개")
+                # print(position)
+                time.sleep(1.5)
                 img = screenshotToOpenCVImg(hwndMain)
                 
             count = 0
-            count, position = ImageSearch(img, 크롬_실행2)
-            if count and is초기화하기:
+            count, position = ImageSearch(img, 파이어폭스_문제_닫기, confidence=0.99)
+            if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0])
-                print("크롬_실행 " + str(count) + "개")
-                self.log("크롬_실행 " + str(count) + "개")
-                print(position)
+                # print("파이어폭스_문제_닫기 " + str(count) + "개")
+                self.log("파이어폭스_문제_닫기 " + str(count) + "개")
+                # print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
                 
@@ -2288,20 +2313,40 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 연결된_서비스_관리)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("연결된_서비스_관리 " + str(count) + "개")
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("연결된_서비스_관리 " + str(count) + "개")
                 self.log("연결된_서비스_관리 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.1)
+                time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
             count = 0
             count, position = ImageSearch(img, 우마무스메_서비스)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("우마무스메_서비스 " + str(count) + "개")
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("우마무스메_서비스 " + str(count) + "개")
                 self.log("우마무스메_서비스 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2309,11 +2354,21 @@ class Umamusume(QThread):
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
             count = 0
-            count, position = ImageSearch(img, 모든_정보_삭제, 202, 390, 116, 50)
+            count, position = ImageSearch(img, 모든_정보_삭제)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("모든_정보_삭제 " + str(count) + "개")
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("모든_정보_삭제 " + str(count) + "개")
                 self.log("모든_정보_삭제 " + str(count) + "개")
                 print(position)
                 time.sleep(0.2)
@@ -2323,13 +2378,23 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 205, 90)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
                 time.sleep(0.5)
                 for _ in range(15):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
                 time.sleep(0.2)
                 WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
-                print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2340,25 +2405,45 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 100, 90)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
                 time.sleep(0.5)
                 for _ in range(15):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
                 time.sleep(0.2)
                 WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
-                print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.2)
+                time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
             count = 0
-            count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, 204, 559, 108, 50, confidence=0.99, grayscale=False)
+            count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, confidence=0.95, grayscale=False)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
                 self.log("모든_정보_삭제_빨간_박스 " + str(count) + "개")
                 print(position)
                 time.sleep(0.2)
@@ -2369,8 +2454,61 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("비밀번호 " + str(count) + "개")
+                # print("비밀번호 " + str(count) + "개")
                 self.log("비밀번호 " + str(count) + "개")
+                print(position)
+                time.sleep(0.2)
+                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                
+            count = 0
+            count, position = ImageSearch(img, 회원님의_소중한_정보_보호를_위해, confidence=0.99, grayscale=False)
+            if count:
+                updateTime = time.time()
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 95)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
+                self.log("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
+                print(position)
+                time.sleep(0.5)
+                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                
+            count = 0
+            count, position = ImageSearch(img, 제안된_로그인, confidence=0.99, grayscale=False)
+            if count:
+                updateTime = time.time()
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 0, 0)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                time.sleep(0.5)
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, -57)
+                    x, y = adbInput.RandomPosition(x, y, 0, 0)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("제안된_로그인 " + str(count) + "개")
+                self.log("제안된_로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -2380,7 +2518,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("자동완성_Continue " + str(count) + "개")
+                # print("자동완성_Continue " + str(count) + "개")
                 self.log("자동완성_Continue " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2391,31 +2529,41 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("자동완성_계속 " + str(count) + "개")
+                # print("자동완성_계속 " + str(count) + "개")
                 self.log("자동완성_계속 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
             count = 0
-            count, position = ImageSearch(img, 비밀번호_확인, 231, 356, 55, 46, confidence=0.99, grayscale=False)
+            count, position = ImageSearch(img, 비밀번호_확인, confidence=0.95, grayscale=False)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("비밀번호_확인 " + str(count) + "개")
+                try:
+                    x, y, width, height = position[0]
+                    x += width/2
+                    y += height/2
+                    x, y = adbInput.BlueStacksOffset(x, y)
+                    x, y = adbInput.Offset(x, y, 0, 0)
+                    x, y = adbInput.RandomPosition(x, y, 5, 5)
+                    adbInput.AdbTap(device, x, y)
+                except:
+                    pass
+                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                # print("비밀번호_확인 " + str(count) + "개")
                 self.log("비밀번호_확인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
             count = 0
-            count, position = ImageSearch(img, 삭제_완료, confidence=0.99)
+            count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
             if count:
                 updateTime = time.time()
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                print("삭제_완료 " + str(count) + "개")
+                # print("삭제_완료 " + str(count) + "개")
                 self.log("삭제_완료 " + str(count) + "개")
-                self.parent.isDoneTutorialCheckBox.setEnabled(True)
+                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 print(position)
                 time.sleep(0.5)
                 return "Failed"
@@ -2432,7 +2580,7 @@ class Umamusume(QThread):
                     except:
                         pass
                     
-                    print("로딩 " + str(count) + "개")
+                    # print("로딩 " + str(count) + "개")
                     self.log("로딩 " + str(count) + "개")
                     print(position)
                     print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2452,7 +2600,7 @@ class Umamusume(QThread):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
                 time.sleep(0.3)
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=45, deltaX=5, deltaY=5)
-                print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
+                # print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                 self.log("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                 print(position)
                 print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
@@ -2464,7 +2612,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("로그인 " + str(count) + "개")
+                # print("로그인 " + str(count) + "개")
                 self.log("로그인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2478,7 +2626,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
-                print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
+                # print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                 self.log("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                 print(position)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2488,7 +2636,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("타이틀_화면으로 " + str(count) + "개")
+                # print("타이틀_화면으로 " + str(count) + "개")
                 self.log("타이틀_화면으로 " + str(count) + "개")
                 print(position)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2498,7 +2646,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                print("2단계_인증 " + str(count) + "개")
+                # print("2단계_인증 " + str(count) + "개")
                 self.log("2단계_인증 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2509,7 +2657,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("확인 " + str(count) + "개")
+                # print("확인 " + str(count) + "개")
                 self.log("확인 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2520,7 +2668,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                print("앱_닫기 " + str(count) + "개")
+                # print("앱_닫기 " + str(count) + "개")
                 self.log("앱_닫기 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2531,7 +2679,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=142, deltaX=5, deltaY=5)
-                print("날짜가_변경됐습니다 " + str(count) + "개")
+                # print("날짜가_변경됐습니다 " + str(count) + "개")
                 self.log("날짜가_변경됐습니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2542,7 +2690,7 @@ class Umamusume(QThread):
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetX=125, offsetY=155, deltaX=5, deltaY=5)
-                print("추가_데이터를_다운로드합니다 " + str(count) + "개")
+                # print("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 self.log("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 print(position)
                 time.sleep(0.5)
@@ -2552,7 +2700,7 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 숫자4080_에러_코드)
             if count:
                 updateTime = time.time()
-                # adbInput.BlueStacksClick(device=device, position=position[0], offsetY=156, deltaX=5, deltaY=5)
+                adbInput.BlueStacksClick(device=device, position=position[0], offsetY=156, deltaX=5, deltaY=5)
                 print("4080_에러_코드 " + str(count) + "개")
                 self.log("4080_에러_코드 " + str(count) + "개")
                 print(position)
