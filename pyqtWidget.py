@@ -18,17 +18,19 @@ class WindowClass(QMainWindow, form_class):
         self.verticalTabWidget.setMovable(True)
         # print(len(Tab)) 탭 갯수
         
-        self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
+        # self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
         
         
 class newTab(QMainWindow):
     def __init__(self, parent=None):
         super().__init__()
+        # 변수 초기화
         self.parent = parent
         
         self.InstanceName = ""
         self.InstancePort = 0
         
+        # 객체 초기화
         self.InstanceComboBox = QComboBox()
         self.InstanceRefreshButton = QPushButton("새로고침", self)
         
@@ -42,8 +44,11 @@ class newTab(QMainWindow):
 
         self.umamusume = Umamusume(self)
         
+        # 함수 초기화
+        self.InstanceFunction()
+        self.InstanceRefreshFunction()
         
-        # 시그널
+        # 시그널 정의
         self.InstanceComboBox.currentIndexChanged.connect(self.InstanceFunction)
         self.InstanceRefreshButton.clicked.connect(self.InstanceRefreshFunction)
         
@@ -108,7 +113,9 @@ class newTab(QMainWindow):
             
             self.InstancePort = int(self.InstancePort)
             self.logs.append(str(self.InstanceName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
+            
             self.umamusume = Umamusume(self)
+            
             self.startButton.setEnabled(True)
             self.stopButton.setEnabled(True)
             self.resetButton.setEnabled(True)
@@ -138,24 +145,34 @@ class newTab(QMainWindow):
     
     
     def startFunction(self):
+        self.InstanceComboBox.setEnabled(False)
+        self.InstanceRefreshButton.setEnabled(False)
+        
         self.startButton.setEnabled(False)
         self.stopButton.setEnabled(True)
         self.resetButton.setEnabled(False)
         self.isDoneTutorialCheckBox.setEnabled(False)
+        
         self.logs.append("-"*50)
         self.logs.append("시작!!")
         self.umamusume.start()
         self.logs.append("-"*50)
     
+    
     def stopFunction(self):
+        self.InstanceComboBox.setEnabled(True)
+        self.InstanceRefreshButton.setEnabled(True)
+        
         self.startButton.setEnabled(True)
         self.stopButton.setEnabled(False)
         self.resetButton.setEnabled(True)
         self.isDoneTutorialCheckBox.setEnabled(True)
+        
         self.logs.append("-"*50)
         self.umamusume.stopping()
         self.logs.append("멈춤!!")
         self.logs.append("-"*50)
+    
     
     def resetFunction(self):
         self.resetButton.setEnabled(False)

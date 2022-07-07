@@ -1,6 +1,4 @@
-# from Umamusume import *
 from pyqtWidget import *
-
 
 if __name__ =="__main__":
     
