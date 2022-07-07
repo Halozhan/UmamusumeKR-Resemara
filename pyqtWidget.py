@@ -83,8 +83,8 @@ class newTab(QMainWindow):
         self.logs.append(text)
         
     @pyqtSlot()
-    def Error_4080(self):
-        pass
+    def Error_4080Function(self):
+        self.AllStop.emit()
         
         
     def newTab(self):

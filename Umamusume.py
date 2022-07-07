@@ -29,7 +29,7 @@ class Umamusume(QThread):
         # 커스텀 시그널 정의
         
         self.recvLog.connect(self.parent.sendLog)
-        self.Error_4080.connect(self.parent.Error_4080)
+        self.Error_4080.connect(self.parent.Error_4080Function)
         
     def log(self, text):
         self.recvLog.emit(text)
