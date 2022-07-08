@@ -7,6 +7,7 @@ from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from Umamusume import *
 from ASUS_Router_Mac_Change import *
 from Change_MAC import *
+from sleepTime import sleepTime
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -18,6 +19,8 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
+        
+        
         # self.ASUSCheckBox = QCheckBox("ASUS 공유기 버전")
         # self.PAGCheckBox = QCheckBox("Technitium MAC Address Changer 버전")
 
@@ -33,11 +36,14 @@ class WindowClass(QMainWindow, form_class):
         for i in range(count):
             self.Tab.append(newTab(self)) # self를 상속받은 newTab
             self.verticalTabWidget.addTab(self.Tab[i].newTab(), "탭 %d" % (self.verticalTabWidget.count()))
-
+        
+        
+        self.sleepTime = sleepTime(self)
+        self.sleepTime.start()
+        
         
         self.verticalTabWidget.setMovable(True)
         # print(len(Tab)) 탭 갯수
-
         
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
         
@@ -45,13 +51,20 @@ class WindowClass(QMainWindow, form_class):
         self.PAGCheckBox.clicked.connect(self.PAGCheckBoxFunction)
         
         
+    @pyqtSlot(float)
+    def SleepTimeFunction(self, Time):
+        for i in self.Tab:
+            i.umamusume.sleepTime = Time
+    
+    @pyqtSlot()
     def ASUSCheckBoxFunction(self):
         if self.ASUSCheckBox.isChecked():
             print("ASUSCheckBox가 활성화됨")
         else:
             print("ASUSCheckBox가 비활성화됨")
         
-        
+    
+    @pyqtSlot()
     def PAGCheckBoxFunction(self):
         if self.PAGCheckBox.isChecked():
             print("PAGCheckBox가 활성화됨")
@@ -83,6 +96,7 @@ class newTab(QMainWindow):
         
         self.InstanceName = ""
         self.InstancePort = 0
+        self.sleepTime = 0.5
         
         # 객체 초기화
         self.InstanceComboBox = QComboBox()
