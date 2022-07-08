@@ -403,8 +403,8 @@ class Umamusume(QThread):
                     print("환영 " + str(count) + "개")
                     self.log("환영 " + str(count) + "개")
                     print(position)
-                    time.sleep(0.5)
-                    continue
+                    time.sleep(1)
+                    img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
                 count, position = ImageSearch(img, 느낌표물음표, 35, 449, 52, 54)
@@ -1547,6 +1547,7 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 # print("공지사항_X " + str(count) + "개")
                 self.log("공지사항_X " + str(count) + "개")
+                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 # print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1559,6 +1560,7 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                 # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                 self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
+                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 # print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -1570,6 +1572,7 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(device=device, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                 # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                 self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
+                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 # print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
@@ -2526,7 +2529,7 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
                 # print("자동완성_Continue " + str(count) + "개")
                 self.log("자동완성_Continue " + str(count) + "개")
-                print(position)
+                # print(position)
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                 
@@ -2569,7 +2572,6 @@ class Umamusume(QThread):
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 # print("삭제_완료 " + str(count) + "개")
                 self.log("삭제_완료 " + str(count) + "개")
-                self.parent.isDoneTutorialCheckBox.setChecked(True)
                 # print(position)
                 time.sleep(0.5)
                 return "Failed"
