@@ -29,61 +29,72 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="verticalTabWidgetPage1" native="true">
+    <widget class="QWidget" name="verticalTabWidgetPage1">
      <attribute name="title">
       <string>메인 페이지</string>
      </attribute>
      <layout class="QVBoxLayout" name="verticalLayout1">
       <item>
-       <layout class="QHBoxLayout" name="hbox">
-        <property name="leftMargin">
-         <number>50</number>
-        </property>
-        <property name="topMargin">
-         <number>20</number>
-        </property>
-        <property name="rightMargin">
-         <number>50</number>
-        </property>
-        <property name="bottomMargin">
-         <number>20</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QPushButton" name="start">
+         <widget class="QCheckBox" name="ASUSCheckBox">
           <property name="text">
-           <string>시작</string>
+           <string>ASUS 공유기 버전</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="stop">
+         <widget class="QCheckBox" name="PAGCheckBox">
           <property name="text">
-           <string>멈춤</string>
+           <string>Technitium MAC Address Changer 버전</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="reset">
-          <property name="text">
-           <string>초기화</string>
+         <layout class="QHBoxLayout" name="hbox">
+          <property name="leftMargin">
+           <number>50</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="isDoneTutorial">
-          <property name="text">
-           <string>튜토리얼 스킵 여부</string>
+          <property name="topMargin">
+           <number>20</number>
           </property>
-         </widget>
+          <property name="rightMargin">
+           <number>50</number>
+          </property>
+          <property name="bottomMargin">
+           <number>20</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="start">
+            <property name="text">
+             <string>시작</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stop">
+            <property name="text">
+             <string>멈춤</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="reset">
+            <property name="text">
+             <string>초기화</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="isDoneTutorial">
+            <property name="text">
+             <string>튜토리얼 스킵 여부</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>자 보여드렸습니다. 옆쪽 탭으로 이동해주세요</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>

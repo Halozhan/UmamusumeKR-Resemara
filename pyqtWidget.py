@@ -40,11 +40,32 @@ class WindowClass(QMainWindow, form_class):
 
         
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
+        
+        self.ASUSCheckBox.clicked.connect(self.ASUSCheckBoxFunction)
+        self.PAGCheckBox.clicked.connect(self.PAGCheckBoxFunction)
+        
+        
+    def ASUSCheckBoxFunction(self):
+        if self.ASUSCheckBox.isChecked():
+            print("ASUSCheckBox가 활성화됨")
+        else:
+            print("ASUSCheckBox가 비활성화됨")
+        
+        
+    def PAGCheckBoxFunction(self):
+        if self.PAGCheckBox.isChecked():
+            print("PAGCheckBox가 활성화됨")
+        else:
+            print("PAGCheckBox가 비활성화됨")
+            
     
     @pyqtSlot()
     def AllStopFunction(self):
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = True
+        print("-"*50)
+        print("초기화"*10)
+        print("-"*50)
         if self.PAGCheckBox.isChecked():
             PAG_MAC_Change()
         if self.ASUSCheckBox.isChecked():
