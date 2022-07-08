@@ -28,14 +28,14 @@ def PAG_MAC_Change():
             Random_MAC_Address = pyautogui.locateCenterOnScreen(Random_MAC_Address_Path, confidence=0.95)
             originalPoint = pyautogui.position()
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
-            pyautogui.moveTo(originalPoint)
-        except:
-            pass
-        time.sleep(0.3)
-        try:
+            time.sleep(0.1)
+            pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
+            time.sleep(0.1)
+            
             Change_Now = pyautogui.locateCenterOnScreen(Change_Now_Path, confidence=0.95)
             originalPoint = pyautogui.position()
             pyautogui.click(Change_Now.x, Change_Now.y)
+            
             pyautogui.moveTo(originalPoint)
         except:
             pass
