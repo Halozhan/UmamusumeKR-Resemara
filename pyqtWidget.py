@@ -6,6 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from Umamusume import *
 from ASUS_Router_Mac_Change import *
+from Change_MAC import *
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -17,6 +18,16 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
 
+        # self.ASUSCheckBox = QCheckBox("ASUS 공유기 버전")
+        # self.PAGCheckBox = QCheckBox("Technitium MAC Address Changer 버전")
+
+        # self.vbox = QVBoxLayout()
+
+        # self.vbox.addWidget(self.ASUSCheckBox)
+        # self.vbox.addWidget(self.PAGCheckBox)
+        # self.verticalTabWidgetPage1.setLayout(self.vbox)
+        # self.setLayout(self.vbox)
+
         self.Tab = []
         count = 8 # 8개의 탭 생성
         for i in range(count):
@@ -26,6 +37,7 @@ class WindowClass(QMainWindow, form_class):
         
         self.verticalTabWidget.setMovable(True)
         # print(len(Tab)) 탭 갯수
+
         
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
     
@@ -33,7 +45,10 @@ class WindowClass(QMainWindow, form_class):
     def AllStopFunction(self):
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = True
-        Change_Mac_Address()
+        if self.PAGCheckBox.isChecked():
+            PAG_MAC_Change()
+        if self.ASUSCheckBox.isChecked():
+            Change_Mac_Address()
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = False
         
