@@ -340,7 +340,7 @@ class Umamusume(QThread):
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("출전 " + str(count) + "개")
                     self.log("출전 " + str(count) + "개")
-                    self.parent.isDoneTutorialCheckBox.setChecked(True)
+                    self.parent.isDoneTutorialCheckBox.setChecked(False)
                     print(position)
                     time.sleep(1)
                     continue
