@@ -93,7 +93,7 @@ class newTab(QMainWindow):
         super().__init__()
         # 변수 초기화
         self.parent = parent
-        
+
         self.InstanceName = ""
         self.InstancePort = 0
         self.sleepTime = 0.5
@@ -236,6 +236,11 @@ class newTab(QMainWindow):
     
     
     def stopFunction(self):
+        self.logs.append("-"*50)
+        self.umamusume.stopping()
+        self.logs.append("멈춤!!")
+        self.logs.append("-"*50)
+
         self.InstanceComboBox.setEnabled(True)
         self.InstanceRefreshButton.setEnabled(True)
         
@@ -244,10 +249,6 @@ class newTab(QMainWindow):
         self.resetButton.setEnabled(True)
         self.isDoneTutorialCheckBox.setEnabled(True)
         
-        self.logs.append("-"*50)
-        self.umamusume.stopping()
-        self.logs.append("멈춤!!")
-        self.logs.append("-"*50)
     
     
     def resetFunction(self):

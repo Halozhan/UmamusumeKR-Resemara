@@ -5,13 +5,11 @@ from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
-from threading import Thread, Event
 from PyQt5.QtWidgets import *
-# from PyQt5.QtCore import *
-from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal
 from ImageVariables import * # 이미지
-import psutil
 import glob, os
+import pickle
 
 
 class Umamusume(QThread):
@@ -29,6 +27,8 @@ class Umamusume(QThread):
             self.sleepTime = self.parent.sleepTime
         except:
             self.sleepTime = 0.5
+
+        self.isStopped = False
         self.isDoingMAC_Change = False
         
         # 커스텀 시그널 정의
@@ -44,6 +44,7 @@ class Umamusume(QThread):
         
     def run(self):
         self.isAlive = True
+        self.isStopped = False
         
         self.InstanceName = self.parent.InstanceName
         self.InstancePort = self.parent.InstancePort
@@ -58,7 +59,12 @@ class Umamusume(QThread):
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
             print("튜토리얼 스킵 여부:", self.parent.isDoneTutorialCheckBox.isChecked())
             self.log("튜토리얼 스킵 여부: " + str(self.parent.isDoneTutorialCheckBox.isChecked()))
-            if isSuccessed == "Failed":
+            if isSuccessed == "Failed": # 데이터 삭제
+                try:
+                    path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
+                    os.remove(path)
+                except:
+                    pass
                 self.resetCount += 1
             if isSuccessed == "Stop":
                 print("This thread was terminated.")
@@ -66,8 +72,8 @@ class Umamusume(QThread):
             print("리세 횟수:", self.resetCount)
             self.log("리세 횟수: " + str(self.resetCount))
             if isSuccessed == True:
-                print("리세 성공")
-                self.log("리세 성공")
+                print("리세 성공 "*5)
+                self.log("리세 성공 "*5)
                 break
             if isSuccessed == "4080_에러_코드":
                 self.Error_4080Function()
@@ -76,36 +82,77 @@ class Umamusume(QThread):
             self.log("-"*50)
             
         print("리세 종료")
+        self.isStopped = True
         
     def stopping(self):
-        self.isAlive = False 
-        
+        self.isAlive = False
+        while self.isStopped:
+            pass
+        try:
+            os.makedirs("./Saved_Data")
+        except:
+            pass
+        try:
+            path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
+            with open(file=path, mode='wb') as file:
+                pickle.dump(self.is시작하기, file) # -- pickle --
+                pickle.dump(self.isPAUSED, file) # -- pickle --
+                pickle.dump(self.is선물_이동, file) # -- pickle --
+                pickle.dump(self.is뽑기_이동, file) # -- pickle --
+                pickle.dump(self.is뽑기_결과, file) # -- pickle --
+                pickle.dump(self.is쥬얼부족, file) # -- pickle --
+                pickle.dump(self.is연동하기, file) # -- pickle --
+                pickle.dump(self.is초기화하기, file) # -- pickle --
+                
+                # 서포트 카드 총 갯수
+                pickle.dump(self.Supporter_cards_total, file) # -- pickle --
+        except:
+            path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
+            print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
         
     def main(self):
-        print(self.InstanceName)
-        
         hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
         
-        is시작하기 = False
-        isPAUSED = False
-        is선물_이동 = True
-        is뽑기_이동 = True
-        is뽑기_결과 = True
-        is쥬얼부족 = False
-        is연동하기 = False
-        is초기화하기 = False
-        updateTime = time.time() # 타임 아웃 터치
-        
-        # 서포트 카드 총 갯수
-        path = './Supporter_cards'
-        Supporter_cards_total = dict()
-        for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            Supporter_cards_total[key[-2]] = 0
+        # 불러오기
+        try:
+            path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
+            with open(file=path,  mode='rb') as file:
+                self.is시작하기 = pickle.load(file) # -- pickle --
+                self.isPAUSED = pickle.load(file) # -- pickle --
+                self.is선물_이동 = pickle.load(file) # -- pickle --
+                self.is뽑기_이동 = pickle.load(file) # -- pickle --
+                self.is뽑기_결과 = pickle.load(file) # -- pickle --
+                self.is쥬얼부족 = pickle.load(file) # -- pickle --
+                self.is연동하기 = pickle.load(file) # -- pickle --
+                self.is초기화하기 = pickle.load(file) # -- pickle --
+                
+                # 서포트 카드 총 갯수
+                self.Supporter_cards_total = pickle.load(file) # -- pickle --
+                for key, value in self.Supporter_cards_total.items():
+                    self.log(key + ": " + str(value))
+                self.log("기존 데이터를 불러옵니다.")
+        except:
+            self.is시작하기 = False # -- pickle --
+            self.isPAUSED = False # -- pickle --
+            self.is선물_이동 = True # -- pickle --
+            self.is뽑기_이동 = True # -- pickle --
+            self.is뽑기_결과 = True # -- pickle --
+            self.is쥬얼부족 = False # -- pickle --
+            self.is연동하기 = False # -- pickle --
+            self.is초기화하기 = False # -- pickle --
+            
+            # 서포트 카드 총 갯수
+            path = './Supporter_cards'
+            self.Supporter_cards_total = dict() # -- pickle --
+            for a in glob.glob(os.path.join(path, '*')):
+                key = a.replace('.', '/').replace('\\', '/')
+                key = key.split('/')
+                self.Supporter_cards_total[key[-2]] = 0
 
+
+        updateTime = time.time() # 타임 아웃 터치
 
         while self.isAlive:
             # 잠수 클릭 20초 터치락 해제
@@ -129,7 +176,7 @@ class Umamusume(QThread):
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
             
-            if is초기화하기 == False:
+            if self.is초기화하기 == False:
                 count = 0
                 count, position = ImageSearch(img, SKIP, confidence=0.85)
                 if count:
@@ -150,7 +197,7 @@ class Umamusume(QThread):
                     # print(position)
                     time.sleep(2)
                 
-                if is시작하기 == False:
+                if self.is시작하기 == False:
                     count = 0
                     count, position = ImageSearch(img, 게스트_로그인, 232, 926, 77, 14)
                     if count:
@@ -188,7 +235,7 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 시작하기, 237, 396, 67, 23, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    is시작하기 = True
+                    self.is시작하기 = True
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("시작하기 " + str(count) + "개")
                     self.log("시작하기 " + str(count) + "개")
@@ -297,38 +344,39 @@ class Umamusume(QThread):
                 
             if self.parent.isDoneTutorialCheckBox.isChecked() == False:
                 updateTime = time.time()
-                    
-                count = 0
-                count, position = ImageSearch(img, 울려라_팡파레)
-                if count and isPAUSED == False:
-                    ConvertedPosition = []
-                    ConvertedPosition.append(position[0][0] / 1.750503018108652) # 1740 / 994 가로화면 가로배율
-                    ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][2] / 1.729965156794425) # 993 / 574 가로화면 세로배율
-                    ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                    print("울려라_팡파레 " + str(count) + "개")
-                    self.log("울려라_팡파레 " + str(count) + "개")
-                    print(position)
-                    isPAUSED = True
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 닿아라_골까지)
-                if count and isPAUSED == False:
-                    ConvertedPosition = []
-                    ConvertedPosition.append(position[0][0] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][2] / 1.729965156794425)
-                    ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                    print("닿아라_골까지 " + str(count) + "개")
-                    self.log("닿아라_골까지 " + str(count) + "개")
-                    print(position)
-                    isPAUSED = True
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
+                
+                if self.isPAUSED == False:
+                    count = 0
+                    count, position = ImageSearch(img, 울려라_팡파레)
+                    if count:
+                        ConvertedPosition = []
+                        ConvertedPosition.append(position[0][0] / 1.750503018108652) # 1740 / 994 가로화면 가로배율
+                        ConvertedPosition.append(position[0][1] / 1.750503018108652)
+                        ConvertedPosition.append(position[0][2] / 1.729965156794425) # 993 / 574 가로화면 세로배율
+                        ConvertedPosition.append(position[0][3] / 1.729965156794425)
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                        print("울려라_팡파레 " + str(count) + "개")
+                        self.log("울려라_팡파레 " + str(count) + "개")
+                        print(position)
+                        self.isPAUSED = True
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 닿아라_골까지)
+                    if count:
+                        ConvertedPosition = []
+                        ConvertedPosition.append(position[0][0] / 1.750503018108652)
+                        ConvertedPosition.append(position[0][1] / 1.750503018108652)
+                        ConvertedPosition.append(position[0][2] / 1.729965156794425)
+                        ConvertedPosition.append(position[0][3] / 1.729965156794425)
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                        print("닿아라_골까지 " + str(count) + "개")
+                        self.log("닿아라_골까지 " + str(count) + "개")
+                        print(position)
+                        self.isPAUSED = True
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
                 count, position = ImageSearch(img, 라이브_메뉴)
@@ -357,7 +405,7 @@ class Umamusume(QThread):
                     print("라이브_스킵 " + str(count) + "개")
                     self.log("라이브_스킵 " + str(count) + "개")
                     print(position)
-                    isPAUSED = False
+                    self.isPAUSED = False
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
@@ -1533,46 +1581,47 @@ class Umamusume(QThread):
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
-            count = 0
-            count, position = ImageSearch(img, 공지사항_X, 495, 52, 23, 22)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                # print("공지사항_X " + str(count) + "개")
-                self.log("공지사항_X " + str(count) + "개")
-                self.parent.isDoneTutorialCheckBox.setChecked(True)
-                # print(position)
-                time.sleep(1)
-                img = screenshotToOpenCVImg(hwndMain)
-            
+            if self.is초기화하기 == False:
+                count = 0
+                count, position = ImageSearch(img, 공지사항_X, 495, 52, 23, 22)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    # print("공지사항_X " + str(count) + "개")
+                    self.log("공지사항_X " + str(count) + "개")
+                    self.parent.isDoneTutorialCheckBox.setChecked(True)
+                    # print(position)
+                    time.sleep(1)
+                    img = screenshotToOpenCVImg(hwndMain)
                 
-            count = 0
-            count, position = ImageSearch(img, 메인_스토리가_해방되었습니다)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
-                # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
-                self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
-                self.parent.isDoneTutorialCheckBox.setChecked(True)
-                # print(position)
-                time.sleep(1)
-                img = screenshotToOpenCVImg(hwndMain)
-                
-            count = 0
-            count, position = ImageSearch(img, 여러_스토리를_해방할_수_있게_되었습니다)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
-                # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
-                self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
-                self.parent.isDoneTutorialCheckBox.setChecked(True)
-                # print(position)
-                time.sleep(1)
-                img = screenshotToOpenCVImg(hwndMain)
+                    
+                count = 0
+                count, position = ImageSearch(img, 메인_스토리가_해방되었습니다)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
+                    # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
+                    self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
+                    self.parent.isDoneTutorialCheckBox.setChecked(True)
+                    # print(position)
+                    time.sleep(1)
+                    img = screenshotToOpenCVImg(hwndMain)
+                    
+                count = 0
+                count, position = ImageSearch(img, 여러_스토리를_해방할_수_있게_되었습니다)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
+                    self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
+                    self.parent.isDoneTutorialCheckBox.setChecked(True)
+                    # print(position)
+                    time.sleep(1)
+                    img = screenshotToOpenCVImg(hwndMain)
             
             
             # 가챠
-            if is선물_이동 == True:
+            if self.is선물_이동 == True:
                 count = 0
                 count, position = ImageSearch(img, 선물_이동, 456, 672, 47, 53)
                 if count:
@@ -1614,11 +1663,11 @@ class Umamusume(QThread):
                     # print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                     self.log("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                     # print(position)
-                    is선물_이동 = False
+                    self.is선물_이동 = False
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
-            if is뽑기_이동:
+            if self.is뽑기_이동:
                 count = 0
                 count, position = ImageSearch(img, 뽑기_이동, 464, 666, 52, 62)
                 if count:
@@ -1642,7 +1691,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
 
             count = 0
-            count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6)
+            count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
@@ -1652,12 +1701,12 @@ class Umamusume(QThread):
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
 
-            if is뽑기_이동:
+            if self.is뽑기_이동:
                 count = 0
                 count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다)
                 if count:
                     updateTime = time.time()
-                    is뽑기_결과 = True
+                    self.is뽑기_결과 = True
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
                     # print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                     self.log("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
@@ -1668,9 +1717,9 @@ class Umamusume(QThread):
                     
                 count = 0
                 count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
-                if count and is뽑기_결과:
+                if count and self.is뽑기_결과:
                     updateTime = time.time()
-                    is뽑기_결과 = False
+                    self.is뽑기_결과 = False
                     # print("뽑기_결과 " + str(count) + "개")
                     self.log("뽑기_결과 " + str(count) + "개")
                     # print(position)
@@ -1683,7 +1732,7 @@ class Umamusume(QThread):
                         key = key.split('/')
                         Supporter_cards_now[key[-2]] = 0
                         
-                    for i in range(3):
+                    for i in range(2):
                         updateTime = time.time()
                         time.sleep(0.25)
                         img = screenshotToOpenCVImg(hwndMain)
@@ -1699,12 +1748,12 @@ class Umamusume(QThread):
                                 # print(position)
                                 
                     # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
-                    for key, value in Supporter_cards_total.items():
-                        Supporter_cards_total[key] += Supporter_cards_now[key]
+                    for key, value in self.Supporter_cards_total.items():
+                        self.Supporter_cards_total[key] += Supporter_cards_now[key]
                     
                     # 총 서포터 카드 갯수
                     total_count = 0
-                    for key, value in Supporter_cards_total.items():
+                    for key, value in self.Supporter_cards_total.items():
                         if value:
                             total_count += value
                     
@@ -1712,7 +1761,7 @@ class Umamusume(QThread):
                         print("-"*50)
                         self.log("-"*50)
                     
-                        for key, value in Supporter_cards_total.items():
+                        for key, value in self.Supporter_cards_total.items():
                             if value:
                                 print(key + ": " + str(value))
                                 self.log(key + ": " + str(value))
@@ -1734,7 +1783,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
             
-            if is초기화하기 == False:
+            if self.is초기화하기 == False:
                 count = 0
                 count, position = ImageSearch(img, 쥬얼이_부족합니다)
                 if count:
@@ -1742,7 +1791,7 @@ class Umamusume(QThread):
                     # 이륙 조건식 -----------------------------------------------
                     # 이륙 조건식 -----------------------------------------------
                     # 이륙 조건식 -----------------------------------------------
-                    SCT = Supporter_cards_total
+                    SCT = self.Supporter_cards_total
                                 
                     if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
                         return True
@@ -1783,9 +1832,9 @@ class Umamusume(QThread):
                     if SCT["SR_스윕_토쇼"] >= 5 and SCT["SSR_파인_모션"] and SCT["SSR_하야카와_타즈나"] and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_비코_페가수스"] or SCT["SSR_사쿠라_바쿠신_오"]):
                         return True
                     
-                    is쥬얼부족 = True
-                    is뽑기_이동 = False
-                    is연동하기 = True
+                    self.is쥬얼부족 = True
+                    self.is뽑기_이동 = False
+                    self.is연동하기 = True
                     adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
                     time.sleep(0.5)
                     adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
@@ -1808,7 +1857,7 @@ class Umamusume(QThread):
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                if is연동하기:
+                if self.is연동하기:
                     count = 0
                     count, position = ImageSearch(img, 메뉴, 452, 48, 57, 48)
                     if count:
@@ -1842,114 +1891,114 @@ class Umamusume(QThread):
                         time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    # print("카카오_로그인 " + str(count) + "개")
-                    self.log("카카오_로그인 " + str(count) + "개")
-                    # print(position)
-                    time.sleep(2)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 확인하고_계속하기, 186, 623, 144, 53)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    # print("확인하고_계속하기 " + str(count) + "개")
-                    self.log("확인하고_계속하기 " + str(count) + "개")
-                    # print(position)
-                    time.sleep(2)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 확인하고_계속하기2, 186, 625, 143, 50)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    # print("확인하고_계속하기2 " + str(count) + "개")
-                    self.log("확인하고_계속하기2 " + str(count) + "개")
-                    # print(position)
-                    time.sleep(2)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 확인하고_계속하기3)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    # print("확인하고_계속하기3 " + str(count) + "개")
-                    self.log("확인하고_계속하기3 " + str(count) + "개")
-                    # print(position)
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(2)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 계속하기, 214, 620, 85, 47)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    # print("계속하기 " + str(count) + "개")
-                    self.log("계속하기 " + str(count) + "개")
-                    # print(position)
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(2)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 정보_확인_중, 105, 167, 188, 49)
-                if count:
-                    updateTime = time.time()
-                    adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
-                    # print("정보_확인_중 " + str(count) + "개")
-                    self.log("정보_확인_중 " + str(count) + "개")
-                    # print(position)
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, Google_계정으로_로그인)
-                if count:
-                    updateTime = time.time()
-                    adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
-                    # print("Google_계정으로_로그인 " + str(count) + "개")
-                    self.log("Google_계정으로_로그인 " + str(count) + "개")
-                    # print(position)
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 인증되지_않는_로그인_방법_입니다)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=143, deltaX=5, deltaY=5)
-                    # print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
-                    self.log("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
-                    # print(position)
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, 카카오_로그인_연동에_실패하였습니다)
-                if count:
-                    updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=150, deltaX=5, deltaY=5)
-                    # print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
-                    self.log("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
-                    # print(position)
-                    time.sleep(5)
-            
+                    count = 0
+                    count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("카카오_로그인 " + str(count) + "개")
+                        self.log("카카오_로그인 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(2)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 확인하고_계속하기, 186, 623, 144, 53)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("확인하고_계속하기 " + str(count) + "개")
+                        self.log("확인하고_계속하기 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(2)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 확인하고_계속하기2, 186, 625, 143, 50)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("확인하고_계속하기2 " + str(count) + "개")
+                        self.log("확인하고_계속하기2 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(2)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 확인하고_계속하기3)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("확인하고_계속하기3 " + str(count) + "개")
+                        self.log("확인하고_계속하기3 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        time.sleep(2)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 계속하기, 214, 620, 85, 47)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("계속하기 " + str(count) + "개")
+                        self.log("계속하기 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        time.sleep(2)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 정보_확인_중, 105, 167, 188, 49)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
+                        # print("정보_확인_중 " + str(count) + "개")
+                        self.log("정보_확인_중 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, Google_계정으로_로그인)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
+                        # print("Google_계정으로_로그인 " + str(count) + "개")
+                        self.log("Google_계정으로_로그인 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 인증되지_않는_로그인_방법_입니다)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=143, deltaX=5, deltaY=5)
+                        # print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
+                        self.log("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                        
+                    count = 0
+                    count, position = ImageSearch(img, 카카오_로그인_연동에_실패하였습니다)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=150, deltaX=5, deltaY=5)
+                        # print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
+                        self.log("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(5)
+                
             count = 0
             count, position = ImageSearch(img, 카카오_로그인_연동에_성공하였습니다, 68, 469, 384, 65)
             if count:
                 updateTime = time.time()
-                is초기화하기 = True
+                self.is초기화하기 = True
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 # print("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
@@ -1963,7 +2012,7 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 로그아웃)
             if count:
                 updateTime = time.time()
-                is초기화하기 = True
+                self.is초기화하기 = True
                 # adbInput.Key_event(device=device, key_code="keyevent 1") # KEYCODE_MENU
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 # print("로그아웃 " + str(count) + "개")
@@ -2006,7 +2055,7 @@ class Umamusume(QThread):
             #     time.sleep(0.5)
             #     img = screenshotToOpenCVImg(hwndMain)
             
-            if is초기화하기:
+            if self.is초기화하기:
                 count = 0
                 count, position = ImageSearch(img, 파이어폭스_실행)
                 if count:
@@ -2018,335 +2067,335 @@ class Umamusume(QThread):
                     time.sleep(1.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-            count = 0
-            count, position = ImageSearch(img, 파이어폭스_문제_닫기, confidence=0.99)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
-                # print("파이어폭스_문제_닫기 " + str(count) + "개")
-                self.log("파이어폭스_문제_닫기 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain)
-                
-            count = 0
-            count, position = ImageSearch(img, 연결된_서비스_관리)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("연결된_서비스_관리 " + str(count) + "개")
-                self.log("연결된_서비스_관리 " + str(count) + "개")
-                # print(position)
-                # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 우마무스메_서비스)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("우마무스메_서비스 " + str(count) + "개")
-                self.log("우마무스메_서비스 " + str(count) + "개")
-                # print(position)
-                # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.2)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 모든_정보_삭제)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("모든_정보_삭제 " + str(count) + "개")
-                self.log("모든_정보_삭제 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.2)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 205, 90)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
-                time.sleep(0.5)
-                for _ in range(15):
-                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
-                time.sleep(0.2)
-                WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
-                # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
-                self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
-                # print(position)
-                # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.2)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-
-            count = 0
-            count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 100, 90)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
-                time.sleep(0.5)
-                for _ in range(15):
-                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
-                time.sleep(0.2)
-                WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
-                # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
-                self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
-                # print(position)
-                # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, confidence=0.95, grayscale=False)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
-                self.log("모든_정보_삭제_빨간_박스 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.2)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 비밀번호, 0, 242, 78, 51, confidence=0.99, grayscale=False)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                # print("비밀번호 " + str(count) + "개")
-                self.log("비밀번호 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.2)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 회원님의_소중한_정보_보호를_위해, confidence=0.99, grayscale=False)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 95)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
-                self.log("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 제안된_로그인, confidence=0.99, grayscale=False)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 0, 0)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                time.sleep(0.5)
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, -57)
-                    x, y = adbInput.RandomPosition(x, y, 0, 0)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("제안된_로그인 " + str(count) + "개")
-                self.log("제안된_로그인 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                # print("자동완성_Continue " + str(count) + "개")
-                self.log("자동완성_Continue " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                # print("자동완성_계속 " + str(count) + "개")
-                self.log("자동완성_계속 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 비밀번호_확인, confidence=0.95, grayscale=False)
-            if count:
-                updateTime = time.time()
-                try:
-                    x, y, width, height = position[0]
-                    x += width/2
-                    y += height/2
-                    x, y = adbInput.BlueStacksOffset(x, y)
-                    x, y = adbInput.Offset(x, y, 0, 0)
-                    x, y = adbInput.RandomPosition(x, y, 5, 5)
-                    adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                except:
-                    pass
-                # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
-                # print("비밀번호_확인 " + str(count) + "개")
-                self.log("비밀번호_확인 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
-                
-            count = 0
-            count, position = ImageSearch(img, 숫자2단계_인증)
-            if count:
-                updateTime = time.time()
-                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                # print("2단계_인증 " + str(count) + "개")
-                self.log("2단계_인증 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain)
-            
-            count = 0
-            count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
-            if count:
-                updateTime = time.time()
-                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                # print("삭제_완료 " + str(count) + "개")
-                self.log("삭제_완료 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                return "Failed"
-            
-            
-            # 무한 로딩 크롬 전용
-            if time.time() >= updateTime + 5:
                 count = 0
-                count, position = ImageSearch(img, 로딩)
+                count, position = ImageSearch(img, 파이어폭스_문제_닫기, confidence=0.99)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
+                    # print("파이어폭스_문제_닫기 " + str(count) + "개")
+                    self.log("파이어폭스_문제_닫기 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain)
+                    
+                count = 0
+                count, position = ImageSearch(img, 연결된_서비스_관리)
                 if count:
                     updateTime = time.time()
                     try:
-                        x, y = adbInput.RandomPosition(540 / 2, 960 / 3, 5, 5)
-                        adbInput.AdbSwipe(self.device, self.InstancePort, x, y, x, y + 960 / 3, adbInput.random.randint(25, 75))
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
                     except:
                         pass
-                    
-                    # print("로딩 " + str(count) + "개")
-                    self.log("로딩 " + str(count) + "개")
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("연결된_서비스_관리 " + str(count) + "개")
+                    self.log("연결된_서비스_관리 " + str(count) + "개")
                     # print(position)
                     # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    self.log("무한 로딩 새로고침")
-                    print("무한 로딩 새로고침")
-                    time.sleep(3)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 우마무스메_서비스)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("우마무스메_서비스 " + str(count) + "개")
+                    self.log("우마무스메_서비스 " + str(count) + "개")
+                    # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                    time.sleep(0.2)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 모든_정보_삭제)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("모든_정보_삭제 " + str(count) + "개")
+                    self.log("모든_정보_삭제 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.2)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 205, 90)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                    time.sleep(0.5)
+                    for _ in range(15):
+                        WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+                    time.sleep(0.2)
+                    WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
+                    # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                    self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                    # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                    time.sleep(0.2)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+
+                count = 0
+                count, position = ImageSearch(img, 이_서비스의_모든_정보를_삭제하시겠습니까2)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 100, 90)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                    time.sleep(0.5)
+                    for _ in range(15):
+                        WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+                    time.sleep(0.2)
+                    WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "우마무스메 프리티 더비")
+                    # print("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                    self.log("이_서비스의_모든_정보를_삭제하시겠습니까 " + str(count) + "개")
+                    # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 모든_정보_삭제_빨간_박스, confidence=0.95, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
+                    self.log("모든_정보_삭제_빨간_박스 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.2)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 비밀번호, 0, 242, 78, 51, confidence=0.99, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    # print("비밀번호 " + str(count) + "개")
+                    self.log("비밀번호 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.2)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 회원님의_소중한_정보_보호를_위해, confidence=0.99, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 95)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
+                    self.log("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 제안된_로그인, confidence=0.99, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 0, 0)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    time.sleep(0.5)
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, -57)
+                        x, y = adbInput.RandomPosition(x, y, 0, 0)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("제안된_로그인 " + str(count) + "개")
+                    self.log("제안된_로그인 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 자동완성_Continue, 214, 923, 90, 47)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    # print("자동완성_Continue " + str(count) + "개")
+                    self.log("자동완성_Continue " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 자동완성_계속, 226, 907, 62, 49)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    # print("자동완성_계속 " + str(count) + "개")
+                    self.log("자동완성_계속 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 비밀번호_확인, confidence=0.95, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    # print("비밀번호_확인 " + str(count) + "개")
+                    self.log("비밀번호_확인 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
+                    
+                count = 0
+                count, position = ImageSearch(img, 숫자2단계_인증)
+                if count:
+                    updateTime = time.time()
+                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+                    # print("2단계_인증 " + str(count) + "개")
+                    self.log("2단계_인증 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
-            
-            count = 0
-            count, position = ImageSearch(img, 카카오메일_아이디_이메일_전화번호, confidence=0.99)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                time.sleep(0.3)
-                WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "a")
-                for _ in range(2):
-                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
-                time.sleep(0.3)
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=45, deltaX=5, deltaY=5)
-                # print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
-                self.log("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
-                # print(position)
-                # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain)
-            
-            count = 0
-            count, position = ImageSearch(img, 로그인, confidence=0.99, grayscale=False)
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                # print("로그인 " + str(count) + "개")
-                self.log("로그인 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
+                
+                count = 0
+                count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
+                if count:
+                    updateTime = time.time()
+                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+                    # print("삭제_완료 " + str(count) + "개")
+                    self.log("삭제_완료 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    return "Failed"
+                
+                
+                # 무한 로딩 크롬 전용
+                if time.time() >= updateTime + 5:
+                    count = 0
+                    count, position = ImageSearch(img, 로딩)
+                    if count:
+                        updateTime = time.time()
+                        try:
+                            x, y = adbInput.RandomPosition(540 / 2, 960 / 3, 5, 5)
+                            adbInput.AdbSwipe(self.device, self.InstancePort, x, y, x, y + 960 / 3, adbInput.random.randint(25, 75))
+                        except:
+                            pass
+                        
+                        # print("로딩 " + str(count) + "개")
+                        self.log("로딩 " + str(count) + "개")
+                        # print(position)
+                        # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                        self.log("무한 로딩 새로고침")
+                        print("무한 로딩 새로고침")
+                        time.sleep(3)
+                        img = screenshotToOpenCVImg(hwndMain)
+                
+                count = 0
+                count, position = ImageSearch(img, 카카오메일_아이디_이메일_전화번호, confidence=0.99)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    time.sleep(0.3)
+                    WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "a")
+                    for _ in range(2):
+                        WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
+                    time.sleep(0.3)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=45, deltaX=5, deltaY=5)
+                    # print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
+                    self.log("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
+                    # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain)
+                
+                count = 0
+                count, position = ImageSearch(img, 로그인, confidence=0.99, grayscale=False)
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    # print("로그인 " + str(count) + "개")
+                    self.log("로그인 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
                 
                 
             # 특수 이벤트
