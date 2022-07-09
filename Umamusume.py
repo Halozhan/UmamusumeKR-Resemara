@@ -69,6 +69,7 @@ class Umamusume(QThread):
             if isSuccessed == "Stop":
                 print("This thread was terminated.")
                 self.log("This thread was terminated.")
+                self.terminate()
             print("리세 횟수:", self.resetCount)
             self.log("리세 횟수: " + str(self.resetCount))
             if isSuccessed == True:
@@ -84,11 +85,12 @@ class Umamusume(QThread):
             self.log("-"*50)
             
         print("리세 종료")
-        self.isAlive = False
         self.isStopped = True
         
-    def terminate(self):
+    def stopping(self):
         self.isAlive = False
+
+    def terminate(self):
         while self.isStopped == False:
             pass
         try:
@@ -228,7 +230,7 @@ class Umamusume(QThread):
                         # print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         self.log("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(2)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -262,7 +264,7 @@ class Umamusume(QThread):
                     # print("TAP_TO_START " + str(count) + "개")
                     self.log("TAP_TO_START " + str(count) + "개")
                     # print(position)
-                    time.sleep(0.5)
+                    time.sleep(2)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
@@ -1687,7 +1689,7 @@ class Umamusume(QThread):
                     # print("뽑기_이동 " + str(count) + "개")
                     self.log("뽑기_이동 " + str(count) + "개")
                     # print(position)
-                    time.sleep(1)
+                    time.sleep(2)
                     img = screenshotToOpenCVImg(hwndMain)
 
                 count = 0
@@ -1698,7 +1700,7 @@ class Umamusume(QThread):
                     # print("프리티_더비_뽑기 " + str(count) + "개")
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
                     # print(position)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
             count = 0
@@ -2486,4 +2488,4 @@ class Umamusume(QThread):
                     return "4080_에러_코드"
             
         if self.isAlive == False:
-                return "Stop"
+            return "Stop"

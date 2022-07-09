@@ -29,7 +29,7 @@ class sleepTime(QThread):
             if cpu_load <= 1: # 오류 무시
                 pass
             else:
-                self.sleepTime = round(((cpu_load*0.01)**(1.5*math.exp(1)))*8, 3) # 클수록 빨라짐
+                self.sleepTime = round(((cpu_load*0.01)**(1.8*math.exp(1)))*8, 3) # 클수록 빨라짐
                 self.sendSleepTime.emit(self.sleepTime)
                     
             if time.time() >= self.now + 2:
