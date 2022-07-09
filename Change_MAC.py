@@ -22,14 +22,14 @@ Change_Now_Path = main_location+"Change_Now.png"
 
 def PAG_MAC_Change():
         try:
-            Random_MAC_Address = pyautogui.locateCenterOnScreen(Random_MAC_Address_Path, confidence=0.95)
+            Random_MAC_Address = pyautogui.locateCenterOnScreen(Random_MAC_Address_Path, confidence=0.9)
             originalPoint = pyautogui.position()
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
             time.sleep(0.2)
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
             time.sleep(0.2)
             
-            Change_Now = pyautogui.locateCenterOnScreen(Change_Now_Path, confidence=0.95)
+            Change_Now = pyautogui.locateCenterOnScreen(Change_Now_Path, confidence=0.9)
             originalPoint = pyautogui.position()
             pyautogui.click(Change_Now.x, Change_Now.y)
             
