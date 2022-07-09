@@ -237,7 +237,7 @@ class newTab(QMainWindow):
     
     def stopFunction(self):
         self.logs.append("-"*50)
-        self.umamusume.stopping()
+        self.umamusume.terminate()
         self.logs.append("멈춤!!")
         self.logs.append("-"*50)
         

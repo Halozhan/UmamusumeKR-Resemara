@@ -69,7 +69,6 @@ class Umamusume(QThread):
             if isSuccessed == "Stop":
                 print("This thread was terminated.")
                 self.log("This thread was terminated.")
-                self.terminate()
             print("리세 횟수:", self.resetCount)
             self.log("리세 횟수: " + str(self.resetCount))
             if isSuccessed == True:
@@ -86,11 +85,9 @@ class Umamusume(QThread):
             
         print("리세 종료")
         self.isStopped = True
-        
-    def stopping(self):
-        self.isAlive = False
 
     def terminate(self):
+        self.isAlive = False
         while self.isStopped == False:
             pass
         try:
@@ -184,6 +181,8 @@ class Umamusume(QThread):
                 
             time.sleep(self.sleepTime)
             
+            if self.isAlive == False: # 중간에 멈춰야 할 경우
+                break
 
             
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
@@ -341,7 +340,9 @@ class Umamusume(QThread):
                     # print(position)
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
-                    
+
+                if self.isAlive == False: # 중간에 멈춰야 할 경우
+                    break
                     
                 # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
                 count = 0
@@ -1680,6 +1681,9 @@ class Umamusume(QThread):
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
+            if self.isAlive == False: # 중간에 멈춰야 할 경우
+                break
+
             if self.is뽑기_이동:
                 count = 0
                 count, position = ImageSearch(img, 뽑기_이동, 464, 666, 52, 62)
@@ -1715,6 +1719,9 @@ class Umamusume(QThread):
                 img = screenshotToOpenCVImg(hwndMain)
 
             if self.is뽑기_이동:
+                if self.isAlive == False: # 중간에 멈춰야 할 경우
+                    break
+                
                 count = 0
                 count, position = ImageSearch(img, 무료_쥬얼부터_먼저_사용됩니다)
                 if count:
@@ -1782,7 +1789,9 @@ class Umamusume(QThread):
                         print("-"*50)
                         self.log("-"*50)
                     
-                            
+                if self.isAlive == False: # 중간에 멈춰야 할 경우
+                    break
+
                 count = 0
                 count, position = ImageSearch(img, 한_번_더_뽑기)
                 if count:
@@ -1903,6 +1912,9 @@ class Umamusume(QThread):
                         # print(position)
                         time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
+
+                    if self.isAlive == False: # 중간에 멈춰야 할 경우
+                        break
                     
                     count = 0
                     count, position = ImageSearch(img, 카카오_로그인, 211, 446, 115, 50)
@@ -2068,6 +2080,9 @@ class Umamusume(QThread):
             #     time.sleep(0.5)
             #     img = screenshotToOpenCVImg(hwndMain)
             
+            if self.isAlive == False: # 중간에 멈춰야 할 경우
+                break
+
             if self.is초기화하기:
                 count = 0
                 count, position = ImageSearch(img, 파이어폭스_실행)
@@ -2410,7 +2425,9 @@ class Umamusume(QThread):
                     # print(position)
                     time.sleep(0.5)
                 
-                
+            if self.isAlive == False: # 중간에 멈춰야 할 경우
+                break
+
             # 특수 이벤트
             count = 0
             count, position = ImageSearch(img, 추가_데이터를_다운로드합니다)
@@ -2486,6 +2503,5 @@ class Umamusume(QThread):
                 # print(position)
                 if self.isDoingMAC_Change == False:
                     return "4080_에러_코드"
-            
-        if self.isAlive == False:
-            return "Stop"
+
+        return "Stop"
