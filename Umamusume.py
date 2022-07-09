@@ -1,5 +1,4 @@
 # pip install pure-python-adb
-from zmq import device
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
@@ -12,6 +11,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
 from ImageVariables import * # 이미지
 import psutil
+import glob, os
 
 
 class Umamusume(QThread):
@@ -96,29 +96,16 @@ class Umamusume(QThread):
         updateTime = time.time() # 타임 아웃 터치
         
         # 서포트 카드 총 갯수
-        SR_스윕_토쇼_total = 0
-        SSR_골드_쉽_total = 0
-        SSR_골드_시티_total = 0
-        SSR_그래스_원더_total = 0
-        SSR_니시노_플라워_total = 0
-        SSR_보드카_total = 0
-        SSR_비코_페가수스_total = 0
-        SSR_사일런스_스즈카_total = 0
-        SSR_사쿠라_바쿠신_오_total = 0
-        SSR_세이운_스카이_total = 0
-        SSR_슈퍼_크릭_total = 0
-        SSR_스마트_팔콘_total = 0
-        SSR_스페셜_위크_total = 0
-        SSR_아이네스_후진_total = 0
-        SSR_에어_샤커_total = 0
-        SSR_엘_콘도르_파사_total = 0
-        SSR_오구리_캡_total = 0
-        SSR_위닝_티켓_total = 0
-        SSR_타마모_크로스_total = 0
-        SSR_토카이_테이오_total = 0
-        SSR_트윈_터보_total = 0
-        SSR_파인_모션_total = 0
-        SSR_하야카와_타즈나_total = 0
+        path = './Supporter_cards'
+        Supporter_cards_total = dict()
+
+        for a in glob.glob(os.path.join(path, '*')):
+            key = a.replace('.', '/').replace('\\', '/')
+            key = key.split('/')
+            Supporter_cards_total[key[-2]] = 0
+
+
+
 
         while self.isAlive:
             # 잠수 클릭 20초 터치락 해제
@@ -147,8 +134,7 @@ class Umamusume(QThread):
                 # print("우마무스메_실행 " + str(count) + "개")
                 self.log("우마무스메_실행 " + str(count) + "개")
                 # print(position)
-                time.sleep(0.5)
-                continue
+                time.sleep(2)
             
             count = 0
             count, position = ImageSearch(img, 게스트_로그인, 232, 926, 77, 14)
@@ -159,7 +145,7 @@ class Umamusume(QThread):
                 self.log("게스트_로그인 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
             
             count = 0
             count, position = ImageSearch(img, 게스트로_로그인_하시겠습니까, 162, 534, 218, 17, confidence = 0.9)
@@ -170,7 +156,7 @@ class Umamusume(QThread):
                 self.log("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
             
             count = 0
             count, position = ImageSearch(img, 전체_동의, 23, 117, 22, 22, confidence=0.95, grayscale=False)
@@ -181,7 +167,7 @@ class Umamusume(QThread):
                 self.log("전체_동의 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
                 
             count = 0
             count, position = ImageSearch(img, 시작하기, 237, 396, 67, 23, grayscale=False)
@@ -192,7 +178,7 @@ class Umamusume(QThread):
                 self.log("시작하기 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
                 
             count = 0
             count, position = ImageSearch(img, TAP_TO_START, 150, 860, 241, 34)
@@ -203,7 +189,7 @@ class Umamusume(QThread):
                 self.log("TAP_TO_START " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
                 
             count = 0
             count, position = ImageSearch(img, 계정_연동_설정_요청, 176, 327, 186, 29)
@@ -214,7 +200,7 @@ class Umamusume(QThread):
                 self.log("계정_연동_설정_요청 " + str(count) + "개")
                 # print(position)
                 time.sleep(2) # 빨리 터치하면 튜토리얼 하기 부분에서도 같은 부분 클릭해버림
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
             
             count = 0
             count, position = ImageSearch(img, 게임_데이터_다운로드, 170, 329, 200, 27)
@@ -225,7 +211,7 @@ class Umamusume(QThread):
                 self.log("게임_데이터_다운로드 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
             
             count = 0
             count, position = ImageSearch(img, SKIP, confidence=0.85)
@@ -267,7 +253,7 @@ class Umamusume(QThread):
                 self.log("등록한다 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
 
             count = 0
             count, position = ImageSearch(img, 이_내용으로_등록합니다_등록하시겠습니까, 72, 569, 333, 49)
@@ -278,7 +264,7 @@ class Umamusume(QThread):
                 self.log("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                 # print(position)
                 time.sleep(0.5)
-                continue
+                img = screenshotToOpenCVImg(hwndMain)
                 
             if self.parent.isDoneTutorialCheckBox.isChecked() == False: # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
                 updateTime = time.time()
@@ -1668,383 +1654,94 @@ class Umamusume(QThread):
                 self.log("뽑기_결과 " + str(count) + "개")
                 # print(position)
                 
-                SR_스윕_토쇼_count = 0
-                SSR_골드_쉽_count = 0
-                SSR_골드_시티_count = 0
-                SSR_그래스_원더_count = 0
-                SSR_니시노_플라워_count = 0
-                SSR_보드카_count = 0
-                SSR_비코_페가수스_count = 0
-                SSR_사일런스_스즈카_count = 0
-                SSR_사쿠라_바쿠신_오_count = 0
-                SSR_세이운_스카이_count = 0
-                SSR_슈퍼_크릭_count = 0
-                SSR_스마트_팔콘_count = 0
-                SSR_스페셜_위크_count = 0
-                SSR_아이네스_후진_count = 0
-                SSR_에어_샤커_count = 0
-                SSR_엘_콘도르_파사_count = 0
-                SSR_오구리_캡_count = 0
-                SSR_위닝_티켓_count = 0
-                SSR_타마모_크로스_count = 0
-                SSR_토카이_테이오_count = 0
-                SSR_트윈_터보_count = 0
-                SSR_파인_모션_count = 0
-                SSR_하야카와_타즈나_count = 0
-                
+                # 서포터 카드 지금 갯수
+                path = './Supporter_cards'
+                Supporter_cards_count = dict()
+                for a in glob.glob(os.path.join(path, '*')):
+                    key = a.replace('.', '/').replace('\\', '/')
+                    key = key.split('/')
+                    Supporter_cards_count[key[-2]] = 0
+                    
                 for i in range(3):
                     updateTime = time.time()
                     time.sleep(0.25)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = 0
-                    count, position = ImageSearch(img, SR_스윕_토쇼, grayscale=False)
-                    if count:
-                        if SR_스윕_토쇼_count < count:
-                            SR_스윕_토쇼_count = count
-                        # print("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
-                        self.log("SR_스윕_토쇼 " + str(SR_스윕_토쇼_count) + "개")
-                        # print(position)
+                    for key, value in Supporter_cards.items():
+                        count = 0
+                        count, position = ImageSearch(img, value, grayscale=False)
+                        if count:
+                            if Supporter_cards_count[key] < count:
+                                Supporter_cards_count[key] = count
+                            # print(key + " " + str(Supporter_cards_count[key]) + "개")
+                            self.log(key + " " + str(Supporter_cards_count[key]) + "개")
+                            # print(position)
                             
-                    count = 0
-                    count, position = ImageSearch(img, SSR_골드_쉽, grayscale=False)
-                    if count:
-                        if SSR_골드_쉽_count < count:
-                            SSR_골드_쉽_count = count
-                        # print("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
-                        self.log("SSR_골드_쉽 " + str(SSR_골드_쉽_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_골드_시티, grayscale=False)
-                    if count:
-                        if SSR_골드_시티_count < count:
-                            SSR_골드_시티_count = count
-                        # print("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
-                        self.log("SSR_골드_시티 " + str(SSR_골드_시티_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_그래스_원더, grayscale=False)
-                    if count:
-                        if SSR_그래스_원더_count < count:
-                            SSR_그래스_원더_count = count
-                        # print("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
-                        self.log("SSR_그래스_원더 " + str(SSR_그래스_원더_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_니시노_플라워, grayscale=False)
-                    if count:
-                        if SSR_니시노_플라워_count < count:
-                            SSR_니시노_플라워_count = count
-                        # print("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
-                        self.log("SSR_니시노_플라워 " + str(SSR_니시노_플라워_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_보드카, grayscale=False)
-                    if count:
-                        if SSR_보드카_count < count:
-                            SSR_보드카_count = count
-                        # print("SSR_보드카 " + str(SSR_보드카_count) + "개")
-                        self.log("SSR_보드카 " + str(SSR_보드카_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_비코_페가수스, grayscale=False)
-                    if count:
-                        if SSR_비코_페가수스_count < count:
-                            SSR_비코_페가수스_count = count
-                        # print("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
-                        self.log("SSR_비코_페가수스 " + str(SSR_비코_페가수스_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_사일런스_스즈카, grayscale=False)
-                    if count:
-                        if SSR_사일런스_스즈카_count < count:
-                            SSR_사일런스_스즈카_count = count
-                        # print("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
-                        self.log("SSR_사일런스_스즈카 " + str(SSR_사일런스_스즈카_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_사쿠라_바쿠신_오, grayscale=False)
-                    if count:
-                        if SSR_사쿠라_바쿠신_오_count < count:
-                            SSR_사쿠라_바쿠신_오_count = count
-                        # print("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
-                        self.log("SSR_사쿠라_바쿠신_오 " + str(SSR_사쿠라_바쿠신_오_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_세이운_스카이, grayscale=False)
-                    if count:
-                        if SSR_세이운_스카이_count < count:
-                            SSR_세이운_스카이_count = count
-                        # print("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
-                        self.log("SSR_세이운_스카이 " + str(SSR_세이운_스카이_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_슈퍼_크릭, grayscale=False)
-                    if count:
-                        if SSR_슈퍼_크릭_count < count:
-                            SSR_슈퍼_크릭_count = count
-                        # print("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
-                        self.log("SSR_슈퍼_크릭 " + str(SSR_슈퍼_크릭_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_스마트_팔콘, grayscale=False)
-                    if count:
-                        if SSR_스마트_팔콘_count < count:
-                            SSR_스마트_팔콘_count = count
-                        # print("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
-                        self.log("SSR_스마트_팔콘 " + str(SSR_스마트_팔콘_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_스페셜_위크, grayscale=False)
-                    if count:
-                        if SSR_스페셜_위크_count < count:
-                            SSR_스페셜_위크_count = count
-                        # print("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
-                        self.log("SSR_스페셜_위크 " + str(SSR_스페셜_위크_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_아이네스_후진, grayscale=False)
-                    if count:
-                        if SSR_아이네스_후진_count < count:
-                            SSR_아이네스_후진_count = count
-                        # print("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
-                        self.log("SSR_아이네스_후진 " + str(SSR_아이네스_후진_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_에어_샤커, grayscale=False)
-                    if count:
-                        if SSR_에어_샤커_count < count:
-                            SSR_에어_샤커_count = count
-                        # print("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
-                        self.log("SSR_에어_샤커 " + str(SSR_에어_샤커_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_엘_콘도르_파사, grayscale=False)
-                    if count:
-                        if SSR_엘_콘도르_파사_count < count:
-                            SSR_엘_콘도르_파사_count = count
-                        # print("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
-                        self.log("SSR_엘_콘도르_파사 " + str(SSR_엘_콘도르_파사_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_오구리_캡, grayscale=False)
-                    if count:
-                        if SSR_오구리_캡_count < count:
-                            SSR_오구리_캡_count = count
-                        # print("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
-                        self.log("SSR_오구리_캡 " + str(SSR_오구리_캡_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_위닝_티켓, grayscale=False)
-                    if count:
-                        if SSR_위닝_티켓_count < count:
-                            SSR_위닝_티켓_count = count
-                        # print("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
-                        self.log("SSR_위닝_티켓 " + str(SSR_위닝_티켓_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_타마모_크로스, grayscale=False)
-                    if count:
-                        if SSR_타마모_크로스_count < count:
-                            SSR_타마모_크로스_count = count
-                        # print("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
-                        self.log("SSR_타마모_크로스 " + str(SSR_타마모_크로스_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_토카이_테이오, grayscale=False)
-                    if count:
-                        if SSR_토카이_테이오_count < count:
-                            SSR_토카이_테이오_count = count
-                        # print("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
-                        self.log("SSR_토카이_테이오 " + str(SSR_토카이_테이오_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_트윈_터보, grayscale=False)
-                    if count:
-                        if SSR_트윈_터보_count < count:
-                            SSR_트윈_터보_count = count
-                        # print("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
-                        self.log("SSR_트윈_터보 " + str(SSR_트윈_터보_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_파인_모션, grayscale=False)
-                    if count:
-                        if SSR_파인_모션_count < count:
-                            SSR_파인_모션_count = count
-                        # print("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
-                        self.log("SSR_파인_모션 " + str(SSR_파인_모션_count) + "개")
-                        # print(position)
-                            
-                    count = 0
-                    count, position = ImageSearch(img, SSR_하야카와_타즈나, grayscale=False)
-                    if count:
-                        if SSR_하야카와_타즈나_count < count:
-                            SSR_하야카와_타즈나_count = count
-                        # print("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
-                        self.log("SSR_하야카와_타즈나 " + str(SSR_하야카와_타즈나_count) + "개")
-                        # print(position)
+                # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
+                for key, value in Supporter_cards_total.items():
+                    Supporter_cards_total[key] += Supporter_cards_count[key]
                 
-                SR_스윕_토쇼_total += SR_스윕_토쇼_count
-                SSR_골드_쉽_total += SSR_골드_쉽_count
-                SSR_골드_시티_total += SSR_골드_시티_count
-                SSR_그래스_원더_total += SSR_그래스_원더_count
-                SSR_니시노_플라워_total += SSR_니시노_플라워_count
-                SSR_보드카_total += SSR_보드카_count
-                SSR_비코_페가수스_total += SSR_비코_페가수스_count
-                SSR_사일런스_스즈카_total += SSR_사일런스_스즈카_count
-                SSR_사쿠라_바쿠신_오_total += SSR_사쿠라_바쿠신_오_count
-                SSR_세이운_스카이_total += SSR_세이운_스카이_count
-                SSR_슈퍼_크릭_total += SSR_슈퍼_크릭_count
-                SSR_스마트_팔콘_total += SSR_스마트_팔콘_count
-                SSR_스페셜_위크_total += SSR_스페셜_위크_count
-                SSR_아이네스_후진_total += SSR_아이네스_후진_count
-                SSR_에어_샤커_total += SSR_에어_샤커_count
-                SSR_엘_콘도르_파사_total += SSR_엘_콘도르_파사_count
-                SSR_오구리_캡_total += SSR_오구리_캡_count
-                SSR_위닝_티켓_total += SSR_위닝_티켓_count
-                SSR_타마모_크로스_total += SSR_타마모_크로스_count
-                SSR_토카이_테이오_total += SSR_토카이_테이오_count
-                SSR_트윈_터보_total += SSR_트윈_터보_count
-                SSR_파인_모션_total += SSR_파인_모션_count
-                SSR_하야카와_타즈나_total +=  SSR_하야카와_타즈나_count
-
+                # 총 서포터 카드 갯수
+                total_count = 0
+                for key, value in Supporter_cards_total.items():
+                    if value:
+                        total_count += value
                 
-                print("-"*50)
-                self.log("-"*50)
-                if SR_스윕_토쇼_total:
-                    print("SR_스윕_토쇼_total:", SR_스윕_토쇼_total)
-                    self.log("SR_스윕_토쇼_total: " + str(SR_스윕_토쇼_total))
-                if SSR_골드_쉽_total:
-                    print("SSR_골드_쉽_total:", SSR_골드_쉽_total)
-                    self.log("SSR_골드_쉽_total: " + str(SSR_골드_쉽_total))
-                if SSR_골드_시티_total:
-                    print("SSR_골드_시티_total:", SSR_골드_시티_total)
-                    self.log("SSR_골드_시티_total: " + str(SSR_골드_시티_total))
-                if SSR_그래스_원더_total:
-                    print("SSR_그래스_원더_total:", SSR_그래스_원더_total)
-                    self.log("SSR_그래스_원더_total: " + str(SSR_그래스_원더_total))
-                if SSR_니시노_플라워_total:
-                    print("SSR_니시노_플라워_total:", SSR_니시노_플라워_total)
-                    self.log("SSR_니시노_플라워_total: " + str(SSR_니시노_플라워_total))
-                if SSR_보드카_total:
-                    print("SSR_보드카_total:", SSR_보드카_total)
-                    self.log("SSR_보드카_total: " + str(SSR_보드카_total))
-                if SSR_비코_페가수스_total:
-                    print("SSR_비코_페가수스_total:", SSR_비코_페가수스_total)
-                    self.log("SSR_비코_페가수스_total: " + str(SSR_비코_페가수스_total))
-                if SSR_사일런스_스즈카_total:
-                    print("SSR_사일런스_스즈카_total:", SSR_사일런스_스즈카_total)
-                    self.log("SSR_사일런스_스즈카_total: " + str(SSR_사일런스_스즈카_total))
-                if SSR_사쿠라_바쿠신_오_total:
-                    print("SSR_사쿠라_바쿠신_오_total:", SSR_사쿠라_바쿠신_오_total)
-                    self.log("SSR_사쿠라_바쿠신_오_total: " + str(SSR_사쿠라_바쿠신_오_total))
-                if SSR_세이운_스카이_total:
-                    print("SSR_세이운_스카이_total:", SSR_세이운_스카이_total)
-                    self.log("SSR_세이운_스카이_total: " + str(SSR_세이운_스카이_total))
-                if SSR_슈퍼_크릭_total:
-                    print("SSR_슈퍼_크릭_total:", SSR_슈퍼_크릭_total)
-                    self.log("SSR_슈퍼_크릭_total: " + str(SSR_슈퍼_크릭_total))
-                if SSR_스마트_팔콘_total:
-                    print("SSR_스마트_팔콘_total:", SSR_스마트_팔콘_total)
-                    self.log("SSR_스마트_팔콘_total: " + str(SSR_스마트_팔콘_total))
-                if SSR_스페셜_위크_total:
-                    print("SSR_스페셜_위크_total:", SSR_스페셜_위크_total)
-                    self.log("SSR_스페셜_위크_total: " + str(SSR_스페셜_위크_total))
-                if SSR_아이네스_후진_total:
-                    print("SSR_아이네스_후진_total:", SSR_아이네스_후진_total)
-                    self.log("SSR_아이네스_후진_total: " + str(SSR_아이네스_후진_total))
-                if SSR_에어_샤커_total:
-                    print("SSR_에어_샤커_total:", SSR_에어_샤커_total)
-                    self.log("SSR_에어_샤커_total: " + str(SSR_에어_샤커_total))
-                if SSR_엘_콘도르_파사_total:
-                    print("SSR_엘_콘도르_파사_total:", SSR_엘_콘도르_파사_total)
-                    self.log("SSR_엘_콘도르_파사_total: " + str(SSR_엘_콘도르_파사_total))
-                if SSR_오구리_캡_total:
-                    print("SSR_오구리_캡_total:", SSR_오구리_캡_total)
-                    self.log("SSR_오구리_캡_total: " + str(SSR_오구리_캡_total))
-                if SSR_위닝_티켓_total:
-                    print("SSR_위닝_티켓_total:", SSR_위닝_티켓_total)
-                    self.log("SSR_위닝_티켓_total: " + str(SSR_위닝_티켓_total))
-                if SSR_타마모_크로스_total:
-                    print("SSR_타마모_크로스_total:", SSR_타마모_크로스_total)
-                    self.log("SSR_타마모_크로스_total: " + str(SSR_타마모_크로스_total))
-                if SSR_토카이_테이오_total:
-                    print("SSR_토카이_테이오_total:", SSR_토카이_테이오_total)
-                    self.log("SSR_토카이_테이오_total: " + str(SSR_토카이_테이오_total))
-                if SSR_트윈_터보_total:
-                    print("SSR_트윈_터보_total:", SSR_트윈_터보_total)
-                    self.log("SSR_트윈_터보_total: " + str(SSR_트윈_터보_total))
-                if SSR_파인_모션_total:
-                    print("SSR_파인_모션_total:", SSR_파인_모션_total)
-                    self.log("SSR_파인_모션_total: " + str(SSR_파인_모션_total))
-                if SSR_하야카와_타즈나_total:
-                    print("SSR_하야카와_타즈나_total:", SSR_하야카와_타즈나_total)
-                    self.log("SSR_하야카와_타즈나_total: " + str(SSR_하야카와_타즈나_total))
-                print("-"*50)
-                self.log("-"*50)
+                if total_count:
+                    print("-"*50)
+                    self.log("-"*50)
+                
+                    for key, value in Supporter_cards_total.items():
+                        if value:
+                            print(key + ": " + str(value))
+                            self.log(key + ": " + str(value))
+                
+                    print("-"*50)
+                    self.log("-"*50)
                 
                 
                 # 이륙 조건식 -----------------------------------------------
                 # 이륙 조건식 -----------------------------------------------
                 # 이륙 조건식 -----------------------------------------------
-                
-                if SSR_파인_모션_total and SSR_슈퍼_크릭_total and SSR_하야카와_타즈나_total:
+                SCT = Supporter_cards_total
+                              
+                if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
                     return True
                 
-                if SSR_파인_모션_total and SSR_비코_페가수스_total and SSR_하야카와_타즈나_total :
+                if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
                     return True
                 
-                if SSR_파인_모션_total and SSR_사쿠라_바쿠신_오_total and SSR_하야카와_타즈나_total:
+                if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
                     return True
                     
-                if SSR_파인_모션_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
+                if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
                     return True
                     
-                if SSR_슈퍼_크릭_total >= 2 and (SSR_파인_모션_total or SSR_하야카와_타즈나_total):
+                if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
+                    return True
+                
+                if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                    return True
+                
+                if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                    return True
+                
+                if SCT["SSR_파인_모션"] >= 3:
                     return True
                     
-                if SSR_비코_페가수스_total >= 2 and (SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
+                if SCT["SSR_슈퍼_크릭"] >= 3:
                     return True
-                    
-                if SSR_사쿠라_바쿠신_오_total >= 2 and (SSR_파인_모션_total or SSR_슈퍼_크릭_total or SSR_하야카와_타즈나_total):
+                
+                if SCT["SSR_비코_페가수스"] >= 3:
                     return True
-                    
-                if SSR_파인_모션_total >= 3:
+                
+                if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
                     return True
-                    
-                if SSR_슈퍼_크릭_total >= 3:
+                
+                if SCT["SSR_하야카와_타즈나"] >= 3:
                     return True
-                    
-                if SSR_비코_페가수스_total >= 3:
-                    return True
-                    
-                if SSR_사쿠라_바쿠신_오_total >= 3:
-                    return True
-                    
-                if SSR_하야카와_타즈나_total >= 3:
-                    return True
-                    
-                if SR_스윕_토쇼_total >= 5 and SSR_파인_모션_total and SSR_하야카와_타즈나_total and (SSR_슈퍼_크릭_total or SSR_비코_페가수스_total or SSR_사쿠라_바쿠신_오_total):
+                
+                if SCT["SR_스윕_토쇼"] >= 5 and SCT["SSR_파인_모션"] and SCT["SSR_하야카와_타즈나"] and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_비코_페가수스"] or SCT["SSR_사쿠라_바쿠신_오"]):
                     return True
                             
             count = 0
@@ -2631,6 +2328,16 @@ class Umamusume(QThread):
                 img = screenshotToOpenCVImg(hwndMain)
             
             count = 0
+            count, position = ImageSearch(img, 재시도)
+            if count:
+                updateTime = time.time()
+                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                # print("재시도 " + str(count) + "개")
+                self.log("재시도 " + str(count) + "개")
+                # print(position)
+                continue
+            
+            count = 0
             count, position = ImageSearch(img, 타이틀_화면으로)
             if count:
                 updateTime = time.time()
@@ -2638,7 +2345,7 @@ class Umamusume(QThread):
                 # print("타이틀_화면으로 " + str(count) + "개")
                 self.log("타이틀_화면으로 " + str(count) + "개")
                 # print(position)
-                img = screenshotToOpenCVImg(hwndMain)
+                continue
             
             count = 0
             count, position = ImageSearch(img, 숫자2단계_인증)

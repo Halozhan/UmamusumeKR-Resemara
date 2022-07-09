@@ -36,7 +36,7 @@ class sleepTime(QThread):
                     print(now.strftime("%H:%M:%S") + " 속도 감소: " + str(self.sleepTime) + "s")
                     self.sendSleepTime.emit(self.sleepTime)
                     
-            elif cpu_load >= 97:
+            elif cpu_load >= 97.5:
                 if self.sleepTime < 5:
                     self.sleepTime += 1
                     self.sleepTime = round(self.sleepTime, 2)
@@ -55,6 +55,14 @@ class sleepTime(QThread):
             elif cpu_load >= 90:
                 if self.sleepTime < 5:
                     self.sleepTime += 0.2
+                    self.sleepTime = round(self.sleepTime, 2)
+                    print(now.strftime("%H:%M:%S") + " cpu 사용량: " + str(cpu_load) + "%")
+                    print(now.strftime("%H:%M:%S") + " 속도 감소: " + str(self.sleepTime) + "s")
+                    self.sendSleepTime.emit(self.sleepTime)
+                    
+            elif cpu_load >= 85:
+                if self.sleepTime < 5:
+                    self.sleepTime += 0.1
                     self.sleepTime = round(self.sleepTime, 2)
                     print(now.strftime("%H:%M:%S") + " cpu 사용량: " + str(cpu_load) + "%")
                     print(now.strftime("%H:%M:%S") + " 속도 감소: " + str(self.sleepTime) + "s")

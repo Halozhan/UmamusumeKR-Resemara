@@ -1,19 +1,51 @@
-import cv2
-from OpenCV_imread import imreadUnicode
-import glob
-
 # same_characters = 6 #number of characters that define if two images are in the same group / type
-image_dict = {img : [imreadUnicode(img)] for img in glob.glob("./Supporter_cards/*.png")}
+# image_dict = {img : [imreadUnicode(img)] for img in glob.glob("./Supporter_cards/*.png")}
 
 
 
 # for key in image_dict:
 #     group = key.split('_')[2][0]
 #     image_dict[key].append(group)
-a = glob.glob("./Supporter_cards/*.png")
-print(a)
-for img in glob.glob("Supporter_cards/*.png"):
-    print(img)
+# a = glob.glob("./Supporter_cards/*.png")
+# print(a)
+# for img in glob.glob("Supporter_cards/*.png"):
+#     print(img)
+    
+    
+    
+    
+import glob, os
+from OpenCV_imread import imreadUnicode
+
+path = './Supporter_cards'
+Supporter_cards = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Supporter_cards[key[-2]] = imreadUnicode(a)
+    
+    
+    # img = imreadUnicode(infile)
+    # my_key = i                 # or put here whatever you want as a key
+    # image_dict[my_key] = img
+
+#print image_dict
+# print(len(image_dict))
+# print(image_dict[0]) # this is the value associated with the key 0
+# print(Supporter_cards.keys()) # this is the list of all keys
+# print(image_dict["SSR_오구리_캡"])
+# print(image_dict.values()) # this is the list of all keys
+# print(type(image_dict.keys()[0])) # this is <type 'int'>
+# print(type(image_dict.values()[0])) # this is <type 'numpy.ndarray'>
+    
+    
+    
+    
+    
+    
+    
+    
     # a = imreadUnicode(img)
     # cv2.imshow("123", a)
     # cv2.waitKey(0)

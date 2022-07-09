@@ -1,4 +1,5 @@
 from OpenCV_imread import imreadUnicode
+from Image_read_dictionary import *
 
 # 찾을 이미지
 우마무스메_실행 = imreadUnicode(r"./Images/우마무스메_실행.png")
