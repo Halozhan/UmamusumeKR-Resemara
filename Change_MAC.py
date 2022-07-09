@@ -1,5 +1,7 @@
-import subprocess
 import sys
+import pyautogui
+import subprocess
+import time
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
@@ -14,11 +16,6 @@ def install(package):
 # install("pyinstaller")
 # 관리자 권한 필요함
 
-import pyautogui
-import subprocess
-import psutil
-import time
-
 main_location = "./"
 Random_MAC_Address_Path = main_location+"Random_MAC_Address.png"
 Change_Now_Path = main_location+"Change_Now.png"
@@ -28,9 +25,9 @@ def PAG_MAC_Change():
             Random_MAC_Address = pyautogui.locateCenterOnScreen(Random_MAC_Address_Path, confidence=0.95)
             originalPoint = pyautogui.position()
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
-            time.sleep(0.1)
+            time.sleep(0.2)
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
-            time.sleep(0.1)
+            time.sleep(0.2)
             
             Change_Now = pyautogui.locateCenterOnScreen(Change_Now_Path, confidence=0.95)
             originalPoint = pyautogui.position()

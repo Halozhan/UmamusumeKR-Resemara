@@ -59,7 +59,7 @@ def Change_Mac_Address():
 
         driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
         
-        time.sleep(10)
+        time.sleep(7)
     except:
         pass
     
