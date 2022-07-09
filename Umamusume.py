@@ -72,6 +72,9 @@ class Umamusume(QThread):
             print("리세 횟수:", self.resetCount)
             self.log("리세 횟수: " + str(self.resetCount))
             if isSuccessed == True:
+                self.parent.stopButton.setEnabled(False)
+                self.isAlive = False
+                self.isStopped = True
                 print("리세 성공 "*5)
                 self.log("리세 성공 "*5)
                 break
