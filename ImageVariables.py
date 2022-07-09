@@ -197,6 +197,7 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 
 # 특수 이벤트
 튜토리얼을_스킵하시겠습니까 = imreadUnicode(r"./Images/튜토리얼을_스킵하시겠습니까.png")
+재시도 = imreadUnicode(r"./Images/재시도.png")
 타이틀_화면으로 = imreadUnicode(r"./Images/타이틀_화면으로.png")
 숫자2단계_인증 = imreadUnicode(r"./Images/2단계_인증.png")
 확인 = imreadUnicode(r"./Images/확인.png")
