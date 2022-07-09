@@ -256,6 +256,12 @@ class newTab(QMainWindow):
         self.logs.append("-"*50)
         self.logs.append("초기화!!")
         self.logs.append("-"*50)
+        try:
+            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+            os.remove(path)
+        except:
+            pass
+        
     
     def isDoneTutorialFunction(self):
         self.logs.append("-"*50)
