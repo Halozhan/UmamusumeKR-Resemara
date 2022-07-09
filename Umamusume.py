@@ -74,7 +74,6 @@ class Umamusume(QThread):
             if isSuccessed == True:
                 self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
-                self.isStopped = True
                 print("리세 성공 "*5)
                 self.log("리세 성공 "*5)
                 break
@@ -85,11 +84,12 @@ class Umamusume(QThread):
             self.log("-"*50)
             
         print("리세 종료")
+        self.isAlive = False
         self.isStopped = True
         
-    def stopping(self):
+    def terminate(self):
         self.isAlive = False
-        while self.isStopped:
+        while self.isStopped == False:
             pass
         try:
             os.makedirs("./Saved_Data")
@@ -112,6 +112,14 @@ class Umamusume(QThread):
         except:
             path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
             print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
+
+        self.parent.InstanceComboBox.setEnabled(True)
+        self.parent.InstanceRefreshButton.setEnabled(True)
+        
+        self.parent.startButton.setEnabled(True)
+        self.parent.stopButton.setEnabled(False)
+        self.parent.resetButton.setEnabled(True)
+        self.parent.isDoneTutorialCheckBox.setEnabled(True)
         
     def main(self):
         hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기

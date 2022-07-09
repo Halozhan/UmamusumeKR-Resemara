@@ -237,19 +237,10 @@ class newTab(QMainWindow):
     
     def stopFunction(self):
         self.logs.append("-"*50)
-        self.umamusume.stopping()
+        self.umamusume.terminate()
         self.logs.append("멈춤!!")
         self.logs.append("-"*50)
-
-        self.InstanceComboBox.setEnabled(True)
-        self.InstanceRefreshButton.setEnabled(True)
         
-        self.startButton.setEnabled(True)
-        self.stopButton.setEnabled(False)
-        self.resetButton.setEnabled(True)
-        self.isDoneTutorialCheckBox.setEnabled(True)
-        
-    
     
     def resetFunction(self):
         self.resetButton.setEnabled(False)
