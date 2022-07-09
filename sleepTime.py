@@ -100,4 +100,4 @@ class sleepTime(QThread):
                     print(now.strftime("%H:%M:%S") + " 속도 증가: " + str(self.sleepTime) + "s")
                     self.sendSleepTime.emit(self.sleepTime)
                     
-            time.sleep(2)
+            time.sleep(1)
