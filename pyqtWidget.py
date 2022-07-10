@@ -11,25 +11,38 @@ from sleepTime import sleepTime
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-form_class = uic.loadUiType("untitled.ui")[0]
+# form_class = uic.loadUiType("untitled.ui")[0]
 
 #화면을 띄우는데 사용되는 Class 선언
-class WindowClass(QMainWindow, form_class):
+class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
 
+        self.resize(600, 600) # 사이즈 변경
+
+        self.verticalTabWidget = QTabWidget() # 탭 위젯
+        self.verticalTabWidget.setMovable(True)
+        QMainWindow.setCentralWidget(self, self.verticalTabWidget) # 중앙 위젯에 탭 위젯 추가
+
+        self.메인페이지 = QWidget() # ---------------------------------
+        self.verticalBox = QVBoxLayout()
+
+        self.CPU_now = QLabel()
+        self.Latency = QLabel()
+
+        self.ASUSCheckBox = QRadioButton("ASUS 공유기 버전")
+        self.ASUSCheckBox.setChecked(True)
+        self.PAGCheckBox = QRadioButton("Technitium MAC Address Changer 버전")
+
+
+        self.verticalBox.addWidget(self.CPU_now)
+        self.verticalBox.addWidget(self.Latency)
+
+        self.verticalBox.addWidget(self.ASUSCheckBox)
+        self.verticalBox.addWidget(self.PAGCheckBox)
         
-        
-        # self.ASUSCheckBox = QCheckBox("ASUS 공유기 버전")
-        # self.PAGCheckBox = QCheckBox("Technitium MAC Address Changer 버전")
-
-        # self.vbox = QVBoxLayout()
-
-        # self.vbox.addWidget(self.ASUSCheckBox)
-        # self.vbox.addWidget(self.PAGCheckBox)
-        # self.verticalTabWidgetPage1.setLayout(self.vbox)
-        # self.setLayout(self.vbox)
+        self.메인페이지.setLayout(self.verticalBox)
+        self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
 
         self.Tab = []
         count = 8 # 8개의 탭 생성
@@ -40,19 +53,17 @@ class WindowClass(QMainWindow, form_class):
         
         self.sleepTime = sleepTime(self)
         self.sleepTime.start()
-        
-        
-        self.verticalTabWidget.setMovable(True)
-        # print(len(Tab)) 탭 갯수
-        
+                
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
         
         self.ASUSCheckBox.clicked.connect(self.ASUSCheckBoxFunction)
         self.PAGCheckBox.clicked.connect(self.PAGCheckBoxFunction)
         
         
-    @pyqtSlot(float)
-    def SleepTimeFunction(self, Time):
+    @pyqtSlot(float, float)
+    def SleepTimeFunction(self, cpu_load, Time):
+        self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
+        self.Latency.setText("지연률: " + str(Time) + "ms")
         for i in self.Tab:
             i.umamusume.sleepTime = Time
     

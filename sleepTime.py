@@ -6,7 +6,7 @@ import math
 
 
 class sleepTime(QThread):    
-    sendSleepTime = pyqtSignal(float)
+    sendSleepTime = pyqtSignal(float, float)
     
     def __init__(self, parent = None):
         
@@ -25,16 +25,16 @@ class sleepTime(QThread):
             
             # CPU 풀로드 완화
             now = datetime.now()
-            cpu_load = psutil.cpu_percent()
-            if cpu_load <= 1: # 오류 무시
+            self.cpu_load = psutil.cpu_percent()
+            if self.cpu_load <= 1: # 오류 무시
                 pass
             else:
-                self.sleepTime = round(((cpu_load*0.01)**(1.8*math.exp(1)))*8, 3) # 클수록 빨라짐
-                self.sendSleepTime.emit(self.sleepTime)
+                self.sleepTime = round(((self.cpu_load*0.01)**(1.8*math.exp(1)))*8, 3) # 클수록 빨라짐
+                self.sendSleepTime.emit(self.cpu_load, self.sleepTime)
                     
             if time.time() >= self.now + 2:
                 self.now = time.time()
-                print(now.strftime("%H:%M:%S") + " cpu 사용량: " + str(cpu_load) + "%")
-                print(now.strftime("%H:%M:%S") + " 속도: " + str(int(self.sleepTime * 1000)) + "ms")
+                # print(now.strftime("%H:%M:%S") + " cpu 사용량: " + str(self.cpu_load) + "%")
+                # print(now.strftime("%H:%M:%S") + " 속도: " + str(int(self.sleepTime * 1000)) + "ms")
 
             time.sleep(0.05)
