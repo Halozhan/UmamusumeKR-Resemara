@@ -176,6 +176,7 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 크롬_실행 = imreadUnicode(r"./Images/크롬_실행.png")
 크롬_실행2 = imreadUnicode(r"./Images/크롬_실행2.png")
 파이어폭스_실행 = imreadUnicode(r"./Images/파이어폭스_실행.png")
+파이어폭스_연결된_서비스_관리 = imreadUnicode(r"./Images/파이어폭스_연결된_서비스_관리.png")
 파이어폭스_문제_닫기 = imreadUnicode(r"./Images/파이어폭스_문제_닫기.png")
 연결된_서비스_관리 = imreadUnicode(r"./Images/연결된_서비스_관리.png")
 우마무스메_서비스 = imreadUnicode(r"./Images/우마무스메_서비스.png")

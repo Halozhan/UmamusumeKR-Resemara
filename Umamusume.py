@@ -2103,6 +2103,26 @@ class Umamusume(QThread):
                     # print(position)
                     time.sleep(1.5)
                     img = screenshotToOpenCVImg(hwndMain)
+
+                count = 0
+                count, position = ImageSearch(img, 파이어폭스_연결된_서비스_관리)
+                if count:
+                    updateTime = time.time()
+                    try:
+                        x, y, width, height = position[0]
+                        x += width/2
+                        y += height/2
+                        x, y = adbInput.BlueStacksOffset(x, y)
+                        x, y = adbInput.Offset(x, y, 0, 0)
+                        x, y = adbInput.RandomPosition(x, y, 5, 5)
+                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
+                    except:
+                        pass
+                    # print("파이어폭스_실행 " + str(count) + "개")
+                    self.log("파이어폭스_연결된_서비스_관리 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(1.5)
+                    img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
                 count, position = ImageSearch(img, 파이어폭스_문제_닫기, confidence=0.99)
