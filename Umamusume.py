@@ -244,7 +244,7 @@ class Umamusume(QThread):
                 
                 if self.is시작하기 == False:
                     count = 0
-                    count, position = ImageSearch(img, 게스트_로그인, 232, 926, 77, 14)
+                    count, position = ImageSearch(img, 게스트_로그인, 232, 926, 77, 14, confidence=0.7)
                     if count:
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
@@ -289,7 +289,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, TAP_TO_START, 150, 860, 241, 34)
+                count, position = ImageSearch(img, TAP_TO_START, 150, 860, 241, 34, confidence=0.7)
                 if count:
                     updateTime = time.time()
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
