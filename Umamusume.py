@@ -38,7 +38,7 @@ class Umamusume(QThread):
         self.recvLog_Main.connect(self.parent.parent.sendLog_Main)
         self.Error_4080.connect(self.parent.Error_4080Function)
 
-        self.recvLog_Main.emit("ㅎㅇㅎㅇ")
+        # self.recvLog_Main.emit("ㅎㅇㅎㅇ")
         
     def log(self, text):
         self.recvLog.emit(text)

@@ -1,9 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
-# from PyQt5.QtCore import pyqtSlot, QObject, pyqtSignal
-# from PyQt5.QtCore import *
-from PyQt5 import uic
-from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
+from PyQt5.QtCore import pyqtSlot, pyqtSignal
+from PyQt5.Qt import Qt
 from Umamusume import *
 from ASUS_Router_Mac_Change import *
 from Change_MAC import *
@@ -30,6 +28,11 @@ class WindowClass(QMainWindow):
         self.CPU_now = QLabel()
         self.Latency = QLabel()
 
+        self.timeRate = QSlider(Qt.Horizontal, self)
+        self.timeRate.setRange(0, 100)
+        self.timeRate.setLayout
+        self.timeRate.setTickPosition(QSlider.TicksBelow)
+
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
         self.ASUSRadioButton.setChecked(True)
         self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
@@ -38,6 +41,8 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.CPU_now)
         self.verticalBox.addWidget(self.Latency)
+
+        self.verticalBox.addWidget(self.timeRate)
 
         self.verticalBox.addWidget(self.ASUSRadioButton)
         self.verticalBox.addWidget(self.PAGRadioButton)

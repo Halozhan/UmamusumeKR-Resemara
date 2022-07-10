@@ -1,7 +1,6 @@
 from PyQt5.QtCore import QThread, pyqtSignal
 import time
 import psutil
-from datetime import datetime
 import math
 
 
