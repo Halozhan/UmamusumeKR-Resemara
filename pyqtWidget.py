@@ -6,6 +6,7 @@ from Umamusume import *
 from ASUS_Router_Mac_Change import *
 from Change_MAC import *
 from sleepTime import sleepTime
+from datetime import datetime
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -93,9 +94,9 @@ class WindowClass(QMainWindow):
         self.timeRateLabel.setText(str(round(value*0.01, 3)))
         self.timeRateLabel_help.setText("x^{"+str(self.timeRateLabel.text())+"e}\cdot8를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
 
-    @pyqtSlot(str)
-    def sendLog_Main(self, text):
-        self.logs.append(text)
+    @pyqtSlot(str, str)
+    def sendLog_Main(self, id, text):
+        self.logs.append(id + " " + text)
         
     @pyqtSlot(float, float)
     def SleepTimeFunction(self, cpu_load, Time):
@@ -125,8 +126,10 @@ class WindowClass(QMainWindow):
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = True
         print("-"*50)
-        print("초기화"*10)
-        print("-"*50)
+        now = datetime.now()
+        now = now.strftime("%Y-%m-%d %H:%M:%S")
+        self.logs.append(now + " MAC 주소 변경 중")
+        print(now + " MAC 주소 변경 중")
         if self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
         if self.ASUSRadioButton.isChecked():

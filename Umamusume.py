@@ -14,7 +14,7 @@ import pickle
 
 class Umamusume(QThread):
     recvLog = pyqtSignal(str)
-    recvLog_Main = pyqtSignal(str)
+    recvLog_Main = pyqtSignal(str, str)
     Error_4080 = pyqtSignal()
     
     def __init__(self, parent=None):
@@ -37,14 +37,12 @@ class Umamusume(QThread):
         self.recvLog.connect(self.parent.sendLog)
         self.recvLog_Main.connect(self.parent.parent.sendLog_Main)
         self.Error_4080.connect(self.parent.Error_4080Function)
-
-        # self.recvLog_Main.emit("ㅎㅇㅎㅇ")
-        
+       
     def log(self, text):
         self.recvLog.emit(text)
 
-    def log_main(self, text):
-        self.recvLog_Main(text)
+    def log_main(self, id, text):
+        self.recvLog_Main.emit(str(id), str(text))
     
     def Error_4080Function(self):
         self.Error_4080.emit()
@@ -59,13 +57,20 @@ class Umamusume(QThread):
         
         while self.isAlive:
             isSuccessed = self.main()
-            print("-"*50)
+
+            # print("-"*50)
+            self.log_main(self.InstanceName, "-"*50)
             self.log("-"*50)
+
             now = datetime.now()
-            print(now.strftime("%Y-%m-%d %H:%M:%S"))
+            # print(now.strftime("%Y-%m-%d %H:%M:%S"))
+            self.log_main(self.InstanceName, now.strftime("%Y-%m-%d %H:%M:%S"))
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
-            print("튜토리얼 스킵 여부:", self.parent.isDoneTutorialCheckBox.isChecked())
+
+            # print("튜토리얼 스킵 여부:", self.parent.isDoneTutorialCheckBox.isChecked())
+            self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.parent.isDoneTutorialCheckBox.isChecked()))
             self.log("튜토리얼 스킵 여부: " + str(self.parent.isDoneTutorialCheckBox.isChecked()))
+
             if isSuccessed == "Failed": # 데이터 삭제
                 try:
                     path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
@@ -73,26 +78,42 @@ class Umamusume(QThread):
                 except:
                     pass
                 self.resetCount += 1
+
             if isSuccessed == "Stop":
-                print("This thread was terminated.")
+                # print("This thread was terminated.")
+                self.log_main(self.InstanceName,  str(self.InstanceName) + " thread was terminated.")
                 self.log("This thread was terminated.")
-            print("리세 횟수:", self.resetCount)
-            self.log("리세 횟수: " + str(self.resetCount))
+
+            # print("리세 횟수:", self.resetCount)
+            total_resetCount = 0
+            for i in self.parent.parent.Tab:
+                total_resetCount += i.umamusume.resetCount
+            self.log_main("리세 총 횟수: ", str(int(total_resetCount)))
+            self.log_main(self.InstanceName, "리세 횟수: " + str(int(self.resetCount)))
+            self.log("리세 횟수: " + str(int(self.resetCount)))
+
             if isSuccessed == True:
                 self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
-                print("리세 성공 "*5)
+                # print("리세 성공 "*5)
+                self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
+
                 self.parent.InstanceComboBox.setEnabled(True)
                 self.parent.InstanceRefreshButton.setEnabled(True)
                 break
+
             if isSuccessed == "4080_에러_코드":
                 self.Error_4080Function()
                 time.sleep(20)
-            print("-"*50)
+            
+            # print("-"*50)
+            self.log_main(self.InstanceName, "-"*50)
             self.log("-"*50)
             
-        print("리세 종료")
+        # print("리세 종료")
+        self.log_main(self.InstanceName, "리세 종료")
+        self.log("리세 종료")
         self.isStopped = True
 
     def terminate(self):
@@ -106,6 +127,7 @@ class Umamusume(QThread):
         try:
             path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
+                pickle.dump(self.resetCount, file) # -- pickle --
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
@@ -119,7 +141,8 @@ class Umamusume(QThread):
                 pickle.dump(self.Supporter_cards_total, file) # -- pickle --
         except:
             path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
-            print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
+            # print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
+            self.log(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
 
         self.parent.InstanceComboBox.setEnabled(True)
         self.parent.InstanceRefreshButton.setEnabled(True)
@@ -138,6 +161,7 @@ class Umamusume(QThread):
         try:
             path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
             with open(file=path,  mode='rb') as file:
+                self.resetCount = pickle.load(file) # -- pickle --
                 self.is시작하기 = pickle.load(file) # -- pickle --
                 self.isPAUSED = pickle.load(file) # -- pickle --
                 self.is선물_이동 = pickle.load(file) # -- pickle --
@@ -1787,15 +1811,18 @@ class Umamusume(QThread):
                             total_count += value
                     
                     if total_count:
-                        print("-"*50)
+                        # print("-"*50)
+                        self.log_main(self.InstanceName, "-"*50)
                         self.log("-"*50)
                     
                         for key, value in self.Supporter_cards_total.items():
                             if value:
-                                print(key + ": " + str(value))
+                                # print(key + ": " + str(value))
+                                self.log_main(self.InstanceName, key + ": " + str(value))
                                 self.log(key + ": " + str(value))
                     
-                        print("-"*50)
+                        # print("-"*50)
+                        self.log_main(self.InstanceName, "-"*50)
                         self.log("-"*50)
                     
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
@@ -2392,7 +2419,8 @@ class Umamusume(QThread):
                     # print(position)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
-                
+            
+            # 예외
             count = 0
             count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
             if count:
@@ -2404,7 +2432,7 @@ class Umamusume(QThread):
                 time.sleep(0.5)
                 return "Failed"
                 
-                
+            if self.is초기화하기:    
                 # 무한 로딩 크롬 전용
                 if time.time() >= updateTime + 5:
                     count = 0
@@ -2443,6 +2471,9 @@ class Umamusume(QThread):
                     # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
+
+                if self.isAlive == False: # 중간에 멈춰야 할 경우
+                    break
                 
                 count = 0
                 count, position = ImageSearch(img, 로그인, confidence=0.99, grayscale=False)
