@@ -22,5 +22,6 @@ def PAG_MAC_Change():
             pyautogui.moveTo(originalPoint) # 원래 위치로 커서 되돌림
         except:
             pass
-        
-PAG_MAC_Change()
+
+if __name__ == "__main__":
+    PAG_MAC_Change()
