@@ -1,9 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
-# from PyQt5.QtCore import pyqtSlot, QObject, pyqtSignal
-# from PyQt5.QtCore import *
-from PyQt5 import uic
-from PyQt5.QtCore import QThread, pyqtSlot, QObject, pyqtSignal
+from PyQt5.QtCore import pyqtSlot, pyqtSignal
+from PyQt5.Qt import Qt
 from Umamusume import *
 from ASUS_Router_Mac_Change import *
 from Change_MAC import *
@@ -17,6 +15,7 @@ from sleepTime import sleepTime
 class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.sleepTime = sleepTime(self)
 
         self.resize(600, 600) # 사이즈 변경
 
@@ -30,6 +29,26 @@ class WindowClass(QMainWindow):
         self.CPU_now = QLabel()
         self.Latency = QLabel()
 
+        self.timeRateGroupBox = QGroupBox("부하를 정합니다. 높을수록 반응이 빨라짐") # ---------
+        self.timeRateVBox = QVBoxLayout()
+
+        self.timeRateLabel = QLabel()
+        self.timeRateLabel_help = QLineEdit("x^{숫자e}\cdot8를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
+        # self.timeRateLabel_help.textInteractionFlags(Qt.TextSelectableByMouse)
+        self.timeRateSlider = QSlider(Qt.Horizontal, self)
+        self.timeRateSlider.setRange(0, 300)
+        self.timeRateSlider.setTickInterval(10)
+        self.timeRateSlider.setSliderPosition(180)
+        self.timeRateFunction()
+        self.timeRateSlider.setLayout
+        self.timeRateSlider.setTickPosition(QSlider.TicksBelow)
+        
+        self.timeRateVBox.addWidget(self.timeRateLabel)
+        self.timeRateVBox.addWidget(self.timeRateLabel_help)
+        self.timeRateVBox.addWidget(self.timeRateSlider)
+
+        self.timeRateGroupBox.setLayout(self.timeRateVBox) # --------------------------------
+
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
         self.ASUSRadioButton.setChecked(True)
         self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
@@ -38,6 +57,8 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.CPU_now)
         self.verticalBox.addWidget(self.Latency)
+
+        self.verticalBox.addWidget(self.timeRateGroupBox)
 
         self.verticalBox.addWidget(self.ASUSRadioButton)
         self.verticalBox.addWidget(self.PAGRadioButton)
@@ -54,14 +75,24 @@ class WindowClass(QMainWindow):
             self.verticalTabWidget.addTab(self.Tab[i].newTab(), "탭 %d" % (self.verticalTabWidget.count()))
         
         
-        self.sleepTime = sleepTime(self)
+        
         self.sleepTime.start()
                 
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
-        
+
+        # Event
+
+        self.timeRateSlider.valueChanged.connect(self.timeRateFunction)
+
         self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
         self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
         
+    def timeRateFunction(self):
+        value = self.timeRateSlider.value()
+        self.sleepTime.timeRate = value*0.01
+        self.timeRateLabel.setText(str(round(value*0.01, 3)))
+        self.timeRateLabel_help.setText("x^{"+str(self.timeRateLabel.text())+"e}\cdot8를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
+
     @pyqtSlot(str)
     def sendLog_Main(self, text):
         self.logs.append(text)

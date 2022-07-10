@@ -1,1 +1,0 @@
-py "ImageMax_copy_instance.py"
