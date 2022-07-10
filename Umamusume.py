@@ -76,6 +76,8 @@ class Umamusume(QThread):
                 self.isAlive = False
                 print("리세 성공 "*5)
                 self.log("리세 성공 "*5)
+                self.parent.InstanceComboBox.setEnabled(True)
+                self.parent.InstanceRefreshButton.setEnabled(True)
                 break
             if isSuccessed == "4080_에러_코드":
                 self.Error_4080Function()
@@ -1655,7 +1657,7 @@ class Umamusume(QThread):
                     # print("선물_일괄_수령 " + str(count) + "개")
                     self.log("선물_일괄_수령 " + str(count) + "개")
                     # print(position)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
                 count = 0
@@ -1666,7 +1668,7 @@ class Umamusume(QThread):
                     # print("상기의_선물을_수령했습니다 " + str(count) + "개")
                     self.log("상기의_선물을_수령했습니다 " + str(count) + "개")
                     # print(position)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
                 count = 0
@@ -1678,7 +1680,7 @@ class Umamusume(QThread):
                     self.log("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                     # print(position)
                     self.is선물_이동 = False
-                    time.sleep(0.5)
+                    time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
             if self.isAlive == False: # 중간에 멈춰야 할 경우
@@ -2364,16 +2366,16 @@ class Umamusume(QThread):
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
-                if count:
-                    updateTime = time.time()
-                    WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                    # print("삭제_완료 " + str(count) + "개")
-                    self.log("삭제_완료 " + str(count) + "개")
-                    # print(position)
-                    time.sleep(0.5)
-                    return "Failed"
+            count = 0
+            count, position = ImageSearch(img, 삭제_완료, confidence=0.95)
+            if count:
+                updateTime = time.time()
+                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+                # print("삭제_완료 " + str(count) + "개")
+                self.log("삭제_완료 " + str(count) + "개")
+                # print(position)
+                time.sleep(0.5)
+                return "Failed"
                 
                 
                 # 무한 로딩 크롬 전용
