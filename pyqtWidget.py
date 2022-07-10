@@ -34,12 +34,15 @@ class WindowClass(QMainWindow):
         self.ASUSCheckBox.setChecked(True)
         self.PAGCheckBox = QRadioButton("Technitium MAC Address Changer 버전")
 
+        self.logs = QTextBrowser()
 
         self.verticalBox.addWidget(self.CPU_now)
         self.verticalBox.addWidget(self.Latency)
 
         self.verticalBox.addWidget(self.ASUSCheckBox)
         self.verticalBox.addWidget(self.PAGCheckBox)
+        
+        self.verticalBox.addWidget(self.logs)
         
         self.메인페이지.setLayout(self.verticalBox)
         self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
@@ -63,7 +66,7 @@ class WindowClass(QMainWindow):
     @pyqtSlot(float, float)
     def SleepTimeFunction(self, cpu_load, Time):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
-        self.Latency.setText("지연률: " + str(Time) + "ms")
+        self.Latency.setText("지연률: " + str(Time) + "s")
         for i in self.Tab:
             i.umamusume.sleepTime = Time
     
@@ -97,6 +100,7 @@ class WindowClass(QMainWindow):
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = False
         
+
 class newTab(QMainWindow):
     AllStop = pyqtSignal()
     
