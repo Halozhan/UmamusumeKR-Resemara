@@ -1,40 +1,26 @@
-import sys
 import pyautogui
-import subprocess
 import time
-
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# install("wmi")
-# install("pyautogui")
-# install("psutil")
-# install("pywin32")
-# install("pywinauto")
-# install("opencv-python")
-# install("pillow")
-# install("pyinstaller")
-# 관리자 권한 필요함
-
-main_location = "./"
-Random_MAC_Address_Path = main_location+"Random_MAC_Address.png"
-Change_Now_Path = main_location+"Change_Now.png"
 
 def PAG_MAC_Change():
         try:
+            main_location = "./"
+            Random_MAC_Address_Path = main_location+"Random_MAC_Address.png"
+            Change_Now_Path = main_location+"Change_Now.png"
+
             Random_MAC_Address = pyautogui.locateCenterOnScreen(Random_MAC_Address_Path, confidence=0.9)
-            originalPoint = pyautogui.position()
+            originalPoint = pyautogui.position() # 처음 위치한 커서 좌표
+
             pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
-            time.sleep(0.2)
-            pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
-            time.sleep(0.2)
+            time.sleep(0.5)
             
-            originalPoint = pyautogui.position()
+            pyautogui.click(Random_MAC_Address.x, Random_MAC_Address.y)
+            time.sleep(0.5)
+            
             pyautogui.click(Random_MAC_Address.x - 202, Random_MAC_Address.y + 111)
+            time.sleep(0.5)
             
-            pyautogui.moveTo(originalPoint)
+            pyautogui.moveTo(originalPoint) # 원래 위치로 커서 되돌림
         except:
             pass
-        
         
 PAG_MAC_Change()
