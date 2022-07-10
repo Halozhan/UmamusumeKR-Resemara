@@ -30,17 +30,17 @@ class WindowClass(QMainWindow):
         self.CPU_now = QLabel()
         self.Latency = QLabel()
 
-        self.ASUSCheckBox = QRadioButton("ASUS 공유기 버전")
-        self.ASUSCheckBox.setChecked(True)
-        self.PAGCheckBox = QRadioButton("Technitium MAC Address Changer 버전")
+        self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
+        self.ASUSRadioButton.setChecked(True)
+        self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
 
         self.logs = QTextBrowser()
 
         self.verticalBox.addWidget(self.CPU_now)
         self.verticalBox.addWidget(self.Latency)
 
-        self.verticalBox.addWidget(self.ASUSCheckBox)
-        self.verticalBox.addWidget(self.PAGCheckBox)
+        self.verticalBox.addWidget(self.ASUSRadioButton)
+        self.verticalBox.addWidget(self.PAGRadioButton)
         
         self.verticalBox.addWidget(self.logs)
         
@@ -59,9 +59,12 @@ class WindowClass(QMainWindow):
                 
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
         
-        self.ASUSCheckBox.clicked.connect(self.ASUSCheckBoxFunction)
-        self.PAGCheckBox.clicked.connect(self.PAGCheckBoxFunction)
+        self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
+        self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
         
+    @pyqtSlot(str)
+    def sendLog_Main(self, text):
+        self.logs.append(text)
         
     @pyqtSlot(float, float)
     def SleepTimeFunction(self, cpu_load, Time):
@@ -72,18 +75,18 @@ class WindowClass(QMainWindow):
     
     @pyqtSlot()
     def ASUSCheckBoxFunction(self):
-        if self.ASUSCheckBox.isChecked():
-            print("ASUSCheckBox가 활성화됨")
+        if self.ASUSRadioButton.isChecked():
+            self.logs.append("ASUSRadioButton가 활성화됨")
         else:
-            print("ASUSCheckBox가 비활성화됨")
+            self.logs.append("ASUSRadioButton가 비활성화됨")
         
     
     @pyqtSlot()
     def PAGCheckBoxFunction(self):
-        if self.PAGCheckBox.isChecked():
-            print("PAGCheckBox가 활성화됨")
+        if self.PAGRadioButton.isChecked():
+            self.logs.append("PAGRadioButton가 활성화됨")
         else:
-            print("PAGCheckBox가 비활성화됨")
+            self.logs.append("PAGRadioButton가 비활성화됨")
             
     
     @pyqtSlot()
@@ -93,9 +96,9 @@ class WindowClass(QMainWindow):
         print("-"*50)
         print("초기화"*10)
         print("-"*50)
-        if self.PAGCheckBox.isChecked():
+        if self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
-        if self.ASUSCheckBox.isChecked():
+        if self.ASUSRadioButton.isChecked():
             Change_Mac_Address()
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = False
@@ -103,6 +106,7 @@ class WindowClass(QMainWindow):
 
 class newTab(QMainWindow):
     AllStop = pyqtSignal()
+    # recvLog_Main = pyqtSignal()
     
     def __init__(self, parent=None):
         super().__init__()
@@ -142,10 +146,15 @@ class newTab(QMainWindow):
         
         # 커스텀 시그널 정의
         self.AllStop.connect(self.parent.AllStopFunction)
+        # self.recvLog_Main.connect(self.parent.sendLog)
                         
     @pyqtSlot(str)
     def sendLog(self, text):
         self.logs.append(text)
+
+    # @pyqtSlot(str)
+    # def sendLog_Main(self, text):
+    #     self.logs.append(text)
         
     @pyqtSlot()
     def Error_4080Function(self):

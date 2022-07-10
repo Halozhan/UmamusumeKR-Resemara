@@ -14,6 +14,7 @@ import pickle
 
 class Umamusume(QThread):
     recvLog = pyqtSignal(str)
+    recvLog_Main = pyqtSignal(str)
     Error_4080 = pyqtSignal()
     
     def __init__(self, parent=None):
@@ -34,10 +35,16 @@ class Umamusume(QThread):
         # 커스텀 시그널 정의
         
         self.recvLog.connect(self.parent.sendLog)
+        self.recvLog_Main.connect(self.parent.parent.sendLog_Main)
         self.Error_4080.connect(self.parent.Error_4080Function)
+
+        self.recvLog_Main.emit("ㅎㅇㅎㅇ")
         
     def log(self, text):
         self.recvLog.emit(text)
+
+    def log_main(self, text):
+        self.recvLog_Main(text)
     
     def Error_4080Function(self):
         self.Error_4080.emit()
