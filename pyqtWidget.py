@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.Qt import Qt
+from PyQt5.QtGui import QIcon
 from Umamusume import *
 from ASUS_Router_Mac_Change import *
 from Change_MAC import *
@@ -19,6 +20,8 @@ class WindowClass(QMainWindow):
         self.sleepTime = sleepTime(self)
 
         self.resize(600, 600) # 사이즈 변경
+        self.setWindowTitle("우마뾰이")
+        self.setWindowIcon(QIcon("channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget() # 탭 위젯
         self.verticalTabWidget.setMovable(True)
