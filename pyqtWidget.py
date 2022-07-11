@@ -33,23 +33,33 @@ class WindowClass(QMainWindow):
         self.CPU_now = QLabel()
         self.Latency = QLabel()
 
-        self.timeRateGroupBox = QGroupBox("부하를 정합니다. 높을수록 반응이 빨라짐") # ---------
+        self.timeRateGroupBox = QGroupBox("부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐") # ---------
         self.timeRateVBox = QVBoxLayout()
 
-        self.timeRateLabel = QLabel()
-        self.timeRateLabel_help = QLineEdit("x^{숫자e}\cdot8를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
-        # self.timeRateLabel_help.textInteractionFlags(Qt.TextSelectableByMouse)
-        self.timeRateSlider = QSlider(Qt.Horizontal, self)
-        self.timeRateSlider.setRange(0, 300)
-        self.timeRateSlider.setTickInterval(10)
-        self.timeRateSlider.setSliderPosition(180)
-        self.timeRateFunction()
-        self.timeRateSlider.setLayout
-        self.timeRateSlider.setTickPosition(QSlider.TicksBelow)
+        self.timeRateLabel_help = QLineEdit()
+        self.timeRateLabel1 = QLabel()
+        self.timeRateLabel2 = QLabel()
         
-        self.timeRateVBox.addWidget(self.timeRateLabel)
+        self.timeRateSlider1 = QSlider(Qt.Horizontal, self)
+        self.timeRateSlider1.setRange(0, 300)
+        self.timeRateSlider1.setTickInterval(10)
+        self.timeRateSlider1.setSliderPosition(180)
+        self.timeRateSlider1.setTickPosition(QSlider.TicksBelow)
+        
+        self.timeRateSlider2 = QSlider(Qt.Horizontal, self)
+        self.timeRateSlider2.setRange(0, 100)
+        self.timeRateSlider2.setTickInterval(10)
+        self.timeRateSlider2.setSliderPosition(80)
+        self.timeRateSlider2.setTickPosition(QSlider.TicksBelow)
+
+        self.timeRateFunction()
+        
         self.timeRateVBox.addWidget(self.timeRateLabel_help)
-        self.timeRateVBox.addWidget(self.timeRateSlider)
+        self.timeRateVBox.addWidget(self.timeRateLabel1)
+        self.timeRateVBox.addWidget(self.timeRateSlider1)
+
+        self.timeRateVBox.addWidget(self.timeRateLabel2)
+        self.timeRateVBox.addWidget(self.timeRateSlider2)
 
         self.timeRateGroupBox.setLayout(self.timeRateVBox) # --------------------------------
 
@@ -86,16 +96,20 @@ class WindowClass(QMainWindow):
 
         # Event
 
-        self.timeRateSlider.valueChanged.connect(self.timeRateFunction)
+        self.timeRateSlider1.valueChanged.connect(self.timeRateFunction)
+        self.timeRateSlider2.valueChanged.connect(self.timeRateFunction)
 
         self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
         self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
         
     def timeRateFunction(self):
-        value = self.timeRateSlider.value()
-        self.sleepTime.timeRate = value*0.01
-        self.timeRateLabel.setText(str(round(value*0.01, 3)))
-        self.timeRateLabel_help.setText("x^{"+str(self.timeRateLabel.text())+"e}\cdot8를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
+        value1 = self.timeRateSlider1.value()
+        value2 = self.timeRateSlider2.value()
+        self.sleepTime.timeRate1 = value1*0.01
+        self.sleepTime.timeRate2 = value2*0.1
+        self.timeRateLabel1.setText(str(round(value1*0.01, 3)))
+        self.timeRateLabel2.setText(str(round(value2*0.1, 3)))
+        self.timeRateLabel_help.setText("x^{"+str(self.timeRateLabel1.text())+"e}\cdot" + str(self.timeRateLabel2.text()) +"를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
 
     @pyqtSlot(str, str)
     def sendLog_Main(self, id, text):

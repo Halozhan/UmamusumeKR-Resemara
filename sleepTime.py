@@ -14,7 +14,8 @@ class sleepTime(QThread):
             self.parent = parent
         self.isAlive = True
         self.sleepTime = 0.5
-        self.timeRate = 1.8
+        self.timeRate1 = 1.8
+        self.timeRate2 = 8
 
         self.sendSleepTime.connect(self.parent.SleepTimeFunction)
     
@@ -26,7 +27,7 @@ class sleepTime(QThread):
             if self.cpu_load <= 1: # 오류 무시
                 pass
             else:
-                self.sleepTime = round(((self.cpu_load*0.01)**(self.timeRate*math.exp(1)))*8, 3) # 클수록 빨라짐
+                self.sleepTime = round(((self.cpu_load*0.01)**(self.timeRate1*math.exp(1)))*self.timeRate2, 3) # 클수록 빨라짐
                 self.sendSleepTime.emit(self.cpu_load, self.sleepTime)
 
             time.sleep(0.05)
