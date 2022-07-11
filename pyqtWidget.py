@@ -30,8 +30,19 @@ class WindowClass(QMainWindow):
         self.메인페이지 = QWidget() # ---------------------------------
         self.verticalBox = QVBoxLayout()
 
+        self.MenuHBox = QHBoxLayout() # --------------
+
+        self.TaskViewVBox = QVBoxLayout()
         self.CPU_now = QLabel()
         self.Latency = QLabel()
+        self.TaskViewVBox.addWidget(self.CPU_now)
+        self.TaskViewVBox.addWidget(self.Latency)
+
+        self.StopButton = QPushButton("모두 정지")
+        
+        self.MenuHBox.addLayout(self.TaskViewVBox)
+        self.MenuHBox.addWidget(self.StopButton) # ----
+
 
         self.timeRateGroupBox = QGroupBox("부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐") # ---------
         self.timeRateVBox = QVBoxLayout()
@@ -69,8 +80,7 @@ class WindowClass(QMainWindow):
 
         self.logs = QTextBrowser()
 
-        self.verticalBox.addWidget(self.CPU_now)
-        self.verticalBox.addWidget(self.Latency)
+        self.verticalBox.addLayout(self.MenuHBox)
 
         self.verticalBox.addWidget(self.timeRateGroupBox)
 
@@ -99,9 +109,17 @@ class WindowClass(QMainWindow):
         self.timeRateSlider1.valueChanged.connect(self.timeRateFunction)
         self.timeRateSlider2.valueChanged.connect(self.timeRateFunction)
 
+        self.StopButton.clicked.connect(self.AllStopInstance)
+
+
         self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
         self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
-        
+    
+    def AllStopInstance(self):
+        for i in self.Tab:
+            if i.stopButton.isEnabled():
+                i.stopFunction()
+
     def timeRateFunction(self):
         value1 = self.timeRateSlider1.value()
         value2 = self.timeRateSlider2.value()
@@ -139,7 +157,7 @@ class WindowClass(QMainWindow):
             
     
     @pyqtSlot()
-    def AllStopFunction(self):
+    def MAC_Address_Change(self):
         for i in self.Tab:
             i.umamusume.isDoingMAC_Change = True
         print("-"*50)
@@ -196,7 +214,7 @@ class newTab(QMainWindow):
         self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
         
         # 커스텀 시그널 정의
-        self.AllStop.connect(self.parent.AllStopFunction)
+        self.AllStop.connect(self.parent.MAC_Address_Change)
         # self.recvLog_Main.connect(self.parent.sendLog)
                         
     @pyqtSlot(str)
