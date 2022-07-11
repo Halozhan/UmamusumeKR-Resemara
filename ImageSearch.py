@@ -21,8 +21,12 @@ def ImageSearch(img, template, roiLeft = 0, roiTop = 0, roiWidth = -1, roiHeight
         
         if roiWidth == -1 and roiHeight == -1:
             img = img[roiTop:-1, roiLeft:-1] # Region of Interest, 관심 영역
+        elif roiWidth == -1:
+            img = img[roiTop:roiTop+roiHeight:, roiLeft:-1]
+        elif roiHeight == -1:
+            img = img[roiTop:-1, roiLeft:roiLeft+roiWidth]
         else:
-            img = img[roiTop:roiTop+roiHeight, roiLeft:roiLeft+roiWidth] # Region of Interest, 관심 영역
+            img = img[roiTop:roiTop+roiHeight, roiLeft:roiLeft+roiWidth]
             
         
         if grayscale:

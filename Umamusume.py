@@ -875,7 +875,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, 초록색_역삼각형, confidence=0.8) # 역 삼각형
+                count, position = ImageSearch(img, 초록색_역삼각형, 440, 850, -1, -1, confidence=0.8) # 역 삼각형
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("초록색_역삼각형 " + str(count) + "개")
@@ -964,7 +964,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, 파란색_역삼각형, confidence=0.9) # 역 삼각형
+                count, position = ImageSearch(img, 파란색_역삼각형, 440, 850, -1, -1, confidence=0.9) # 역 삼각형
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("파란색_역삼각형 " + str(count) + "개")
@@ -1063,9 +1063,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, 돌아간다_화살표)
+                count, position = ImageSearch(img, 돌아간다_화살표, grayscale=False)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("돌아간다_화살표 " + str(count) + "개")
                     self.log("돌아간다_화살표 " + str(count) + "개")
                     print(position)
@@ -1453,24 +1453,25 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, 강화_편성_화살표, grayscale=False) # [(18, 879, 72, 102)]
-                                                                                    # (-7, 854, 97, 127)
+                count, position = ImageSearch(img, 강화_편성_화살표, 0, 910, 97, -1, grayscale=False) # -5, 910, 97, 67
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    print(position[0])
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("강화_편성_화살표 " + str(count) + "개")
                     self.log("강화_편성_화살표 " + str(count) + "개")
                     print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, 레이스_화살표, grayscale=False) # [(358, 867, 74, 111)]
-                                                                                    # (333, 842, 99, 136)
+                count, position = ImageSearch(img, 레이스_화살표, 329, 908, 103, -1, grayscale=False) # 329, 908, 103, 71
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("레이스_화살표 " + str(count) + "개")
                     self.log("레이스_화살표 " + str(count) + "개")
                     print(position)
+                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
@@ -1668,7 +1669,7 @@ class Umamusume(QThread):
             
             
             # 가챠
-            if self.is선물_이동 == True:
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is선물_이동 == True:
                 count = 0
                 count, position = ImageSearch(img, 선물_이동, 456, 672, 47, 53)
                 if count:
@@ -1717,7 +1718,7 @@ class Umamusume(QThread):
             if self.isAlive == False: # 중간에 멈춰야 할 경우
                 break
 
-            if self.is뽑기_이동:
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is뽑기_이동:
                 count = 0
                 count, position = ImageSearch(img, 뽑기_이동, 464, 666, 52, 62)
                 if count:
@@ -1751,7 +1752,7 @@ class Umamusume(QThread):
                 time.sleep(0.5)
                 img = screenshotToOpenCVImg(hwndMain)
 
-            if self.is뽑기_이동:
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is뽑기_이동:
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
                     break
                 
@@ -1841,7 +1842,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
             
-            if self.is초기화하기 == False:
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is초기화하기 == False:
                 count = 0
                 count, position = ImageSearch(img, 쥬얼이_부족합니다)
                 if count:
@@ -2119,7 +2120,7 @@ class Umamusume(QThread):
             if self.isAlive == False: # 중간에 멈춰야 할 경우
                 break
 
-            if self.is초기화하기:
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is초기화하기:
                 count = 0
                 count, position = ImageSearch(img, 파이어폭스_실행)
                 if count:
@@ -2432,7 +2433,7 @@ class Umamusume(QThread):
                 time.sleep(0.5)
                 return "Failed"
                 
-            if self.is초기화하기:    
+            if self.parent.isDoneTutorialCheckBox.isChecked() and self.is초기화하기:    
                 # 무한 로딩 크롬 전용
                 if time.time() >= updateTime + 5:
                     count = 0
