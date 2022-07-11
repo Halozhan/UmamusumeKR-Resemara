@@ -20,7 +20,11 @@ def PAG_MAC_Change():
             pyautogui.click(Random_MAC_Address.x - 202, Random_MAC_Address.y + 111)
             time.sleep(0.5)
 
+
+            time.sleep(10)
             MAC_Address_was_changed_successfully = pyautogui.locateCenterOnScreen(MAC_Address_was_changed_successfully_Path, confidence=0.9)
+            time.sleep(0.5)
+
             pyautogui.click(MAC_Address_was_changed_successfully.x + 153, MAC_Address_was_changed_successfully.y + 116)
 
             pyautogui.moveTo(originalPoint) # 원래 위치로 커서 되돌림
