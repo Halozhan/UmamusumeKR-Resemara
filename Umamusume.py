@@ -202,7 +202,8 @@ class Umamusume(QThread):
             if self.parent.isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 20:
                 # print("20초 정지 터치락 해제!!! "*3)
                 self.log("20초 정지 터치락 해제!!! "*3)
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=(0,0,0,0))
+                # adbInput.BlueStacksClick(self.device, self.InstancePort, position=(0,0,0,0))
+                adbInput.BlueStacksClick(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
                 time.sleep(2)
             
             # 잠수 클릭 40초 이상 앱정지
@@ -1647,8 +1648,6 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 메인_스토리가_해방되었습니다)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
-                    time.sleep(0.5)
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                     # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
