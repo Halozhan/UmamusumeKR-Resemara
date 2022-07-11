@@ -1661,8 +1661,6 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 여러_스토리를_해방할_수_있게_되었습니다)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
-                    time.sleep(0.5)
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
