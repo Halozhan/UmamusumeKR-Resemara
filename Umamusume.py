@@ -633,7 +633,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, 서포트_카드_화살표, 410, 508, 124, 135)
+                count, position = ImageSearch(img, 서포트_카드_화살표) # 위치
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표 " + str(count) + "개") # 느림
@@ -642,15 +642,15 @@ class Umamusume(QThread):
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, 서포트_카드_화살표2, 410, 508, 124, 135)
-                if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    print("서포트_카드_화살표2 " + str(count) + "개") # 느림
-                    self.log("서포트_카드_화살표2 " + str(count) + "개") # 느림
-                    print(position)
-                    time.sleep(0.5)
-                    img = screenshotToOpenCVImg(hwndMain)
+                # count = 0 # 지울 예정
+                # count, position = ImageSearch(img, 서포트_카드_화살표2, 410, 508, 124, 135)
+                # if count:
+                #     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                #     print("서포트_카드_화살표2 " + str(count) + "개") # 느림
+                #     self.log("서포트_카드_화살표2 " + str(count) + "개") # 느림
+                #     print(position)
+                #     time.sleep(0.5)
+                #     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
                 count, position = ImageSearch(img, 서포트_카드_뽑기_10번_뽑기_무료)
@@ -775,9 +775,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, 자동_선택_화살표, 329, 668, 105, 105)
+                count, position = ImageSearch(img, 자동_선택_화살표)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자동_선택_화살표 " + str(count) + "개")
                     self.log("자동_선택_화살표 " + str(count) + "개")
                     print(position)
@@ -885,7 +885,7 @@ class Umamusume(QThread):
                     time.sleep(0.5)
                 
                 count = 0
-                count, position = ImageSearch(img, TAP)
+                count, position = ImageSearch(img, TAP, confidence=0.7)
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("TAP " + str(count) + "개")
@@ -1116,7 +1116,7 @@ class Umamusume(QThread):
                 count = 0
                 count, position = ImageSearch(img, 스킬_결정_화살표)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_결정_화살표 " + str(count) + "개")
                     self.log("스킬_결정_화살표 " + str(count) + "개")
                     print(position)
@@ -1126,7 +1126,7 @@ class Umamusume(QThread):
                 count = 0
                 count, position = ImageSearch(img, 스킬_획득_화살표)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_획득_화살표 " + str(count) + "개")
                     self.log("스킬_획득_화살표 " + str(count) + "개")
                     print(position)
@@ -1356,7 +1356,7 @@ class Umamusume(QThread):
                 count = 0
                 count, position = ImageSearch(img, 육성_완료_확인_완료한다_화살표)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     self.log("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     print(position)
