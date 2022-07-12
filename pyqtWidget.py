@@ -127,7 +127,7 @@ class WindowClass(QMainWindow):
         self.sleepTime.timeRate2 = value2*0.1
         self.timeRateLabel1.setText("기울기: " + str(round(value1*0.01, 3)))
         self.timeRateLabel2.setText("최고 지연: " + str(round(value2*0.1, 3)) + "s")
-        self.timeRateLabel_help.setText("x^{"+str(self.timeRateLabel1.text())+"e}\cdot" + str(self.timeRateLabel2.text()) +"를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
+        self.timeRateLabel_help.setText("x^{"+str(round(value1*0.01, 3))+"e}\cdot" + str(round(value2*0.1, 3)) +"를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
 
     @pyqtSlot(str, str)
     def sendLog_Main(self, id, text):
