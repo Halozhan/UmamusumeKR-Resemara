@@ -1966,7 +1966,7 @@ class Umamusume(QThread):
                         img = screenshotToOpenCVImg(hwndMain)
                         
                     count = 0
-                    count, position = ImageSearch(img, 확인하고_계속하기, 186, 623, 144, 53)
+                    count, position = ImageSearch(img, 확인하고_계속하기)
                     if count:
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
@@ -1977,7 +1977,7 @@ class Umamusume(QThread):
                         img = screenshotToOpenCVImg(hwndMain)
                         
                     count = 0
-                    count, position = ImageSearch(img, 확인하고_계속하기2, 186, 625, 143, 50)
+                    count, position = ImageSearch(img, 확인하고_계속하기2)
                     if count:
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
@@ -2000,7 +2000,7 @@ class Umamusume(QThread):
                         img = screenshotToOpenCVImg(hwndMain)
                         
                     count = 0
-                    count, position = ImageSearch(img, 계속하기, 214, 620, 85, 47)
+                    count, position = ImageSearch(img, 계속하기)
                     if count:
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
@@ -2012,7 +2012,7 @@ class Umamusume(QThread):
                         img = screenshotToOpenCVImg(hwndMain)
                         
                     count = 0
-                    count, position = ImageSearch(img, 정보_확인_중, 105, 167, 188, 49)
+                    count, position = ImageSearch(img, 정보_확인_중)
                     if count:
                         updateTime = time.time()
                         adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
