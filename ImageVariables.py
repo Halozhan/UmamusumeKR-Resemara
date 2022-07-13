@@ -1,5 +1,31 @@
-# from OpenCV_imread import imreadUnicode
+import glob, os
+from OpenCV_imread import imreadUnicode
 
+# Images
+path = './Images'
+Images = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Images[key[-2]] = imreadUnicode(a)
+
+if __name__ == "__main__":
+    for i in Images.keys():
+        print(i, end=", ")
+
+
+# 서포트 카드
+path = './Supporter_cards'
+Supporter_cards = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Supporter_cards[key[-2]] = imreadUnicode(a)
+
+
+# 구버전
 
 # # 찾을 이미지
 # 우마무스메_실행 = imreadUnicode(r"./Images/우마무스메_실행.png")
@@ -213,34 +239,7 @@
 # 숫자4080_에러_코드 = imreadUnicode(r"./Images/숫자4080_에러_코드.png")
 
 
-
-# Images
-import glob, os
-from OpenCV_imread import imreadUnicode
-
-path = './Images'
-Images = dict()
-
-for a in glob.glob(os.path.join(path, '*')):
-    key = a.replace('.', '/').replace('\\', '/')
-    key = key.split('/')
-    Images[key[-2]] = imreadUnicode(a)
-
-if __name__ == "__main__":
-    for i in Images.keys():
-        print(i, end=", ")
-
-
-
 # 서포트 카드
-path = './Supporter_cards'
-Supporter_cards = dict()
-
-for a in glob.glob(os.path.join(path, '*')):
-    key = a.replace('.', '/').replace('\\', '/')
-    key = key.split('/')
-    Supporter_cards[key[-2]] = imreadUnicode(a)
-
 # SR_스윕_토쇼 = imreadUnicode(r"./Supporter_cards/SR_스윕_토쇼.png")
 # SSR_골드_쉽 = imreadUnicode(r"./Supporter_cards/SSR_골드_쉽.png")
 # SSR_골드_시티 = imreadUnicode(r"./Supporter_cards/SSR_골드_시티.png")
