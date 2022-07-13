@@ -1,4 +1,3 @@
-# pip install pure-python-adb
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch

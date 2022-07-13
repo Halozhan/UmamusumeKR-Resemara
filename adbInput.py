@@ -1,4 +1,3 @@
-# pip install pure-python-adb
 import time
 import random
 from ppadb.client import Client as AdbClient
