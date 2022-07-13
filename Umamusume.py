@@ -22,7 +22,6 @@ class Umamusume(QThread):
         self.parent = parent
         
         self.isAlive = False
-        self.resetCount = 0
         
         try:
             self.sleepTime = self.parent.sleepTime
@@ -32,6 +31,28 @@ class Umamusume(QThread):
         self.isStopped = False
         self.isDoingMAC_Change = False
         
+
+        # 기본 값 - pickle 불러오기 전
+        self.resetCount = 0 # -- pickle --
+        self.is시작하기 = False # -- pickle --
+        self.isPAUSED = False # -- pickle --
+        self.is선물_이동 = True # -- pickle --
+        self.is뽑기_이동 = True # -- pickle --
+        self.is서포트_뽑기 = False # -- pickle --
+        self.isSSR확정_뽑기 = False # -- pickle --
+        self.is뽑기_결과 = True # -- pickle --
+        self.is연동하기 = False # -- pickle --
+        self.is초기화하기 = False # -- pickle --
+        
+        # 서포트 카드 총 갯수
+        path = './Supporter_cards'
+        self.Supporter_cards_total = dict() # -- pickle --
+        for a in glob.glob(os.path.join(path, '*')):
+            key = a.replace('.', '/').replace('\\', '/')
+            key = key.split('/')
+            self.Supporter_cards_total[key[-2]] = 0
+
+
         # 커스텀 시그널 정의
         
         self.recvLog.connect(self.parent.sendLog)
@@ -128,12 +149,14 @@ class Umamusume(QThread):
             path = "./Saved_Data/"+str(self.parent.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
                 pickle.dump(self.resetCount, file) # -- pickle --
+
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
                 pickle.dump(self.is뽑기_이동, file) # -- pickle --
+                pickle.dump(self.is서포트_뽑기, file) # -- pickle --
+                pickle.dump(self.isSSR확정_뽑기, file) # -- pickle --
                 pickle.dump(self.is뽑기_결과, file) # -- pickle --
-                pickle.dump(self.is쥬얼부족, file) # -- pickle --
                 pickle.dump(self.is연동하기, file) # -- pickle --
                 pickle.dump(self.is초기화하기, file) # -- pickle --
                 
@@ -166,8 +189,9 @@ class Umamusume(QThread):
                 self.isPAUSED = pickle.load(file) # -- pickle --
                 self.is선물_이동 = pickle.load(file) # -- pickle --
                 self.is뽑기_이동 = pickle.load(file) # -- pickle --
+                self.is서포트_뽑기 = pickle.load(file) # -- pickle --
+                self.isSSR확정_뽑기 = pickle.load(file) # -- pickle --
                 self.is뽑기_결과 = pickle.load(file) # -- pickle --
-                self.is쥬얼부족 = pickle.load(file) # -- pickle --
                 self.is연동하기 = pickle.load(file) # -- pickle --
                 self.is초기화하기 = pickle.load(file) # -- pickle --
                 
@@ -177,12 +201,15 @@ class Umamusume(QThread):
                     self.log(key + ": " + str(value))
                 self.log("기존 데이터를 불러옵니다.")
         except:
+            # self.resetCount = 0 # -- pickle -- 다른건 초기화해도 리세 횟수는 초기화 하는 거 아님
+            
             self.is시작하기 = False # -- pickle --
             self.isPAUSED = False # -- pickle --
             self.is선물_이동 = True # -- pickle --
             self.is뽑기_이동 = True # -- pickle --
+            self.is서포트_뽑기 = False # -- pickle --
+            self.isSSR확정_뽑기 = False # -- pickle --
             self.is뽑기_결과 = True # -- pickle --
-            self.is쥬얼부족 = False # -- pickle --
             self.is연동하기 = False # -- pickle --
             self.is초기화하기 = False # -- pickle --
             
@@ -1735,23 +1762,79 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93, confidence=0.6)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
                     # print("프리티_더비_뽑기 " + str(count) + "개")
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
+                    if self.isSSR확정_뽑기 == False:
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
+                        self.is서포트_뽑기 = True
+                    else:
+                        adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
+                        self.is뽑기_이동 = False
+                        self.is연동하기 = True
+
+                        # 이륙 조건식 -----------------------------------------------
+                        # 이륙 조건식 -----------------------------------------------
+                        # 이륙 조건식 -----------------------------------------------
+                        SCT = self.Supporter_cards_total
+                                    
+                        if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
+                            return True
+                        
+                        if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
+                            return True
+                        
+                        if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
+                            return True
+                            
+                        if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                            return True
+                            
+                        if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
+                            return True
+                        
+                        if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                            return True
+                        
+                        if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                            return True
+                        
+                        if SCT["SSR_파인_모션"] >= 3:
+                            return True
+                            
+                        if SCT["SSR_슈퍼_크릭"] >= 3:
+                            return True
+                        
+                        if SCT["SSR_비코_페가수스"] >= 3:
+                            return True
+                        
+                        if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
+                            return True
+                        
+                        if SCT["SSR_하야카와_타즈나"] >= 3:
+                            return True
+                        
+                        if SCT["SR_스윕_토쇼"] >= 5 and SCT["SSR_파인_모션"] and SCT["SSR_하야카와_타즈나"] and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_비코_페가수스"] or SCT["SSR_사쿠라_바쿠신_오"]):
+                            return True
+
+                        if SCT["SSR_메지로_파머"] >= 4:
+                            return True
+
+
                     # print(position)
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
-            count = 0
-            count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
-            if count:
-                updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
-                # print("서포트_카드_뽑기 " + str(count) + "개")
-                self.log("서포트_카드_뽑기 " + str(count) + "개")
-                # print(position)
-                time.sleep(0.5)
-                img = screenshotToOpenCVImg(hwndMain)
+            if self.is서포트_뽑기:
+                count = 0
+                count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
+                if count:
+                    updateTime = time.time()
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
+                    # print("서포트_카드_뽑기 " + str(count) + "개")
+                    self.log("서포트_카드_뽑기 " + str(count) + "개")
+                    # print(position)
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain)
 
             if self.parent.isDoneTutorialCheckBox.isChecked() and self.is뽑기_이동:
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
@@ -1771,7 +1854,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
+                count, position = ImageSearch(img, 뽑기_결과)
                 if count and self.is뽑기_결과:
                     updateTime = time.time()
                     self.is뽑기_결과 = False
@@ -1895,9 +1978,10 @@ class Umamusume(QThread):
                     if SCT["SSR_메지로_파머"] >= 4:
                         return True
                     
-                    self.is쥬얼부족 = True
-                    self.is뽑기_이동 = False
-                    self.is연동하기 = True
+                    
+                    self.is서포트_뽑기 = False
+                    self.isSSR확정_뽑기 = True
+                    
                     adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
                     time.sleep(0.5)
                     adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
@@ -1919,6 +2003,138 @@ class Umamusume(QThread):
                     # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
+
+                if self.parent.isDoneTutorialCheckBox.isChecked() and self.isSSR확정_뽑기:
+                    count = 0
+                    count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
+                        # print("서포트_카드_뽑기 " + str(count) + "개")
+                        self.log("서포트_카드_뽑기 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                    
+                    count = 0
+                    count, position = ImageSearch(img, 숫자3성_확정, confidence=0.6)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=247, deltaX=5, deltaY=5)
+                        # print("숫자3성_확정 " + str(count) + "개")
+                        self.log("숫자3성_확정 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                    
+                    count = 0
+                    count, position = ImageSearch(img, SSR_확정_스타트_대시, confidence=0.6)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=248, deltaX=5, deltaY=5)
+                        # print("SSR_확정_스타트_대시 " + str(count) + "개")
+                        self.log("SSR_확정_스타트_대시 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                    
+                    count = 0
+                    count, position = ImageSearch(img, SSR_확정_메이크_데뷔_뽑기, confidence=0.6)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=195, deltaX=5, deltaY=5)
+                        # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
+                        self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                    
+                    count = 0
+                    count, position = ImageSearch(img, SSR_확정_메이크_데뷔_티켓을_1장_사용해, confidence=0.6)
+                    if count:
+                        updateTime = time.time()
+                        self.is뽑기_결과 = True
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=117, offsetY=190, deltaX=5, deltaY=5)
+                        # print("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
+                        self.log("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+                    
+                    count = 0
+                    count, position = ImageSearch(img, 뽑기_결과_OK)
+                    if count:
+                        updateTime = time.time()
+                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        # print("뽑기_결과_OK " + str(count) + "개")
+                        self.log("뽑기_결과_OK " + str(count) + "개")
+                        # print(position)
+                        time.sleep(0.5)
+                        img = screenshotToOpenCVImg(hwndMain)
+
+                    
+
+
+                    # count = 0
+                    # count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
+                    # if count and self.is뽑기_결과:
+                    #     updateTime = time.time()
+                    #     self.is뽑기_결과 = False
+                    #     # print("뽑기_결과 " + str(count) + "개")
+                    #     self.log("뽑기_결과 " + str(count) + "개")
+                    #     # print(position)
+                        
+                    #     # 서포터 카드 지금 갯수
+                    #     path = './Supporter_cards'
+                    #     Supporter_cards_now = dict()
+                    #     for a in glob.glob(os.path.join(path, '*')):
+                    #         key = a.replace('.', '/').replace('\\', '/')
+                    #         key = key.split('/')
+                    #         Supporter_cards_now[key[-2]] = 0
+                            
+                    #     for i in range(2):
+                    #         updateTime = time.time()
+                    #         time.sleep(0.25)
+                    #         img = screenshotToOpenCVImg(hwndMain)
+                            
+                    #         for key, value in Supporter_cards.items():
+                    #             count = 0
+                    #             count, position = ImageSearch(img, value, grayscale=False)
+                    #             if count:
+                    #                 if Supporter_cards_now[key] < count:
+                    #                     Supporter_cards_now[key] = count
+                    #                 # print(key + " " + str(Supporter_cards_now[key]) + "개")
+                    #                 self.log(key + " " + str(Supporter_cards_now[key]) + "개")
+                    #                 # print(position)
+                                    
+                    #     # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
+                    #     for key, value in self.Supporter_cards_total.items():
+                    #         self.Supporter_cards_total[key] += Supporter_cards_now[key]
+                        
+                    #     # 총 서포터 카드 갯수
+                    #     total_count = 0
+                    #     for key, value in self.Supporter_cards_total.items():
+                    #         if value:
+                    #             total_count += value
+                        
+                    #     if total_count:
+                    #         # print("-"*50)
+                    #         self.log_main(self.InstanceName, "-"*50)
+                    #         self.log("-"*50)
+                        
+                    #         for key, value in self.Supporter_cards_total.items():
+                    #             if value:
+                    #                 # print(key + ": " + str(value))
+                    #                 self.log_main(self.InstanceName, key + ": " + str(value))
+                    #                 self.log(key + ": " + str(value))
+                        
+                    #         # print("-"*50)
+                    #         self.log_main(self.InstanceName, "-"*50)
+                    #         self.log("-"*50)
+
+
+
+
                     
                 if self.is연동하기:
                     count = 0

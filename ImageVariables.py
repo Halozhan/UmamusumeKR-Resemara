@@ -151,6 +151,11 @@ TAP = imreadUnicode(r"./Images/TAP.png")
 뽑기_결과 = imreadUnicode(r"./Images/뽑기_결과.png")
 한_번_더_뽑기 = imreadUnicode(r"./Images/한_번_더_뽑기.png")
 쥬얼이_부족합니다 = imreadUnicode(r"./Images/쥬얼이_부족합니다.png")
+숫자3성_확정 = imreadUnicode(r"./Images/숫자3성_확정.png")
+SSR_확정_스타트_대시 = imreadUnicode(r"./Images/SSR_확정_스타트_대시.png")
+SSR_확정_메이크_데뷔_뽑기 = imreadUnicode(r"./Images/SSR_확정_메이크_데뷔_뽑기.png")
+SSR_확정_메이크_데뷔_티켓을_1장_사용해 = imreadUnicode(r"./Images/SSR_확정_메이크_데뷔_티켓을_1장_사용해.png")
+뽑기_결과_OK = imreadUnicode(r"./Images/뽑기_결과_OK.png")
 상점_화면을_표시할_수_없습니다 = imreadUnicode(r"./Images/상점_화면을_표시할_수_없습니다.png")
 
 
