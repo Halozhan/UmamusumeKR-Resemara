@@ -2,7 +2,10 @@ from selenium import webdriver
 import chromedriver_autoinstaller
 import os
 import time
-from ASUS_ROUTER_CONFIG import *
+try:
+    from ASUS_ROUTER_CONFIG import *
+except:
+    print("라우터 구성에 필요한 계정 정보가 없습니다.")
 
 def Change_Mac_Address():
     chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
