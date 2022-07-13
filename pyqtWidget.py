@@ -93,7 +93,7 @@ class WindowClass(QMainWindow):
         self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
 
         self.Tab = []
-        count = 8 # 8개의 탭 생성
+        count = 10 # 10개의 탭 생성
         for i in range(count):
             self.Tab.append(newTab(self)) # self를 상속받은 newTab
             self.verticalTabWidget.addTab(self.Tab[i].newTab(), "탭 %d" % (self.verticalTabWidget.count()))

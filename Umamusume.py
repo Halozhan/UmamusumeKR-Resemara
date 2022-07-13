@@ -1735,7 +1735,7 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 프리티_더비_뽑기, 154, 551, 175, 93, confidence=0.6)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=254, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
                     # print("프리티_더비_뽑기 " + str(count) + "개")
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
                     # print(position)
@@ -1746,7 +1746,7 @@ class Umamusume(QThread):
             count, position = ImageSearch(img, 서포트_카드_뽑기, 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=196, offsetY=186, deltaX=5, deltaY=5)
+                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
                 # print("서포트_카드_뽑기 " + str(count) + "개")
                 self.log("서포트_카드_뽑기 " + str(count) + "개")
                 # print(position)
