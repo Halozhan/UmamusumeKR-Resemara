@@ -1776,15 +1776,15 @@ class Umamusume(QThread):
                         # 이륙 조건식 -----------------------------------------------
                         # 이륙 조건식 -----------------------------------------------
                         SCT = self.Supporter_cards_total
-                                    
+                                
                         if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
                             return True
                         
-                        if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
-                            return True
+                        # if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
+                        #     return True
                         
-                        if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
-                            return True
+                        # if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
+                        #     return True
                             
                         if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
                             return True
@@ -1792,11 +1792,11 @@ class Umamusume(QThread):
                         if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
                             return True
                         
-                        if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                            return True
+                        # if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                        #     return True
                         
-                        if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                            return True
+                        # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                        #     return True
                         
                         if SCT["SSR_파인_모션"] >= 3:
                             return True
@@ -1804,11 +1804,11 @@ class Umamusume(QThread):
                         if SCT["SSR_슈퍼_크릭"] >= 3:
                             return True
                         
-                        if SCT["SSR_비코_페가수스"] >= 3:
-                            return True
+                        # if SCT["SSR_비코_페가수스"] >= 3:
+                        #     return True
                         
-                        if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
-                            return True
+                        # if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
+                        #     return True
                         
                         if SCT["SSR_하야카와_타즈나"] >= 3:
                             return True
@@ -1939,11 +1939,11 @@ class Umamusume(QThread):
                     if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
                         return True
                     
-                    if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
-                        return True
+                    # if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
+                    #     return True
                     
-                    if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
-                        return True
+                    # if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
+                    #     return True
                         
                     if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
                         return True
@@ -1951,11 +1951,11 @@ class Umamusume(QThread):
                     if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
                         return True
                     
-                    if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                        return True
+                    # if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                    #     return True
                     
-                    if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                        return True
+                    # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+                    #     return True
                     
                     if SCT["SSR_파인_모션"] >= 3:
                         return True
@@ -1963,11 +1963,11 @@ class Umamusume(QThread):
                     if SCT["SSR_슈퍼_크릭"] >= 3:
                         return True
                     
-                    if SCT["SSR_비코_페가수스"] >= 3:
-                        return True
+                    # if SCT["SSR_비코_페가수스"] >= 3:
+                    #     return True
                     
-                    if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
-                        return True
+                    # if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
+                    #     return True
                     
                     if SCT["SSR_하야카와_타즈나"] >= 3:
                         return True
@@ -2071,67 +2071,6 @@ class Umamusume(QThread):
                         # print(position)
                         time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
-
-                    
-
-
-                    # count = 0
-                    # count, position = ImageSearch(img, 뽑기_결과, 208, 48, 97, 47)
-                    # if count and self.is뽑기_결과:
-                    #     updateTime = time.time()
-                    #     self.is뽑기_결과 = False
-                    #     # print("뽑기_결과 " + str(count) + "개")
-                    #     self.log("뽑기_결과 " + str(count) + "개")
-                    #     # print(position)
-                        
-                    #     # 서포터 카드 지금 갯수
-                    #     path = './Supporter_cards'
-                    #     Supporter_cards_now = dict()
-                    #     for a in glob.glob(os.path.join(path, '*')):
-                    #         key = a.replace('.', '/').replace('\\', '/')
-                    #         key = key.split('/')
-                    #         Supporter_cards_now[key[-2]] = 0
-                            
-                    #     for i in range(2):
-                    #         updateTime = time.time()
-                    #         time.sleep(0.25)
-                    #         img = screenshotToOpenCVImg(hwndMain)
-                            
-                    #         for key, value in Supporter_cards.items():
-                    #             count = 0
-                    #             count, position = ImageSearch(img, value, grayscale=False)
-                    #             if count:
-                    #                 if Supporter_cards_now[key] < count:
-                    #                     Supporter_cards_now[key] = count
-                    #                 # print(key + " " + str(Supporter_cards_now[key]) + "개")
-                    #                 self.log(key + " " + str(Supporter_cards_now[key]) + "개")
-                    #                 # print(position)
-                                    
-                    #     # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
-                    #     for key, value in self.Supporter_cards_total.items():
-                    #         self.Supporter_cards_total[key] += Supporter_cards_now[key]
-                        
-                    #     # 총 서포터 카드 갯수
-                    #     total_count = 0
-                    #     for key, value in self.Supporter_cards_total.items():
-                    #         if value:
-                    #             total_count += value
-                        
-                    #     if total_count:
-                    #         # print("-"*50)
-                    #         self.log_main(self.InstanceName, "-"*50)
-                    #         self.log("-"*50)
-                        
-                    #         for key, value in self.Supporter_cards_total.items():
-                    #             if value:
-                    #                 # print(key + ": " + str(value))
-                    #                 self.log_main(self.InstanceName, key + ": " + str(value))
-                    #                 self.log(key + ": " + str(value))
-                        
-                    #         # print("-"*50)
-                    #         self.log_main(self.InstanceName, "-"*50)
-                    #         self.log("-"*50)
-
 
 
 
