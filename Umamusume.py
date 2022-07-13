@@ -10,6 +10,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from ImageVariables import * # 이미지
 import glob, os
 import pickle
+from 이륙_조건 import 이륙_조건
 
 
 class Umamusume(QThread):
@@ -1771,54 +1772,8 @@ class Umamusume(QThread):
                         adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
                         self.is뽑기_이동 = False
                         self.is연동하기 = True
-
-                        # 이륙 조건식 -----------------------------------------------
-                        # 이륙 조건식 -----------------------------------------------
-                        # 이륙 조건식 -----------------------------------------------
-                        SCT = self.Supporter_cards_total
-                                
-                        if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
+                        if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
                             return True
-                        
-                        # if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
-                        #     return True
-                        
-                        # if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
-                        #     return True
-                            
-                        if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                            return True
-                            
-                        if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
-                            return True
-                        
-                        # if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                        #     return True
-                        
-                        # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                        #     return True
-                        
-                        if SCT["SSR_파인_모션"] >= 3:
-                            return True
-                            
-                        if SCT["SSR_슈퍼_크릭"] >= 3:
-                            return True
-                        
-                        # if SCT["SSR_비코_페가수스"] >= 3:
-                        #     return True
-                        
-                        # if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
-                        #     return True
-                        
-                        if SCT["SSR_하야카와_타즈나"] >= 3:
-                            return True
-                        
-                        if SCT["SR_스윕_토쇼"] >= 5 and SCT["SSR_파인_모션"] and SCT["SSR_하야카와_타즈나"] and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_비코_페가수스"] or SCT["SSR_사쿠라_바쿠신_오"]):
-                            return True
-
-                        if SCT["SSR_메지로_파머"] >= 4:
-                            return True
-
 
                     # print(position)
                     time.sleep(1)
@@ -1931,53 +1886,10 @@ class Umamusume(QThread):
                 count, position = ImageSearch(img, 쥬얼이_부족합니다)
                 if count:
                     updateTime = time.time()
-                    # 이륙 조건식 -----------------------------------------------
-                    # 이륙 조건식 -----------------------------------------------
-                    # 이륙 조건식 -----------------------------------------------
-                    SCT = self.Supporter_cards_total
-                                
-                    if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
-                        return True
-                    
-                    # if SCT["SSR_파인_모션"] and SCT["SSR_비코_페가수스"] and SCT["SSR_하야카와_타즈나"]:
-                    #     return True
-                    
-                    # if SCT["SSR_파인_모션"] and SCT["SSR_사쿠라_바쿠신_오"] and SCT["SSR_하야카와_타즈나"]:
-                    #     return True
-                        
-                    if SCT["SSR_파인_모션"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                        return True
-                        
-                    if SCT["SSR_슈퍼_크릭"] >= 2  and (SCT["SSR_파인_모션"] or SCT["SSR_하야카와_타즈나"]):
-                        return True
-                    
-                    # if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                    #     return True
-                    
-                    # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
-                    #     return True
-                    
-                    if SCT["SSR_파인_모션"] >= 3:
-                        return True
-                        
-                    if SCT["SSR_슈퍼_크릭"] >= 3:
-                        return True
-                    
-                    # if SCT["SSR_비코_페가수스"] >= 3:
-                    #     return True
-                    
-                    # if SCT["SSR_사쿠라_바쿠신_오"] >= 3:
-                    #     return True
-                    
-                    if SCT["SSR_하야카와_타즈나"] >= 3:
-                        return True
-                    
-                    if SCT["SR_스윕_토쇼"] >= 5 and SCT["SSR_파인_모션"] and SCT["SSR_하야카와_타즈나"] and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_비코_페가수스"] or SCT["SSR_사쿠라_바쿠신_오"]):
+
+                    if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
                         return True
 
-                    if SCT["SSR_메지로_파머"] >= 4:
-                        return True
-                    
                     
                     self.is서포트_뽑기 = False
                     self.isSSR확정_뽑기 = True
