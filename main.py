@@ -1,6 +1,4 @@
 from pyqtWidget import *
-# pip install chromedriver_autoinstaller
-
 
 if __name__ =="__main__":
     

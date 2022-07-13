@@ -1,5 +1,5 @@
 from OpenCV_imread import imreadUnicode
-from Image_read_dictionary import *
+
 
 # 찾을 이미지
 우마무스메_실행 = imreadUnicode(r"./Images/우마무스메_실행.png")
@@ -88,10 +88,10 @@ TAP = imreadUnicode(r"./Images/TAP.png")
 스킬_획득_돌아간다_화살표 = imreadUnicode(r"./Images/스킬_획득_돌아간다_화살표.png")
 이졔_준비가_다_끝났어요_레이스에_출전해_봐요 = imreadUnicode(r"./Images/이졔_준비가_다_끝났어요_레이스에_출전해_봐요.png")
 출전_화살표 = imreadUnicode(r"./Images/출전_화살표.png")
-숫자1등이_되기_위해서도_말야 = imreadUnicode(r"./Images/1등이_되기_위해서도_말야.png")
+숫자1등이_되기_위해서도_말야 = imreadUnicode(r"./Images/숫자1등이_되기_위해서도_말야.png")
 패덕에서는_레이스에_출전하는_우마무스메의 = imreadUnicode(r"./Images/패덕에서는_레이스에_출전하는_우마무스메의.png")
 우선_예상_표시에_관해서_설명할게요 = imreadUnicode(r"./Images/우선_예상_표시에_관해서_설명할게요.png")
-숫자3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Images/3개의_표시는_전문가들의_예상을_나타내며.png")
+숫자3개의_표시는_전문가들의_예상을_나타내며 = imreadUnicode(r"./Images/숫자3개의_표시는_전문가들의_예상을_나타내며.png")
 능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 = imreadUnicode(r"./Images/능력과_컨디션이_좋을수록_많은_기대를_받게_돼서.png")
 물론_반드시_우승하게_되는_건_아니지만 = imreadUnicode(r"./Images/물론_반드시_우승하게_되는_건_아니지만.png")
 또_패덕에서는_우마무스메의_작전을 = imreadUnicode(r"./Images/또_패덕에서는_우마무스메의_작전을.png")
@@ -205,15 +205,17 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 튜토리얼을_스킵하시겠습니까 = imreadUnicode(r"./Images/튜토리얼을_스킵하시겠습니까.png")
 재시도 = imreadUnicode(r"./Images/재시도.png")
 타이틀_화면으로 = imreadUnicode(r"./Images/타이틀_화면으로.png")
-숫자2단계_인증 = imreadUnicode(r"./Images/2단계_인증.png")
+숫자2단계_인증 = imreadUnicode(r"./Images/숫자2단계_인증.png")
 확인 = imreadUnicode(r"./Images/확인.png")
 앱_닫기 = imreadUnicode(r"./Images/앱_닫기.png")
 날짜가_변경됐습니다 = imreadUnicode(r"./Images/날짜가_변경됐습니다.png")
 추가_데이터를_다운로드합니다 = imreadUnicode(r"./Images/추가_데이터를_다운로드합니다.png")
-숫자4080_에러_코드 = imreadUnicode(r"./Images/4080_에러_코드.png")
+숫자4080_에러_코드 = imreadUnicode(r"./Images/숫자4080_에러_코드.png")
 
 
 # 서포트 카드
+from Image_read_dictionary import *
+
 # SR_스윕_토쇼 = imreadUnicode(r"./Supporter_cards/SR_스윕_토쇼.png")
 # SSR_골드_쉽 = imreadUnicode(r"./Supporter_cards/SSR_골드_쉽.png")
 # SSR_골드_시티 = imreadUnicode(r"./Supporter_cards/SSR_골드_시티.png")
