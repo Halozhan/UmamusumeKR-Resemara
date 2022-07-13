@@ -1584,11 +1584,11 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, 팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠, 84, 619, 352, 123)
+                count, position = ImageSearch(img, 팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠, 84, 619, 352, 123)
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=246, deltaX=5, deltaY=5)
-                    print("팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠 " + str(count) + "개")
-                    self.log("팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠 " + str(count) + "개")
+                    print("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
+                    self.log("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)

@@ -127,7 +127,7 @@ TAP = imreadUnicode(r"./Images/TAP.png")
 팀_편성 = imreadUnicode(r"./Images/팀_편성.png")
 전당_입성_우마무스메로_자신만의_팀을_결성 = imreadUnicode(r"./Images/전당_입성_우마무스메로_자신만의_팀을_결성.png")
 팀_랭크를_올려서_최강의_팀이_되자 = imreadUnicode(r"./Images/팀_랭크를_올려서_최강의_팀이_되자.png")
-팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠 = imreadUnicode(r"./Images/팀_평가를_높이는_것이_팀_경기짱을_공략하는_열쇠.png")
+팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 = imreadUnicode(r"./Images/팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠.png")
 팀_편성_다이와_스칼렛_화살표_클릭 = imreadUnicode(r"./Images/팀_편성_다이와_스칼렛_화살표_클릭.png")
 출전_우마무스메_선택_다이와_스칼렛_화살표 = imreadUnicode(r"./Images/출전_우마무스메_선택_다이와_스칼렛_화살표.png")
 팀_편성_확정_화살표 = imreadUnicode(r"./Images/팀_편성_확정_화살표.png")
@@ -213,8 +213,40 @@ Google_계정으로_로그인 = imreadUnicode(r"./Images/Google_계정으로_로
 숫자4080_에러_코드 = imreadUnicode(r"./Images/숫자4080_에러_코드.png")
 
 
+
+
+
+
+# Images
+# import glob, os
+# from OpenCV_imread import imreadUnicode
+
+# path = './Images'
+# Images = dict()
+
+# for a in glob.glob(os.path.join(path, '*')):
+#     key = a.replace('.', '/').replace('\\', '/')
+#     key = key.split('/')
+#     Images[key[-2]] = imreadUnicode(a)
+
+
+# if __name__ == "__main__":
+#     for i in Images.keys():
+#         print(i, end=", ")
+
+
+
+
+
+
 # 서포트 카드
-from Image_read_dictionary import *
+path = './Supporter_cards'
+Supporter_cards = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Supporter_cards[key[-2]] = imreadUnicode(a)
 
 # SR_스윕_토쇼 = imreadUnicode(r"./Supporter_cards/SR_스윕_토쇼.png")
 # SSR_골드_쉽 = imreadUnicode(r"./Supporter_cards/SSR_골드_쉽.png")
