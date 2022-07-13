@@ -286,7 +286,7 @@ class newTab(QMainWindow):
             self.umamusume = Umamusume(self)
             
             self.startButton.setEnabled(True)
-            self.stopButton.setEnabled(True)
+            self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(True)
             self.isDoneTutorialCheckBox.setEnabled(True)
             
