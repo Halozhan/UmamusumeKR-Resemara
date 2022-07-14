@@ -679,7 +679,7 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, Images["서포트_카드_화살표"]) # 위치
+                count, position = ImageSearch(img, Images["서포트_카드_화살표"], confidence=0.7)
                 if count:
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표 " + str(count) + "개") # 느림
@@ -1843,7 +1843,7 @@ class Umamusume(QThread):
                         key = key.split('/')
                         Supporter_cards_now[key[-2]] = 0
                         
-                    for i in range(2):
+                    for _ in range(2):
                         updateTime = time.time()
                         time.sleep(0.1)
                         img = screenshotToOpenCVImg(hwndMain)
