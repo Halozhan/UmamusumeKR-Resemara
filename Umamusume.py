@@ -1992,8 +1992,8 @@ class Umamusume(QThread):
                     count = 0
                     count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_티켓을_1장_사용해"], confidence=0.6)
                     if count:
-                        print(time.time() - 타임)
-                        타임 = time.time()
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         self.is뽑기_결과 = True
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=117, offsetY=190, deltaX=5, deltaY=5)
