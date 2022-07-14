@@ -1853,7 +1853,7 @@ class Umamusume(QThread):
                         
                         for key, value in Supporter_cards.items():
                             count = 0
-                            count, position = ImageSearch(img, value, grayscale=False)
+                            count, position = ImageSearch(img, value, 46, 122, 451, 715, grayscale=False)
                             if count:
                                 if Supporter_cards_now[key] < count:
                                     Supporter_cards_now[key] = count
