@@ -238,6 +238,7 @@ class Umamusume(QThread):
                 key = key.split('/')
                 self.Supporter_cards_total[key[-2]] = 0
 
+        # 타임 = time.time()
 
         updateTime = time.time() # 타임 아웃 터치
 
@@ -275,6 +276,7 @@ class Umamusume(QThread):
                     # print("SKIP " + str(count) + "개")
                     self.log("SKIP " + str(count) + "개")
                     # print(position)
+                    time.sleep(0.3)
                     continue
                 
                 count = 0
@@ -1843,7 +1845,7 @@ class Umamusume(QThread):
                         
                     for i in range(2):
                         updateTime = time.time()
-                        time.sleep(0.25)
+                        time.sleep(0.1)
                         img = screenshotToOpenCVImg(hwndMain)
                         
                         for key, value in Supporter_cards.items():
@@ -1931,62 +1933,74 @@ class Umamusume(QThread):
                     # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
-
+                
+                # 타임 = time.time()
+                
                 if self.parent.isDoneTutorialCheckBox.isChecked() and self.isSSR확정_뽑기:
                     count = 0
                     count, position = ImageSearch(img, Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
                     if count:
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
                         # print("서포트_카드_뽑기 " + str(count) + "개")
                         self.log("서포트_카드_뽑기 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
                     count, position = ImageSearch(img, Images["숫자3성_확정"], confidence=0.6)
                     if count:
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=247, deltaX=5, deltaY=5)
                         # print("숫자3성_확정 " + str(count) + "개")
                         self.log("숫자3성_확정 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
                     count, position = ImageSearch(img, Images["SSR_확정_스타트_대시"], confidence=0.6)
                     if count:
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=248, deltaX=5, deltaY=5)
                         # print("SSR_확정_스타트_대시 " + str(count) + "개")
                         self.log("SSR_확정_스타트_대시 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
                     count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_뽑기"], confidence=0.6)
                     if count:
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=195, deltaX=5, deltaY=5)
                         # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
                     count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_티켓을_1장_사용해"], confidence=0.6)
                     if count:
+                        # print(time.time() - 타임)
+                        # 타임 = time.time()
                         updateTime = time.time()
                         self.is뽑기_결과 = True
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=117, offsetY=190, deltaX=5, deltaY=5)
                         # print("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(3)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -1997,9 +2011,8 @@ class Umamusume(QThread):
                         # print("뽑기_결과_OK " + str(count) + "개")
                         self.log("뽑기_결과_OK " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(3)
                         img = screenshotToOpenCVImg(hwndMain)
-
 
 
                     
