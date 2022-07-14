@@ -741,9 +741,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["다음_화살표"], 195, 742, 120, 117)
+                count, position = ImageSearch(img, Images["다음_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음_화살표 " + str(count) + "개")
                     self.log("다음_화살표 " + str(count) + "개")
                     print(position)
@@ -902,9 +902,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["육성_시작_화살표"], 184, 732, 160, 129)
+                count, position = ImageSearch(img, Images["육성_시작_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_시작_화살표 " + str(count) + "개")
                     self.log("육성_시작_화살표 " + str(count) + "개")
                     print(position)
