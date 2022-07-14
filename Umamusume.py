@@ -1843,7 +1843,7 @@ class Umamusume(QThread):
                         key = key.split('/')
                         Supporter_cards_now[key[-2]] = 0
                         
-                    for i in range(2):
+                    for _ in range(2):
                         updateTime = time.time()
                         time.sleep(0.1)
                         img = screenshotToOpenCVImg(hwndMain)
