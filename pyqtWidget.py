@@ -9,9 +9,6 @@ from Change_MAC import *
 from sleepTime import sleepTime
 from datetime import datetime
 
-#UI파일 연결
-#단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-# form_class = uic.loadUiType("untitled.ui")[0]
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
@@ -38,10 +35,10 @@ class WindowClass(QMainWindow):
         self.TaskViewVBox.addWidget(self.CPU_now)
         self.TaskViewVBox.addWidget(self.Latency)
 
-        self.StopButton = QPushButton("모두 정지")
+        self.AllStopButton = QPushButton("모두 정지")
         
         self.MenuHBox.addLayout(self.TaskViewVBox)
-        self.MenuHBox.addWidget(self.StopButton) # ----
+        self.MenuHBox.addWidget(self.AllStopButton) # ----
 
 
         self.timeRateGroupBox = QGroupBox("부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐") # ---------
@@ -74,6 +71,7 @@ class WindowClass(QMainWindow):
 
         self.timeRateGroupBox.setLayout(self.timeRateVBox) # --------------------------------
 
+        self.ManualButton = QRadioButton("수동 버전. 직접 MAC주소 초기화하고 각각 시작을 다시 눌러주세요.")
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
         self.ASUSRadioButton.setChecked(True)
         self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
@@ -84,6 +82,7 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.timeRateGroupBox)
 
+        self.verticalBox.addWidget(self.ManualButton)
         self.verticalBox.addWidget(self.ASUSRadioButton)
         self.verticalBox.addWidget(self.PAGRadioButton)
         
@@ -108,10 +107,11 @@ class WindowClass(QMainWindow):
         self.timeRateSlider1.valueChanged.connect(self.timeRateFunction)
         self.timeRateSlider2.valueChanged.connect(self.timeRateFunction)
 
-        self.StopButton.clicked.connect(self.AllStopInstance)
+        self.AllStopButton.clicked.connect(self.AllStopInstance)
 
-        self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
-        self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
+        self.ManualButton.clicked.connect(self.ManualRadioFunction)
+        self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
+        self.PAGRadioButton.clicked.connect(self.PAGRadioFunction)
     
     def AllStopInstance(self):
         for i in self.Tab:
@@ -139,20 +139,19 @@ class WindowClass(QMainWindow):
             i.umamusume.sleepTime = Time
     
     @pyqtSlot()
-    def ASUSCheckBoxFunction(self):
+    def ManualRadioFunction(self):
+        if self.ManualButton.isChecked():
+            self.logs.append("수동 조작이 활성화됨")
+
+    @pyqtSlot()
+    def ASUSRadioFunction(self):
         if self.ASUSRadioButton.isChecked():
             self.logs.append("ASUSRadioButton가 활성화됨")
-        else:
-            self.logs.append("ASUSRadioButton가 비활성화됨")
         
-    
     @pyqtSlot()
-    def PAGCheckBoxFunction(self):
+    def PAGRadioFunction(self):
         if self.PAGRadioButton.isChecked():
             self.logs.append("PAGRadioButton가 활성화됨")
-        else:
-            self.logs.append("PAGRadioButton가 비활성화됨")
-            
     
     @pyqtSlot()
     def MAC_Address_Change(self):
@@ -163,6 +162,9 @@ class WindowClass(QMainWindow):
         now = now.strftime("%Y-%m-%d %H:%M:%S")
         self.logs.append(now + " MAC 주소 변경 중")
         print(now + " MAC 주소 변경 중")
+        if self.ManualButton.isChecked():
+            print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
+            self.AllStopInstance()
         if self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
         if self.ASUSRadioButton.isChecked():
