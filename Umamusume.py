@@ -275,6 +275,7 @@ class Umamusume(QThread):
                     # print("SKIP " + str(count) + "개")
                     self.log("SKIP " + str(count) + "개")
                     # print(position)
+                    time.sleep(0.3)
                     continue
                 
                 count = 0
@@ -1941,7 +1942,7 @@ class Umamusume(QThread):
                         # print("서포트_카드_뽑기 " + str(count) + "개")
                         self.log("서포트_카드_뽑기 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -1952,7 +1953,7 @@ class Umamusume(QThread):
                         # print("숫자3성_확정 " + str(count) + "개")
                         self.log("숫자3성_확정 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -1963,7 +1964,7 @@ class Umamusume(QThread):
                         # print("SSR_확정_스타트_대시 " + str(count) + "개")
                         self.log("SSR_확정_스타트_대시 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -1974,7 +1975,7 @@ class Umamusume(QThread):
                         # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
@@ -1997,9 +1998,8 @@ class Umamusume(QThread):
                         # print("뽑기_결과_OK " + str(count) + "개")
                         self.log("뽑기_결과_OK " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.5)
+                        time.sleep(2)
                         img = screenshotToOpenCVImg(hwndMain)
-
 
 
                     
