@@ -9,9 +9,9 @@ class sleepTime(QThread):
     
     def __init__(self, parent = None):
         super().__init__()
-        
         if parent is not None:
             self.parent = parent
+            
         self.isAlive = True
         self.sleepTime = 0.5
         self.timeRate1 = 1.8
