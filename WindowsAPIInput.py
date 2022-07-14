@@ -3,8 +3,11 @@ import win32con
 import win32gui
 
 def GetHwnd(windowName):
-    hwnd = win32gui.FindWindow(None, windowName) # 윈도우 이름으로 hwnd 찾기
-    return hwnd
+    try:
+        hwnd = win32gui.FindWindow(None, windowName) # 윈도우 이름으로 hwnd 찾기
+        return hwnd
+    except:
+        pass
 
 
 def SetWindowSize(hwnd, width, height):
@@ -20,29 +23,37 @@ def SetWindowSize(hwnd, width, height):
 
 
 def WindowsAPIKeyboardInput(hwnd, key):
-    hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
-  
-    win32api.PostMessage(hwndChild, win32con.WM_KEYDOWN, key, 0) 
-    win32api.PostMessage(hwndChild, win32con.WM_KEYUP, key, 0)
+    try:
+        hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
+    
+        win32api.PostMessage(hwndChild, win32con.WM_KEYDOWN, key, 0) 
+        win32api.PostMessage(hwndChild, win32con.WM_KEYUP, key, 0)
+    except:
+        pass
         
         
 def WindowsAPIKeyboardInputString(hwnd, contents):
-    hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
+    try:
+        hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
 
-    for char in contents: # 입력할 내용
-        win32api.PostMessage(hwndChild, win32con.WM_CHAR, ord(char), 0)
+        for char in contents: # 입력할 내용
+            win32api.PostMessage(hwndChild, win32con.WM_CHAR, ord(char), 0)
+    except:
+        pass
 
 
-def WindowsAPIMouseClick(hwnd, x, y):
-    
-    # hwndChild = win32gui.FindWindowEx(hwndMain, None, "HD-Player", None)
-    hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
-    # hwndChild = win32gui.FindWindowEx(hwndMain, None, None, None)
-    print(hwndChild)
-    
-    position = win32api.MAKELONG(x, y)
-    win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, position)
-    win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, position)
+def WindowsAPIMouseClick(hwnd, x, y): # 미구현
+    try:
+        # hwndChild = win32gui.FindWindowEx(hwndMain, None, "HD-Player", None)
+        hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD) # hwnd의 하위
+        # hwndChild = win32gui.FindWindowEx(hwndMain, None, None, None)
+        print(hwndChild)
+        
+        position = win32api.MAKELONG(x, y)
+        win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, position)
+        win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, position)
+    except:
+        pass
 
 
 if __name__ == "__main__":

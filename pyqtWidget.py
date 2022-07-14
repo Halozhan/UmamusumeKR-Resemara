@@ -105,12 +105,10 @@ class WindowClass(QMainWindow):
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
 
         # Event
-
         self.timeRateSlider1.valueChanged.connect(self.timeRateFunction)
         self.timeRateSlider2.valueChanged.connect(self.timeRateFunction)
 
         self.StopButton.clicked.connect(self.AllStopInstance)
-
 
         self.ASUSRadioButton.clicked.connect(self.ASUSCheckBoxFunction)
         self.PAGRadioButton.clicked.connect(self.PAGCheckBoxFunction)
@@ -175,7 +173,6 @@ class WindowClass(QMainWindow):
 
 class newTab(QMainWindow):
     AllStop = pyqtSignal()
-    # recvLog_Main = pyqtSignal()
     
     def __init__(self, parent=None):
         super().__init__()
@@ -215,20 +212,11 @@ class newTab(QMainWindow):
         
         # 커스텀 시그널 정의
         self.AllStop.connect(self.parent.MAC_Address_Change)
-        # self.recvLog_Main.connect(self.parent.sendLog)
                         
     @pyqtSlot(str)
     def sendLog(self, text):
         self.logs.append(text)
 
-    # @pyqtSlot(str)
-    # def sendLog_Main(self, text):
-    #     self.logs.append(text)
-        
-    @pyqtSlot()
-    def Error_4080Function(self):
-        self.AllStop.emit()
-        
         
     def newTab(self):
         
@@ -247,8 +235,6 @@ class newTab(QMainWindow):
         self.vbox.addLayout(self.hbox1)
         self.vbox.addLayout(self.hbox2)
         self.vbox.addWidget(self.logs)
-        
-        # vbox.addWidget()
         
         self.tab = QWidget()
         self.tab.setLayout(self.vbox)

@@ -2,14 +2,37 @@ import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
+from OpenCV_imread import imreadUnicode
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QThread, pyqtSignal
-from ImageVariables import * # 이미지
 import glob, os
 import pickle
 from 이륙_조건 import 이륙_조건
+
+
+# Images
+path = './Images'
+Images = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Images[key[-2]] = imreadUnicode(a)
+
+if __name__ == "__main__":
+    for i in Images.keys():
+        print(i, end=", ")
+
+# 서포트 카드
+path = './Supporter_cards'
+Supporter_cards = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Supporter_cards[key[-2]] = imreadUnicode(a)
 
 
 class Umamusume(QThread):
@@ -19,54 +42,48 @@ class Umamusume(QThread):
     
     def __init__(self, parent=None):
         super().__init__()
-        self.parent = parent
+        if parent is not None:
+            self.parent = parent
         
         self.isAlive = False
-        
-        try:
-            self.sleepTime = self.parent.sleepTime
-        except:
-            self.sleepTime = 0.5
+        self.sleepTime = 0.5
 
         self.isStopped = False
         self.isDoingMAC_Change = False
         
 
-        # 기본 값 - pickle 불러오기 전
-        self.resetCount = 0 # -- pickle --
-        self.is시작하기 = False # -- pickle --
-        self.isPAUSED = False # -- pickle --
-        self.is선물_이동 = True # -- pickle --
-        self.is뽑기_이동 = True # -- pickle --
-        self.is서포트_뽑기 = False # -- pickle --
-        self.isSSR확정_뽑기 = False # -- pickle --
-        self.is뽑기_결과 = True # -- pickle --
-        self.is연동하기 = False # -- pickle --
-        self.is초기화하기 = False # -- pickle --
+        # 기본 값 - pickle 불러오기 전 ---
+        self.resetCount = 0
+        self.is시작하기 = False
+        self.isPAUSED = False
+        self.is선물_이동 = True
+        self.is뽑기_이동 = True
+        self.is서포트_뽑기 = False
+        self.isSSR확정_뽑기 = False
+        self.is뽑기_결과 = True
+        self.is연동하기 = False
+        self.is초기화하기 = False
         
         # 서포트 카드 총 갯수
         path = './Supporter_cards'
-        self.Supporter_cards_total = dict() # -- pickle --
+        self.Supporter_cards_total = dict()
         for a in glob.glob(os.path.join(path, '*')):
             key = a.replace('.', '/').replace('\\', '/')
             key = key.split('/')
             self.Supporter_cards_total[key[-2]] = 0
+        # --------------------------------
 
 
         # 커스텀 시그널 정의
-        
         self.recvLog.connect(self.parent.sendLog)
         self.recvLog_Main.connect(self.parent.parent.sendLog_Main)
-        self.Error_4080.connect(self.parent.Error_4080Function)
-       
+        self.Error_4080.connect(self.parent.parent.MAC_Address_Change)
+
     def log(self, text):
         self.recvLog.emit(text)
 
     def log_main(self, id, text):
         self.recvLog_Main.emit(str(id), str(text))
-    
-    def Error_4080Function(self):
-        self.Error_4080.emit()
         
     def run(self):
         self.isAlive = True
@@ -125,7 +142,7 @@ class Umamusume(QThread):
                 break
 
             if isSuccessed == "4080_에러_코드":
-                self.Error_4080Function()
+                self.Error_4080.emit()
                 time.sleep(20)
             
             # print("-"*50)
