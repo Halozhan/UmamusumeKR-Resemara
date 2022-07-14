@@ -1,29 +1,5 @@
-import glob, os
-from OpenCV_imread import imreadUnicode
-
-# Images
-path = './Images'
-Images = dict()
-
-for a in glob.glob(os.path.join(path, '*')):
-    key = a.replace('.', '/').replace('\\', '/')
-    key = key.split('/')
-    Images[key[-2]] = imreadUnicode(a)
-
-if __name__ == "__main__":
-    for i in Images.keys():
-        print(i, end=", ")
-
-
-# 서포트 카드
-path = './Supporter_cards'
-Supporter_cards = dict()
-
-for a in glob.glob(os.path.join(path, '*')):
-    key = a.replace('.', '/').replace('\\', '/')
-    key = key.split('/')
-    Supporter_cards[key[-2]] = imreadUnicode(a)
-
+# import glob, os
+# from OpenCV_imread import imreadUnicode
 
 # 구버전
 

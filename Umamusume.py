@@ -2,14 +2,37 @@ import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
+from OpenCV_imread import imreadUnicode
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QThread, pyqtSignal
-from ImageVariables import * # 이미지
 import glob, os
 import pickle
 from 이륙_조건 import 이륙_조건
+
+
+# Images
+path = './Images'
+Images = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Images[key[-2]] = imreadUnicode(a)
+
+if __name__ == "__main__":
+    for i in Images.keys():
+        print(i, end=", ")
+
+# 서포트 카드
+path = './Supporter_cards'
+Supporter_cards = dict()
+
+for a in glob.glob(os.path.join(path, '*')):
+    key = a.replace('.', '/').replace('\\', '/')
+    key = key.split('/')
+    Supporter_cards[key[-2]] = imreadUnicode(a)
 
 
 class Umamusume(QThread):
