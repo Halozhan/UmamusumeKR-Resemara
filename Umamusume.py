@@ -251,10 +251,10 @@ class Umamusume(QThread):
                 adbInput.BlueStacksClick(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
                 time.sleep(2)
             
-            # 잠수 클릭 40초 이상 앱정지
-            if self.parent.isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 40:
-                # print("40초 정지 앱 강제종료!!! "*3)
-                self.log("40초 정지 앱 강제종료!!! "*3)
+            # 잠수 클릭 60초 이상 앱정지
+            if self.parent.isDoneTutorialCheckBox.isChecked() and time.time() >= updateTime + 60:
+                # print("60초 정지 앱 강제종료!!! "*3)
+                self.log("60초 정지 앱 강제종료!!! "*3)
                 WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 time.sleep(2)
                 
@@ -741,9 +741,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["다음_화살표"], 195, 742, 120, 117)
+                count, position = ImageSearch(img, Images["다음_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음_화살표 " + str(count) + "개")
                     self.log("다음_화살표 " + str(count) + "개")
                     print(position)
@@ -902,9 +902,9 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["육성_시작_화살표"], 184, 732, 160, 129)
+                count, position = ImageSearch(img, Images["육성_시작_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_시작_화살표 " + str(count) + "개")
                     self.log("육성_시작_화살표 " + str(count) + "개")
                     print(position)
@@ -1783,6 +1783,7 @@ class Umamusume(QThread):
                     updateTime = time.time()
                     # print("프리티_더비_뽑기 " + str(count) + "개")
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     if self.isSSR확정_뽑기 == False:
                         adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
                         self.is서포트_뽑기 = True
@@ -1806,6 +1807,7 @@ class Umamusume(QThread):
                     # print("서포트_카드_뽑기 " + str(count) + "개")
                     self.log("서포트_카드_뽑기 " + str(count) + "개")
                     # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
@@ -1814,7 +1816,7 @@ class Umamusume(QThread):
                     break
                 
                 count = 0
-                count, position = ImageSearch(img, Images["무료_쥬얼부터_먼저_사용됩니다"])
+                count, position = ImageSearch(img, Images["무료_쥬얼부터_먼저_사용됩니다"], 126, 570, 280, 76)
                 if count:
                     updateTime = time.time()
                     self.is뽑기_결과 = True
@@ -1827,13 +1829,14 @@ class Umamusume(QThread):
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = 0
-                count, position = ImageSearch(img, Images["뽑기_결과"])
+                count, position = ImageSearch(img, Images["뽑기_결과"], 208, 35, 97, 247)
                 if count and self.is뽑기_결과:
                     updateTime = time.time()
                     self.is뽑기_결과 = False
                     # print("뽑기_결과 " + str(count) + "개")
                     self.log("뽑기_결과 " + str(count) + "개")
                     # print(position)
+                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     
                     # 서포터 카드 지금 갯수
                     path = './Supporter_cards'
@@ -1850,7 +1853,7 @@ class Umamusume(QThread):
                         
                         for key, value in Supporter_cards.items():
                             count = 0
-                            count, position = ImageSearch(img, value, grayscale=False)
+                            count, position = ImageSearch(img, value, 46, 122, 451, 715, grayscale=False)
                             if count:
                                 if Supporter_cards_now[key] < count:
                                     Supporter_cards_now[key] = count
@@ -1887,7 +1890,7 @@ class Umamusume(QThread):
                     break
 
                 count = 0
-                count, position = ImageSearch(img, Images["한_번_더_뽑기"])
+                count, position = ImageSearch(img, Images["한_번_더_뽑기"], 267, 675, 247, 318)
                 if count:
                     updateTime = time.time()
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
@@ -1901,7 +1904,7 @@ class Umamusume(QThread):
             
             if self.parent.isDoneTutorialCheckBox.isChecked() and self.is초기화하기 == False:
                 count = 0
-                count, position = ImageSearch(img, Images["쥬얼이_부족합니다"])
+                count, position = ImageSearch(img, Images["쥬얼이_부족합니다"], 165, 586, 207, 41)
                 if count:
                     updateTime = time.time()
 
@@ -1951,7 +1954,7 @@ class Umamusume(QThread):
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
-                    count, position = ImageSearch(img, Images["숫자3성_확정"], confidence=0.6)
+                    count, position = ImageSearch(img, Images["숫자3성_확정"], 144, 558, 235, 108, confidence=0.6)
                     if count:
                         # print(time.time() - 타임)
                         # 타임 = time.time()
@@ -1960,11 +1963,11 @@ class Umamusume(QThread):
                         # print("숫자3성_확정 " + str(count) + "개")
                         self.log("숫자3성_확정 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.8)
+                        time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
-                    count, position = ImageSearch(img, Images["SSR_확정_스타트_대시"], confidence=0.6)
+                    count, position = ImageSearch(img, Images["SSR_확정_스타트_대시"], 144, 558, 235, 108, confidence=0.6)
                     if count:
                         # print(time.time() - 타임)
                         # 타임 = time.time()
@@ -1973,11 +1976,11 @@ class Umamusume(QThread):
                         # print("SSR_확정_스타트_대시 " + str(count) + "개")
                         self.log("SSR_확정_스타트_대시 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.8)
+                        time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
-                    count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_뽑기"], confidence=0.6)
+                    count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_뽑기"], 144, 558, 235, 108, confidence=0.6)
                     if count:
                         # print(time.time() - 타임)
                         # 타임 = time.time()
@@ -1986,11 +1989,11 @@ class Umamusume(QThread):
                         # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         # print(position)
-                        time.sleep(0.8)
+                        time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                     
                     count = 0
-                    count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_티켓을_1장_사용해"], confidence=0.6)
+                    count, position = ImageSearch(img, Images["SSR_확정_메이크_데뷔_티켓을_1장_사용해"], 98, 449, 342, 35, confidence=0.6)
                     if count:
                         # print(time.time() - 타임)
                         # 타임 = time.time()
