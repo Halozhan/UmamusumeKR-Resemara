@@ -17,7 +17,9 @@ def Change_Mac_Address():
         chromedriver_autoinstaller.install(path="./ChromeDriver")
     
     options = webdriver.ChromeOptions()
+    options.add_argument("headless")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    
     driver = webdriver.Chrome(driver_path, options=options)
 
     try:
