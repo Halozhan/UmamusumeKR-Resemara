@@ -23,4 +23,5 @@ if __name__ == '__main__':
             # print(parent_conn.readable)
         if test:
             print(parent_conn.recv())   # prints "[42, None, 'send from child_conn']"
+        
     p.join()

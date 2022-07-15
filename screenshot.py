@@ -50,5 +50,10 @@ def screenshot(hwnd, isExport):
     
     
 if __name__ == "__main__": # 이미지 추출 테스트
-    hwndMain = win32gui.FindWindow(None, "Bluestacks Dev")
-    screenshot(hwndMain, True)
+    hwndMain = win32gui.FindWindow(None, "Bluestacks 5")
+    import time
+    now = time.time()
+    while True:
+        screenshot(hwndMain, False)
+        print(str(round((time.time()  - now)*1000, 6)) + "ms")
+        now = time.time()
