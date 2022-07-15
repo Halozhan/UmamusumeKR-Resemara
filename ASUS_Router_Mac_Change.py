@@ -16,7 +16,9 @@ def Change_Mac_Address():
         print("install the ChromeDriver. VER: " + chrome_ver)
         chromedriver_autoinstaller.install(path="./ChromeDriver")
     
-    driver = webdriver.Chrome(driver_path)
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    driver = webdriver.Chrome(driver_path, options=options)
 
     try:
         driver.get(GATEWAY_ADDRESS)
@@ -63,6 +65,8 @@ def Change_Mac_Address():
         driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
         
         time.sleep(7)
+
+        driver.quit()
     except:
         pass
     
