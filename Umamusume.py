@@ -6,10 +6,11 @@ from OpenCV_imread import imreadUnicode
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal, QObject
 import glob, os
 import pickle
 from 이륙_조건 import 이륙_조건
+import multiprocessing as mp
 
 
 # Images
@@ -35,7 +36,7 @@ for a in glob.glob(os.path.join(path, '*')):
     Supporter_cards[key[-2]] = imreadUnicode(a)
 
 
-class Umamusume(QThread):
+class Umamusume(QObject):
     recvLog = pyqtSignal(str)
     recvLog_Main = pyqtSignal(str, str)
     Error_4080 = pyqtSignal()
@@ -45,6 +46,9 @@ class Umamusume(QThread):
         if parent is not None:
             self.parent = parent
         
+        self.pipeParent, self.pipeChild = mp.Pipe()
+        # self.pipeParent.send("ㅎㅇ")
+
         self.isAlive = False
         self.sleepTime = 0.5
 
@@ -84,8 +88,13 @@ class Umamusume(QThread):
 
     def log_main(self, id, text):
         self.recvLog_Main.emit(str(id), str(text))
+
+    def start(self):
+        self.p = mp.Process(name=str(self.parent.InstancePort), target=self.run_a, args=(self.pipeChild, ),daemon=True)
+        self.p.start()
         
-    def run(self):
+        
+    def run_a(self, conn):
         self.isAlive = True
         self.isStopped = False
         
