@@ -1911,9 +1911,12 @@ class Umamusume(QThread):
                     if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
                         return True
 
-                    
-                    self.is서포트_뽑기 = False
-                    self.isSSR확정_뽑기 = True
+                    if self.parent.isSSRGachaCheckBox.isChecked():
+                        self.is서포트_뽑기 = False
+                        self.isSSR확정_뽑기 = True
+                    else:
+                        self.is뽑기_이동 = False
+                        self.is연동하기 = True
                     
                     adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
                     time.sleep(0.5)
@@ -1939,7 +1942,7 @@ class Umamusume(QThread):
                 
                 # 타임 = time.time()
                 
-                if self.parent.isDoneTutorialCheckBox.isChecked() and self.isSSR확정_뽑기:
+                if self.parent.isDoneTutorialCheckBox.isChecked() and self.parent.isSSRGachaCheckBox.isChecked() and self.isSSR확정_뽑기:
                     count = 0
                     count, position = ImageSearch(img, Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
                     if count:

@@ -174,8 +174,6 @@ class WindowClass(QMainWindow):
         
 
 class newTab(QMainWindow):
-    AllStop = pyqtSignal()
-    
     def __init__(self, parent=None):
         super().__init__()
         # 변수 초기화
@@ -194,6 +192,8 @@ class newTab(QMainWindow):
         self.resetButton = QPushButton("초기화", self)
         self.isDoneTutorialCheckBox = QCheckBox("튜토리얼 스킵 여부", self)
         self.isDoneTutorialCheckBox.setChecked(True)
+        self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
+        self.isSSRGachaCheckBox.setChecked(True)
         
         self.logs = QTextBrowser()
 
@@ -211,10 +211,11 @@ class newTab(QMainWindow):
         self.stopButton.clicked.connect(self.stopFunction)
         self.resetButton.clicked.connect(self.resetFunction)
         self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
+        self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaFunction)
         
         # 커스텀 시그널 정의
-        self.AllStop.connect(self.parent.MAC_Address_Change)
-                        
+        # 없음
+
     @pyqtSlot(str)
     def sendLog(self, text):
         self.logs.append(text)
@@ -231,6 +232,7 @@ class newTab(QMainWindow):
         self.hbox2.addWidget(self.stopButton)
         self.hbox2.addWidget(self.resetButton)
         self.hbox2.addWidget(self.isDoneTutorialCheckBox)
+        self.hbox2.addWidget(self.isSSRGachaCheckBox)
         
         self.vbox = QVBoxLayout()
         
@@ -250,6 +252,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(False)
             self.isDoneTutorialCheckBox.setEnabled(False)
+            self.isSSRGachaCheckBox.setEnabled(False)
             return
         
         self.logs.append("-"*50)
@@ -260,6 +263,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(False)
             self.isDoneTutorialCheckBox.setEnabled(False)
+            self.isSSRGachaCheckBox.setEnabled(False)
             
         else:
             self.SelectedInstance = self.InstanceComboBox.currentText()
@@ -277,6 +281,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(True)
             self.isDoneTutorialCheckBox.setEnabled(True)
+            self.isSSRGachaCheckBox.setEnabled(True)
             
         self.logs.append("-"*50)
             
@@ -341,6 +346,15 @@ class newTab(QMainWindow):
             self.logs.append("튜토리얼 스킵 활성화!!")
         else:
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
+        self.logs.append("-"*50)
+    
+    
+    def isSSRGachaFunction(self):
+        self.logs.append("-"*50)
+        if self.isSSRGachaCheckBox.isChecked():
+            self.logs.append("SSR 확정권 사용!!")
+        else:
+            self.logs.append("SSR 확정권 사용안함!!")
         self.logs.append("-"*50)
     
         
