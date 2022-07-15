@@ -11,7 +11,8 @@ def Change_Mac_Address():
     chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
     driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
     if os.path.exists(driver_path):
-        print("ChromeDriver is installed: " + driver_path)
+        # print("ChromeDriver is installed: " + driver_path)
+        pass
     else:
         print("install the ChromeDriver. VER: " + chrome_ver)
         chromedriver_autoinstaller.install(path="./ChromeDriver")
@@ -45,7 +46,7 @@ def Change_Mac_Address():
         asdf = MAC_Address
         asdf = int("0x"+asdf, 16)
         asdf = asdf + 1
-        print(asdf)
+        # print(asdf)
         asdf = hex(asdf)
         asdf = asdf.replace("0x", "")
         index = 0
@@ -60,7 +61,7 @@ def Change_Mac_Address():
             index += 1
         MAC_Address = address[:-1]
             
-        print(MAC_Address)
+        print("New MAC Address:", MAC_Address)
         MACAdd.clear()
         MACAdd.send_keys(MAC_Address)
 
