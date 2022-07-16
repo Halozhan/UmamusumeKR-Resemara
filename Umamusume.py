@@ -20,8 +20,7 @@ class Umamusume(QObject):
         if parent is not None:
             self.parent: "newTab" = parent
 
-        self.TotalResetCount = None
-        self.ResetCount = None
+        self.ResetCount = -1
 
         # 커스텀 시그널 정의
         self.sendLog.connect(self.parent.recvLog)
@@ -67,44 +66,22 @@ class Umamusume(QObject):
                 self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
                 # print(recv[1])
 
+            elif recv[0] == "sendResetCount":
+                self.ResetCount = recv[1]
+                # print(recv[1])
             elif recv[0] == "requestTotalResetCount":
-                self.TotalResetCount = None
                 TotalResetCount = 0
                 for i in self.parent.parent.Tab:
                     if i.stopButton.isEnabled():
-                        TotalResetCount += i.umamusume.ResetCount
+                        if not (i.umamusume.ResetCount == -1):
+                            TotalResetCount += i.umamusume.ResetCount
                 self.toChild.put(["sendTotalResetCount", TotalResetCount])
-                # print(recv[1])
-            elif recv[0] == "sendResetCount":
-                self.ResetCount = recv[1]
                 # print(recv[1])
 
             elif recv[0] == "숫자4080_에러_코드":
                 self.Error_4080.emit()
                 # print(recv[1])
-            
 
-    # def TotalResetCountFunction(self):
-    #     TotalResetCount = 0
-    #     for i in self.parent.parent.Tab:
-    #         if i.stopButton.isEnabled(): # 시작된 인스턴스만
-    #             i.umamusume.toChild.put(["requestResetCount"])
-    #     탈출 = False
-    #     while True: # 데이터를 계속 새로 받아옴
-    #         for i in self.parent.parent.Tab:
-    #             if i.stopButton.isEnabled(): # 시작된 인스턴스만
-    #                 print(i.umamusume.ResetCount)
-    #                 if not (i.umamusume.ResetCount == -1):
-    #                     탈출 = True
-    #                     break
-    #                 print("무한")
-    #                 TotalResetCount += i.umamusume.ResetCount
-    #             print("보냈음 ㅇㅇ")
-    #             time.sleep(0.5)
-    #         if 탈출:
-    #             break
-    #     self.toChild.put(["sendTotalResetCount", TotalResetCount])
-    #     print("받았냐?")
 
     def start(self):
         # 초기화
@@ -115,12 +92,9 @@ class Umamusume(QObject):
         self.toChild.put(["InstancePort", self.parent.InstancePort])
         self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
         self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
-        # self.p = mp.Process(name=str(self.parent.InstancePort), target=self.run_a, args=(self.pipeChild, ), daemon=True)
+
         self.uma = UmaProcess()
         self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
-        # self.pipeParent.send("ㅎㅇ1")
-        # self.pipeParent.send("ㅎㅇ2")
-        # self.pipeParent.send("ㅎㅇ3")
         self.process.start()
 
         self.Receiver = Thread(target=self.Receive_Worker, daemon=True)

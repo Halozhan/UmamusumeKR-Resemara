@@ -72,9 +72,6 @@ class UmaProcess():
                 self.isSSRGacha = recv[1]
                 # print(recv[1])
 
-            elif recv[0] == "requestResetCount":
-                self.toParent.put(["sendResetCount", self.resetCount])
-                # print(recv[1])
             elif recv[0] == "sendTotalResetCount":
                 self.totalResetCount = recv[1]
                 self.waiting = False
@@ -205,28 +202,30 @@ class UmaProcess():
             
         # print("리세 종료")
 
-        self.toParent.put(["InstanceComboBox.setEnabled", True])
-        # self.parent.InstanceComboBox.setEnabled(True)
-        self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-        # self.parent.InstanceRefreshButton.setEnabled(True)
+        # self.toParent.put(["InstanceComboBox.setEnabled", True])
+        # # self.parent.InstanceComboBox.setEnabled(True)
+        # self.toParent.put(["InstanceRefreshButton.setEnabled", True])
+        # # self.parent.InstanceRefreshButton.setEnabled(True)
         
-        self.toParent.put(["startButton.setEnabled", True])
-        # self.parent.startButton.setEnabled(True)
-        self.toParent.put(["stopButton.setEnabled", False])
-        # self.parent.stopButton.setEnabled(False)
-        self.toParent.put(["resetButton.setEnabled", True])
-        # self.parent.resetButton.setEnabled(True)
-        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
-        # self.parent.isDoneTutorialCheckBox.setEnabled(True)
+        # self.toParent.put(["startButton.setEnabled", True])
+        # # self.parent.startButton.setEnabled(True)
+        # self.toParent.put(["stopButton.setEnabled", False])
+        # # self.parent.stopButton.setEnabled(False)
+        # self.toParent.put(["resetButton.setEnabled", True])
+        # # self.parent.resetButton.setEnabled(True)
+        # self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
+        # # self.parent.isDoneTutorialCheckBox.setEnabled(True)
 
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
         self.isStopped = True
+        while self.isStopped:
+            time.sleep(0.005)
 
     def terminate(self):
         self.isAlive = False
         while self.isStopped == False:
-            pass
+            time.sleep(0.005)
         try:
             os.makedirs("./Saved_Data")
         except:
@@ -271,6 +270,8 @@ class UmaProcess():
 
         self.toParent.close()
         self.toChild.close()
+
+        self.isStopped = False
     
 
     def main(self):
@@ -319,6 +320,7 @@ class UmaProcess():
                 key = key.split('/')
                 self.Supporter_cards_total[key[-2]] = 0
 
+        self.toParent.put(["sendResetCount", self.resetCount]) # 리세 횟수 발신
         # 타임 = time.time()
         
         updateTime = time.time() # 타임 아웃 터치

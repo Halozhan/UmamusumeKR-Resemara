@@ -291,8 +291,6 @@ class newTab(QMainWindow):
         self.logs.append("-"*50)
             
 
-    
-        
     def InstanceRefreshFunction(self):
         self.InstanceComboBox.clear()
         
