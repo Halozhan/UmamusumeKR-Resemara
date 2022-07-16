@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import *
 import glob, os
 import pickle
 from 이륙_조건 import 이륙_조건
-from multiprocessing.connection import PipeConnection
+from multiprocessing import Queue
 import threading
 
 # Images
@@ -45,9 +45,9 @@ class UmaProcess():
 
     def Receive(self): # 통신용
         while True:
-            try:
-                recv = self.conn.recv()
-                print(recv)
+            if self.toChild.empty() == False:
+                recv = self.toChild.get()
+                # print(recv)
                 if recv[0] == "sleepTime":
                     self.sleepTime = recv[1]
                     # print(recv[1])
@@ -68,19 +68,19 @@ class UmaProcess():
                 if recv[0] == "recvResetCount":
                     self.totalResetCount = recv[1]
                     # print(recv[1])
-            except:
-                pass
+                time.sleep(0.001)
 
     
     def log_main(self, id, text):
-        self.conn.send(["sendLog_main", str(id), str(text)])
+        self.toParent.put(["sendLog_main", str(id), str(text)])
 
     def log(self, text):
-        self.conn.send(["sendLog", str(text)])
+        self.toParent.put(["sendLog", str(text)])
 
-    def run_a(self, conn: PipeConnection):
+    def run_a(self, toParent: Queue, toChild: Queue):
         # 선언
-        self.conn = conn
+        self.toParent = toParent
+        self.toChild = toChild
         self.InstanceName = ""
         self.InstancePort = 0
         self.isDoneTutorial = False
@@ -156,22 +156,22 @@ class UmaProcess():
                 self.log("This thread was terminated.")
 
             # print("리세 횟수:", self.resetCount)
-            self.conn.send("requestResetCount")
+            self.toParent.put("requestResetCount")
             self.log_main("리세 총 횟수: ", str(int(self.totalResetCount)))
             self.log_main(self.InstanceName, "리세 횟수: " + str(int(self.resetCount)))
             self.log("리세 횟수: " + str(int(self.resetCount)))
 
             if isSuccessed == True:
-                self.conn.send("stopButton.setEnabled", False)
+                self.toParent.put("stopButton.setEnabled", False)
                 # self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
                 # print("리세 성공 "*5)
                 self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
 
-                self.conn.send("InstanceComboBox.setEnabled", True)
+                self.toParent.put("InstanceComboBox.setEnabled", True)
                 # self.parent.InstanceComboBox.setEnabled(True)
-                self.conn.send("InstanceRefreshButton.setEnabled", True)
+                self.toParent.put("InstanceRefreshButton.setEnabled", True)
                 # self.parent.InstanceRefreshButton.setEnabled(True)
                 break
 
@@ -218,18 +218,18 @@ class UmaProcess():
             # print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
             self.log(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
 
-        self.conn.send("InstanceComboBox.setEnabled", True)
+        self.toParent.put("InstanceComboBox.setEnabled", True)
         # self.parent.InstanceComboBox.setEnabled(True)
-        self.conn.send("InstanceRefreshButton.setEnabled", True)
+        self.toParent.put("InstanceRefreshButton.setEnabled", True)
         # self.parent.InstanceRefreshButton.setEnabled(True)
         
-        self.conn.send("startButton.setEnabled", True)
+        self.toParent.put("startButton.setEnabled", True)
         # self.parent.startButton.setEnabled(True)
-        self.conn.send("stopButton.setEnabled", True)
+        self.toParent.put("stopButton.setEnabled", True)
         # self.parent.stopButton.setEnabled(False)
-        self.conn.send("resetButton.setEnabled", True)
+        self.toParent.put("resetButton.setEnabled", True)
         # self.parent.resetButton.setEnabled(True)
-        self.conn.send("isDoneTutorialCheckBox.setEnabled", True)
+        self.toParent.put("isDoneTutorialCheckBox.setEnabled", True)
         # self.parent.isDoneTutorialCheckBox.setEnabled(True)
     
 
@@ -472,7 +472,7 @@ class UmaProcess():
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("출전 " + str(count) + "개")
                     self.log("출전 " + str(count) + "개")
-                    self.conn.send(["isDoneTutorial", False])
+                    self.toParent.put(["isDoneTutorial", False])
                     self.isDoneTutorial = False
                     # self.parent.isDoneTutorialCheckBox.setChecked(False)
                     print(position)
@@ -1727,7 +1727,9 @@ class UmaProcess():
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("공지사항_X " + str(count) + "개")
                     self.log("공지사항_X " + str(count) + "개")
-                    self.parent.isDoneTutorialCheckBox.setChecked(True)
+                    self.isDoneTutorial = True
+                    self.toParent.put(["isDoneTutorial", True])
+                    # self.parent.isDoneTutorialCheckBox.setChecked(True)
                     # print(position)
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
@@ -1740,7 +1742,8 @@ class UmaProcess():
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                     # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
-                    self.conn.send(["isDoneTutorial", True])
+                    self.isDoneTutorial = True
+                    self.toParent.put(["isDoneTutorial", True])
                     # self.parent.isDoneTutorialCheckBox.setChecked(True)
                     
                     # print(position)
@@ -1754,7 +1757,8 @@ class UmaProcess():
                     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
-                    self.conn.send(["isDoneTutorial", True])
+                    self.isDoneTutorial = True
+                    self.toParent.put(["isDoneTutorial", True])
                     # self.parent.isDoneTutorialCheckBox.setChecked(True)
 
                     # print(position)

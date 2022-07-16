@@ -1,9 +1,8 @@
-from re import T
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal, QObject
 import multiprocessing as mp
 from threading import Thread
-# from run_a import *
+import time
 from UmamusumeProcess import UmaProcess
 
 from typing import TYPE_CHECKING
@@ -21,7 +20,9 @@ class Umamusume(QObject):
         if parent is not None:
             self.parent = parent
         
-        self.pipeParent, self.pipeChild = mp.Pipe() # 다른 프로세스와의 연결고리 생성
+        # self.pipeParent, self.pipeChild = mp.Pipe() # 다른 프로세스와의 연결고리 생성
+        self.toParent = mp.Queue()
+        self.toChild = mp.Queue()
         # self.pipeParent.send("ㅎㅇ")
         # self.start()
 
@@ -34,9 +35,9 @@ class Umamusume(QObject):
 
     def Receive(self): # 통신용
         while True:
-            try:
-                recv = self.pipeParent.recv()
-                print(recv)
+            if self.toParent.empty() == False:
+                recv = self.toParent.get()
+                # print(recv)
                 if recv[0] == "sendLog":
                     self.sendLog.emit(str(recv[1]))
                     # print(recv[1])
@@ -72,10 +73,9 @@ class Umamusume(QObject):
                     total_resetCount = 0
                     for i in self.parent.parent.Tab:
                         total_resetCount += i.umamusume.resetCount
-                    self.pipeParent.send(["recvResetCount", total_resetCount])
+                    self.toChild.put(["recvResetCount", total_resetCount])
                     # print(recv[1])
-            except:
-                pass
+                time.sleep(0.001)
 
 
 
@@ -87,13 +87,13 @@ class Umamusume(QObject):
 
     def start(self):
         # 초기화
-        self.pipeParent.send(["InstanceName", self.parent.InstanceName])
-        self.pipeParent.send(["InstancePort", self.parent.InstancePort])
-        self.pipeParent.send(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
-        self.pipeParent.send(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
+        self.toChild.put(["InstanceName", self.parent.InstanceName])
+        self.toChild.put(["InstancePort", self.parent.InstancePort])
+        self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
+        self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
         # self.p = mp.Process(name=str(self.parent.InstancePort), target=self.run_a, args=(self.pipeChild, ), daemon=True)
         self.uma = UmaProcess()
-        self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.pipeChild, ), daemon=True)
+        self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
         # self.pipeParent.send("ㅎㅇ1")
         # self.pipeParent.send("ㅎㅇ2")
         # self.pipeParent.send("ㅎㅇ3")
@@ -103,6 +103,6 @@ class Umamusume(QObject):
         self.receiver.start()
         
     def terminate(self):
-        self.pipeParent.send("ㅎㅇ")
-        self.pipeParent.send(["List", "poo"])
+        self.toChild.put("ㅎㅇ")
+        self.toChild.put(["List", "poo"])
         # pass # not yet

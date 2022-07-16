@@ -135,7 +135,7 @@ class WindowClass(QMainWindow):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
         self.Latency.setText("지연률: " + str(Time) + "s")
         for i in self.Tab:
-            i.umamusume.pipeParent.send(["sleepTime", float(Time)])
+            i.umamusume.toChild.put(["sleepTime", float(Time)])
     
     @pyqtSlot()
     def ManualRadioFunction(self):
@@ -313,7 +313,6 @@ class newTab(QMainWindow):
         
         self.logs.append("-"*50)
         self.logs.append("시작!!")
-        self.umamusume = Umamusume(self)
         self.umamusume.start()
         self.logs.append("-"*50)
     
