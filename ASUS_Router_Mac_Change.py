@@ -7,7 +7,7 @@ try:
 except:
     print("라우터 구성에 필요한 계정 정보가 없습니다.")
 
-def Change_Mac_Address():
+def ASUS_Change_MAC():
     chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
     driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
     if os.path.exists(driver_path):
@@ -74,4 +74,4 @@ def Change_Mac_Address():
         pass
     
 if __name__ == "__main__":
-    Change_Mac_Address()
+    ASUS_Change_MAC()

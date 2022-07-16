@@ -34,42 +34,42 @@ class Umamusume(QObject):
                 if recv[0] == "sendLog":
                     self.sendLog.emit(str(recv[1]))
                     # print(recv[1])
-                if recv[0] == "sendLog_main":
+                elif recv[0] == "sendLog_main":
                     self.sendLog_Main.emit(str(recv[1]), str(recv[2]))
                     # print(recv[1])
-                if recv[0] == "isDoneTutorial":
+                elif recv[0] == "isDoneTutorial":
                     self.parent.isDoneTutorialCheckBox.setChecked(recv[1])
                     # print(recv[1])
 
-                if recv[0] == "InstanceComboBox.setEnabled":
+                elif recv[0] == "InstanceComboBox.setEnabled":
                     self.parent.InstanceComboBox.setEnabled(recv[1])
                     # print(recv[1])
-                if recv[0] == "InstanceRefreshButton.setEnabled":
+                elif recv[0] == "InstanceRefreshButton.setEnabled":
                     self.parent.InstanceRefreshButton.setEnabled(recv[1])
                     # print(recv[1])
 
-                if recv[0] == "startButton.setEnabled":
+                elif recv[0] == "startButton.setEnabled":
                     self.parent.startButton.setEnabled(recv[1])
                     # print(recv[1])
-                if recv[0] == "stopButton.setEnabled":
+                elif recv[0] == "stopButton.setEnabled":
                     self.parent.stopButton.setEnabled(recv[1])
                     # print(recv[1])
-                if recv[0] == "resetButton.setEnabled":
+                elif recv[0] == "resetButton.setEnabled":
                     self.parent.resetButton.setEnabled(recv[1])
                     # print(recv[1])
-                if recv[0] == "isDoneTutorialCheckBox.setEnabled":
+                elif recv[0] == "isDoneTutorialCheckBox.setEnabled":
                     self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
                     # print(recv[1])
 
 
-                if recv[0] == "requestResetCount":
+                elif recv[0] == "requestResetCount":
                     total_resetCount = 0
                     for i in self.parent.parent.Tab:
                         total_resetCount += i.umamusume.resetCount
                     self.toChild.put(["recvResetCount", total_resetCount])
                     # print(recv[1])
 
-                if recv[0] == "4080":
+                elif recv[0] == "숫자4080_에러_코드":
                     self.Error_4080.emit()
                     # print(recv[1])
             time.sleep(0.05)

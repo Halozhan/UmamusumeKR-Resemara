@@ -51,28 +51,28 @@ class UmaProcess():
                 if recv[0] == "sleepTime":
                     self.sleepTime = recv[1]
                     # print(recv[1])
-                if recv[0] == "terminate":
+                elif recv[0] == "terminate":
                     self.terminate()
                     # print(recv[1])
 
-                if recv[0] == "InstanceName":
+                elif recv[0] == "InstanceName":
                     self.InstanceName = recv[1]
                     # print(recv[1])
-                if recv[0] == "InstancePort":
+                elif recv[0] == "InstancePort":
                     self.InstancePort = recv[1]
                     # print(recv[1])
-                if recv[0] == "isDoneTutorial":
+                elif recv[0] == "isDoneTutorial":
                     self.isDoneTutorial = recv[1]
                     # print(recv[1])
-                if recv[0] == "isSSRGacha":
+                elif recv[0] == "isSSRGacha":
                     self.isSSRGacha = recv[1]
                     # print(recv[1])
 
-                if recv[0] == "recvResetCount":
+                elif recv[0] == "recvResetCount":
                     self.totalResetCount = recv[1]
                     # print(recv[1])
 
-                if recv[0] == "isDoingMAC_Change":
+                elif recv[0] == "isDoingMAC_Change":
                     self.isDoingMAC_Change = recv[1]
                     # print(recv[1])
             time.sleep(0.05)
@@ -172,7 +172,7 @@ class UmaProcess():
                 self.toParent.put(["stopButton.setEnabled", False])
                 # self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
-                # print("리세 성공 "*5)
+                print("리세 성공 "*5)
                 self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
 
@@ -182,8 +182,8 @@ class UmaProcess():
                 # self.parent.InstanceRefreshButton.setEnabled(True)
                 break
 
-            if isSuccessed == "4080_에러_코드":
-                self.toParent.put("4080")
+            if isSuccessed == "숫자4080_에러_코드":
+                self.toParent.put(["숫자4080_에러_코드"])
                 time.sleep(30)
             
             # print("-"*50)
@@ -2743,10 +2743,10 @@ class UmaProcess():
             if count:
                 updateTime = time.time()
                 adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
-                print("4080_에러_코드 " + str(count) + "개")
-                self.log("4080_에러_코드 " + str(count) + "개")
+                print("숫자4080_에러_코드 " + str(count) + "개")
+                self.log("숫자4080_에러_코드 " + str(count) + "개")
                 # print(position)
                 if self.isDoingMAC_Change == False:
-                    return "4080_에러_코드"
+                    return "숫자4080_에러_코드"
 
         return "Stop"

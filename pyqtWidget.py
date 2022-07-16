@@ -157,8 +157,12 @@ class WindowClass(QMainWindow):
     
     @pyqtSlot()
     def MAC_Address_Change(self):
-        for i in self.Tab:
-            i.umamusume.toChild(["isDoingMAC_Change", True])
+        try:
+            for i in self.Tab:
+                i.umamusume.toChild(["isDoingMAC_Change", True])
+        except:
+            pass
+
         print("-"*50)
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -167,12 +171,16 @@ class WindowClass(QMainWindow):
         if self.ManualButton.isChecked():
             print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
             self.AllStopInstance()
-        if self.PAGRadioButton.isChecked():
+        elif self.ASUSRadioButton.isChecked():
+            ASUS_Change_MAC()
+        elif self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
-        if self.ASUSRadioButton.isChecked():
-            Change_Mac_Address()
-        for i in self.Tab:
-            i.umamusume.toChild(["isDoingMAC_Change", False])
+
+        try:
+            for i in self.Tab:
+                i.umamusume.toChild(["isDoingMAC_Change", False])
+        except:
+            pass
         
 
 class newTab(QMainWindow):
