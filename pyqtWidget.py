@@ -91,11 +91,10 @@ class WindowClass(QMainWindow):
         self.메인페이지.setLayout(self.verticalBox)
         self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
 
-        self.Tab = []
-        count = 10 # 10개의 탭 생성
-        for i in range(count):
+        self.Tab: list[newTab] = []
+        for i in range(10): # 10개의 탭 생성
             self.Tab.append(newTab(self)) # self를 상속받은 newTab
-            self.verticalTabWidget.addTab(self.Tab[i].newTab(), "탭 %d" % (self.verticalTabWidget.count()))
+            self.verticalTabWidget.addTab(self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count()))
         
         
         
@@ -128,7 +127,7 @@ class WindowClass(QMainWindow):
         self.timeRateLabel_help.setText("x^{"+str(round(value1*0.01, 3))+"e}\cdot" + str(round(value2*0.1, 3)) +"를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
 
     @pyqtSlot(str, str)
-    def sendLog_Main(self, id, text):
+    def recvLog_Main(self, id, text):
         self.logs.append(id + " " + text)
         
     @pyqtSlot(float, float)
@@ -136,7 +135,10 @@ class WindowClass(QMainWindow):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
         self.Latency.setText("지연률: " + str(Time) + "s")
         for i in self.Tab:
-            i.umamusume.sleepTime = Time
+            try:
+                i.umamusume.toChild.put(["sleepTime", float(Time)])
+            except:
+                pass
     
     @pyqtSlot()
     def ManualRadioFunction(self):
@@ -155,8 +157,12 @@ class WindowClass(QMainWindow):
     
     @pyqtSlot()
     def MAC_Address_Change(self):
-        for i in self.Tab:
-            i.umamusume.isDoingMAC_Change = True
+        try:
+            for i in self.Tab:
+                i.umamusume.toChild(["isDoingMAC_Change", True])
+        except:
+            pass
+
         print("-"*50)
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -165,16 +171,20 @@ class WindowClass(QMainWindow):
         if self.ManualButton.isChecked():
             print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
             self.AllStopInstance()
-        if self.PAGRadioButton.isChecked():
+        elif self.ASUSRadioButton.isChecked():
+            ASUS_Change_MAC()
+        elif self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
-        if self.ASUSRadioButton.isChecked():
-            Change_Mac_Address()
-        for i in self.Tab:
-            i.umamusume.isDoingMAC_Change = False
+
+        try:
+            for i in self.Tab:
+                i.umamusume.toChild(["isDoingMAC_Change", False])
+        except:
+            pass
         
 
 class newTab(QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent: "WindowClass"=None):
         super().__init__()
         # 변수 초기화
         self.parent = parent
@@ -184,9 +194,15 @@ class newTab(QMainWindow):
         self.sleepTime = 0.5
         
         # 객체 초기화
+        self.vbox = QVBoxLayout() # --------------------------------
+
+        self.hbox1 = QHBoxLayout()
         self.InstanceComboBox = QComboBox()
         self.InstanceRefreshButton = QPushButton("새로고침", self)
+        self.hbox1.addWidget(self.InstanceComboBox, stretch=2)
+        self.hbox1.addWidget(self.InstanceRefreshButton, stretch=1)
         
+        self.hbox2 = QHBoxLayout()
         self.startButton = QPushButton("시작", self)
         self.stopButton = QPushButton("정지", self)
         self.resetButton = QPushButton("초기화", self)
@@ -194,12 +210,26 @@ class newTab(QMainWindow):
         self.isDoneTutorialCheckBox.setChecked(True)
         self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
         self.isSSRGachaCheckBox.setChecked(True)
+        self.hbox2.addWidget(self.startButton)
+        self.hbox2.addWidget(self.stopButton)
+        self.hbox2.addWidget(self.resetButton)
+        self.hbox2.addWidget(self.isDoneTutorialCheckBox)
+        self.hbox2.addWidget(self.isSSRGachaCheckBox)
         
-        self.logs = QTextBrowser()
+        
+        self.vbox.addLayout(self.hbox1)
+        self.vbox.addLayout(self.hbox2)
 
+        self.logs = QTextBrowser()
+        self.vbox.addWidget(self.logs)
+        
+        self.tab = QWidget()
+        self.tab.setLayout(self.vbox) # ------------------------------
+
+        # 우마무스메
         self.umamusume = Umamusume(self)
         
-        # 함수 초기화
+        # 함수 초기화 (일회성 실행)
         self.InstanceFunction()
         self.InstanceRefreshFunction()
         
@@ -217,34 +247,9 @@ class newTab(QMainWindow):
         # 없음
 
     @pyqtSlot(str)
-    def sendLog(self, text):
+    def recvLog(self, text):
         self.logs.append(text)
 
-        
-    def newTab(self):
-        
-        self.hbox1 = QHBoxLayout()
-        self.hbox1.addWidget(self.InstanceComboBox, stretch=2)
-        self.hbox1.addWidget(self.InstanceRefreshButton, stretch=1)
-        
-        self.hbox2 = QHBoxLayout()
-        self.hbox2.addWidget(self.startButton)
-        self.hbox2.addWidget(self.stopButton)
-        self.hbox2.addWidget(self.resetButton)
-        self.hbox2.addWidget(self.isDoneTutorialCheckBox)
-        self.hbox2.addWidget(self.isSSRGachaCheckBox)
-        
-        self.vbox = QVBoxLayout()
-        
-        self.vbox.addLayout(self.hbox1)
-        self.vbox.addLayout(self.hbox2)
-        self.vbox.addWidget(self.logs)
-        
-        self.tab = QWidget()
-        self.tab.setLayout(self.vbox)
-        
-        return self.tab
-    
     # events
     def InstanceFunction(self):
         if self.InstanceComboBox.count() == 0:
@@ -285,6 +290,8 @@ class newTab(QMainWindow):
             
         self.logs.append("-"*50)
             
+
+    
         
     def InstanceRefreshFunction(self):
         self.InstanceComboBox.clear()
@@ -356,6 +363,11 @@ class newTab(QMainWindow):
         else:
             self.logs.append("SSR 확정권 사용안함!!")
         self.logs.append("-"*50)
+    
+
+
+    
+
     
         
 if __name__ =="__main__":

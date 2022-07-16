@@ -7,16 +7,21 @@ try:
 except:
     print("라우터 구성에 필요한 계정 정보가 없습니다.")
 
-def Change_Mac_Address():
+def ASUS_Change_MAC():
     chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
     driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
     if os.path.exists(driver_path):
-        print("ChromeDriver is installed: " + driver_path)
+        # print("ChromeDriver is installed: " + driver_path)
+        pass
     else:
         print("install the ChromeDriver. VER: " + chrome_ver)
         chromedriver_autoinstaller.install(path="./ChromeDriver")
     
-    driver = webdriver.Chrome(driver_path)
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    
+    driver = webdriver.Chrome(driver_path, options=options)
 
     try:
         driver.get(GATEWAY_ADDRESS)
@@ -41,7 +46,7 @@ def Change_Mac_Address():
         asdf = MAC_Address
         asdf = int("0x"+asdf, 16)
         asdf = asdf + 1
-        print(asdf)
+        # print(asdf)
         asdf = hex(asdf)
         asdf = asdf.replace("0x", "")
         index = 0
@@ -56,15 +61,17 @@ def Change_Mac_Address():
             index += 1
         MAC_Address = address[:-1]
             
-        print(MAC_Address)
+        print("New MAC Address:", MAC_Address)
         MACAdd.clear()
         MACAdd.send_keys(MAC_Address)
 
         driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
         
         time.sleep(7)
+
+        driver.quit()
     except:
         pass
     
 if __name__ == "__main__":
-    Change_Mac_Address()
+    ASUS_Change_MAC()
