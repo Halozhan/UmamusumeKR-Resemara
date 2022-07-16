@@ -29,7 +29,7 @@ class Umamusume(QObject):
     def Receive(self): # 통신용
         while True:
             if self.toParent.empty() == False:
-                recv = self.toParent.get()
+                recv = self.toParent.get(timeout=1)
                 print(recv)
                 if recv[0] == "sendLog":
                     self.sendLog.emit(str(recv[1]))
@@ -42,7 +42,7 @@ class Umamusume(QObject):
                     # print(recv[1])
 
                 if recv[0] == "InstanceComboBox.setEnabled":
-                    self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
+                    self.parent.InstanceComboBox.setEnabled(recv[1])
                     # print(recv[1])
                 if recv[0] == "InstanceRefreshButton.setEnabled":
                     self.parent.InstanceRefreshButton.setEnabled(recv[1])
@@ -72,8 +72,6 @@ class Umamusume(QObject):
                 if recv[0] == "4080":
                     self.Error_4080.emit()
                     # print(recv[1])
-                time.sleep(0.001)
-
 
 
     # def recvLog(self, text):
