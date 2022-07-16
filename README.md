@@ -8,6 +8,8 @@
 python moduleInstaller.py
 ```
 
+[ADB 다운로드](https://developer.android.com/studio/releases/platform-tools) 및 platform-tools 이름으로 압축풀기
+
 ## Initialization
 
 ### 공통
