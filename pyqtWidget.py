@@ -158,7 +158,7 @@ class WindowClass(QMainWindow):
     @pyqtSlot()
     def MAC_Address_Change(self):
         for i in self.Tab:
-            i.umamusume.isDoingMAC_Change = True
+            i.umamusume.toChild(["isDoingMAC_Change", True])
         print("-"*50)
         now = datetime.now()
         now = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -172,7 +172,7 @@ class WindowClass(QMainWindow):
         if self.ASUSRadioButton.isChecked():
             Change_Mac_Address()
         for i in self.Tab:
-            i.umamusume.isDoingMAC_Change = False
+            i.umamusume.toChild(["isDoingMAC_Change", False])
         
 
 class newTab(QMainWindow):

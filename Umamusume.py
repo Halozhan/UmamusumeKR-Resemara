@@ -30,7 +30,7 @@ class Umamusume(QObject):
         while True:
             if self.toParent.empty() == False:
                 recv = self.toParent.get(timeout=1)
-                print(recv)
+                # print(recv)
                 if recv[0] == "sendLog":
                     self.sendLog.emit(str(recv[1]))
                     # print(recv[1])

@@ -72,6 +72,10 @@ class UmaProcess():
                     self.totalResetCount = recv[1]
                     # print(recv[1])
 
+                if recv[0] == "isDoingMAC_Change":
+                    self.isDoingMAC_Change = recv[1]
+                    # print(recv[1])
+
     
     def log_main(self, id, text):
         self.toParent.put(["sendLog_main", str(id), str(text)])
