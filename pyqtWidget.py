@@ -187,7 +187,7 @@ class newTab(QMainWindow):
     def __init__(self, parent: "WindowClass"=None):
         super().__init__()
         # 변수 초기화
-        self.parent = parent
+        self.parent: "WindowClass" = parent
 
         self.InstanceName = ""
         self.InstancePort = 0

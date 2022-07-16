@@ -42,40 +42,48 @@ for a in glob.glob(os.path.join(path, '*')):
 class UmaProcess():
     def __init__(self):
         pass
+    
+    def Receive_Worker(self):
+        while True:
+            self.Receive()
+            time.sleep(0.05)
 
     def Receive(self): # 통신용
-        while True:
-            if self.toChild.empty() == False:
-                recv = self.toChild.get(timeout=1)
-                # print(recv)
-                if recv[0] == "sleepTime":
-                    self.sleepTime = recv[1]
-                    # print(recv[1])
-                elif recv[0] == "terminate":
-                    self.terminate()
-                    # print(recv[1])
+        if self.toChild.empty() == False:
+            recv = self.toChild.get()
+            # print(recv)
+            if recv[0] == "sleepTime":
+                self.sleepTime = recv[1]
+                # print(recv[1])
+            elif recv[0] == "terminate":
+                self.terminate()
+                # print(recv[1])
 
-                elif recv[0] == "InstanceName":
-                    self.InstanceName = recv[1]
-                    # print(recv[1])
-                elif recv[0] == "InstancePort":
-                    self.InstancePort = recv[1]
-                    # print(recv[1])
-                elif recv[0] == "isDoneTutorial":
-                    self.isDoneTutorial = recv[1]
-                    # print(recv[1])
-                elif recv[0] == "isSSRGacha":
-                    self.isSSRGacha = recv[1]
-                    # print(recv[1])
+            elif recv[0] == "InstanceName":
+                self.InstanceName = recv[1]
+                # print(recv[1])
+            elif recv[0] == "InstancePort":
+                self.InstancePort = recv[1]
+                # print(recv[1])
+            elif recv[0] == "isDoneTutorial":
+                self.isDoneTutorial = recv[1]
+                # print(recv[1])
+            elif recv[0] == "isSSRGacha":
+                self.isSSRGacha = recv[1]
+                # print(recv[1])
 
-                elif recv[0] == "recvResetCount":
-                    self.totalResetCount = recv[1]
-                    # print(recv[1])
+            elif recv[0] == "requestResetCount":
+                self.toParent.put(["sendResetCount", self.resetCount])
+                # print(recv[1])
+            elif recv[0] == "sendTotalResetCount":
+                self.totalResetCount = recv[1]
+                self.waiting = False
+                # print(recv[1])
 
-                elif recv[0] == "isDoingMAC_Change":
-                    self.isDoingMAC_Change = recv[1]
-                    # print(recv[1])
-            time.sleep(0.05)
+            elif recv[0] == "isDoingMAC_Change":
+                self.isDoingMAC_Change = recv[1]
+                # print(recv[1])
+            
 
     
     def log_main(self, id, text):
@@ -93,7 +101,7 @@ class UmaProcess():
         self.isDoneTutorial = False
         self.isSSRGacha = False
         self.totalResetCount = 0
-
+        self.waiting = False
         
         self.isAlive = False
         self.sleepTime = 0.5
@@ -125,7 +133,7 @@ class UmaProcess():
 
 
         # 수신
-        self.Receiver = threading.Thread(target=self.Receive, daemon=True)
+        self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
 
         time.sleep(0.2)
@@ -163,10 +171,15 @@ class UmaProcess():
                 self.log("This thread was terminated.")
 
             # print("리세 횟수:", self.resetCount)
-            self.toParent.put("requestResetCount")
-            self.log_main("리세 총 횟수: ", str(int(self.totalResetCount)))
             self.log_main(self.InstanceName, "리세 횟수: " + str(int(self.resetCount)))
             self.log("리세 횟수: " + str(int(self.resetCount)))
+            self.toParent.put(["sendResetCount", self.resetCount])
+            self.toParent.put(["requestTotalResetCount"])
+            self.waiting = True
+            while self.waiting:
+                self.Receive()
+                time.sleep(0.05)
+            self.log_main("리세 총 횟수: ", str(int(self.totalResetCount)))
 
             if isSuccessed == True:
                 self.toParent.put(["stopButton.setEnabled", False])
@@ -258,7 +271,6 @@ class UmaProcess():
 
         self.toParent.close()
         self.toChild.close()
-        print("ㅇㅇ??") # 여기 왜 안되는지 고쳐봐야함
     
 
     def main(self):
