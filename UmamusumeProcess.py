@@ -51,6 +51,9 @@ class UmaProcess():
                 if recv[0] == "sleepTime":
                     self.sleepTime = recv[1]
                     # print(recv[1])
+                if recv[0] == "terminate":
+                    self.terminate()
+                    # print(recv[1])
 
                 if recv[0] == "InstanceName":
                     self.InstanceName = recv[1]
@@ -121,7 +124,7 @@ class UmaProcess():
         self.Receiver = threading.Thread(target=self.Receive, daemon=True)
         self.Receiver.start()
 
-        time.sleep(1)
+        time.sleep(0.2)
 
         self.isAlive = True
         self.isStopped = False
@@ -162,21 +165,21 @@ class UmaProcess():
             self.log("리세 횟수: " + str(int(self.resetCount)))
 
             if isSuccessed == True:
-                self.toParent.put("stopButton.setEnabled", False)
+                self.toParent.put(["stopButton.setEnabled", False])
                 # self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
                 # print("리세 성공 "*5)
                 self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
 
-                self.toParent.put("InstanceComboBox.setEnabled", True)
+                self.toParent.put(["InstanceComboBox.setEnabled", True])
                 # self.parent.InstanceComboBox.setEnabled(True)
-                self.toParent.put("InstanceRefreshButton.setEnabled", True)
+                self.toParent.put(["InstanceRefreshButton.setEnabled", True])
                 # self.parent.InstanceRefreshButton.setEnabled(True)
                 break
 
             if isSuccessed == "4080_에러_코드":
-                self.Error_4080.emit()
+                self.toParent.put("4080")
                 time.sleep(30)
             
             # print("-"*50)
@@ -218,19 +221,24 @@ class UmaProcess():
             # print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
             self.log(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
 
-        self.toParent.put("InstanceComboBox.setEnabled", True)
+        self.toParent.put(["InstanceComboBox.setEnabled", True])
         # self.parent.InstanceComboBox.setEnabled(True)
-        self.toParent.put("InstanceRefreshButton.setEnabled", True)
+        self.toParent.put(["InstanceRefreshButton.setEnabled", True])
         # self.parent.InstanceRefreshButton.setEnabled(True)
         
-        self.toParent.put("startButton.setEnabled", True)
+        self.toParent.put(["startButton.setEnabled", True])
         # self.parent.startButton.setEnabled(True)
-        self.toParent.put("stopButton.setEnabled", True)
+        self.toParent.put(["stopButton.setEnabled", True])
         # self.parent.stopButton.setEnabled(False)
-        self.toParent.put("resetButton.setEnabled", True)
+        self.toParent.put(["resetButton.setEnabled", True])
         # self.parent.resetButton.setEnabled(True)
-        self.toParent.put("isDoneTutorialCheckBox.setEnabled", True)
+        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
         # self.parent.isDoneTutorialCheckBox.setEnabled(True)
+
+        time.sleep(0.2)
+        
+        self.toParent.close()
+        self.toChild.close()
     
 
     def main(self):

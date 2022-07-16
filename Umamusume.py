@@ -19,13 +19,6 @@ class Umamusume(QObject):
         super().__init__()
         if parent is not None:
             self.parent = parent
-        
-        # self.pipeParent, self.pipeChild = mp.Pipe() # 다른 프로세스와의 연결고리 생성
-        self.toParent = mp.Queue()
-        self.toChild = mp.Queue()
-        # self.pipeParent.send("ㅎㅇ")
-        # self.start()
-
 
         # 커스텀 시그널 정의
         self.sendLog.connect(self.parent.recvLog)
@@ -37,7 +30,7 @@ class Umamusume(QObject):
         while True:
             if self.toParent.empty() == False:
                 recv = self.toParent.get()
-                # print(recv)
+                print(recv)
                 if recv[0] == "sendLog":
                     self.sendLog.emit(str(recv[1]))
                     # print(recv[1])
@@ -75,6 +68,10 @@ class Umamusume(QObject):
                         total_resetCount += i.umamusume.resetCount
                     self.toChild.put(["recvResetCount", total_resetCount])
                     # print(recv[1])
+
+                if recv[0] == "4080":
+                    self.Error_4080.emit()
+                    # print(recv[1])
                 time.sleep(0.001)
 
 
@@ -87,6 +84,9 @@ class Umamusume(QObject):
 
     def start(self):
         # 초기화
+        self.toParent = mp.Queue() # 다른 프로세스와의 연결고리 생성
+        self.toChild = mp.Queue()
+
         self.toChild.put(["InstanceName", self.parent.InstanceName])
         self.toChild.put(["InstancePort", self.parent.InstancePort])
         self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
@@ -99,10 +99,9 @@ class Umamusume(QObject):
         # self.pipeParent.send("ㅎㅇ3")
         self.process.start()
 
-        self.receiver = Thread(target=self.Receive, daemon=True)
-        self.receiver.start()
+        self.Receiver = Thread(target=self.Receive, daemon=True)
+        self.Receiver.start()
         
     def terminate(self):
-        self.toChild.put("ㅎㅇ")
-        self.toChild.put(["List", "poo"])
+        self.toChild.put(["terminate"])
         # pass # not yet

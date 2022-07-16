@@ -135,7 +135,10 @@ class WindowClass(QMainWindow):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
         self.Latency.setText("지연률: " + str(Time) + "s")
         for i in self.Tab:
-            i.umamusume.toChild.put(["sleepTime", float(Time)])
+            try:
+                i.umamusume.toChild.put(["sleepTime", float(Time)])
+            except:
+                pass
     
     @pyqtSlot()
     def ManualRadioFunction(self):
