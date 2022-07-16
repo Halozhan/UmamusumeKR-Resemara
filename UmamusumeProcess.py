@@ -64,8 +64,8 @@ class UmaProcess():
                 if recv[0] == "isDoneTutorial":
                     self.isDoneTutorial = recv[1]
                     # print(recv[1])
-                if recv[0] == "isDoneTutorial":
-                    self.isDoneTutorial = recv[1]
+                if recv[0] == "isSSRGacha":
+                    self.isSSRGacha = recv[1]
                     # print(recv[1])
 
                 if recv[0] == "recvResetCount":
@@ -75,6 +75,7 @@ class UmaProcess():
                 if recv[0] == "isDoingMAC_Change":
                     self.isDoingMAC_Change = recv[1]
                     # print(recv[1])
+            time.sleep(0.05)
 
     
     def log_main(self, id, text):

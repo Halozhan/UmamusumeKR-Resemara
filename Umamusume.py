@@ -72,6 +72,7 @@ class Umamusume(QObject):
                 if recv[0] == "4080":
                     self.Error_4080.emit()
                     # print(recv[1])
+            time.sleep(0.05)
 
 
     # def recvLog(self, text):
