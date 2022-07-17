@@ -4,11 +4,11 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QIcon
 from Umamusume import *
-from ASUS_Router_Mac_Change import *
+from datetime import datetime
+import ASUS_Router_Mac_Change
 from Change_MAC import *
 from sleepTime import sleepTime
-from datetime import datetime
-
+import mac_address_changer_windows
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
@@ -75,6 +75,7 @@ class WindowClass(QMainWindow):
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
         self.ASUSRadioButton.setChecked(True)
         self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
+        self.PythonMACChangerRadioButton = QRadioButton("Python MAC Changer 버전")
 
         self.logs = QTextBrowser()
 
@@ -85,6 +86,7 @@ class WindowClass(QMainWindow):
         self.verticalBox.addWidget(self.ManualButton)
         self.verticalBox.addWidget(self.ASUSRadioButton)
         self.verticalBox.addWidget(self.PAGRadioButton)
+        self.verticalBox.addWidget(self.PythonMACChangerRadioButton)
         
         self.verticalBox.addWidget(self.logs)
         
@@ -111,6 +113,7 @@ class WindowClass(QMainWindow):
         self.ManualButton.clicked.connect(self.ManualRadioFunction)
         self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
         self.PAGRadioButton.clicked.connect(self.PAGRadioFunction)
+        self.PythonMACChangerRadioButton.clicked.connect(self.PythonMACChangerRadioFunction)
     
     def AllStopInstance(self):
         for i in self.Tab:
@@ -156,6 +159,11 @@ class WindowClass(QMainWindow):
             self.logs.append("PAGRadioButton가 활성화됨")
     
     @pyqtSlot()
+    def PythonMACChangerRadioFunction(self):
+        if self.PythonMACChangerRadioButton.isChecked():
+            self.logs.append("PythonMACChangerRadioButton가 활성화됨")
+    
+    @pyqtSlot()
     def MAC_Address_Change(self):
         try:
             for i in self.Tab:
@@ -172,10 +180,11 @@ class WindowClass(QMainWindow):
             print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
             self.AllStopInstance()
         elif self.ASUSRadioButton.isChecked():
-            ASUS_Change_MAC()
+            ASUS_Router_Mac_Change.ASUS_Change_MAC()
         elif self.PAGRadioButton.isChecked():
             PAG_MAC_Change()
-
+        elif self.PythonMACChangerRadioButton.isChecked():
+            mac_address_changer_windows.main()
         try:
             for i in self.Tab:
                 i.umamusume.toChild(["isDoingMAC_Change", False])
@@ -289,7 +298,6 @@ class newTab(QMainWindow):
             self.isSSRGachaCheckBox.setEnabled(True)
             
         self.logs.append("-"*50)
-            
 
     def InstanceRefreshFunction(self):
         self.InstanceComboBox.clear()
@@ -310,7 +318,6 @@ class newTab(QMainWindow):
             self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
             pass
     
-    
     def startFunction(self):
         self.InstanceComboBox.setEnabled(False)
         self.InstanceRefreshButton.setEnabled(False)
@@ -325,13 +332,11 @@ class newTab(QMainWindow):
         self.umamusume.start()
         self.logs.append("-"*50)
     
-    
     def stopFunction(self):
         self.logs.append("-"*50)
         self.umamusume.terminate()
         self.logs.append("멈춤!!")
         self.logs.append("-"*50)
-        
     
     def resetFunction(self):
         self.resetButton.setEnabled(False)
@@ -343,7 +348,6 @@ class newTab(QMainWindow):
             os.remove(path)
         except:
             pass
-        
     
     def isDoneTutorialFunction(self):
         self.logs.append("-"*50)
@@ -352,7 +356,6 @@ class newTab(QMainWindow):
         else:
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
         self.logs.append("-"*50)
-    
     
     def isSSRGachaFunction(self):
         self.logs.append("-"*50)
@@ -363,11 +366,6 @@ class newTab(QMainWindow):
         self.logs.append("-"*50)
     
 
-
-    
-
-    
-        
 if __name__ =="__main__":
     #QApplication : 프로그램을 실행시켜주는 클래스
     app = QApplication(sys.argv)
