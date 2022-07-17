@@ -55,14 +55,15 @@ def get_user_adapter_choice(connected_adapters_mac):
         return connected_adapters_mac[0]
     # prompt the user to choose a network adapter index
     try:
-        choice = int(input("Please choose the interface you want to change the MAC address:"))
+        # choice = int(input("Please choose the interface you want to change the MAC address:")) 사용 안함
+        choice = 0 # 기본값 0
         # return the target chosen adapter's MAC and transport name that we'll use later to search for our adapter
         # using the reg QUERY command
         return connected_adapters_mac[choice]
     except:
         # if -for whatever reason- an error is raised, just quit the script
         print("Not a valid choice, quitting...")
-        exit()
+        # exit()
     
 
 def change_mac_address(adapter_transport_name, new_mac_address):
