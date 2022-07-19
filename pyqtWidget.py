@@ -9,6 +9,7 @@ import ASUS_Router_Mac_Change
 from Change_MAC import *
 from sleepTime import sleepTime
 import mac_address_changer_windows
+import os
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
