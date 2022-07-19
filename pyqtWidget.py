@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.Qt import Qt
+from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QIcon
 from Umamusume import *
 from datetime import datetime
@@ -191,7 +192,18 @@ class WindowClass(QMainWindow):
                 i.umamusume.toChild(["isDoingMAC_Change", False])
         except:
             pass
+        # return super().closeEvent(a0)
+    # def closeEvent(self) -> None:
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        msg = "정말 종료하시겠습니까?\n(정지되지않는 인스턴스는 데이터가 저장되지 않을 수 있습니다)"
+        self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
+        if self.reply == QMessageBox.Yes:
+            self.AllStopInstance()
+            print("종료 중")
+            a0.accept()
+        else:
+            a0.ignore()
 
 class newTab(QMainWindow):
     def __init__(self, parent: "WindowClass"=None):
