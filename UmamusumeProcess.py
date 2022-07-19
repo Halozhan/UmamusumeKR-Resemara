@@ -201,21 +201,6 @@ class UmaProcess():
             self.log("-"*50)
             
         # print("리세 종료")
-
-        # self.toParent.put(["InstanceComboBox.setEnabled", True])
-        # # self.parent.InstanceComboBox.setEnabled(True)
-        # self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-        # # self.parent.InstanceRefreshButton.setEnabled(True)
-        
-        # self.toParent.put(["startButton.setEnabled", True])
-        # # self.parent.startButton.setEnabled(True)
-        # self.toParent.put(["stopButton.setEnabled", False])
-        # # self.parent.stopButton.setEnabled(False)
-        # self.toParent.put(["resetButton.setEnabled", True])
-        # # self.parent.resetButton.setEnabled(True)
-        # self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
-        # # self.parent.isDoneTutorialCheckBox.setEnabled(True)
-
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
         self.isStopped = True
