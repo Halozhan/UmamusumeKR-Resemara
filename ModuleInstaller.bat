@@ -1,2 +1,2 @@
-python moduleInstaller.py
+python ModuleInstaller.py
 PAUSE>NUL
