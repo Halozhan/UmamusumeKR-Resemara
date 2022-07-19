@@ -7,7 +7,11 @@ try:
 except:
     print("라우터 구성에 필요한 계정 정보가 없습니다.")
 
-def ASUS_Change_MAC():
+
+def importChromeDriver() -> webdriver.Chrome:
+    if not os.path.isdir("ChromeDriver"): # 크롬 드라이버 폴더 생성
+        os.makedirs("ChromeDriver")
+
     chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
     driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
     if os.path.exists(driver_path):
@@ -22,6 +26,10 @@ def ASUS_Change_MAC():
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     
     driver = webdriver.Chrome(driver_path, options=options)
+    return driver
+
+def ASUS_Change_MAC():
+    driver = importChromeDriver()
 
     try:
         driver.get(GATEWAY_ADDRESS)
