@@ -2414,7 +2414,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["회원님의_소중한_정보_보호를_위해"], confidence=0.99, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                     # print("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
                     self.log("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
                     # print(position)
