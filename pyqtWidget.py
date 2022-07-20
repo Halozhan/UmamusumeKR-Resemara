@@ -199,6 +199,7 @@ class WindowClass(QMainWindow):
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
         if self.reply == QMessageBox.Yes:
+            self.sleepTime.isAlive = False
             self.AllStopInstance()
             print("종료 중")
             a0.accept()
