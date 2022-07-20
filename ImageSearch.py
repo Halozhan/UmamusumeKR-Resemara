@@ -80,7 +80,7 @@ if __name__ == "__main__":
     instancePort = 6205 # adb instance 포트
     device = adbInput.AdbConnect(instancePort) # 연결
     while 1:
-        adbInput.BlueStacksClick(device, position[0], 5, 5)
+        adbInput.BlueStacksSwipe(device, position[0], 5, 5)
     
 
 # reference: https://stackoverflow.com/questions/7853628/how-do-i-find-an-image-contained-within-an-image

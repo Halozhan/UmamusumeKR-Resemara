@@ -70,7 +70,21 @@ def Key_event(device, InstancePort, key_code:str):
         AdbConnect(InstancePort)
 
 
-def BlueStacksClick(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+def BlueStacksTap(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+    try:
+        x, y, width, height = position
+        x += width/2
+        y += height/2
+        x, y = BlueStacksOffset(x, y)
+        x, y = Offset(x, y, offsetX, offsetY)
+        x, y = RandomPosition(x, y, deltaX, deltaY)
+        AdbTap(device, InstancePort, x, y)
+        return True
+    except:
+        AdbConnect(InstancePort)
+        return False
+
+def BlueStacksSwipe(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
         x += width/2
@@ -90,7 +104,7 @@ if __name__ == "__main__":
     InstancePort = 6275
     device = AdbConnect(InstancePort)
     while 1:
-        BlueStacksClick(device, InstancePort, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
+        BlueStacksSwipe(device, InstancePort, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
         
         time.sleep(0.1)
         
