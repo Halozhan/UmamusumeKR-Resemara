@@ -199,7 +199,6 @@ class WindowClass(QMainWindow):
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
         if self.reply == QMessageBox.Yes:
-            self.sleepTime.isAlive = False
             self.AllStopInstance()
             print("종료 중")
             a0.accept()
@@ -333,23 +332,18 @@ class newTab(QMainWindow):
             pass
     
     def startFunction(self):
-        self.InstanceComboBox.setEnabled(False)
-        self.InstanceRefreshButton.setEnabled(False)
-        
         self.startButton.setEnabled(False)
-        self.stopButton.setEnabled(True)
-        self.resetButton.setEnabled(False)
-        self.isDoneTutorialCheckBox.setEnabled(False)
-        
+
         self.logs.append("-"*50)
         self.logs.append("시작!!")
         self.umamusume.start()
         self.logs.append("-"*50)
     
     def stopFunction(self):
+        self.stopButton.setEnabled(False)
         self.logs.append("-"*50)
         self.umamusume.terminate()
-        self.logs.append("멈춤!!")
+        self.logs.append("정지 중!!")
         self.logs.append("-"*50)
     
     def resetFunction(self):

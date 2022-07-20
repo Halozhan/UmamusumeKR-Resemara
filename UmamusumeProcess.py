@@ -35,11 +35,15 @@ class UmaProcess():
         pass
     
     def Receive_Worker(self):
-        while True:
-            self.Receive()
-            time.sleep(0.05)
+        while self.ReceiverEvent.is_set() == False:
+            # self.lock.acquire()
+            if not self.Receive():
+                time.sleep(0.05)
+            # self.lock.release()
+        # print("이거 종료함")
 
-    def Receive(self): # 통신용
+    def Receive(self) -> bool: # 통신용
+        
         if self.toChild.empty() == False:
             recv = self.toChild.get()
             # print(recv)
@@ -71,13 +75,15 @@ class UmaProcess():
             elif recv[0] == "isDoingMAC_Change":
                 self.isDoingMAC_Change = recv[1]
                 # print(recv[1])
+            return True
+        return False
             
 
     
-    def log_main(self, id, text):
+    def log_main(self, id, text) -> None:
         self.toParent.put(["sendLog_main", str(id), str(text)])
 
-    def log(self, text):
+    def log(self, text) -> None:
         self.toParent.put(["sendLog", str(text)])
 
     def run_a(self, toParent: Queue, toChild: Queue):
@@ -121,16 +127,35 @@ class UmaProcess():
 
 
         # 수신
+        self.lock = threading.Lock()
+        self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
 
-        time.sleep(0.2)
+        time.sleep(0.1)
 
         self.isAlive = True
         self.isStopped = False
+
+        # 버튼 비활성화
+        self.toParent.put(["InstanceComboBox.setEnabled", False])
+        # self.InstanceComboBox.setEnabled(False)
+        self.toParent.put(["InstanceRefreshButton.setEnabled", False])
+        # self.InstanceRefreshButton.setEnabled(False)
+        
+        # self.toParent.put(["startButton.setEnabled", False])
+        # self.startButton.setEnabled(False)
+        self.toParent.put(["stopButton.setEnabled", True])
+        # self.stopButton.setEnabled(True)
+        self.toParent.put(["resetButton.setEnabled", False])
+        # self.resetButton.setEnabled(False)
+        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
+        # self.isDoneTutorialCheckBox.setEnabled(False)
+
         
         while self.isAlive:
             isSuccessed = self.main()
+            # isSuccessed = "Failed"
 
             # print("-"*50)
             self.log_main(self.InstanceName, "-"*50)
@@ -142,10 +167,10 @@ class UmaProcess():
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
 
             # print("튜토리얼 스킵 여부:", self.isDoneTutorial)
-            self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
-            self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
+            # self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
+            # self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
 
-            if isSuccessed == "Failed": # 데이터 삭제
+            if isSuccessed == "Failed": # 리세 실패, 저장된 데이터 삭제
                 try:
                     path = "./Saved_Data/"+str(self.InstancePort)+".uma"
                     os.remove(path)
@@ -155,7 +180,7 @@ class UmaProcess():
 
             if isSuccessed == "Stop":
                 # print("This thread was terminated.")
-                self.log_main(self.InstanceName,  str(self.InstanceName) + " thread was terminated.")
+                self.log_main(str(self.InstanceName), " thread was terminated.")
                 self.log("This thread was terminated.")
 
             # print("리세 횟수:", self.resetCount)
@@ -194,6 +219,17 @@ class UmaProcess():
         # print("리세 종료")
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
+
+        # print("종료할게")
+        
+        # print("종료명령실행함")
+        # self.Receiver.join(1)
+        # time.sleep(2)
+        # print(self.Receiver.is_alive())
+        # time.sleep(0.1)
+        # time.sleep(0.1)
+        # print(self.Receiver.is_alive())
+        self.ReceiverEvent.set() # Receiver 스레드 종료 준비
         self.isStopped = True
         while self.isStopped:
             time.sleep(0.005)
@@ -225,8 +261,8 @@ class UmaProcess():
                 pickle.dump(self.Supporter_cards_total, file) # -- pickle --
         except:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            # print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
-            self.log(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
+            # print(path+"를 저장하는데 실패했습니다.")
+            self.log(path+"를 저장하는데 실패했습니다.")
 
         self.toParent.put(["InstanceComboBox.setEnabled", True])
         # self.parent.InstanceComboBox.setEnabled(True)
@@ -242,12 +278,15 @@ class UmaProcess():
         self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
         # self.parent.isDoneTutorialCheckBox.setEnabled(True)
 
-        time.sleep(0.2)
 
-        self.toParent.close()
-        self.toChild.close()
+        # self.toParent.close()
+        # self.toChild.close()
 
+        print(self.Receiver.is_alive())
+
+        
         self.isStopped = False
+        self.toParent.put(["정상종료"])
     
 
     def main(self):

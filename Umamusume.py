@@ -38,37 +38,32 @@ class Umamusume(QObject):
             # print(recv)
             if recv[0] == "sendLog":
                 self.sendLog.emit(str(recv[1]))
-                # print(recv[1])
             elif recv[0] == "sendLog_main":
                 self.sendLog_Main.emit(str(recv[1]), str(recv[2]))
-                # print(recv[1])
             elif recv[0] == "isDoneTutorial":
                 self.parent.isDoneTutorialCheckBox.setChecked(recv[1])
-                # print(recv[1])
 
             elif recv[0] == "InstanceComboBox.setEnabled":
                 self.parent.InstanceComboBox.setEnabled(recv[1])
-                # print(recv[1])
             elif recv[0] == "InstanceRefreshButton.setEnabled":
                 self.parent.InstanceRefreshButton.setEnabled(recv[1])
-                # print(recv[1])
 
+            
+            elif recv[0] == "InstanceComboBox.setEnabled":
+                self.parent.InstanceComboBox.setEnabled(recv[1])
+            elif recv[0] == "InstanceRefreshButton.setEnabled":
+                self.parent.InstanceRefreshButton.setEnabled(recv[1])
             elif recv[0] == "startButton.setEnabled":
                 self.parent.startButton.setEnabled(recv[1])
-                # print(recv[1])
             elif recv[0] == "stopButton.setEnabled":
                 self.parent.stopButton.setEnabled(recv[1])
-                # print(recv[1])
             elif recv[0] == "resetButton.setEnabled":
                 self.parent.resetButton.setEnabled(recv[1])
-                # print(recv[1])
             elif recv[0] == "isDoneTutorialCheckBox.setEnabled":
                 self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
-                # print(recv[1])
 
             elif recv[0] == "sendResetCount":
                 self.ResetCount = recv[1]
-                # print(recv[1])
             elif recv[0] == "requestTotalResetCount":
                 TotalResetCount = 0
                 for i in self.parent.parent.Tab:
@@ -76,11 +71,12 @@ class Umamusume(QObject):
                         if not (i.umamusume.ResetCount == -1):
                             TotalResetCount += i.umamusume.ResetCount
                 self.toChild.put(["sendTotalResetCount", TotalResetCount])
-                # print(recv[1])
 
             elif recv[0] == "숫자4080_에러_코드":
                 self.Error_4080.emit()
-                # print(recv[1])
+
+            elif recv[0] == "정상종료":
+                self.isStopped = True
 
 
     def start(self):
@@ -92,7 +88,7 @@ class Umamusume(QObject):
         self.toChild.put(["InstancePort", self.parent.InstancePort])
         self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
         self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
-
+        
         self.uma = UmaProcess()
         self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
         self.process.start()
@@ -101,5 +97,12 @@ class Umamusume(QObject):
         self.Receiver.start()
         
     def terminate(self):
+        self.isStopped = False
         self.toChild.put(["terminate"])
-        # pass # not yet
+        while self.isStopped == False:
+            time.sleep(0.05)
+        print("is process alive?", self.process.is_alive())
+        self.process.close()
+        # self.toParent.close()
+        # self.toChild.close()
+        # self.process.join() # 종료 대기
