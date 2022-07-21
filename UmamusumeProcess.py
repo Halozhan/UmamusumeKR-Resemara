@@ -1,3 +1,4 @@
+from concurrent.futures import thread
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
@@ -35,12 +36,19 @@ class UmaProcess():
         pass
     
     def Receive_Worker(self):
-        while self.ReceiverEvent.is_set() == False:
+        while self.ReceiverEvent.is_set() == False or self.toChild.empty() == False:
             # self.lock.acquire()
             if not self.Receive():
-                time.sleep(0.05)
+                time.sleep(0.01)
             # self.lock.release()
-        # print("이거 종료함")
+        while not self.toChild.empty():
+            try:
+                recv = self.toChild.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
+        self.toChild.close()
+        print("자식 수신 종료")
 
     def Receive(self) -> bool: # 통신용
         
@@ -51,7 +59,9 @@ class UmaProcess():
                 self.sleepTime = recv[1]
                 # print(recv[1])
             elif recv[0] == "terminate":
-                self.terminate()
+                print("종료 신호")
+                th = threading.Thread(target=self.terminate)
+                th.start()
                 # print(recv[1])
 
             elif recv[0] == "InstanceName":
@@ -77,8 +87,6 @@ class UmaProcess():
                 # print(recv[1])
             return True
         return False
-            
-
     
     def log_main(self, id, text) -> None:
         self.toParent.put(["sendLog_main", str(id), str(text)])
@@ -100,7 +108,6 @@ class UmaProcess():
         self.isAlive = False
         self.sleepTime = 0.5
 
-        self.isStopped = False
         self.isDoingMAC_Change = False
 
 
@@ -127,16 +134,22 @@ class UmaProcess():
 
 
         # 수신
-        self.lock = threading.Lock()
+        # self.lock = threading.Lock() 사용 안 할 듯
         self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
-
-        time.sleep(0.1)
-
+        while self.Receiver.is_alive() == False:
+            time.sleep(0.001)
+        
         self.isAlive = True
-        self.isStopped = False
 
+        # 정보가 불러와졌을 때까지 기다림
+        while self.InstanceName == "":
+            time.sleep(0.001)
+        while self.InstancePort == 0:
+            time.sleep(0.001)
+        print("패스")
+        
         # 버튼 비활성화
         self.toParent.put(["InstanceComboBox.setEnabled", False])
         # self.InstanceComboBox.setEnabled(False)
@@ -152,7 +165,6 @@ class UmaProcess():
         self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
         # self.isDoneTutorialCheckBox.setEnabled(False)
 
-        
         while self.isAlive:
             isSuccessed = self.main()
             # isSuccessed = "Failed"
@@ -206,7 +218,8 @@ class UmaProcess():
                 # self.parent.InstanceComboBox.setEnabled(True)
                 self.toParent.put(["InstanceRefreshButton.setEnabled", True])
                 # self.parent.InstanceRefreshButton.setEnabled(True)
-                break
+                self.terminate()
+                self.toParent.put(["terminate"])
 
             if isSuccessed == "숫자4080_에러_코드":
                 self.toParent.put(["숫자4080_에러_코드"])
@@ -220,24 +233,15 @@ class UmaProcess():
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
 
-        # print("종료할게")
-        
-        # print("종료명령실행함")
-        # self.Receiver.join(1)
-        # time.sleep(2)
-        # print(self.Receiver.is_alive())
-        # time.sleep(0.1)
-        # time.sleep(0.1)
-        # print(self.Receiver.is_alive())
-        self.ReceiverEvent.set() # Receiver 스레드 종료 준비
-        self.isStopped = True
-        while self.isStopped:
-            time.sleep(0.005)
 
-    def terminate(self):
-        self.isAlive = False
-        while self.isStopped == False:
-            time.sleep(0.005)
+        self.ReceiverEvent.set() # Receiver 스레드 종료 준비
+        print("종료 준비")
+        self.Receiver.join() # 수신 종료 대기
+        print("종료됨")
+
+        print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
+
+        # 데이터 저장
         try:
             os.makedirs("./Saved_Data")
         except:
@@ -261,36 +265,18 @@ class UmaProcess():
                 pickle.dump(self.Supporter_cards_total, file) # -- pickle --
         except:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            # print(path+"를 저장하는데 실패했습니다.")
-            self.log(path+"를 저장하는데 실패했습니다.")
-
-        self.toParent.put(["InstanceComboBox.setEnabled", True])
-        # self.parent.InstanceComboBox.setEnabled(True)
-        self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-        # self.parent.InstanceRefreshButton.setEnabled(True)
+            print(path+"를 저장하는데 실패했습니다.")
+            # self.log(path+"를 저장하는데 실패했습니다.")
         
-        self.toParent.put(["startButton.setEnabled", True])
-        # self.parent.startButton.setEnabled(True)
-        self.toParent.put(["stopButton.setEnabled", False])
-        # self.parent.stopButton.setEnabled(False)
-        self.toParent.put(["resetButton.setEnabled", True])
-        # self.parent.resetButton.setEnabled(True)
-        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
-        # self.parent.isDoneTutorialCheckBox.setEnabled(True)
-
-
-        # self.toParent.close()
-        # self.toChild.close()
-
-        print(self.Receiver.is_alive())
-
-        
-        self.isStopped = False
-        self.toParent.put(["정상종료"])
-    
+    def terminate(self):
+        self.isAlive = False
+        print("isAlive", self.isAlive)
 
     def main(self):
         hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
+        if hwndMain == 0:
+            self.toParent.put(["terminate"])
+            return "Stop"
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
         

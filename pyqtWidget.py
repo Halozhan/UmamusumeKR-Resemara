@@ -119,8 +119,9 @@ class WindowClass(QMainWindow):
     
     def AllStopInstance(self):
         for i in self.Tab:
-            if i.stopButton.isEnabled():
-                i.stopFunction()
+            if i.stopButton.isEnabled(): # 정지 버튼이 켜져있는 인스턴스만
+                i.stopFunction() # 종료
+                print("인스턴스 종료 시도!!")
 
     def timeRateFunction(self):
         value1 = self.timeRateSlider1.value()
@@ -195,7 +196,7 @@ class WindowClass(QMainWindow):
         # return super().closeEvent(a0)
     # def closeEvent(self) -> None:
     def closeEvent(self, a0: QCloseEvent) -> None:
-        msg = "정말 종료하시겠습니까?\n(정지되지않는 인스턴스는 데이터가 저장되지 않을 수 있습니다)"
+        msg = "정말 종료하시겠습니까?\n(정지되지않는 인스턴스는 데이터가 저장되지 않을 수도 있습니다)"
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
         if self.reply == QMessageBox.Yes:
@@ -342,8 +343,8 @@ class newTab(QMainWindow):
     def stopFunction(self):
         self.stopButton.setEnabled(False)
         self.logs.append("-"*50)
-        self.umamusume.terminate()
         self.logs.append("정지 중!!")
+        self.umamusume.terminate()
         self.logs.append("-"*50)
     
     def resetFunction(self):

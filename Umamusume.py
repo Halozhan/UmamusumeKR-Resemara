@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal, QObject
 import multiprocessing as mp
-from threading import Thread
+import threading
 import time
 from UmamusumeProcess import UmaProcess
 
@@ -28,9 +28,17 @@ class Umamusume(QObject):
         self.Error_4080.connect(self.parent.parent.MAC_Address_Change)
 
     def Receive_Worker(self):
-        while True:
-            self.Receive()
-            time.sleep(0.05)
+        while self.ReceiverEvent.is_set() == False or self.toParent.empty() == False:
+            if not self.Receive():
+                time.sleep(0.01)
+        while not self.toParent.empty():
+            try:
+                recv = self.toParent.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
+        self.toParent.close()
+        print("부모 수신 종료")
 
     def Receive(self): # 통신용
         if self.toParent.empty() == False:
@@ -75,8 +83,9 @@ class Umamusume(QObject):
             elif recv[0] == "숫자4080_에러_코드":
                 self.Error_4080.emit()
 
-            elif recv[0] == "정상종료":
-                self.isStopped = True
+            elif recv[0] == "terminate":
+                th = threading.Thread(target=self.terminate)
+                th.start()
 
 
     def start(self):
@@ -93,16 +102,42 @@ class Umamusume(QObject):
         self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
         self.process.start()
 
-        self.Receiver = Thread(target=self.Receive_Worker, daemon=True)
+        self.ReceiverEvent = threading.Event()
+        self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
         
     def terminate(self):
-        self.isStopped = False
         self.toChild.put(["terminate"])
-        while self.isStopped == False:
-            time.sleep(0.05)
-        print("is process alive?", self.process.is_alive())
+        print("terminate 신호 보냄")
+        while self.process.is_alive():
+            time.sleep(0.01)
+        print("자식 프로세스 생존?", self.process.is_alive())
+        self.ReceiverEvent.set()
+        while self.Receiver.is_alive():
+            time.sleep(0.01)
+        self.toChild.close() # 자식 수신 큐도 삭제해야함
         self.process.close()
+        print("process 삭제")
+
+
+
+        # 버튼 활성화
+        # self.toParent.put(["InstanceComboBox.setEnabled", True])
+        self.parent.InstanceComboBox.setEnabled(True)
+        # self.toParent.put(["InstanceRefreshButton.setEnabled", True])
+        self.parent.InstanceRefreshButton.setEnabled(True)
+        
+        # self.toParent.put(["startButton.setEnabled", True])
+        self.parent.startButton.setEnabled(True)
+        # self.toParent.put(["stopButton.setEnabled", False])
+        self.parent.stopButton.setEnabled(False)
+        # self.toParent.put(["resetButton.setEnabled", True])
+        self.parent.resetButton.setEnabled(True)
+        # self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
+        self.parent.isDoneTutorialCheckBox.setEnabled(True)
+
+
+
         # self.toParent.close()
         # self.toChild.close()
         # self.process.join() # 종료 대기
