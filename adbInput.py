@@ -20,7 +20,6 @@ def AdbConnect(InstancePort):
         device = client.device("localhost:"+str(InstancePort))
         return device
 
-
 def RandomPosition(x, y, deltaX, deltaY):
     try:
         x = int(x)
@@ -32,7 +31,6 @@ def RandomPosition(x, y, deltaX, deltaY):
     except:
         pass
 
-
 def BlueStacksOffset(x, y): # 블루스택 이미지 서칭에서 가져온 위치로 터치하기 위해 블루스택 좌표로 변환
     try:
         x -= 1
@@ -42,12 +40,10 @@ def BlueStacksOffset(x, y): # 블루스택 이미지 서칭에서 가져온 위�
     except:
         pass
 
-
 def Offset(x, y, offsetX, offsetY):
     x += offsetX
     y += offsetY
     return x, y
-
 
 def AdbTap(device, InstancePort, x, y): # 0초 동안 누름
     try:
@@ -55,13 +51,11 @@ def AdbTap(device, InstancePort, x, y): # 0초 동안 누름
     except:
         AdbConnect(InstancePort)
 
-
 def AdbSwipe(device, InstancePort, x, y, toX, toY, delay): # 딜레이를 줘서 누름
     try:
         device.shell("input swipe " + str(x) + " " + str(y) + " " + str(toX) + " " + str(toY) + " " + str(delay))
     except:
         AdbConnect(InstancePort)
-
 
 def Key_event(device, InstancePort, key_code:str):
     try:
@@ -69,8 +63,21 @@ def Key_event(device, InstancePort, key_code:str):
     except:
         AdbConnect(InstancePort)
 
+def BlueStacksTap(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+    try:
+        x, y, width, height = position
+        x += width/2
+        y += height/2
+        x, y = BlueStacksOffset(x, y)
+        x, y = Offset(x, y, offsetX, offsetY)
+        x, y = RandomPosition(x, y, deltaX, deltaY)
+        AdbTap(device, InstancePort, x, y)
+        return True
+    except:
+        AdbConnect(InstancePort)
+        return False
 
-def BlueStacksClick(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+def BlueStacksSwipe(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
         x += width/2
@@ -90,7 +97,7 @@ if __name__ == "__main__":
     InstancePort = 6275
     device = AdbConnect(InstancePort)
     while 1:
-        BlueStacksClick(device, InstancePort, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
+        BlueStacksSwipe(device, InstancePort, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
         
         time.sleep(0.1)
         

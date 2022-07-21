@@ -1,3 +1,4 @@
+from concurrent.futures import thread
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
@@ -16,27 +17,18 @@ import threading
 # Images
 path = './Images'
 Images = dict()
-
 for a in glob.glob(os.path.join(path, '*')):
     key = a.replace('.', '/').replace('\\', '/')
     key = key.split('/')
     Images[key[-2]] = imreadUnicode(a)
 
-if __name__ == "__main__":
-    for i in Images.keys():
-        print(i, end=", ")
-
 # 서포트 카드
 path = './Supporter_cards'
 Supporter_cards = dict()
-
 for a in glob.glob(os.path.join(path, '*')):
     key = a.replace('.', '/').replace('\\', '/')
     key = key.split('/')
     Supporter_cards[key[-2]] = imreadUnicode(a)
-
-
-
 
 
 class UmaProcess():
@@ -44,11 +36,22 @@ class UmaProcess():
         pass
     
     def Receive_Worker(self):
-        while True:
-            self.Receive()
-            time.sleep(0.05)
+        while self.ReceiverEvent.is_set() == False or self.toChild.empty() == False:
+            # self.lock.acquire()
+            if not self.Receive():
+                time.sleep(0.01)
+            # self.lock.release()
+        while not self.toChild.empty():
+            try:
+                recv = self.toChild.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
+        self.toChild.close()
+        # print("자식 수신 종료")
 
-    def Receive(self): # 통신용
+    def Receive(self) -> bool: # 통신용
+        
         if self.toChild.empty() == False:
             recv = self.toChild.get()
             # print(recv)
@@ -56,7 +59,10 @@ class UmaProcess():
                 self.sleepTime = recv[1]
                 # print(recv[1])
             elif recv[0] == "terminate":
-                self.terminate()
+                # print("종료 신호")
+                # th = threading.Thread(target=self.terminate)
+                # th.start()
+                self.isAlive = False
                 # print(recv[1])
 
             elif recv[0] == "InstanceName":
@@ -80,13 +86,13 @@ class UmaProcess():
             elif recv[0] == "isDoingMAC_Change":
                 self.isDoingMAC_Change = recv[1]
                 # print(recv[1])
-            
-
+            return True
+        return False
     
-    def log_main(self, id, text):
+    def log_main(self, id, text) -> None:
         self.toParent.put(["sendLog_main", str(id), str(text)])
 
-    def log(self, text):
+    def log(self, text) -> None:
         self.toParent.put(["sendLog", str(text)])
 
     def run_a(self, toParent: Queue, toChild: Queue):
@@ -103,7 +109,6 @@ class UmaProcess():
         self.isAlive = False
         self.sleepTime = 0.5
 
-        self.isStopped = False
         self.isDoingMAC_Change = False
 
 
@@ -130,16 +135,39 @@ class UmaProcess():
 
 
         # 수신
+        # self.lock = threading.Lock() 사용 안 할 듯
+        self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
-
-        time.sleep(0.2)
-
-        self.isAlive = True
-        self.isStopped = False
+        while self.Receiver.is_alive() == False:
+            time.sleep(0.001)
         
+        self.isAlive = True
+
+        # 정보가 불러와졌을 때까지 기다림
+        while self.InstanceName == "":
+            time.sleep(0.001)
+        while self.InstancePort == 0:
+            time.sleep(0.001)
+        
+        # 버튼 비활성화
+        self.toParent.put(["InstanceComboBox.setEnabled", False])
+        # self.InstanceComboBox.setEnabled(False)
+        self.toParent.put(["InstanceRefreshButton.setEnabled", False])
+        # self.InstanceRefreshButton.setEnabled(False)
+        
+        # self.toParent.put(["startButton.setEnabled", False])
+        # self.startButton.setEnabled(False)
+        self.toParent.put(["stopButton.setEnabled", True])
+        # self.stopButton.setEnabled(True)
+        self.toParent.put(["resetButton.setEnabled", False])
+        # self.resetButton.setEnabled(False)
+        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
+        # self.isDoneTutorialCheckBox.setEnabled(False)
+
         while self.isAlive:
             isSuccessed = self.main()
+            # isSuccessed = "Failed"
 
             # print("-"*50)
             self.log_main(self.InstanceName, "-"*50)
@@ -151,10 +179,10 @@ class UmaProcess():
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
 
             # print("튜토리얼 스킵 여부:", self.isDoneTutorial)
-            self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
-            self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
+            # self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
+            # self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
 
-            if isSuccessed == "Failed": # 데이터 삭제
+            if isSuccessed == "Failed": # 리세 실패, 저장된 데이터 삭제
                 try:
                     path = "./Saved_Data/"+str(self.InstancePort)+".uma"
                     os.remove(path)
@@ -164,7 +192,7 @@ class UmaProcess():
 
             if isSuccessed == "Stop":
                 # print("This thread was terminated.")
-                self.log_main(self.InstanceName,  str(self.InstanceName) + " thread was terminated.")
+                self.log_main(str(self.InstanceName), " thread was terminated.")
                 self.log("This thread was terminated.")
 
             # print("리세 횟수:", self.resetCount)
@@ -179,18 +207,12 @@ class UmaProcess():
             self.log_main("리세 총 횟수: ", str(int(self.totalResetCount)))
 
             if isSuccessed == True:
-                self.toParent.put(["stopButton.setEnabled", False])
-                # self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
                 print("리세 성공 "*5)
                 self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
 
-                self.toParent.put(["InstanceComboBox.setEnabled", True])
-                # self.parent.InstanceComboBox.setEnabled(True)
-                self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-                # self.parent.InstanceRefreshButton.setEnabled(True)
-                break
+                self.toParent.put(["terminate"])
 
             if isSuccessed == "숫자4080_에러_코드":
                 self.toParent.put(["숫자4080_에러_코드"])
@@ -203,14 +225,16 @@ class UmaProcess():
         # print("리세 종료")
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
-        self.isStopped = True
-        while self.isStopped:
-            time.sleep(0.005)
 
-    def terminate(self):
-        self.isAlive = False
-        while self.isStopped == False:
-            time.sleep(0.005)
+
+        self.ReceiverEvent.set() # Receiver 스레드 종료 준비
+        # print("종료 준비")
+        self.Receiver.join() # 수신 종료 대기
+        # print("종료됨")
+
+        # print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
+
+        # 데이터 저장
         try:
             os.makedirs("./Saved_Data")
         except:
@@ -219,7 +243,6 @@ class UmaProcess():
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
                 pickle.dump(self.resetCount, file) # -- pickle --
-
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
@@ -234,33 +257,15 @@ class UmaProcess():
                 pickle.dump(self.Supporter_cards_total, file) # -- pickle --
         except:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            # print(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
-            self.log(path+"를 저장하는데 실패했습니다. (동시작업 가능성)")
-
-        self.toParent.put(["InstanceComboBox.setEnabled", True])
-        # self.parent.InstanceComboBox.setEnabled(True)
-        self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-        # self.parent.InstanceRefreshButton.setEnabled(True)
-        
-        self.toParent.put(["startButton.setEnabled", True])
-        # self.parent.startButton.setEnabled(True)
-        self.toParent.put(["stopButton.setEnabled", False])
-        # self.parent.stopButton.setEnabled(False)
-        self.toParent.put(["resetButton.setEnabled", True])
-        # self.parent.resetButton.setEnabled(True)
-        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
-        # self.parent.isDoneTutorialCheckBox.setEnabled(True)
-
-        time.sleep(0.2)
-
-        self.toParent.close()
-        self.toChild.close()
-
-        self.isStopped = False
-    
+            print(path+"를 저장하는데 실패했습니다.")
+            # self.log(path+"를 저장하는데 실패했습니다.")
+        # 종료됨
 
     def main(self):
         hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
+        if hwndMain == 0:
+            self.toParent.put(["terminate"])
+            return "Stop"
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
         
@@ -286,7 +291,6 @@ class UmaProcess():
                 self.log("기존 데이터를 불러옵니다.")
         except:
             # self.resetCount = 0 # -- pickle -- 다른건 초기화해도 리세 횟수는 초기화 하는 거 아님
-            
             self.is시작하기 = False # -- pickle --
             self.isPAUSED = False # -- pickle --
             self.is선물_이동 = True # -- pickle --
@@ -315,8 +319,8 @@ class UmaProcess():
             if self.isDoneTutorial and time.time() >= updateTime + 20:
                 # print("20초 정지 터치락 해제!!! "*3)
                 self.log("20초 정지 터치락 해제!!! ")
-                # adbInput.BlueStacksClick(self.device, self.InstancePort, position=(0,0,0,0))
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
+                # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=(0,0,0,0))
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
                 time.sleep(2)
             
             # 잠수 클릭 60초 이상 앱정지
@@ -340,7 +344,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["SKIP"], confidence=0.85)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("SKIP " + str(count) + "개")
                     self.log("SKIP " + str(count) + "개")
                     # print(position)
@@ -351,7 +355,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["우마무스메_실행"], confidence=0.99, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0])
                     # print("우마무스메_실행 " + str(count) + "개")
                     self.log("우마무스메_실행 " + str(count) + "개")
                     # print(position)
@@ -362,7 +366,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["게스트_로그인"], 232, 926, 77, 14, confidence=0.6)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("게스트_로그인 " + str(count) + "개")
                         self.log("게스트_로그인 " + str(count) + "개")
                         # print(position)
@@ -373,7 +377,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["게스트로_로그인_하시겠습니까"], 162, 534, 218, 17, confidence = 0.9)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX = 120, offsetY = 117, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX = 120, offsetY = 117, deltaX=5, deltaY=5)
                         # print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         self.log("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         # print(position)
@@ -384,7 +388,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["전체_동의"], 23, 117, 22, 22, confidence=0.95, grayscale=False)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX = 0, offsetY = 0, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX = 0, offsetY = 0, deltaX=5, deltaY=5)
                         # print("전체_동의 " + str(count) + "개")
                         self.log("전체_동의 " + str(count) + "개")
                         # print(position)
@@ -395,7 +399,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["시작하기"], 237, 396, 67, 23, grayscale=False)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("시작하기 " + str(count) + "개")
                         self.log("시작하기 " + str(count) + "개")
                         # print(position)
@@ -406,7 +410,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["TAP_TO_START"], 150, 860, 241, 34, confidence=0.6)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     self.is시작하기 = True
                     # print("TAP_TO_START " + str(count) + "개")
                     self.log("TAP_TO_START " + str(count) + "개")
@@ -418,7 +422,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["계정_연동_설정_요청"], 176, 327, 186, 29)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX = -121, offsetY = 316, deltaX=5, deltaY=5)
                     # print("계정_연동_설정_요청 " + str(count) + "개")
                     self.log("계정_연동_설정_요청 " + str(count) + "개")
                     # print(position)
@@ -429,7 +433,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["튜토리얼을_스킵하시겠습니까"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=120, offsetY=140, deltaX=5, deltaY=5)
                     # print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                     self.log("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                     # print(position)
@@ -440,7 +444,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["게임_데이터_다운로드"], 170, 329, 200, 27)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX = 132, offsetY = 316, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX = 132, offsetY = 316, deltaX=5, deltaY=5)
                     # print("게임_데이터_다운로드 " + str(count) + "개")
                     self.log("게임_데이터_다운로드 " + str(count) + "개")
                     # print(position)
@@ -451,9 +455,9 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["트레이너_정보를_입력해주세요"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=61, deltaX=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=61, deltaX=5)
                     time.sleep(0.5)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=555, deltaX=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=555, deltaX=5)
                     # print("트레이너_정보를_입력해주세요 " + str(count) + "개")
                     self.log("트레이너_정보를_입력해주세요 " + str(count) + "개")
                     time.sleep(0.2)
@@ -463,7 +467,7 @@ class UmaProcess():
                     time.sleep(0.2)
                     WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "UmaPyoi")
                     time.sleep(0.5)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
@@ -471,7 +475,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["등록한다"], 206, 620, 106, 52)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("등록한다 " + str(count) + "개")
                     self.log("등록한다 " + str(count) + "개")
                     # print(position)
@@ -482,7 +486,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["이_내용으로_등록합니다_등록하시겠습니까"], 72, 569, 333, 49)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
                     # print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                     self.log("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                     # print(position)
@@ -496,7 +500,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["출전"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("출전 " + str(count) + "개")
                     self.log("출전 " + str(count) + "개")
                     self.toParent.put(["isDoneTutorial", False])
@@ -518,7 +522,7 @@ class UmaProcess():
                         ConvertedPosition.append(position[0][1] / 1.750503018108652)
                         ConvertedPosition.append(position[0][2] / 1.729965156794425) # 993 / 574 가로화면 세로배율
                         ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
                         print("울려라_팡파레 " + str(count) + "개")
                         self.log("울려라_팡파레 " + str(count) + "개")
                         print(position)
@@ -534,7 +538,7 @@ class UmaProcess():
                         ConvertedPosition.append(position[0][1] / 1.750503018108652)
                         ConvertedPosition.append(position[0][2] / 1.729965156794425)
                         ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
                         print("닿아라_골까지 " + str(count) + "개")
                         self.log("닿아라_골까지 " + str(count) + "개")
                         print(position)
@@ -550,7 +554,7 @@ class UmaProcess():
                     ConvertedPosition.append(position[0][1] / 1.750503018108652)
                     ConvertedPosition.append(position[0][2] / 1.729965156794425)
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("라이브_메뉴 " + str(count) + "개")
                     self.log("라이브_메뉴 " + str(count) + "개")
                     print(position)
@@ -565,7 +569,7 @@ class UmaProcess():
                     ConvertedPosition.append(position[0][1] / 1.750503018108652)
                     ConvertedPosition.append(position[0][2] / 1.729965156794425)
                     ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
                     print("라이브_스킵 " + str(count) + "개")
                     self.log("라이브_스킵 " + str(count) + "개")
                     print(position)
@@ -576,7 +580,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["타즈나_씨와_레이스를_관전한"], 124, 808, 268, 52)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
                     self.log("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
                     print(position)
@@ -586,7 +590,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["일본_우마무스메_트레이닝_센터_학원"], 78, 844, 345, 53)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
                     self.log("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
                     print(position)
@@ -596,7 +600,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["레이스의_세계를_꿈꾸는_아이들이"], 73, 810, 369, 70)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
                     self.log("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
                     print(position)
@@ -606,7 +610,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["환영"], 180, 811, 156, 68)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("환영 " + str(count) + "개")
                     self.log("환영 " + str(count) + "개")
                     print(position)
@@ -616,7 +620,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["느낌표물음표"], 35, 449, 52, 54)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("느낌표물음표 " + str(count) + "개")
                     self.log("느낌표물음표 " + str(count) + "개")
                     print(position)
@@ -626,7 +630,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["아키카와_이사장님"], 181, 811, 181, 49)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("아키카와_이사장님 " + str(count) + "개")
                     self.log("아키카와_이사장님 " + str(count) + "개")
                     print(position)
@@ -636,7 +640,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["장래_유망한_트레이너의_등장에"], 145, 808, 284, 50)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("장래_유망한_트레이너의_등장에 " + str(count) + "개")
                     self.log("장래_유망한_트레이너의_등장에 " + str(count) + "개")
                     print(position)
@@ -646,7 +650,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["나는_이_학원의_이사장"], 98, 821, 209, 49)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("나는_이_학원의_이사장 " + str(count) + "개")
                     self.log("나는_이_학원의_이사장 " + str(count) + "개")
                     print(position)
@@ -656,7 +660,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자네에_대해_가르쳐_주게나"], 155, 833, 250, 48)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네에_대해_가르쳐_주게나 " + str(count) + "개")
                     self.log("자네에_대해_가르쳐_주게나 " + str(count) + "개")
                     print(position)
@@ -670,7 +674,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자네는_트레센_학원의_일원일세"], 150, 833, 282, 49)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레센_학원의_일원일세 " + str(count) + "개")
                     self.log("자네는_트레센_학원의_일원일세 " + str(count) + "개")
                     print(position)
@@ -680,7 +684,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["담당_우마무스메와_함께"], 172, 798, 224, 49)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("담당_우마무스메와_함께 " + str(count) + "개")
                     self.log("담당_우마무스메와_함께 " + str(count) + "개")
                     print(position)
@@ -690,7 +694,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["학원에_다니는_우마무스메의"], 86, 798, 259, 50)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("학원에_다니는_우마무스메의 " + str(count) + "개")
                     self.log("학원에_다니는_우마무스메의 " + str(count) + "개")
                     print(position)
@@ -700,7 +704,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자네는_트레이너로서_담당_우마무스메를"], 79, 810, 358, 51)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
                     self.log("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
                     print(position)
@@ -710,7 +714,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["가슴에_단_트레이너_배지에"], 159, 811, 248, 48)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("가슴에_단_트레이너_배지에 " + str(count) + "개")
                     self.log("가슴에_단_트레이너_배지에 " + str(count) + "개")
                     print(position)
@@ -720,7 +724,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["실전_연수를_하러_가시죠"], 207, 813, 224, 46)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("실전_연수를_하러_가시죠 " + str(count) + "개")
                     self.log("실전_연수를_하러_가시죠 " + str(count) + "개")
                     print(position)
@@ -730,7 +734,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["프리티_더비_뽑기_5번_뽑기_무료"], 191, 710, 135, 125)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
                     self.log("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
                     print(position)
@@ -740,7 +744,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["튜토리얼_용_프리티_더비_뽑기"], 130, 432, 258, 69)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
                     self.log("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
                     print(position)
@@ -751,7 +755,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_카드_화살표"], confidence=0.6)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표 " + str(count) + "개") # 느림
                     self.log("서포트_카드_화살표 " + str(count) + "개") # 느림
                     print(position)
@@ -761,7 +765,7 @@ class UmaProcess():
                 # count = 0 # 지울 예정
                 # count, position = ImageSearch(img, Images["서포트_카드_화살표2"], 410, 508, 124, 135)
                 # if count:
-                #     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                #     adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 #     print("서포트_카드_화살표2 " + str(count) + "개") # 느림
                 #     self.log("서포트_카드_화살표2 " + str(count) + "개") # 느림
                 #     print(position)
@@ -771,7 +775,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_카드_뽑기_10번_뽑기_무료"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
                     self.log("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
                     print(position)
@@ -781,7 +785,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["튜토리얼_용_서포트_카드_뽑기"], 124, 431, 266, 71)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
                     self.log("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
                     print(position)
@@ -791,7 +795,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_화살표"], 350, 712, 117, 172)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     print("육성_화살표 " + str(count) + "개")
                     self.log("육성_화살표 " + str(count) + "개")
                     print(position)
@@ -803,7 +807,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_시나리오를_공략하자"], 59, 664, 399, 77)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=223, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=223, deltaX=5, deltaY=5)
                     print("육성_시나리오를_공략하자 " + str(count) + "개")
                     self.log("육성_시나리오를_공략하자 " + str(count) + "개")
                     print(position)
@@ -813,7 +817,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다음_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음_화살표 " + str(count) + "개")
                     self.log("다음_화살표 " + str(count) + "개")
                     print(position)
@@ -823,7 +827,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자"], 53, 614, 414, 125)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=248, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=248, deltaX=5, deltaY=5)
                     print("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
                     self.log("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
                     print(position)
@@ -833,7 +837,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["마음에_드는_우마무스메를_육성하자"], 21, 670, 473, 71)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=217, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=217, deltaX=5, deltaY=5)
                     print("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
                     self.log("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
                     print(position)
@@ -843,7 +847,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다이와_스칼렛_클릭"], 0, 496, 138, 138)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다이와_스칼렛_클릭 " + str(count) + "개")
                     self.log("다이와_스칼렛_클릭 " + str(count) + "개")
                     print(position)
@@ -853,7 +857,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다음_화살표_육성_우마무스메_선택"], 212, 747, 91, 116)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
                     self.log("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
                     print(position)
@@ -863,7 +867,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["플러스_계승_우마무스메_선택_화살표"], 19, 520, 103, 152)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     self.log("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     print(position)
@@ -873,7 +877,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["계승_보드카_선택_화살표"], 209, 496, 93, 161)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("계승_보드카_선택_화살표 " + str(count) + "개")
                     self.log("계승_보드카_선택_화살표 " + str(count) + "개")
                     print(position)
@@ -881,9 +885,9 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["보드카_결정_화살표"], 213, 740, 90, 120)
+                count, position = ImageSearch(img, Images["보드카_결정_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("보드카_결정_화살표 " + str(count) + "개")
                     self.log("보드카_결정_화살표 " + str(count) + "개")
                     print(position)
@@ -893,7 +897,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자동_선택_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자동_선택_화살표 " + str(count) + "개")
                     self.log("자동_선택_화살표 " + str(count) + "개")
                     print(position)
@@ -903,7 +907,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자동_선택_확인_OK_화살표"], 334, 559, 84, 117) # 느림
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     self.log("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     print(position)
@@ -914,7 +918,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["마음을_이어서_꿈을_이루자"], 73, 661, 371, 79)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=218, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=218, deltaX=5, deltaY=5)
                     print("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     self.log("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     print(position)
@@ -924,7 +928,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["계승_최종_다음_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=35, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=35, deltaX=5, deltaY=5)
                     print("계승_최종_다음_화살표 " + str(count) + "개")
                     self.log("계승_최종_다음_화살표 " + str(count) + "개")
                     print(position)
@@ -934,7 +938,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_카드를_편성해서_육성_효율_UP"], 67, 615, 383, 120)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
                     print("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     self.log("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     print(position)
@@ -944,7 +948,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_카드의_타입에_주목"], 38, 662, 439, 69)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=225, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=225, deltaX=5, deltaY=5)
                     print("서포트_카드의_타입에_주목 " + str(count) + "개")
                     self.log("서포트_카드의_타입에_주목 " + str(count) + "개")
                     print(position)
@@ -954,7 +958,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["우정_트레이닝이_육성의_열쇠를_쥐고_있다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=212, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=212, deltaX=5, deltaY=5)
                     print("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     self.log("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     print(position)
@@ -964,7 +968,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_자동_편성_화살표"], 324, 629, 107, 102)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("서포트_자동_편성_화살표 " + str(count) + "개")
                     self.log("서포트_자동_편성_화살표 " + str(count) + "개")
                     print(position)
@@ -974,7 +978,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_시작_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_시작_화살표 " + str(count) + "개")
                     self.log("육성_시작_화살표 " + str(count) + "개")
                     print(position)
@@ -984,7 +988,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["TP를_소비해_육성_시작_화살표"], 305, 816, 142, 119)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     self.log("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     print(position)
@@ -994,7 +998,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["초록색_역삼각형"], 440, 850, -1, -1, confidence=0.8) # 역 삼각형
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("초록색_역삼각형 " + str(count) + "개")
                     self.log("초록색_역삼각형 " + str(count) + "개")
                     print(position)
@@ -1003,27 +1007,17 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["TAP"], confidence=0.7)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("TAP " + str(count) + "개")
                     self.log("TAP " + str(count) + "개")
                     print(position)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                # count = 0
-                # count, position = ImageSearch(img, Images["TAP"])
-                # if count:
-                #     adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                #     print("TAP " + str(count) + "개")
-                #     self.log("TAP " + str(count) + "개")
-                #     print(position)
-                #     time.sleep(0.5)
-                #     img = screenshotToOpenCVImg(hwndMain)
-                
                 count = 0
                 count, position = ImageSearch(img, Images["우마무스메에겐_저마다_다른_목표가_있습니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     self.log("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     print(position)
@@ -1033,7 +1027,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["이쪽은_육성을_진행할_때_필요한_커맨드입니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     self.log("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     print(position)
@@ -1043,7 +1037,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["커맨드를_하나_실행하면_턴을_소비합니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     self.log("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     print(position)
@@ -1053,7 +1047,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["우선_트레이닝을_선택해_보세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=60, offsetY=178, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=60, offsetY=178, deltaX=5, deltaY=5)
                     print("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     print(position)
@@ -1063,7 +1057,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["이게_실행할_수_있는_트레이닝들입니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     self.log("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     print(position)
@@ -1073,7 +1067,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["한_번_스피드를_골라_보세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=-143, offsetY=228, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-143, offsetY=228, deltaX=5, deltaY=5)
                     print("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     self.log("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     print(position)
@@ -1083,7 +1077,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["파란색_역삼각형"], 440, 850, -1, -1, confidence=0.9) # 역 삼각형
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("파란색_역삼각형 " + str(count) + "개")
                     self.log("파란색_역삼각형 " + str(count) + "개")
                     print(position)
@@ -1092,7 +1086,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["약속"], 38, 614, 80, 57)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("약속 " + str(count) + "개")
                     self.log("약속 " + str(count) + "개")
                     print(position)
@@ -1102,7 +1096,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서둘러_가봐"], 38, 617, 132, 53)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서둘러_가봐 " + str(count) + "개")
                     self.log("서둘러_가봐 " + str(count) + "개")
                     print(position)
@@ -1112,7 +1106,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["그때_번뜩였다"], 22, 740, 289, 102)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("그때_번뜩였다 " + str(count) + "개")
                     self.log("그때_번뜩였다 " + str(count) + "개")
                     print(position)
@@ -1122,7 +1116,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다이와_스칼렛의_성장으로_이어졌다"], 23, 741, 328, 55)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     self.log("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     print(position)
@@ -1132,7 +1126,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다음으로_육성_우마무스메의_체력에_관해_설명할게요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     self.log("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     print(position)
@@ -1142,7 +1136,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["우선_아까처럼_트레이닝을_선택해_보세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=90, offsetY=173, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=90, offsetY=173, deltaX=5, deltaY=5)
                     print("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     print(position)
@@ -1152,7 +1146,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["여기_실패율에_주목해_주세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     self.log("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     print(position)
@@ -1162,7 +1156,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["남은_체력이_적을수록_실패율이_높아지게_돼요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     self.log("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     print(position)
@@ -1172,7 +1166,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["트레이닝에_실패하면_능력과_컨디션이"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     self.log("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     print(position)
@@ -1182,7 +1176,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["돌아간다_화살표"], grayscale=False)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("돌아간다_화살표 " + str(count) + "개")
                     self.log("돌아간다_화살표 " + str(count) + "개")
                     print(position)
@@ -1192,7 +1186,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["체력이_적을_때는_우마무스메를"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=-125, offsetY=180, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-125, offsetY=180, deltaX=5, deltaY=5)
                     print("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     self.log("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     print(position)
@@ -1202,7 +1196,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["먼저_여기_스킬을_선택해보세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=-70, offsetY=170, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-70, offsetY=170, deltaX=5, deltaY=5)
                     print("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     self.log("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     print(position)
@@ -1212,7 +1206,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["다음으로_배울_스킬을_선택하세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     self.log("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     print(position)
@@ -1222,7 +1216,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["이번에는_이_스킬을_습득해_보세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=273, offsetY=183, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=273, offsetY=183, deltaX=5, deltaY=5)
                     print("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     self.log("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     print(position)
@@ -1232,7 +1226,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["스킬_결정_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_결정_화살표 " + str(count) + "개")
                     self.log("스킬_결정_화살표 " + str(count) + "개")
                     print(position)
@@ -1242,7 +1236,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["스킬_획득_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_획득_화살표 " + str(count) + "개")
                     self.log("스킬_획득_화살표 " + str(count) + "개")
                     print(position)
@@ -1252,7 +1246,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["스킬_획득_돌아간다_화살표"], 1, 857, 100, 115)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     self.log("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     print(position)
@@ -1262,7 +1256,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["이졔_준비가_다_끝났어요_레이스에_출전해_봐요"], 85, 621, 191, 69)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=207, offsetY=168, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=207, offsetY=168, deltaX=5, deltaY=5)
                     print("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     self.log("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     print(position)
@@ -1272,7 +1266,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["출전_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("출전_화살표 " + str(count) + "개")
                     self.log("출전_화살표 " + str(count) + "개")
                     print(position)
@@ -1282,7 +1276,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["숫자1등이_되기_위해서도_말야"], 37, 615, 252, 58)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("1등이_되기_위해서도_말야 " + str(count) + "개")
                     self.log("1등이_되기_위해서도_말야 " + str(count) + "개")
                     print(position)
@@ -1292,7 +1286,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["패덕에서는_레이스에_출전하는_우마무스메의"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     self.log("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     print(position)
@@ -1302,7 +1296,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["우선_예상_표시에_관해서_설명할게요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     self.log("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     print(position)
@@ -1312,7 +1306,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["숫자3개의_표시는_전문가들의_예상을_나타내며"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     self.log("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     print(position)
@@ -1322,7 +1316,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["능력과_컨디션이_좋을수록_많은_기대를_받게_돼서"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     self.log("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     print(position)
@@ -1332,7 +1326,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["물론_반드시_우승하게_되는_건_아니지만"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     self.log("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     print(position)
@@ -1342,7 +1336,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["또_패덕에서는_우마무스메의_작전을"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=210, offsetY=157, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=210, offsetY=157, deltaX=5, deltaY=5)
                     print("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     self.log("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     print(position)
@@ -1352,7 +1346,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["선행A_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("선행A_화살표 " + str(count) + "개")
                     self.log("선행A_화살표 " + str(count) + "개")
                     print(position)
@@ -1362,7 +1356,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["작전_결정"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("작전_결정 " + str(count) + "개")
                     self.log("작전_결정 " + str(count) + "개")
                     print(position)
@@ -1372,7 +1366,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["이것으로_준비는_다_됐어요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=145, offsetY=161, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=145, offsetY=161, deltaX=5, deltaY=5)
                     print("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     self.log("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     print(position)
@@ -1382,7 +1376,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["첫_우승_축하_드려요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=847, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=847, deltaX=5, deltaY=5)
                     print("첫_우승_축하_드려요 " + str(count) + "개")
                     self.log("첫_우승_축하_드려요 " + str(count) + "개")
                     print(position)
@@ -1392,7 +1386,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["좋아"], 37, 613, 80, 59)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("좋아 " + str(count) + "개")
                     self.log("좋아 " + str(count) + "개")
                     print(position)
@@ -1402,7 +1396,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["목표_달성"], 114, 222, 293, 100)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
                     print("목표_달성 " + str(count) + "개")
                     self.log("목표_달성 " + str(count) + "개")
                     print(position)
@@ -1412,7 +1406,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_목표_달성"], 31, 227, 469, 96)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
                     print("육성_목표_달성 " + str(count) + "개")
                     self.log("육성_목표_달성 " + str(count) + "개")
                     print(position)
@@ -1422,7 +1416,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_수고하셨습니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_수고하셨습니다 " + str(count) + "개")
                     self.log("육성_수고하셨습니다 " + str(count) + "개")
                     print(position)
@@ -1432,7 +1426,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["스킬_포인트가_남았다면"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("스킬_포인트가_남았다면 " + str(count) + "개")
                     self.log("스킬_포인트가_남았다면 " + str(count) + "개")
                     print(position)
@@ -1442,7 +1436,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성은_이것으로_종료입니다"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성은_이것으로_종료입니다 " + str(count) + "개")
                     self.log("육성은_이것으로_종료입니다 " + str(count) + "개")
                     print(position)
@@ -1452,7 +1446,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["또_연수_기간은_짧았지만"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("또_연수_기간은_짧았지만 " + str(count) + "개")
                     self.log("또_연수_기간은_짧았지만 " + str(count) + "개")
                     print(position)
@@ -1462,7 +1456,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_완료_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=40, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=40, deltaX=5, deltaY=5)
                     print("육성_완료_화살표 " + str(count) + "개")
                     self.log("육성_완료_화살표 " + str(count) + "개")
                     print(position)
@@ -1472,7 +1466,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성_완료_확인_완료한다_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     self.log("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     print(position)
@@ -1482,7 +1476,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     print(position)
@@ -1492,7 +1486,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["최고_랭크를_목표로_힘내세요"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     self.log("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     print(position)
@@ -1502,7 +1496,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["랭크_육성"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=837, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=837, deltaX=5, deltaY=5)
                     print("랭크_육성 " + str(count) + "개")
                     self.log("랭크_육성 " + str(count) + "개")
                     print(position)
@@ -1512,7 +1506,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["육성을_끝낸_우마무스메는_인자를"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     print(position)
@@ -1522,7 +1516,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["계승_우마무스메로_선택하면_새로운_우마무스메에게"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     self.log("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     print(position)
@@ -1532,7 +1526,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["인자획득"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=829, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=829, deltaX=5, deltaY=5)
                     print("인자획득 " + str(count) + "개")
                     self.log("인자획득 " + str(count) + "개")
                     print(position)
@@ -1542,7 +1536,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["우마무스메_상세_닫기_화살표"])
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     self.log("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     print(position)
@@ -1552,7 +1546,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["평가점"], 293, 327, 75, 50)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=-75, offsetY=552, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-75, offsetY=552, deltaX=5, deltaY=5)
                     print("평가점 " + str(count) + "개")
                     self.log("평가점 " + str(count) + "개")
                     print(position)
@@ -1562,7 +1556,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["보상획득"], 113, 21, 287, 103)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=834, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=834, deltaX=5, deltaY=5)
                     print("보상획득 " + str(count) + "개")
                     self.log("보상획득 " + str(count) + "개")
                     print(position)
@@ -1573,7 +1567,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["강화_편성_화살표"], 0, 910, 97, -1, grayscale=False) # -5, 910, 97, 67
                 if count:
                     print(position[0])
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("강화_편성_화살표 " + str(count) + "개")
                     self.log("강화_편성_화살표 " + str(count) + "개")
                     print(position)
@@ -1584,7 +1578,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["레이스_화살표"], 329, 908, 103, -1, grayscale=False) # 329, 908, 103, 71
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("레이스_화살표 " + str(count) + "개")
                     self.log("레이스_화살표 " + str(count) + "개")
                     print(position)
@@ -1595,7 +1589,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_경기장_화살표"], 82, 542, 130, 83)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     print("팀_경기장_화살표 " + str(count) + "개")
                     self.log("팀_경기장_화살표 " + str(count) + "개")
                     print(position)
@@ -1605,7 +1599,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["오리지널_팀을_결성_상위_CLASS를_노려라"], 81, 622, 358, 118)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
                     print("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     self.log("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     print(position)
@@ -1615,7 +1609,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["하이스코어를_기록해서_CLASS_승급을_노리자"], 78, 614, 362, 125)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=250, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=250, deltaX=5, deltaY=5)
                     print("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     self.log("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     print(position)
@@ -1625,7 +1619,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["기간_중에_개최되는_5개의_레이스에"], 8, 617, 504, 121)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=236, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=236, deltaX=5, deltaY=5)
                     print("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     self.log("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     print(position)
@@ -1635,7 +1629,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["서포트_카드의_Lv을_UP해서"], 61, 630, 396, 111)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
                     print("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     self.log("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     print(position)
@@ -1645,7 +1639,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_편성"], 264, 699, 126, 72)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("팀_편성 " + str(count) + "개")
                     self.log("팀_편성 " + str(count) + "개")
                     print(position)
@@ -1655,7 +1649,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["전당_입성_우마무스메로_자신만의_팀을_결성"], 59, 616, 395, 122)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
                     print("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     self.log("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     print(position)
@@ -1665,7 +1659,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_랭크를_올려서_최강의_팀이_되자"], 128, 616, 262, 122)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=238, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=238, deltaX=5, deltaY=5)
                     print("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     self.log("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     print(position)
@@ -1675,7 +1669,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠"], 84, 619, 352, 123)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=246, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=246, deltaX=5, deltaY=5)
                     print("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     self.log("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     print(position)
@@ -1685,7 +1679,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_편성_다이와_스칼렛_화살표_클릭"], 200, 341, 116, 160)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     self.log("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     print(position)
@@ -1695,7 +1689,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["출전_우마무스메_선택_다이와_스칼렛_화살표"], 0, 591, 121, 138)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     self.log("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     print(position)
@@ -1705,7 +1699,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_편성_확정_화살표"], 190, 736, 136, 124)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_편성_확정_화살표 " + str(count) + "개")
                     self.log("팀_편성_확정_화살표 " + str(count) + "개")
                     print(position)
@@ -1715,7 +1709,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["편성을_확정합니다_진행하시겠습니까"], 177, 524, 165, 75)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=121, offsetY=77, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=121, offsetY=77, deltaX=5, deltaY=5)
                     print("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     self.log("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     print(position)
@@ -1725,7 +1719,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["팀_최고_평가점_갱신_닫기"], 223, 840, 98, 95)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     self.log("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     print(position)
@@ -1735,7 +1729,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["홈_화살표"], 188, 845, 144, 134)
                 if count:
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("홈_화살표 " + str(count) + "개")
                     self.log("홈_화살표 " + str(count) + "개")
                     print(position)
@@ -1751,7 +1745,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["공지사항_X"], 495, 52, 23, 22)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("공지사항_X " + str(count) + "개")
                     self.log("공지사항_X " + str(count) + "개")
                     self.isDoneTutorial = True
@@ -1766,7 +1760,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["메인_스토리가_해방되었습니다"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                     # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.isDoneTutorial = True
@@ -1781,7 +1775,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["여러_스토리를_해방할_수_있게_되었습니다"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.isDoneTutorial = True
@@ -1799,7 +1793,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["선물_이동"], 456, 672, 47, 53)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("선물_이동 " + str(count) + "개")
                     self.log("선물_이동 " + str(count) + "개")
                     # print(position)
@@ -1810,7 +1804,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["선물_일괄_수령"], 319, 879, 115, 54, confidence=0.99, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("선물_일괄_수령 " + str(count) + "개")
                     self.log("선물_일괄_수령 " + str(count) + "개")
                     # print(position)
@@ -1821,7 +1815,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["상기의_선물을_수령했습니다"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     # print("상기의_선물을_수령했습니다 " + str(count) + "개")
                     self.log("상기의_선물을_수령했습니다 " + str(count) + "개")
                     # print(position)
@@ -1832,7 +1826,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["받을_수_있는_선물이_없습니다"], 143, 460, 231, 51)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=-125, offsetY=420, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-125, offsetY=420, deltaX=5, deltaY=5)
                     # print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                     self.log("받을_수_있는_선물이_없습니다 " + str(count) + "개")
                     # print(position)
@@ -1848,7 +1842,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["뽑기_이동"], 464, 666, 52, 62)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=245, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=245, deltaX=5, deltaY=5)
                     # print("뽑기_이동 " + str(count) + "개")
                     self.log("뽑기_이동 " + str(count) + "개")
                     # print(position)
@@ -1863,7 +1857,7 @@ class UmaProcess():
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
                     # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     if self.isSSR확정_뽑기 == False:
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
                         self.is서포트_뽑기 = True
                     else:
                         adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
@@ -1881,7 +1875,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
                     # print("서포트_카드_뽑기 " + str(count) + "개")
                     self.log("서포트_카드_뽑기 " + str(count) + "개")
                     # print(position)
@@ -1898,7 +1892,7 @@ class UmaProcess():
                 if count:
                     updateTime = time.time()
                     self.is뽑기_결과 = True
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
                     # print("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                     self.log("무료_쥬얼부터_먼저_사용됩니다 " + str(count) + "개")
                     # print(position)
@@ -1971,7 +1965,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["한_번_더_뽑기"], 267, 675, 247, 318)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("한_번_더_뽑기 " + str(count) + "개")
                     self.log("한_번_더_뽑기 " + str(count) + "개")
                     # print(position)
@@ -2010,7 +2004,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["상점_화면을_표시할_수_없습니다"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=147, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=147, deltaX=5, deltaY=5)
                     # print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
                     self.log("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
                     # print(position)
@@ -2027,7 +2021,7 @@ class UmaProcess():
                         # print(time.time() - 타임)
                         # 타임 = time.time()
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
                         # print("서포트_카드_뽑기 " + str(count) + "개")
                         self.log("서포트_카드_뽑기 " + str(count) + "개")
                         # print(position)
@@ -2040,7 +2034,7 @@ class UmaProcess():
                         # print(time.time() - 타임)
                         # 타임 = time.time()
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=247, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=247, deltaX=5, deltaY=5)
                         # print("숫자3성_확정 " + str(count) + "개")
                         self.log("숫자3성_확정 " + str(count) + "개")
                         # print(position)
@@ -2053,7 +2047,7 @@ class UmaProcess():
                         # print(time.time() - 타임)
                         # 타임 = time.time()
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=248, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=248, deltaX=5, deltaY=5)
                         # print("SSR_확정_스타트_대시 " + str(count) + "개")
                         self.log("SSR_확정_스타트_대시 " + str(count) + "개")
                         # print(position)
@@ -2066,7 +2060,7 @@ class UmaProcess():
                         # print(time.time() - 타임)
                         # 타임 = time.time()
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=195, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=195, deltaX=5, deltaY=5)
                         # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         # print(position)
@@ -2080,7 +2074,7 @@ class UmaProcess():
                         # 타임 = time.time()
                         updateTime = time.time()
                         self.is뽑기_결과 = True
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=117, offsetY=190, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=117, offsetY=190, deltaX=5, deltaY=5)
                         # print("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
                         # print(position)
@@ -2091,7 +2085,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["뽑기_결과_OK"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("뽑기_결과_OK " + str(count) + "개")
                         self.log("뽑기_결과_OK " + str(count) + "개")
                         # print(position)
@@ -2105,7 +2099,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["메뉴"], 452, 48, 57, 48)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=5, offsetY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=5, offsetY=5)
                         # print("메뉴 " + str(count) + "개")
                         self.log("메뉴 " + str(count) + "개")
                         # print(position)
@@ -2116,7 +2110,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["메뉴_단축"], 511, 73, 19, 31, confidence=0.98, grayscale=False)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=4)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=4)
                         # print("메뉴_단축 " + str(count) + "개")
                         self.log("메뉴_단축 " + str(count) + "개")
                         # print(position)
@@ -2127,7 +2121,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["계정_정보"], 354, 635, 111, 51)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("계정_정보 " + str(count) + "개")
                         self.log("계정_정보 " + str(count) + "개")
                         # print(position)
@@ -2141,7 +2135,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["카카오_로그인"], 211, 446, 115, 50)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("카카오_로그인 " + str(count) + "개")
                         self.log("카카오_로그인 " + str(count) + "개")
                         # print(position)
@@ -2152,7 +2146,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["확인하고_계속하기"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("확인하고_계속하기 " + str(count) + "개")
                         self.log("확인하고_계속하기 " + str(count) + "개")
                         # print(position)
@@ -2163,7 +2157,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["확인하고_계속하기2"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("확인하고_계속하기2 " + str(count) + "개")
                         self.log("확인하고_계속하기2 " + str(count) + "개")
                         # print(position)
@@ -2174,7 +2168,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["확인하고_계속하기3"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("확인하고_계속하기3 " + str(count) + "개")
                         self.log("확인하고_계속하기3 " + str(count) + "개")
                         # print(position)
@@ -2186,7 +2180,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["계속하기"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                         # print("계속하기 " + str(count) + "개")
                         self.log("계속하기 " + str(count) + "개")
                         # print(position)
@@ -2222,7 +2216,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["인증되지_않는_로그인_방법_입니다"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=143, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=143, deltaX=5, deltaY=5)
                         # print("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
                         self.log("인증되지_않는_로그인_방법_입니다 " + str(count) + "개")
                         # print(position)
@@ -2234,7 +2228,7 @@ class UmaProcess():
                     count, position = ImageSearch(img, Images["카카오_로그인_연동에_실패하였습니다"])
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=150, deltaX=5, deltaY=5)
+                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=150, deltaX=5, deltaY=5)
                         # print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
                         self.log("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
                         # print(position)
@@ -2271,7 +2265,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["모두_지우기"], 428, 40, 96, 48)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0])
                 # print("모두_지우기 " + str(count) + "개")
                 self.log("모두_지우기 " + str(count) + "개")
                 # print(position)
@@ -2282,7 +2276,7 @@ class UmaProcess():
             # count, position = ImageSearch(img, Images["크롬_실행"])
             # if count and is초기화하기:
             #     updateTime = time.time()
-            #     adbInput.BlueStacksClick(device=device, position=position[0])
+            #     adbInput.BlueStacksSwipe(device=device, position=position[0])
             #     # print("크롬_실행 " + str(count) + "개")
             #     self.log("크롬_실행 " + str(count) + "개")
             #     print(position)
@@ -2293,7 +2287,7 @@ class UmaProcess():
             # count, position = ImageSearch(img, Images["크롬_실행2"])
             # if count and is초기화하기:
             #     updateTime = time.time()
-            #     adbInput.BlueStacksClick(device=device, position=position[0])
+            #     adbInput.BlueStacksSwipe(device=device, position=position[0])
             #     # print("크롬_실행 " + str(count) + "개")
             #     self.log("크롬_실행 " + str(count) + "개")
             #     print(position)
@@ -2308,7 +2302,8 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["파이어폭스_실행"])
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0])
+                    # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0])
                     # print("파이어폭스_실행 " + str(count) + "개")
                     self.log("파이어폭스_실행 " + str(count) + "개")
                     # print(position)
@@ -2319,16 +2314,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["파이어폭스_연결된_서비스_관리"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0])
                     # print("파이어폭스_실행 " + str(count) + "개")
                     self.log("파이어폭스_연결된_서비스_관리 " + str(count) + "개")
                     # print(position)
@@ -2339,7 +2325,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["파이어폭스_문제_닫기"], confidence=0.99)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0])
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0])
                     # print("파이어폭스_문제_닫기 " + str(count) + "개")
                     self.log("파이어폭스_문제_닫기 " + str(count) + "개")
                     # print(position)
@@ -2350,17 +2336,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["연결된_서비스_관리"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("연결된_서비스_관리 " + str(count) + "개")
                     self.log("연결된_서비스_관리 " + str(count) + "개")
                     # print(position)
@@ -2372,17 +2348,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["우마무스메_서비스"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("우마무스메_서비스 " + str(count) + "개")
                     self.log("우마무스메_서비스 " + str(count) + "개")
                     # print(position)
@@ -2394,17 +2360,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["모든_정보_삭제"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("모든_정보_삭제 " + str(count) + "개")
                     self.log("모든_정보_삭제 " + str(count) + "개")
                     # print(position)
@@ -2415,17 +2371,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["이_서비스의_모든_정보를_삭제하시겠습니까"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 205, 90)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
                     time.sleep(0.5)
                     for _ in range(15):
                         WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
@@ -2442,17 +2388,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["이_서비스의_모든_정보를_삭제하시겠습니까2"])
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 100, 90)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], offsetX=205, offsetY=90, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], offsetX=100, offsetY=90, deltaX=5, deltaY=5)
                     time.sleep(0.5)
                     for _ in range(15):
                         WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
@@ -2469,17 +2405,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["모든_정보_삭제_빨간_박스"], confidence=0.95, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("모든_정보_삭제_빨간_박스 " + str(count) + "개")
                     self.log("모든_정보_삭제_빨간_박스 " + str(count) + "개")
                     # print(position)
@@ -2487,10 +2413,10 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                     
                 count = 0
-                count, position = ImageSearch(img, Images["비밀번호"], 0, 242, 78, 51, confidence=0.99, grayscale=False)
+                count, position = ImageSearch(img, Images["비밀번호"], 0, 242, 78, 51, confidence=0.99, grayscale=False) # 크롬
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("비밀번호 " + str(count) + "개")
                     self.log("비밀번호 " + str(count) + "개")
                     # print(position)
@@ -2501,17 +2427,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["회원님의_소중한_정보_보호를_위해"], confidence=0.99, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 95)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
                     # print("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
                     self.log("회원님의_소중한_정보_보호를_위해 " + str(count) + "개")
                     # print(position)
@@ -2522,28 +2438,9 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["제안된_로그인"], confidence=0.99, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 0, 0)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0])
                     time.sleep(0.5)
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, -57)
-                        x, y = adbInput.RandomPosition(x, y, 0, 0)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], offsetY=-57)
                     # print("제안된_로그인 " + str(count) + "개")
                     self.log("제안된_로그인 " + str(count) + "개")
                     # print(position)
@@ -2551,10 +2448,10 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                     
                 count = 0
-                count, position = ImageSearch(img, Images["자동완성_Continue"], 214, 923, 90, 47)
+                count, position = ImageSearch(img, Images["자동완성_Continue"], 214, 923, 90, 47) # 크롬
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("자동완성_Continue " + str(count) + "개")
                     self.log("자동완성_Continue " + str(count) + "개")
                     # print(position)
@@ -2562,10 +2459,10 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                     
                 count = 0
-                count, position = ImageSearch(img, Images["자동완성_계속"], 226, 907, 62, 49)
+                count, position = ImageSearch(img, Images["자동완성_계속"], 226, 907, 62, 49) # 크롬
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("자동완성_계속 " + str(count) + "개")
                     self.log("자동완성_계속 " + str(count) + "개")
                     # print(position)
@@ -2576,17 +2473,7 @@ class UmaProcess():
                 count, position = ImageSearch(img, Images["비밀번호_확인"], confidence=0.95, grayscale=False)
                 if count:
                     updateTime = time.time()
-                    try:
-                        x, y, width, height = position[0]
-                        x += width/2
-                        y += height/2
-                        x, y = adbInput.BlueStacksOffset(x, y)
-                        x, y = adbInput.Offset(x, y, 0, 0)
-                        x, y = adbInput.RandomPosition(x, y, 5, 5)
-                        adbInput.AdbTap(self.device, self.InstancePort, x, y)
-                    except:
-                        pass
-                    # adbInput.BlueStacksClick(device=device, position=position[0], deltaX=5, deltaY=5)
+                    adbInput.BlueStacksTap(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     # print("비밀번호_확인 " + str(count) + "개")
                     self.log("비밀번호_확인 " + str(count) + "개")
                     # print(position)
@@ -2620,7 +2507,7 @@ class UmaProcess():
                 # 무한 로딩 크롬 전용
                 if time.time() >= updateTime + 5:
                     count = 0
-                    count, position = ImageSearch(img, Images["로딩"])
+                    count, position = ImageSearch(img, Images["로딩"]) # 크롬
                     if count:
                         updateTime = time.time()
                         try:
@@ -2628,7 +2515,6 @@ class UmaProcess():
                             adbInput.AdbSwipe(self.device, self.InstancePort, x, y, x, y + 960 / 3, adbInput.random.randint(25, 75))
                         except:
                             pass
-                        
                         # print("로딩 " + str(count) + "개")
                         self.log("로딩 " + str(count) + "개")
                         # print(position)
@@ -2642,13 +2528,13 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["카카오메일_아이디_이메일_전화번호"], confidence=0.99)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 time.sleep(0.3)
                 WindowsAPIInput.WindowsAPIKeyboardInputString(hwndMain, "a")
                 for _ in range(2):
                     WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_BACK)
                 time.sleep(0.3)
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=45, deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=45, deltaX=5, deltaY=5)
                 # print("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                 self.log("카카오메일_아이디_이메일_전화번호 " + str(count) + "개")
                 # print(position)
@@ -2663,7 +2549,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["로그인"], confidence=0.99, grayscale=False)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 # print("로그인 " + str(count) + "개")
                 self.log("로그인 " + str(count) + "개")
                 # print(position)
@@ -2677,7 +2563,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["추가_데이터를_다운로드합니다"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetX=125, offsetY=155, deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=125, offsetY=155, deltaX=5, deltaY=5)
                 # print("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 self.log("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 # print(position)
@@ -2688,7 +2574,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["재시도"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 # print("재시도 " + str(count) + "개")
                 self.log("재시도 " + str(count) + "개")
                 # print(position)
@@ -2698,7 +2584,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["타이틀_화면으로"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 # print("타이틀_화면으로 " + str(count) + "개")
                 self.log("타이틀_화면으로 " + str(count) + "개")
                 # print(position)
@@ -2708,7 +2594,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["확인"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 # print("확인 " + str(count) + "개")
                 self.log("확인 " + str(count) + "개")
                 # print(position)
@@ -2719,7 +2605,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["앱_닫기"], 78, 425, 391, 205)
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                 # print("앱_닫기 " + str(count) + "개")
                 self.log("앱_닫기 " + str(count) + "개")
                 # print(position)
@@ -2730,7 +2616,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["날짜가_변경됐습니다"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=142, deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=142, deltaX=5, deltaY=5)
                 # print("날짜가_변경됐습니다 " + str(count) + "개")
                 self.log("날짜가_변경됐습니다 " + str(count) + "개")
                 # print(position)
@@ -2741,7 +2627,7 @@ class UmaProcess():
             count, position = ImageSearch(img, Images["숫자4080_에러_코드"])
             if count:
                 updateTime = time.time()
-                adbInput.BlueStacksClick(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
                 print("숫자4080_에러_코드 " + str(count) + "개")
                 self.log("숫자4080_에러_코드 " + str(count) + "개")
                 # print(position)
