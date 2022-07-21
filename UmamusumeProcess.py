@@ -48,7 +48,7 @@ class UmaProcess():
             except:
                 pass
         self.toChild.close()
-        print("자식 수신 종료")
+        # print("자식 수신 종료")
 
     def Receive(self) -> bool: # 통신용
         
@@ -59,9 +59,10 @@ class UmaProcess():
                 self.sleepTime = recv[1]
                 # print(recv[1])
             elif recv[0] == "terminate":
-                print("종료 신호")
-                th = threading.Thread(target=self.terminate)
-                th.start()
+                # print("종료 신호")
+                # th = threading.Thread(target=self.terminate)
+                # th.start()
+                self.isAlive = False
                 # print(recv[1])
 
             elif recv[0] == "InstanceName":
@@ -148,7 +149,6 @@ class UmaProcess():
             time.sleep(0.001)
         while self.InstancePort == 0:
             time.sleep(0.001)
-        print("패스")
         
         # 버튼 비활성화
         self.toParent.put(["InstanceComboBox.setEnabled", False])
@@ -207,18 +207,11 @@ class UmaProcess():
             self.log_main("리세 총 횟수: ", str(int(self.totalResetCount)))
 
             if isSuccessed == True:
-                self.toParent.put(["stopButton.setEnabled", False])
-                # self.parent.stopButton.setEnabled(False)
                 self.isAlive = False
                 print("리세 성공 "*5)
                 self.log_main(self.InstanceName, "리세 성공 "*5)
                 self.log("리세 성공 "*5)
 
-                self.toParent.put(["InstanceComboBox.setEnabled", True])
-                # self.parent.InstanceComboBox.setEnabled(True)
-                self.toParent.put(["InstanceRefreshButton.setEnabled", True])
-                # self.parent.InstanceRefreshButton.setEnabled(True)
-                self.terminate()
                 self.toParent.put(["terminate"])
 
             if isSuccessed == "숫자4080_에러_코드":
@@ -235,11 +228,11 @@ class UmaProcess():
 
 
         self.ReceiverEvent.set() # Receiver 스레드 종료 준비
-        print("종료 준비")
+        # print("종료 준비")
         self.Receiver.join() # 수신 종료 대기
-        print("종료됨")
+        # print("종료됨")
 
-        print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
+        # print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
 
         # 데이터 저장
         try:
@@ -250,7 +243,6 @@ class UmaProcess():
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
                 pickle.dump(self.resetCount, file) # -- pickle --
-
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
@@ -267,10 +259,7 @@ class UmaProcess():
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             print(path+"를 저장하는데 실패했습니다.")
             # self.log(path+"를 저장하는데 실패했습니다.")
-        
-    def terminate(self):
-        self.isAlive = False
-        print("isAlive", self.isAlive)
+        # 종료됨
 
     def main(self):
         hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
@@ -302,7 +291,6 @@ class UmaProcess():
                 self.log("기존 데이터를 불러옵니다.")
         except:
             # self.resetCount = 0 # -- pickle -- 다른건 초기화해도 리세 횟수는 초기화 하는 거 아님
-            
             self.is시작하기 = False # -- pickle --
             self.isPAUSED = False # -- pickle --
             self.is선물_이동 = True # -- pickle --
