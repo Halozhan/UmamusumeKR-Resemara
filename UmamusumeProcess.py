@@ -36,15 +36,23 @@ class UmaProcess():
         pass
     
     def Receive_Worker(self):
-        while self.ReceiverEvent.is_set() == False or not self.toChild.empty():
+        while self.ReceiverEvent.is_set() == False or self.toChild.empty() == False:
+            # self.lock.acquire()
             if not self.Receive():
                 time.sleep(0.01)
+            # self.lock.release()
+        while not self.toChild.empty():
+            try:
+                recv = self.toChild.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
         self.toChild.close()
         # print("자식 수신 종료")
 
     def Receive(self) -> bool: # 통신용
-        
         if self.toChild.empty() == False:
+            self.Lock.acquire()
             recv = self.toChild.get()
             # print(recv)
             if recv[0] == "sleepTime":
@@ -78,7 +86,9 @@ class UmaProcess():
             elif recv[0] == "isDoingMAC_Change":
                 self.isDoingMAC_Change = recv[1]
                 # print(recv[1])
+            self.Lock.release()
             return True
+
         return False
     
     def log_main(self, id, text) -> None:
@@ -88,6 +98,7 @@ class UmaProcess():
         self.toParent.put(["sendLog", str(text)])
 
     def run_a(self, toParent: Queue, toChild: Queue):
+        self.Lock = threading.Lock()
         # 선언
         self.toParent = toParent
         self.toChild = toChild
@@ -127,6 +138,7 @@ class UmaProcess():
 
 
         # 수신
+        # self.lock = threading.Lock() 사용 안 할 듯
         self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
@@ -221,6 +233,7 @@ class UmaProcess():
         self.ReceiverEvent.set() # Receiver 스레드 종료 준비
         # print("종료 준비")
         self.Receiver.join() # 수신 종료 대기
+        self.ReceiverEvent.clear()
         # print("종료됨")
 
         # print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
@@ -250,6 +263,11 @@ class UmaProcess():
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             print(path+"를 저장하는데 실패했습니다.")
             # self.log(path+"를 저장하는데 실패했습니다.")
+
+        
+        while not self.toParent.empty():
+            time.sleep(0.01)
+        self.toParent.close()
         # 종료됨
 
     def main(self):
@@ -957,9 +975,9 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = 0
-                count, position = ImageSearch(img, Images["서포트_자동_편성_화살표"], 324, 629, 107, 102)
+                count, position = ImageSearch(img, Images["서포트_자동_편성_화살표"])
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_자동_편성_화살표 " + str(count) + "개")
                     self.log("서포트_자동_편성_화살표 " + str(count) + "개")
                     print(position)
@@ -1257,7 +1275,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["출전_화살표"])
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("출전_화살표 " + str(count) + "개")
                     self.log("출전_화살표 " + str(count) + "개")
                     print(position)

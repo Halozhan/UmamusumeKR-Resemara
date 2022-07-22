@@ -28,14 +28,21 @@ class Umamusume(QObject):
         self.Error_4080.connect(self.parent.parent.MAC_Address_Change)
 
     def Receive_Worker(self):
-        while self.ReceiverEvent.is_set() == False or not self.toParent.empty():
+        while self.ReceiverEvent.is_set() == False or self.toParent.empty() == False:
             if not self.Receive():
                 time.sleep(0.01)
+        while not self.toParent.empty():
+            try:
+                recv = self.toParent.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
         self.toParent.close()
         # print("부모 수신 종료")
 
     def Receive(self): # 통신용
         if self.toParent.empty() == False:
+            self.Lock.acquire()
             recv = self.toParent.get()
             # print(recv)
             if recv[0] == "sendLog":
@@ -80,10 +87,15 @@ class Umamusume(QObject):
             elif recv[0] == "terminate":
                 th = threading.Thread(target=self.terminate)
                 th.start()
+            self.Lock.release()
+            return True
+
+        return False
 
 
     def start(self):
         # 초기화
+        self.Lock = threading.Lock()
         self.toParent = mp.Queue() # 다른 프로세스와의 연결고리 생성
         self.toChild = mp.Queue()
 
@@ -107,8 +119,16 @@ class Umamusume(QObject):
             time.sleep(0.01)
         # print("자식 프로세스 생존?", self.process.is_alive())
         self.ReceiverEvent.set()
-        while self.Receiver.is_alive():
-            time.sleep(0.01)
+        self.Receiver.join() # 종료 대기
+        # while self.Receiver.is_alive():
+        #     time.sleep(0.01)
+        self.ReceiverEvent.clear()
+        while not self.toChild.empty():
+            try:
+                recv = self.toChild.get(timeout=0.001)
+                print(recv)
+            except:
+                pass
         self.toChild.close() # 자식 수신 큐도 삭제해야함
         self.process.close()
         # print("process 삭제")
