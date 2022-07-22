@@ -1729,6 +1729,7 @@ class UmaProcess():
                     self.log("상기의_선물을_수령했습니다 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
+            if self.is초기화하기 == False:
                 count = 받을_수_있는_선물이_없습니다(img, self.device, self.InstancePort)
                 if count:
                     updateTime = time.time()
@@ -1747,7 +1748,7 @@ class UmaProcess():
                     # print("뽑기_이동 " + str(count) + "개")
                     self.log("뽑기_이동 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
-                    
+
             if self.is초기화하기 == False:
                 count = 0
                 count, position = ImageSearch(img, Images["프리티_더비_뽑기"], 154, 551, 175, 93, confidence=0.6)
