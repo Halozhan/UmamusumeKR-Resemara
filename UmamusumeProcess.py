@@ -36,17 +36,9 @@ class UmaProcess():
         pass
     
     def Receive_Worker(self):
-        while self.ReceiverEvent.is_set() == False or self.toChild.empty() == False:
-            # self.lock.acquire()
+        while self.ReceiverEvent.is_set() == False or not self.toChild.empty():
             if not self.Receive():
                 time.sleep(0.01)
-            # self.lock.release()
-        while not self.toChild.empty():
-            try:
-                recv = self.toChild.get(timeout=0.001)
-                print(recv)
-            except:
-                pass
         self.toChild.close()
         # print("자식 수신 종료")
 
@@ -135,7 +127,6 @@ class UmaProcess():
 
 
         # 수신
-        # self.lock = threading.Lock() 사용 안 할 듯
         self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
