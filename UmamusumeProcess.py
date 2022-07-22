@@ -1747,7 +1747,8 @@ class UmaProcess():
                     # print("뽑기_이동 " + str(count) + "개")
                     self.log("뽑기_이동 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
-
+                    
+            if self.is초기화하기 == False:
                 count = 0
                 count, position = ImageSearch(img, Images["프리티_더비_뽑기"], 154, 551, 175, 93, confidence=0.6)
                 if count:
