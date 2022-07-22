@@ -38,7 +38,6 @@ class Umamusume(QObject):
             except:
                 pass
         self.toParent.close()
-        self.toChild.close() # 자식 수신 큐도 삭제해야함
         # print("부모 수신 종료")
 
     def Receive(self): # 통신용
@@ -116,6 +115,7 @@ class Umamusume(QObject):
         self.ReceiverEvent.set()
         while self.Receiver.is_alive():
             time.sleep(0.01)
+        self.toChild.close() # 자식 수신 큐도 삭제해야함
         self.process.close()
         # print("process 삭제")
 
