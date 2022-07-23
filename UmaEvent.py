@@ -306,7 +306,7 @@ def 뽑기_이동(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, Insta
     count, position = ImageSearch(img, Images["뽑기_이동"], 464, 666, 52, 62)
     if count:
         adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], offsetY=245, deltaX=5, deltaY=5)
-        time.sleep(2)
+        time.sleep(1.5)
         # print(position)
         return count
     return None

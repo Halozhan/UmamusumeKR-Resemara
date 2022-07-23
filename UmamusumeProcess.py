@@ -100,16 +100,16 @@ class UmaProcess():
 
         # 기본 값 - pickle 불러오기 전 ---
         self.resetCount = 0
-        # self.is시작하기 = False
-        # self.isPAUSED = False
-        # self.is선물_이동 = True
-        # self.is미션_이동 = True
-        # self.is뽑기_이동 = True
-        # self.is서포트_뽑기 = False
-        # self.isSSR확정_뽑기 = False
-        # self.is뽑기_결과 = True
-        # self.is연동하기 = False
-        # self.is초기화하기 = False
+        self.is시작하기 = False
+        self.isPAUSED = False
+        self.is선물_이동 = True
+        self.is미션_이동 = True
+        self.is뽑기_이동 = True
+        self.is서포트_뽑기 = False
+        self.isSSR확정_뽑기 = False
+        self.is뽑기_결과 = True
+        self.is연동하기 = False
+        self.is초기화하기 = False
         
         # 서포트 카드 총 갯수
         path = './Supporter_cards'
@@ -234,7 +234,7 @@ class UmaProcess():
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
-                
+                pickle.dump(self.is미션_이동, file) # -- pickle --
                 pickle.dump(self.is뽑기_이동, file) # -- pickle --
                 pickle.dump(self.is서포트_뽑기, file) # -- pickle --
                 pickle.dump(self.isSSR확정_뽑기, file) # -- pickle --
