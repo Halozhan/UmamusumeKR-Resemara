@@ -78,11 +78,7 @@ CPU 설정: 중간 (2 코어)
     ```
     만약 안될 시 공유기 펌웨어 버전을 최신버전으로 올려주세요.
 
-3. ### Technitium MAC Address Changer 버전 (모뎀 직렬 연결)
-    [Technitium MAC Address Changer 다운로드](https://technitium.com/tmac/) 및 설치  
-    PyAutoGui 모듈을 사용하기 때문에 윈도우 활성 클릭을 하므로 항상 프로그램을 (우측 상단에) 띄워두고 사용합니다.
-
-4. ### Python MAC Changer 버전 (모뎀 직렬 연결) **추천**
+3. ### Python MAC Changer 버전 (모뎀 직렬 연결)
     네트워크 어댑터가 하나만 있을 경우 자동으로 MAC 주소를 생성해서 바꿀 수 있습니다.
 
 

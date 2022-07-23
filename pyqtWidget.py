@@ -7,7 +7,6 @@ from PyQt5.QtGui import QIcon
 from Umamusume import *
 from datetime import datetime
 import ASUS_Router_Mac_Change
-from Change_MAC import *
 from sleepTime import sleepTime
 import mac_address_changer_windows
 import os
@@ -76,7 +75,6 @@ class WindowClass(QMainWindow):
         self.ManualButton = QRadioButton("수동 버전. 직접 MAC주소 초기화하고 각각 시작을 다시 눌러주세요.")
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
         self.ASUSRadioButton.setChecked(True)
-        self.PAGRadioButton = QRadioButton("Technitium MAC Address Changer 버전")
         self.PythonMACChangerRadioButton = QRadioButton("Python MAC Changer 버전")
 
         self.logs = QTextBrowser()
@@ -87,7 +85,6 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.ManualButton)
         self.verticalBox.addWidget(self.ASUSRadioButton)
-        self.verticalBox.addWidget(self.PAGRadioButton)
         self.verticalBox.addWidget(self.PythonMACChangerRadioButton)
         
         self.verticalBox.addWidget(self.logs)
@@ -114,7 +111,6 @@ class WindowClass(QMainWindow):
 
         self.ManualButton.clicked.connect(self.ManualRadioFunction)
         self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
-        self.PAGRadioButton.clicked.connect(self.PAGRadioFunction)
         self.PythonMACChangerRadioButton.clicked.connect(self.PythonMACChangerRadioFunction)
     
     def AllStopInstance(self):
@@ -156,11 +152,6 @@ class WindowClass(QMainWindow):
             self.logs.append("ASUSRadioButton가 활성화됨")
         
     @pyqtSlot()
-    def PAGRadioFunction(self):
-        if self.PAGRadioButton.isChecked():
-            self.logs.append("PAGRadioButton가 활성화됨")
-    
-    @pyqtSlot()
     def PythonMACChangerRadioFunction(self):
         if self.PythonMACChangerRadioButton.isChecked():
             self.logs.append("PythonMACChangerRadioButton가 활성화됨")
@@ -183,8 +174,6 @@ class WindowClass(QMainWindow):
             self.AllStopInstance()
         elif self.ASUSRadioButton.isChecked():
             ASUS_Router_Mac_Change.ASUS_Change_MAC()
-        elif self.PAGRadioButton.isChecked():
-            PAG_MAC_Change()
         elif self.PythonMACChangerRadioButton.isChecked():
             mac_address_changer_windows.main()
         try:
