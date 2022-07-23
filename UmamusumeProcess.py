@@ -103,6 +103,7 @@ class UmaProcess():
         self.is시작하기 = False
         self.isPAUSED = False
         self.is선물_이동 = True
+        self.is미션_이동 = True
         self.is뽑기_이동 = True
         self.is서포트_뽑기 = False
         self.isSSR확정_뽑기 = False
@@ -233,6 +234,7 @@ class UmaProcess():
                 pickle.dump(self.is시작하기, file) # -- pickle --
                 pickle.dump(self.isPAUSED, file) # -- pickle --
                 pickle.dump(self.is선물_이동, file) # -- pickle --
+                pickle.dump(self.is미션_이동, file) # -- pickle --
                 pickle.dump(self.is뽑기_이동, file) # -- pickle --
                 pickle.dump(self.is서포트_뽑기, file) # -- pickle --
                 pickle.dump(self.isSSR확정_뽑기, file) # -- pickle --
@@ -269,6 +271,7 @@ class UmaProcess():
                 self.is시작하기 = pickle.load(file) # -- pickle --
                 self.isPAUSED = pickle.load(file) # -- pickle --
                 self.is선물_이동 = pickle.load(file) # -- pickle --
+                self.is미션_이동 = pickle.load(file) # -- pickle --
                 self.is뽑기_이동 = pickle.load(file) # -- pickle --
                 self.is서포트_뽑기 = pickle.load(file) # -- pickle --
                 self.isSSR확정_뽑기 = pickle.load(file) # -- pickle --
@@ -286,6 +289,7 @@ class UmaProcess():
             self.is시작하기 = False # -- pickle --
             self.isPAUSED = False # -- pickle --
             self.is선물_이동 = True # -- pickle --
+            self.is미션_이동 = True # -- pickle --
             self.is뽑기_이동 = True # -- pickle --
             self.is서포트_뽑기 = False # -- pickle --
             self.isSSR확정_뽑기 = False # -- pickle --
@@ -1705,7 +1709,7 @@ class UmaProcess():
                     # self.parent.isDoneTutorialCheckBox.setChecked(True)
                     img = screenshotToOpenCVImg(hwndMain)
             
-            # 가챠
+            # 선물 수령
             if self.isDoneTutorial and self.is선물_이동 == True:
                 
                 count = 선물_이동(img, self.device, self.InstancePort)
@@ -1738,9 +1742,59 @@ class UmaProcess():
                     self.is선물_이동 = False
                     img = screenshotToOpenCVImg(hwndMain)
 
+            # 미션 수령
+            if self.isDoneTutorial and self.is미션_이동:
+                count = 미션_이동(img, self.device, self.InstancePort)
+                if count:
+                    updateTime = time.time()
+                    # print("미션_이동 " + str(count) + "개")
+                    self.log("미션_이동 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
+                count = 미션_메인(img, self.device, self.InstancePort)
+                if count:
+                    updateTime = time.time()
+                    # print("미션_메인 " + str(count) + "개")
+                    self.log("미션_메인 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
+                count = 미션_일괄_수령(img, self.device, self.InstancePort)
+                if count:
+                    updateTime = time.time()
+                    # print("미션_일괄_수령 " + str(count) + "개")
+                    self.log("미션_일괄_수령 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
+                count = 미션_일괄_수령_확인됨(img, self.device, self.InstancePort)
+                if count:
+                    updateTime = time.time()
+                    # print("미션_일괄_수령_확인됨 " + str(count) + "개")
+                    self.log("미션_일괄_수령_확인됨 " + str(count) + "개")
+                    self.is미션_이동 = False
+                    img = screenshotToOpenCVImg(hwndMain)
+
+            count = 상기의_보상을_수령했습니다(img, self.device, self.InstancePort)
+            if count:
+                updateTime = time.time()
+                # print("상기의_보상을_수령했습니다 " + str(count) + "개")
+                self.log("상기의_보상을_수령했습니다 " + str(count) + "개")
+                self.is미션_이동 = False
+                img = screenshotToOpenCVImg(hwndMain)
+
+            if self.is미션_이동 == False:
+                count = 돌아간다(img, self.device, self.InstancePort)
+                if count:
+                    updateTime = time.time()
+                    # print("돌아간다 " + str(count) + "개")
+                    self.log("돌아간다 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
+            
+
             if self.isAlive == False: # 중간에 멈춰야 할 경우
                 break
 
+            # 뽑기
             if self.isDoneTutorial and self.is뽑기_이동:
                 count = 뽑기_이동(img, self.device, self.InstancePort)
                 if count:

@@ -148,7 +148,7 @@ def 등록한다(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, Instan
     count, position = ImageSearch(img, Images["등록한다"], 206, 620, 106, 52)
     if count:
         adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], deltaX=5, deltaY=5)
-        time.sleep(1)
+        time.sleep(0.5)
         # print(position)
         return count
     return None
@@ -226,6 +226,7 @@ def 상기의_선물을_수령했습니다(img: screenshotToOpenCVImg, device: a
     count, position = ImageSearch(img, Images["상기의_선물을_수령했습니다"])
     if count:
         adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], offsetY=105, deltaX=5, deltaY=5)
         time.sleep(1)
         # print(position)
         return count
@@ -241,12 +242,71 @@ def 받을_수_있는_선물이_없습니다(img: screenshotToOpenCVImg, device:
         return count
     return None
 
+def 미션_이동(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["미션_이동"], 454, 602, 49, 45)
+    if count:
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], deltaX=5, deltaY=5)
+        time.sleep(1)
+        # print(position)
+        return count
+    return None
+
+def 미션_메인(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["미션_메인"], 159, 359, 70, 47)
+    if count:
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], deltaX=5, deltaY=5)
+        time.sleep(0.5)
+        # print(position)
+        return count
+    return None
+
+def 미션_일괄_수령(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["미션_일괄_수령"], 197, 803, 117, 58, confidence=1, grayscale=False)
+    if count:
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], deltaX=5, deltaY=5)
+        time.sleep(0.5)
+        # print(position)
+        return count
+    return None
+
+def 미션_일괄_수령_확인됨(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["미션_일괄_수령_확인됨"], 197, 803, 117, 58, confidence=1, grayscale=False)
+    if count:
+        time.sleep(0.5)
+        # print(position)
+        return count
+    return None
+
+def 상기의_보상을_수령했습니다(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["상기의_보상을_수령했습니다"])
+    if count:
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], offsetY=90, deltaX=5, deltaY=5)
+        time.sleep(0.5)
+        # print(position)
+        return count
+    return None
+
+def 돌아간다(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+    count = 0
+    count, position = ImageSearch(img, Images["돌아간다"])
+    if count:
+        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], deltaX=5, deltaY=5)
+        time.sleep(0.5)
+        # print(position)
+        return count
+    return None
+
 def 뽑기_이동(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
     count = 0
     count, position = ImageSearch(img, Images["뽑기_이동"], 464, 666, 52, 62)
     if count:
         adbInput.BlueStacksSwipe(device, InstancePort, position=position[0], offsetY=245, deltaX=5, deltaY=5)
-        time.sleep(2)
+        time.sleep(1.5)
         # print(position)
         return count
     return None
