@@ -119,14 +119,10 @@ class Umamusume(QObject):
         
     def terminate(self):
         self.toChild.put(["terminate"])
-        # print("terminate 신호 보냄")
         while self.process.is_alive():
             time.sleep(0.01)
-        # print("자식 프로세스 생존?", self.process.is_alive())
         self.ReceiverEvent.set()
         self.Receiver.join() # 종료 대기
-        # while self.Receiver.is_alive():
-        #     time.sleep(0.01)
         self.ReceiverEvent.clear()
         while not self.toChild.empty():
             try:
@@ -135,30 +131,15 @@ class Umamusume(QObject):
             except:
                 pass
         self.toChild.close() # 자식 수신 큐도 삭제해야함
-        self.process.close()
-        # print("process 삭제")
+        self.process.close() # process 삭제
 
-
-
-        # 버튼 활성화
-        # self.toParent.put(["InstanceComboBox.setEnabled", True])
+        # 종료 후 버튼 복구
         self.parent.InstanceComboBox.setEnabled(True)
-        # self.toParent.put(["InstanceRefreshButton.setEnabled", True])
         self.parent.InstanceRefreshButton.setEnabled(True)
         
-        # self.toParent.put(["startButton.setEnabled", True])
         self.parent.startButton.setEnabled(True)
-        # self.toParent.put(["stopButton.setEnabled", False])
         self.parent.stopButton.setEnabled(False)
-        # self.toParent.put(["resetButton.setEnabled", True])
         self.parent.resetButton.setEnabled(True)
-        # self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
         self.parent.isDoneTutorialCheckBox.setEnabled(True)
         self.parent.isMissionCheckBox.setEnabled(True)
         self.parent.isSSRGachaCheckBox.setEnabled(True)
-
-
-
-        # self.toParent.close()
-        # self.toChild.close()
-        # self.process.join() # 종료 대기

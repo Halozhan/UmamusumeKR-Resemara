@@ -104,16 +104,6 @@ class UmaProcess():
 
         # 기본 값 - pickle 불러오기 전 ---
         self.resetCount = 0
-        self.is시작하기 = False
-        self.isPAUSED = False
-        self.is선물_이동 = True
-        self.is미션_이동 = True
-        self.is뽑기_이동 = True
-        self.is서포트_뽑기 = False
-        self.isSSR확정_뽑기 = False
-        self.is뽑기_결과 = True
-        self.is연동하기 = False
-        self.is초기화하기 = False
         
         # 서포트 카드 총 갯수
         path = './Supporter_cards'
@@ -140,26 +130,19 @@ class UmaProcess():
         while self.InstancePort == 0:
             time.sleep(0.001)
         
-        # 버튼 비활성화
+        # 시작 후 버튼 잠금
         self.toParent.put(["InstanceComboBox.setEnabled", False])
-        # self.InstanceComboBox.setEnabled(False)
         self.toParent.put(["InstanceRefreshButton.setEnabled", False])
-        # self.InstanceRefreshButton.setEnabled(False)
         
         # self.toParent.put(["startButton.setEnabled", False])
-        # self.startButton.setEnabled(False)
         self.toParent.put(["stopButton.setEnabled", True])
-        # self.stopButton.setEnabled(True)
         self.toParent.put(["resetButton.setEnabled", False])
-        # self.resetButton.setEnabled(False)
         self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
-        # self.isDoneTutorialCheckBox.setEnabled(False)
         self.toParent.put(["isMissionCheckBox.setEnabled", False])
         self.toParent.put(["isSSRGachaCheckBox.setEnabled", False])
 
         while self.isAlive:
             isSuccessed = self.main()
-            # isSuccessed = "Failed"
 
             # print("-"*50)
             self.log_main(self.InstanceName, "-"*50)
@@ -169,10 +152,6 @@ class UmaProcess():
             # print(now.strftime("%Y-%m-%d %H:%M:%S"))
             self.log_main(self.InstanceName, now.strftime("%Y-%m-%d %H:%M:%S"))
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
-
-            # print("튜토리얼 스킵 여부:", self.isDoneTutorial)
-            # self.log_main(self.InstanceName, "튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
-            # self.log("튜토리얼 스킵 여부: " + str(self.isDoneTutorial))
 
             if isSuccessed == "Failed": # 리세 실패, 저장된 데이터 삭제
                 try:
@@ -218,14 +197,9 @@ class UmaProcess():
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
 
-
         self.ReceiverEvent.set() # Receiver 스레드 종료 준비
-        # print("종료 준비")
         self.Receiver.join() # 수신 종료 대기
         self.ReceiverEvent.clear()
-        # print("종료됨")
-
-        # print("자식 수신 스레드 생존?", self.Receiver.is_alive()) # 수신 종료 스레드 살아있는지 여부
 
         # 데이터 저장
         try:
@@ -320,7 +294,6 @@ class UmaProcess():
             if self.isDoneTutorial and time.time() >= updateTime + 20:
                 # print("20초 정지 터치락 해제!!! "*3)
                 self.log("20초 정지 터치락 해제!!! ")
-                # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=(0,0,0,0))
                 adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
                 time.sleep(2)
             
@@ -443,7 +416,6 @@ class UmaProcess():
                     self.log("출전 " + str(count) + "개")
                     self.toParent.put(["isDoneTutorial", False])
                     self.isDoneTutorial = False
-                    # self.parent.isDoneTutorialCheckBox.setChecked(False)
                     time.sleep(1)
                     continue
                 
@@ -1794,8 +1766,6 @@ class UmaProcess():
                     self.log("돌아간다 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-            
-
             if self.isAlive == False: # 중간에 멈춰야 할 경우
                 break
 
@@ -2014,6 +1984,9 @@ class UmaProcess():
                         # print("메뉴_단축 " + str(count) + "개")
                         self.log("메뉴_단축 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
+
+                    if self.isAlive == False: # 중간에 멈춰야 할 경우
+                        break
                         
                     count = 계정_정보(img, self.device, self.InstancePort)
                     if count:
@@ -2031,6 +2004,9 @@ class UmaProcess():
                         # print("카카오_로그인 " + str(count) + "개")
                         self.log("카카오_로그인 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
+
+                    if self.isAlive == False: # 중간에 멈춰야 할 경우
+                        break
                         
                     count = 확인하고_계속하기(img, self.device, self.InstancePort)
                     if count:
