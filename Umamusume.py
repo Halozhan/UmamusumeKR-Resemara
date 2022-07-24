@@ -96,7 +96,6 @@ class Umamusume(QObject):
 
         return False
 
-
     def start(self):
         # 초기화
         self.Lock = threading.Lock()

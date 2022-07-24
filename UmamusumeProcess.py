@@ -101,7 +101,6 @@ class UmaProcess():
 
         self.isDoingMAC_Change = False
 
-
         # 기본 값 - pickle 불러오기 전 ---
         self.resetCount = 0
         

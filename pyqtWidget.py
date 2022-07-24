@@ -97,8 +97,6 @@ class WindowClass(QMainWindow):
             self.Tab.append(newTab(self)) # self를 상속받은 newTab
             self.verticalTabWidget.addTab(self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count()))
         
-        
-        
         self.sleepTime.start()
                 
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
@@ -136,10 +134,8 @@ class WindowClass(QMainWindow):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
         self.Latency.setText("지연률: " + str(Time) + "s")
         for i in self.Tab:
-            try:
+            if i.stopButton.isEnabled():
                 i.umamusume.toChild.put(["sleepTime", float(Time)])
-            except:
-                pass
     
     @pyqtSlot()
     def ManualRadioFunction(self):
