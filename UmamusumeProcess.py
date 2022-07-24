@@ -1697,7 +1697,7 @@ class UmaProcess():
 
                 count = 선물_일괄_수령(img, self.device, self.InstancePort)
                 if count:
-                    updateTime = time.time()
+                    # updateTime = time.time() 먹통 예상
                     # print("선물_일괄_수령 " + str(count) + "개")
                     self.log("선물_일괄_수령 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
