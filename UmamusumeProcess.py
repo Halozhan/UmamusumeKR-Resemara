@@ -57,6 +57,9 @@ class UmaProcess():
             elif recv[0] == "isDoneTutorial":
                 self.isDoneTutorial = recv[1]
                 # print(recv[1])
+            elif recv[0] == "isMission":
+                self.isMission = recv[1]
+                # print(recv[1])
             elif recv[0] == "isSSRGacha":
                 self.isSSRGacha = recv[1]
                 # print(recv[1])
@@ -87,7 +90,8 @@ class UmaProcess():
         self.toChild = toChild
         self.InstanceName = ""
         self.InstancePort = 0
-        self.isDoneTutorial = False
+        self.isDoneTutorial = False # 체크 박스로 튜토리얼 스킵 여부 결정
+        self.isMission = False # 체크 박스로 수령할 지 결정
         self.isSSRGacha = False
         self.totalResetCount = 0
         self.waiting = False
@@ -122,7 +126,6 @@ class UmaProcess():
 
 
         # 수신
-        # self.lock = threading.Lock() 사용 안 할 듯
         self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
@@ -151,6 +154,8 @@ class UmaProcess():
         # self.resetButton.setEnabled(False)
         self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
         # self.isDoneTutorialCheckBox.setEnabled(False)
+        self.toParent.put(["isMissionCheckBox.setEnabled", False])
+        self.toParent.put(["isSSRGachaCheckBox.setEnabled", False])
 
         while self.isAlive:
             isSuccessed = self.main()
@@ -1743,7 +1748,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
 
             # 미션 수령
-            if self.isDoneTutorial and self.is미션_이동:
+            if self.isDoneTutorial and self.isMission and self.is미션_이동:
                 count = 미션_이동(img, self.device, self.InstancePort)
                 if count:
                     updateTime = time.time()

@@ -70,6 +70,10 @@ class Umamusume(QObject):
                 self.parent.resetButton.setEnabled(recv[1])
             elif recv[0] == "isDoneTutorialCheckBox.setEnabled":
                 self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
+            elif recv[0] == "isMissionCheckBox.setEnabled":
+                self.parent.isMissionCheckBox.setEnabled(recv[1])
+            elif recv[0] == "isSSRGachaCheckBox.setEnabled":
+                self.parent.isSSRGachaCheckBox.setEnabled(recv[1])
 
             elif recv[0] == "sendResetCount":
                 self.ResetCount = recv[1]
@@ -102,6 +106,7 @@ class Umamusume(QObject):
         self.toChild.put(["InstanceName", self.parent.InstanceName])
         self.toChild.put(["InstancePort", self.parent.InstancePort])
         self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
+        self.toChild.put(["isMission", self.parent.isMissionCheckBox.isChecked()])
         self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
         
         self.uma = UmaProcess()
@@ -149,6 +154,8 @@ class Umamusume(QObject):
         self.parent.resetButton.setEnabled(True)
         # self.toParent.put(["isDoneTutorialCheckBox.setEnabled", True])
         self.parent.isDoneTutorialCheckBox.setEnabled(True)
+        self.parent.isMissionCheckBox.setEnabled(True)
+        self.parent.isSSRGachaCheckBox.setEnabled(True)
 
 
 

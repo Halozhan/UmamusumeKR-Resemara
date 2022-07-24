@@ -218,12 +218,15 @@ class newTab(QMainWindow):
         self.resetButton = QPushButton("초기화", self)
         self.isDoneTutorialCheckBox = QCheckBox("튜토리얼 스킵 여부", self)
         self.isDoneTutorialCheckBox.setChecked(True)
+        self.isMissionCheckBox = QCheckBox("미션 수령", self)
+        self.isMissionCheckBox.setChecked(True)
         self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
         self.isSSRGachaCheckBox.setChecked(True)
         self.hbox2.addWidget(self.startButton)
         self.hbox2.addWidget(self.stopButton)
         self.hbox2.addWidget(self.resetButton)
         self.hbox2.addWidget(self.isDoneTutorialCheckBox)
+        self.hbox2.addWidget(self.isMissionCheckBox)
         self.hbox2.addWidget(self.isSSRGachaCheckBox)
         
         
@@ -252,6 +255,7 @@ class newTab(QMainWindow):
         self.resetButton.clicked.connect(self.resetFunction)
         self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
         self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaFunction)
+        self.isMissionCheckBox.clicked.connect(self.isMissionFunction)
         
         # 커스텀 시그널 정의
         # 없음
@@ -267,6 +271,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(False)
             self.isDoneTutorialCheckBox.setEnabled(False)
+            self.isMissionCheckBox.setEnabled(False)
             self.isSSRGachaCheckBox.setEnabled(False)
             return
         
@@ -278,6 +283,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(False)
             self.isDoneTutorialCheckBox.setEnabled(False)
+            self.isMissionCheckBox.setEnabled(False)
             self.isSSRGachaCheckBox.setEnabled(False)
             
         else:
@@ -296,6 +302,7 @@ class newTab(QMainWindow):
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(True)
             self.isDoneTutorialCheckBox.setEnabled(True)
+            self.isMissionCheckBox.setEnabled(True)
             self.isSSRGachaCheckBox.setEnabled(True)
             
         self.logs.append("-"*50)
@@ -353,6 +360,14 @@ class newTab(QMainWindow):
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
         self.logs.append("-"*50)
     
+    def isMissionFunction(self):
+        self.logs.append("-"*50)
+        if self.isMissionCheckBox.isChecked():
+            self.logs.append("미션 수령!!")
+        else:
+            self.logs.append("미션 수령 안함!!")
+        self.logs.append("-"*50)
+
     def isSSRGachaFunction(self):
         self.logs.append("-"*50)
         if self.isSSRGachaCheckBox.isChecked():
@@ -360,6 +375,7 @@ class newTab(QMainWindow):
         else:
             self.logs.append("SSR 확정권 사용안함!!")
         self.logs.append("-"*50)
+    
     
 
 if __name__ =="__main__":
