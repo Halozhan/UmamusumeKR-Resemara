@@ -3,7 +3,7 @@ import random
 from ppadb.client import Client as AdbClient
 import subprocess
 
-def AdbConnect(InstancePort):
+def AdbConnect(InstancePort) -> AdbClient.device:
     try:
         client = AdbClient(host="127.0.0.1", port=5037)
         client.remote_connect(host="localhost", port=InstancePort)
@@ -45,25 +45,31 @@ def Offset(x, y, offsetX, offsetY):
     y += offsetY
     return x, y
 
-def AdbTap(device, InstancePort, x, y): # 0초 동안 누름
+def shell(device: AdbClient.device, shell: str):
+    try:
+        device.shell(shell)
+    except:
+        AdbConnect(InstancePort)
+
+def AdbTap(device: AdbClient.device, InstancePort, x, y): # 0초 동안 누름
     try:
         device.shell("input touchscreen tap " + str(x) + " " + str(y))
     except:
         AdbConnect(InstancePort)
 
-def AdbSwipe(device, InstancePort, x, y, toX, toY, delay): # 딜레이를 줘서 누름
+def AdbSwipe(device: AdbClient.device, InstancePort, x, y, toX, toY, delay): # 딜레이를 줘서 누름
     try:
         device.shell("input swipe " + str(x) + " " + str(y) + " " + str(toX) + " " + str(toY) + " " + str(delay))
     except:
         AdbConnect(InstancePort)
 
-def Key_event(device, InstancePort, key_code:str):
+def Key_event(device: AdbClient.device, InstancePort, key_code:str):
     try:
         device.shell("input " + str(key_code))
     except:
         AdbConnect(InstancePort)
 
-def BlueStacksTap(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+def BlueStacksTap(device: AdbClient.device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
         x += width/2
@@ -77,7 +83,7 @@ def BlueStacksTap(device, InstancePort, position, offsetX = 0, offsetY = 0, delt
         AdbConnect(InstancePort)
         return False
 
-def BlueStacksSwipe(device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
+def BlueStacksSwipe(device: AdbClient.device, InstancePort, position, offsetX = 0, offsetY = 0, deltaX = 0, deltaY = 0):
     try:
         x, y, width, height = position
         x += width/2
@@ -91,15 +97,16 @@ def BlueStacksSwipe(device, InstancePort, position, offsetX = 0, offsetY = 0, de
         AdbConnect(InstancePort)
         return False
 
-
 if __name__ == "__main__":
 
-    InstancePort = 6275
+    InstancePort = 6415
     device = AdbConnect(InstancePort)
+    # device.shell("am force-stop org.mozilla.firefox")
     while 1:
         BlueStacksSwipe(device, InstancePort, (100, 100, 200, 200), offsetX = 0, offsetY = 0, deltaX = 5, deltaY = 5)
         
         time.sleep(0.1)
+
         
         
 # reference: https://lemon7z.tistory.com/96#%EC%-D%B-%EB%AF%B-%EC%A-%--%--%EC%--%-C%EC%B-%--%EC%--%--%--%EA%B-%B-%ED%--%A-%ED%--%--%EA%B-%B-%---%EC%-D%B-%ED%--%B-%--%ED%--%--%EC%-A%---

@@ -300,7 +300,9 @@ class UmaProcess():
             if self.isDoneTutorial and time.time() >= updateTime + 60:
                 # print("60초 정지 앱 강제종료!!! "*3)
                 self.log("60초 정지 앱 강제종료!!! ")
-                WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+                # WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
+                adbInput.shell(self.device, "am force-stop com.kakaogames.umamusume")
+                adbInput.shell(self.device, "am force-stop org.mozilla.firefox")
                 time.sleep(2)
                 
             time.sleep(self.sleepTime)
