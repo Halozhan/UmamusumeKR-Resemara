@@ -1,4 +1,3 @@
-from zmq import device
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
