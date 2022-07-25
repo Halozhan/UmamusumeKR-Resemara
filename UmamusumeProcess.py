@@ -1,3 +1,4 @@
+from zmq import device
 import WindowsAPIInput
 import adbInput
 from ImageSearch import ImageSearch
@@ -301,8 +302,8 @@ class UmaProcess():
                 # print("60초 정지 앱 강제종료!!! "*3)
                 self.log("60초 정지 앱 강제종료!!! ")
                 # WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                adbInput.shell(self.device, "am force-stop com.kakaogames.umamusume")
-                adbInput.shell(self.device, "am force-stop org.mozilla.firefox")
+                adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
+                adbInput.shell(self.device, self.InstancePort, "am force-stop org.mozilla.firefox")
                 time.sleep(2)
                 
             time.sleep(self.sleepTime)
@@ -1791,11 +1792,11 @@ class UmaProcess():
                         adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
                         self.is서포트_뽑기 = True
                     else:
+                        if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
+                            return True
                         adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
                         self.is뽑기_이동 = False
                         self.is연동하기 = True
-                        if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
-                            return True
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
 
@@ -1972,6 +1973,14 @@ class UmaProcess():
 
                     
                 if self.is연동하기:
+                    # adbInput.shell(self.device, self.InstancePort, "")
+                    adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
+                    time.sleep(1)
+                    adbInput.shell(self.device, self.InstancePort, "/system/xbin/bstk/su -c rm -rf /data/data/com.kakaogames.umamusume/shared_prefs")
+                    self.log("삭제_완료")
+                    return "Failed"
+
+
                     count = 메뉴(img, self.device, self.InstancePort)
                     if count:
                         updateTime = time.time()
@@ -2064,7 +2073,7 @@ class UmaProcess():
                         # print("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
                         self.log("카카오_로그인_연동에_실패하였습니다 " + str(count) + "개")
             
-            count = 카카오_로그인_연동에_성공하였습니다(img, hwndMain)
+            count = 카카오_로그인_연동에_성공하였습니다(img, self.device, self.InstancePort)
             if count:
                 updateTime = time.time()
                 self.is초기화하기 = True
@@ -2072,7 +2081,7 @@ class UmaProcess():
                 self.log("카카오_로그인_연동에_성공하였습니다 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
 
-            count = 로그아웃(img, hwndMain)
+            count = 로그아웃(img, self.device, self.InstancePort)
             if count:
                 updateTime = time.time()
                 self.is초기화하기 = True
@@ -2080,7 +2089,7 @@ class UmaProcess():
                 self.log("로그아웃 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
 
-            count = 모두_지우기(img, self.device, self.InstancePort)
+            count = 모두_지우기(img, self.device)
             if count:
                 updateTime = time.time()
                 # print("모두_지우기 " + str(count) + "개")
@@ -2212,7 +2221,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
                     
                 # 나올 경우가 없음
-                # count = 숫자2단계_인증(img, hwndMain)
+                # count = 숫자2단계_인증(img, self.device, self.InstancePort)
                 # if count:
                 #     updateTime = time.time()
                 #     # print("2단계_인증 " + str(count) + "개")
@@ -2220,7 +2229,7 @@ class UmaProcess():
                 #     img = screenshotToOpenCVImg(hwndMain)
             
             # 예외
-            count = 삭제_완료(img, hwndMain)
+            count = 삭제_완료(img, self.device, self.InstancePort)
             if count:
                 updateTime = time.time()
                 # print("삭제_완료 " + str(count) + "개")

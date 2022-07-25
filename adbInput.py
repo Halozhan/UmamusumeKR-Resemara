@@ -45,7 +45,7 @@ def Offset(x, y, offsetX, offsetY):
     y += offsetY
     return x, y
 
-def shell(device: AdbClient.device, shell: str):
+def shell(device: AdbClient.device, InstancePort, shell: str):
     try:
         device.shell(shell)
     except:

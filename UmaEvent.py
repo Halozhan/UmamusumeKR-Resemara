@@ -533,31 +533,33 @@ def 카카오_로그인_연동에_실패하였습니다(img: screenshotToOpenCVI
         return count
     return None
 
-def 카카오_로그인_연동에_성공하였습니다(img: screenshotToOpenCVImg, hwnd: int) -> int:
+def 카카오_로그인_연동에_성공하였습니다(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
     count = 0
     count, position = ImageSearch(img, Images["카카오_로그인_연동에_성공하였습니다"], 68, 469, 384, 65)
     if count:
-        WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        # WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        adbInput.shell(device, InstancePort, "am force-stop com.kakaogames.umamusume")
         time.sleep(0.5)
         # print(position)
         return count
     return None
 
-def 로그아웃(img: screenshotToOpenCVImg, hwnd: int) -> int:
+def 로그아웃(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
     count = 0
     count, position = ImageSearch(img, Images["로그아웃"])
     if count:
-        WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        # WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        adbInput.shell(device, InstancePort, "am force-stop com.kakaogames.umamusume")
         time.sleep(0.5)
         # print(position)
         return count
     return None
 
-def 모두_지우기(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
+def 모두_지우기(img: screenshotToOpenCVImg, device: adbInput.AdbConnect) -> int:
     count = 0
     count, position = ImageSearch(img, Images["모두_지우기"], 428, 40, 96, 48)
     if count:
-        adbInput.BlueStacksSwipe(device, InstancePort, position=position[0])
+        adbInput.BlueStacksSwipe(device, 0, position=position[0])
         time.sleep(0.5)
         # print(position)
         return count
@@ -745,21 +747,25 @@ def 비밀번호_확인(img: screenshotToOpenCVImg, device: adbInput.AdbConnect,
         return count
     return None
 
-def 숫자2단계_인증(img: screenshotToOpenCVImg, hwnd: int) -> int:
+def 숫자2단계_인증(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
     count = 0
     count, position = ImageSearch(img, Images["숫자2단계_인증"])
     if count:
-        WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        # WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        adbInput.shell(device, InstancePort, "am force-stop com.kakaogames.umamusume")
+        adbInput.shell(device, InstancePort, "am force-stop org.mozilla.firefox")
         time.sleep(0.5)
         # print(position)
         return count
     return None
 
-def 삭제_완료(img: screenshotToOpenCVImg, hwnd: int) -> int:
+def 삭제_완료(img: screenshotToOpenCVImg, device: adbInput.AdbConnect, InstancePort: int) -> int:
     count = 0
     count, position = ImageSearch(img, Images["삭제_완료"], confidence=0.95)
     if count:
-        WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        # WindowsAPIInput.WindowsAPIKeyboardInput(hwnd, WindowsAPIInput.win32con.VK_SCROLL)
+        adbInput.shell(device, InstancePort, "am force-stop com.kakaogames.umamusume")
+        adbInput.shell(device, InstancePort, "am force-stop org.mozilla.firefox")
         time.sleep(0.5)
         # print(position)
         return count
