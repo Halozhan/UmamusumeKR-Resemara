@@ -217,7 +217,7 @@ class newTab(QMainWindow):
         self.isMissionCheckBox = QCheckBox("미션 수령", self)
         self.isMissionCheckBox.setChecked(True)
         self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
-        self.isSSRGachaCheckBox.setChecked(True)
+        self.isSSRGachaCheckBox.setChecked(False)
         self.hbox2.addWidget(self.startButton)
         self.hbox2.addWidget(self.stopButton)
         self.hbox2.addWidget(self.resetButton)
