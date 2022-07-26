@@ -1,1 +1,0 @@
-suzuka = suzuka + 1

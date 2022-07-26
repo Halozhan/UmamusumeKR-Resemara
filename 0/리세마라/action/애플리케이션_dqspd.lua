@@ -1,1 +1,0 @@
-EnableImage(false, "¼³Á¤")

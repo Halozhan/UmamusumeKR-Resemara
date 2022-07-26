@@ -1,1 +1,0 @@
-EnableImage(true, "½ºÅµ")
