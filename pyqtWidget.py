@@ -37,9 +37,11 @@ class WindowClass(QMainWindow):
         self.TaskViewVBox.addWidget(self.Latency)
 
         self.AllStopButton = QPushButton("모두 정지")
+        self.clearLogsButton = QPushButton("로그 삭제", self)
         
         self.MenuHBox.addLayout(self.TaskViewVBox)
         self.MenuHBox.addWidget(self.AllStopButton) # ----
+        self.MenuHBox.addWidget(self.clearLogsButton)
 
 
         self.timeRateGroupBox = QGroupBox("부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐") # ---------
@@ -106,6 +108,7 @@ class WindowClass(QMainWindow):
         self.timeRateSlider2.valueChanged.connect(self.timeRateFunction)
 
         self.AllStopButton.clicked.connect(self.AllStopInstance)
+        self.clearLogsButton.clicked.connect(self.logs.clear)
 
         self.ManualButton.clicked.connect(self.ManualRadioFunction)
         self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
@@ -210,20 +213,22 @@ class newTab(QMainWindow):
         
         self.hbox2 = QHBoxLayout()
         self.startButton = QPushButton("시작", self)
+        self.hbox2.addWidget(self.startButton)
         self.stopButton = QPushButton("정지", self)
+        self.hbox2.addWidget(self.stopButton)
         self.resetButton = QPushButton("초기화", self)
+        self.hbox2.addWidget(self.resetButton)
         self.isDoneTutorialCheckBox = QCheckBox("튜토리얼 스킵 여부", self)
         self.isDoneTutorialCheckBox.setChecked(True)
+        self.hbox2.addWidget(self.isDoneTutorialCheckBox)
         self.isMissionCheckBox = QCheckBox("미션 수령", self)
         self.isMissionCheckBox.setChecked(True)
+        self.hbox2.addWidget(self.isMissionCheckBox)
         self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
         self.isSSRGachaCheckBox.setChecked(False)
-        self.hbox2.addWidget(self.startButton)
-        self.hbox2.addWidget(self.stopButton)
-        self.hbox2.addWidget(self.resetButton)
-        self.hbox2.addWidget(self.isDoneTutorialCheckBox)
-        self.hbox2.addWidget(self.isMissionCheckBox)
         self.hbox2.addWidget(self.isSSRGachaCheckBox)
+        self.clearLogsButton = QPushButton("로그 삭제", self)
+        self.hbox2.addWidget(self.clearLogsButton)
         
         
         self.vbox.addLayout(self.hbox1)
@@ -252,6 +257,7 @@ class newTab(QMainWindow):
         self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
         self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaFunction)
         self.isMissionCheckBox.clicked.connect(self.isMissionFunction)
+        self.clearLogsButton.clicked.connect(self.logs.clear)
         
         # 커스텀 시그널 정의
         # 없음
