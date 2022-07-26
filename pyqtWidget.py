@@ -4,7 +4,7 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QIcon
-from Umamusume import *
+from Umamusume import Umamusume
 from datetime import datetime
 import ASUS_Router_Mac_Change
 from sleepTime import sleepTime

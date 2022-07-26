@@ -238,8 +238,11 @@ class UmaProcess():
         if hwndMain == 0:
             self.toParent.put(["terminate"])
             return "Stop"
+        
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
+        
+        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
         
         # 불러오기
         try:
@@ -283,6 +286,22 @@ class UmaProcess():
                 key = key.split('/')
                 self.Supporter_cards_total[key[-2]] = 0
 
+        # Images
+        path = './Images'
+        Images = dict()
+        for a in glob.glob(os.path.join(path, '*')):
+            key = a.replace('.', '/').replace('\\', '/')
+            key = key.split('/')
+            Images[key[-2]] = imreadUnicode(a)
+
+        # 서포트 카드
+        path = './Supporter_cards'
+        Supporter_cards = dict()
+        for a in glob.glob(os.path.join(path, '*')):
+            key = a.replace('.', '/').replace('\\', '/')
+            key = key.split('/')
+            Supporter_cards[key[-2]] = imreadUnicode(a)
+
         self.toParent.put(["sendResetCount", self.resetCount]) # 리세 횟수 발신
         # 타임 = time.time()
         
@@ -313,49 +332,49 @@ class UmaProcess():
             img = screenshotToOpenCVImg(hwndMain) # 윈도우의 스크린샷
             
             if self.is초기화하기 == False:
-                count = SKIP(img, self.device, self.InstancePort)
+                count = self.event.SKIP(img)
                 if count:
                     updateTime = time.time()
                     # print("SKIP " + str(count) + "개")
                     self.log("SKIP " + str(count) + "개")
                     continue
                 
-                count = 우마무스메_실행(img, self.device, self.InstancePort)
+                count = self.event.우마무스메_실행(img)
                 if count:
                     updateTime = time.time()
                     # print("우마무스메_실행 " + str(count) + "개")
                     self.log("우마무스메_실행 " + str(count) + "개")
                 
                 if self.is시작하기 == False:
-                    count = 게스트_로그인(img, self.device, self.InstancePort)
+                    count = self.event.게스트_로그인(img)
                     if count:
                         updateTime = time.time()
                         # print("게스트_로그인 " + str(count) + "개")
                         self.log("게스트_로그인 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = 게스트로_로그인_하시겠습니까(img, self.device, self.InstancePort)
+                    count = self.event.게스트로_로그인_하시겠습니까(img)
                     if count:
                         updateTime = time.time()
                         # print("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         self.log("게스트로_로그인_하시겠습니까 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = 전체_동의(img, self.device, self.InstancePort)
+                    count = self.event.전체_동의(img)
                     if count:
                         updateTime = time.time()
                         # print("전체_동의 " + str(count) + "개")
                         self.log("전체_동의 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                         
-                    count = 시작하기(img, self.device, self.InstancePort)
+                    count = self.event.시작하기(img)
                     if count:
                         updateTime = time.time()
                         # print("시작하기 " + str(count) + "개")
                         self.log("시작하기 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                 
-                count = TAP_TO_START(img, self.device, self.InstancePort)
+                count = self.event.TAP_TO_START(img)
                 if count:
                     updateTime = time.time()
                     self.is시작하기 = True
@@ -363,42 +382,42 @@ class UmaProcess():
                     self.log("TAP_TO_START " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 계정_연동_설정_요청(img, self.device, self.InstancePort)
+                count = self.event.계정_연동_설정_요청(img)
                 if count:
                     updateTime = time.time()
                     # print("계정_연동_설정_요청 " + str(count) + "개")
                     self.log("계정_연동_설정_요청 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 튜토리얼을_스킵하시겠습니까(img, self.device, self.InstancePort)
+                count = self.event.튜토리얼을_스킵하시겠습니까(img)
                 if count:
                     updateTime = time.time()
                     # print("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                     self.log("튜토리얼을_스킵하시겠습니까 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 게임_데이터_다운로드(img, self.device, self.InstancePort)
+                count = self.event.게임_데이터_다운로드(img)
                 if count:
                     updateTime = time.time()
                     # print("게임_데이터_다운로드 " + str(count) + "개")
                     self.log("게임_데이터_다운로드 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 트레이너_정보를_입력해주세요(img, self.device, self.InstancePort, hwndMain)
+                count = self.event.트레이너_정보를_입력해주세요(img)
                 if count:
                     updateTime = time.time()
                     # print("트레이너_정보를_입력해주세요 " + str(count) + "개")
                     self.log("트레이너_정보를_입력해주세요 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 등록한다(img, self.device, self.InstancePort)
+                count = self.event.등록한다(img)
                 if count:
                     updateTime = time.time()
                     # print("등록한다 " + str(count) + "개")
                     self.log("등록한다 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 이_내용으로_등록합니다_등록하시겠습니까(img, self.device, self.InstancePort)
+                count = self.event.이_내용으로_등록합니다_등록하시겠습니까(img)
                 if count:
                     updateTime = time.time()
                     # print("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
@@ -814,7 +833,7 @@ class UmaProcess():
                 count = 0
                 count, position = ImageSearch(img, Images["자동_선택_확인_OK_화살표"], 334, 559, 84, 117) # 느림
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     self.log("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     
@@ -1656,7 +1675,7 @@ class UmaProcess():
             # ------------------------------ 리세 -----------------------------
             if self.is초기화하기 == False:
 
-                count = 공지사항_X(img, self.device, self.InstancePort)
+                count = self.event.공지사항_X(img)
                 if count:
                     updateTime = time.time()
                     # print("공지사항_X " + str(count) + "개")
@@ -1667,7 +1686,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                     
-                count = 메인_스토리가_해방되었습니다(img, self.device, self.InstancePort)
+                count = self.event.메인_스토리가_해방되었습니다(img)
                 if count:
                     updateTime = time.time()
                     # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
@@ -1677,7 +1696,7 @@ class UmaProcess():
                     # self.parent.isDoneTutorialCheckBox.setChecked(True)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 여러_스토리를_해방할_수_있게_되었습니다(img, self.device, self.InstancePort)
+                count = self.event.여러_스토리를_해방할_수_있게_되었습니다(img)
                 if count:
                     updateTime = time.time()
                     # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
@@ -1690,21 +1709,21 @@ class UmaProcess():
             # 선물 수령
             if self.isDoneTutorial and self.is선물_이동 == True:
                 
-                count = 선물_이동(img, self.device, self.InstancePort)
+                count = self.event.선물_이동(img)
                 if count:
                     updateTime = time.time()
                     # print("선물_이동 " + str(count) + "개")
                     self.log("선물_이동 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 선물_일괄_수령(img, self.device, self.InstancePort)
+                count = self.event.선물_일괄_수령(img)
                 if count:
                     # updateTime = time.time() 먹통 예상
                     # print("선물_일괄_수령 " + str(count) + "개")
                     self.log("선물_일괄_수령 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 상기의_선물을_수령했습니다(img, self.device, self.InstancePort)
+                count = self.event.상기의_선물을_수령했습니다(img)
                 if count:
                     updateTime = time.time()
                     # print("상기의_선물을_수령했습니다 " + str(count) + "개")
@@ -1712,7 +1731,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
 
             if self.is초기화하기 == False:
-                count = 받을_수_있는_선물이_없습니다(img, self.device, self.InstancePort)
+                count = self.event.받을_수_있는_선물이_없습니다(img)
                 if count:
                     updateTime = time.time()
                     # print("받을_수_있는_선물이_없습니다 " + str(count) + "개")
@@ -1722,28 +1741,28 @@ class UmaProcess():
 
             # 미션 수령
             if self.isDoneTutorial and self.isMission and self.is미션_이동:
-                count = 미션_이동(img, self.device, self.InstancePort)
+                count = self.event.미션_이동(img)
                 if count:
                     updateTime = time.time()
                     # print("미션_이동 " + str(count) + "개")
                     self.log("미션_이동 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 미션_메인(img, self.device, self.InstancePort)
+                count = self.event.미션_메인(img)
                 if count:
                     updateTime = time.time()
                     # print("미션_메인 " + str(count) + "개")
                     self.log("미션_메인 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 미션_일괄_수령(img, self.device, self.InstancePort)
+                count = self.event.미션_일괄_수령(img)
                 if count:
                     updateTime = time.time()
                     # print("미션_일괄_수령 " + str(count) + "개")
                     self.log("미션_일괄_수령 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = 미션_일괄_수령_확인됨(img, self.device, self.InstancePort)
+                count = self.event.미션_일괄_수령_확인됨(img)
                 if count:
                     updateTime = time.time()
                     # print("미션_일괄_수령_확인됨 " + str(count) + "개")
@@ -1751,7 +1770,7 @@ class UmaProcess():
                     self.is미션_이동 = False
                     img = screenshotToOpenCVImg(hwndMain)
 
-            count = 상기의_보상을_수령했습니다(img, self.device, self.InstancePort)
+            count = self.event.상기의_보상을_수령했습니다(img)
             if count:
                 updateTime = time.time()
                 # print("상기의_보상을_수령했습니다 " + str(count) + "개")
@@ -1760,7 +1779,7 @@ class UmaProcess():
                 img = screenshotToOpenCVImg(hwndMain)
 
             if self.is미션_이동 == False:
-                count = 돌아간다(img, self.device, self.InstancePort)
+                count = self.event.돌아간다(img)
                 if count:
                     updateTime = time.time()
                     # print("돌아간다 " + str(count) + "개")
@@ -1772,7 +1791,7 @@ class UmaProcess():
 
             # 뽑기
             if self.isDoneTutorial and self.is뽑기_이동:
-                count = 뽑기_이동(img, self.device, self.InstancePort)
+                count = self.event.뽑기_이동(img)
                 if count:
                     updateTime = time.time()
                     # print("뽑기_이동 " + str(count) + "개")
@@ -1814,7 +1833,7 @@ class UmaProcess():
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
                     break
                 
-                count = 무료_쥬얼부터_먼저_사용됩니다(img, self.device, self.InstancePort)
+                count = self.event.무료_쥬얼부터_먼저_사용됩니다(img)
                 if count:
                     updateTime = time.time()
                     self.is뽑기_결과 = True
@@ -1823,7 +1842,7 @@ class UmaProcess():
                     
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 뽑기_결과(img, self.device, self.InstancePort)
+                count = self.event.뽑기_결과(img)
                 if count and self.is뽑기_결과:
                     updateTime = time.time()
                     self.is뽑기_결과 = False
@@ -1881,7 +1900,7 @@ class UmaProcess():
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
                     break
 
-                count = 한_번_더_뽑기(img, self.device, self.InstancePort)
+                count = self.event.한_번_더_뽑기(img)
                 if count:
                     updateTime = time.time()
                     # print("한_번_더_뽑기 " + str(count) + "개")
@@ -1915,7 +1934,7 @@ class UmaProcess():
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 상점_화면을_표시할_수_없습니다(img, self.device, self.InstancePort)
+                count = self.event.상점_화면을_표시할_수_없습니다(img)
                 if count:
                     updateTime = time.time()
                     # print("상점_화면을_표시할_수_없습니다 " + str(count) + "개")
@@ -1934,28 +1953,28 @@ class UmaProcess():
                         time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = 숫자3성_확정(img, self.device, self.InstancePort)
+                    count = self.event.숫자3성_확정(img)
                     if count:
                         updateTime = time.time()
                         # print("숫자3성_확정 " + str(count) + "개")
                         self.log("숫자3성_확정 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = SSR_확정_스타트_대시(img, self.device, self.InstancePort)
+                    count = self.event.SSR_확정_스타트_대시(img)
                     if count:
                         updateTime = time.time()
                         # print("SSR_확정_스타트_대시 " + str(count) + "개")
                         self.log("SSR_확정_스타트_대시 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = SSR_확정_메이크_데뷔_뽑기(img, self.device, self.InstancePort)
+                    count = self.event.SSR_확정_메이크_데뷔_뽑기(img)
                     if count:
                         updateTime = time.time()
                         # print("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         self.log("SSR_확정_메이크_데뷔_뽑기 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = SSR_확정_메이크_데뷔_티켓을_1장_사용해(img, self.device, self.InstancePort)
+                    count = self.event.SSR_확정_메이크_데뷔_티켓을_1장_사용해(img)
                     if count:
                         updateTime = time.time()
                         self.is뽑기_결과 = True
@@ -1963,7 +1982,7 @@ class UmaProcess():
                         self.log("SSR_확정_메이크_데뷔_티켓을_1장_사용해 " + str(count) + "개")
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                    count = 뽑기_결과_OK(img, self.device, self.InstancePort)
+                    count = self.event.뽑기_결과_OK(img)
                     if count:
                         updateTime = time.time()
                         # print("뽑기_결과_OK " + str(count) + "개")
@@ -1980,7 +1999,7 @@ class UmaProcess():
                     return "Failed"
 
             # 특수 이벤트
-            count = 모두_지우기(img, self.device)
+            count = self.event.모두_지우기(img)
             if count:
                 updateTime = time.time()
                 # print("모두_지우기 " + str(count) + "개")
@@ -1988,49 +2007,49 @@ class UmaProcess():
                 img = screenshotToOpenCVImg(hwndMain)
 
 
-            count = 추가_데이터를_다운로드합니다(img, self.device, self.InstancePort)
+            count = self.event.추가_데이터를_다운로드합니다(img)
             if count:
                 updateTime = time.time()
                 # print("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 self.log("추가_데이터를_다운로드합니다 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
                 
-            count = 재시도(img, self.device, self.InstancePort)
+            count = self.event.재시도(img)
             if count:
                 updateTime = time.time()
                 # print("재시도 " + str(count) + "개")
                 self.log("재시도 " + str(count) + "개")
                 continue
             
-            count = 타이틀_화면으로(img, self.device, self.InstancePort)
+            count = self.event.타이틀_화면으로(img)
             if count:
                 updateTime = time.time()
                 # print("타이틀_화면으로 " + str(count) + "개")
                 self.log("타이틀_화면으로 " + str(count) + "개")
                 continue
             
-            count = 확인(img, self.device, self.InstancePort)
+            count = self.event.확인(img)
             if count:
                 updateTime = time.time()
                 # print("확인 " + str(count) + "개")
                 self.log("확인 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
             
-            count = 앱_닫기(img, self.device, self.InstancePort)
+            count = self.event.앱_닫기(img)
             if count:
                 updateTime = time.time()
                 # print("앱_닫기 " + str(count) + "개")
                 self.log("앱_닫기 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
             
-            count = 날짜가_변경됐습니다(img, self.device, self.InstancePort)
+            count = self.event.날짜가_변경됐습니다(img)
             if count:
                 updateTime = time.time()
                 # print("날짜가_변경됐습니다 " + str(count) + "개")
                 self.log("날짜가_변경됐습니다 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
             
-            count = 숫자4080_에러_코드(img, self.device, self.InstancePort)
+            count = self.event.숫자4080_에러_코드(img)
             if count:
                 updateTime = time.time()
                 print("숫자4080_에러_코드 " + str(count) + "개")
