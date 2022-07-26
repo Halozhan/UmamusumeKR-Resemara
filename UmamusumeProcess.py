@@ -1980,6 +1980,7 @@ class UmaProcess():
                     return "Failed"
 
 
+            '''
                     count = 메뉴(img, self.device, self.InstancePort)
                     if count:
                         updateTime = time.time()
@@ -2265,6 +2266,7 @@ class UmaProcess():
             
             if self.isAlive == False: # 중간에 멈춰야 할 경우
                 break
+            '''
 
             # 특수 이벤트
             count = 추가_데이터를_다운로드합니다(img, self.device, self.InstancePort)
