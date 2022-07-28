@@ -1,1 +1,0 @@
-teio = teio + 1

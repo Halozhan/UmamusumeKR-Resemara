@@ -1,1 +1,0 @@
-bakushin = bakushin + 1

@@ -1,1 +1,0 @@
-EnableImage(true, "초기화_완료")

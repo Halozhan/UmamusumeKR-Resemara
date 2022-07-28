@@ -1,1 +1,0 @@
-tazuna = tazuna + 1

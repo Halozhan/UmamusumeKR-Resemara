@@ -1,1 +1,0 @@
-pasa = pasa + 1

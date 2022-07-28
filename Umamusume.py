@@ -123,6 +123,8 @@ class Umamusume(QObject):
         self.ReceiverEvent.set()
         self.Receiver.join() # 종료 대기
         self.ReceiverEvent.clear()
+
+        # toChild 비우기
         while not self.toChild.empty():
             try:
                 recv = self.toChild.get(timeout=0.001)
@@ -130,7 +132,9 @@ class Umamusume(QObject):
             except:
                 pass
         self.toChild.close() # 자식 수신 큐도 삭제해야함
-        self.process.close() # process 삭제
+
+        # 최종적으로 process 삭제
+        self.process.close()
 
         # 종료 후 버튼 복구
         self.parent.InstanceComboBox.setEnabled(True)
