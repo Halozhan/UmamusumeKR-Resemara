@@ -347,7 +347,7 @@ class UmaEvent:
 
     def 뽑기_결과(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["뽑기_결과"], 208, 35, 97, 247)
+        count, position = ImageSearch(img, self.Images["뽑기_결과"])
         if count:
             # print(position)
             return count
