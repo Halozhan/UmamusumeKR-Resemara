@@ -242,7 +242,7 @@ class UmaProcess():
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
         
-        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
+        self.event: UmaEvent = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
         
         # 불러오기
         try:
@@ -428,1234 +428,1104 @@ class UmaProcess():
                     break
                     
                 # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
-                count = 0
-                count, position = ImageSearch(img, Images["출전"])
+                count = self.event.출전(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    print("출전 " + str(count) + "개")
+                    # print("출전 " + str(count) + "개")
                     self.log("출전 " + str(count) + "개")
                     self.toParent.put(["isDoneTutorial", False])
                     self.isDoneTutorial = False
                     time.sleep(1)
-                    continue
                 
             if self.isDoneTutorial == False:
                 updateTime = time.time()
                 
                 if self.isPAUSED == False:
-                    count = 0
-                    count, position = ImageSearch(img, Images["울려라_팡파레"])
+                    count = self.event.울려라_팡파레(img)
                     if count:
-                        ConvertedPosition = []
-                        ConvertedPosition.append(position[0][0] / 1.750503018108652) # 1740 / 994 가로화면 가로배율
-                        ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                        ConvertedPosition.append(position[0][2] / 1.729965156794425) # 993 / 574 가로화면 세로배율
-                        ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                        print("울려라_팡파레 " + str(count) + "개")
+                        # print("울려라_팡파레 " + str(count) + "개")
                         self.log("울려라_팡파레 " + str(count) + "개")
-                        
                         self.isPAUSED = True
                         time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                         
-                    count = 0
-                    count, position = ImageSearch(img, Images["닿아라_골까지"])
+                    count = self.event.닿아라_골까지(img)
                     if count:
-                        ConvertedPosition = []
-                        ConvertedPosition.append(position[0][0] / 1.750503018108652)
-                        ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                        ConvertedPosition.append(position[0][2] / 1.729965156794425)
-                        ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                        print("닿아라_골까지 " + str(count) + "개")
+                        # print("닿아라_골까지 " + str(count) + "개")
                         self.log("닿아라_골까지 " + str(count) + "개")
                         
                         self.isPAUSED = True
                         time.sleep(0.5)
                         img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["라이브_메뉴"])
+                count = self.event.라이브_메뉴(img)
                 if count:
-                    ConvertedPosition = []
-                    ConvertedPosition.append(position[0][0] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][2] / 1.729965156794425)
-                    ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                    print("라이브_메뉴 " + str(count) + "개")
+                    # print("라이브_메뉴 " + str(count) + "개")
                     self.log("라이브_메뉴 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["라이브_스킵"])
+                count = self.event.라이브_스킵(img)
                 if count:
-                    ConvertedPosition = []
-                    ConvertedPosition.append(position[0][0] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][1] / 1.750503018108652)
-                    ConvertedPosition.append(position[0][2] / 1.729965156794425)
-                    ConvertedPosition.append(position[0][3] / 1.729965156794425)
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=ConvertedPosition, deltaX=5, deltaY=5)
-                    print("라이브_스킵 " + str(count) + "개")
+                    # print("라이브_스킵 " + str(count) + "개")
                     self.log("라이브_스킵 " + str(count) + "개")
                     
                     self.isPAUSED = False
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["타즈나_씨와_레이스를_관전한"], 124, 808, 268, 52)
+                count = self.event.타즈나_씨와_레이스를_관전한(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
                     self.log("타즈나_씨와_레이스를_관전한 " + str(count) + "개")
-                    
-                    time.sleep(0.5)
+                    time.sleep(3)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["일본_우마무스메_트레이닝_센터_학원"], 78, 844, 345, 53)
+                count = self.event.일본_우마무스메_트레이닝_센터_학원(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
                     self.log("일본_우마무스메_트레이닝_센터_학원 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["레이스의_세계를_꿈꾸는_아이들이"], 73, 810, 369, 70)
+                count = self.event.레이스의_세계를_꿈꾸는_아이들이(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
                     self.log("레이스의_세계를_꿈꾸는_아이들이 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["환영"], 180, 811, 156, 68)
+                count = self.event.환영(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("환영 " + str(count) + "개")
                     self.log("환영 " + str(count) + "개")
-                    
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["느낌표물음표"], 35, 449, 52, 54)
+                count = self.event.느낌표물음표(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("느낌표물음표 " + str(count) + "개")
                     self.log("느낌표물음표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["아키카와_이사장님"], 181, 811, 181, 49)
+                count = self.event.아키카와_이사장님(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("아키카와_이사장님 " + str(count) + "개")
                     self.log("아키카와_이사장님 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["장래_유망한_트레이너의_등장에"], 145, 808, 284, 50)
+                count = self.event.장래_유망한_트레이너의_등장에(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("장래_유망한_트레이너의_등장에 " + str(count) + "개")
                     self.log("장래_유망한_트레이너의_등장에 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["나는_이_학원의_이사장"], 98, 821, 209, 49)
+                count = self.event.나는_이_학원의_이사장(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("나는_이_학원의_이사장 " + str(count) + "개")
                     self.log("나는_이_학원의_이사장 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["자네에_대해_가르쳐_주게나"], 155, 833, 250, 48)
+                count = self.event.자네에_대해_가르쳐_주게나(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네에_대해_가르쳐_주게나 " + str(count) + "개")
                     self.log("자네에_대해_가르쳐_주게나 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 # 트레이너 정보 입력 -----------
             
-                count = 0
-                count, position = ImageSearch(img, Images["자네는_트레센_학원의_일원일세"], 150, 833, 282, 49)
+                count = self.event.자네는_트레센_학원의_일원일세(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레센_학원의_일원일세 " + str(count) + "개")
                     self.log("자네는_트레센_학원의_일원일세 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["담당_우마무스메와_함께"], 172, 798, 224, 49)
+                count = self.event.담당_우마무스메와_함께(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("담당_우마무스메와_함께 " + str(count) + "개")
                     self.log("담당_우마무스메와_함께 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["학원에_다니는_우마무스메의"], 86, 798, 259, 50)
+                count = self.event.학원에_다니는_우마무스메의(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("학원에_다니는_우마무스메의 " + str(count) + "개")
                     self.log("학원에_다니는_우마무스메의 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["자네는_트레이너로서_담당_우마무스메를"], 79, 810, 358, 51)
+                count = self.event.자네는_트레이너로서_담당_우마무스메를(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
                     self.log("자네는_트레이너로서_담당_우마무스메를 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["가슴에_단_트레이너_배지에"], 159, 811, 248, 48)
+                count = self.event.가슴에_단_트레이너_배지에(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("가슴에_단_트레이너_배지에 " + str(count) + "개")
                     self.log("가슴에_단_트레이너_배지에 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["실전_연수를_하러_가시죠"], 207, 813, 224, 46)
+                count = self.event.실전_연수를_하러_가시죠(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("실전_연수를_하러_가시죠 " + str(count) + "개")
                     self.log("실전_연수를_하러_가시죠 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["프리티_더비_뽑기_5번_뽑기_무료"], 191, 710, 135, 125)
+                count = self.event.프리티_더비_뽑기_5번_뽑기_무료(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
                     self.log("프리티_더비_뽑기_5번_뽑기_무료 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["튜토리얼_용_프리티_더비_뽑기"], 130, 432, 258, 69)
+                count = self.event.튜토리얼_용_프리티_더비_뽑기(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
                     self.log("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
-                    
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드_화살표"], confidence=0.6)
+                count = self.event.서포트_카드_화살표(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("서포트_카드_화살표 " + str(count) + "개") # 느림
                     self.log("서포트_카드_화살표 " + str(count) + "개") # 느림
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                # count = 0 # 지울 예정
-                # count, position = ImageSearch(img, Images["서포트_카드_화살표2"], 410, 508, 124, 135)
-                # if count:
-                #     adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                #     print("서포트_카드_화살표2 " + str(count) + "개") # 느림
-                #     self.log("서포트_카드_화살표2 " + str(count) + "개") # 느림
-                #     time.sleep(0.5)
-                #     img = screenshotToOpenCVImg(hwndMain)
-                    
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드_뽑기_10번_뽑기_무료"])
+                count = self.event.서포트_카드_뽑기_10번_뽑기_무료(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
                     self.log("서포트_카드_뽑기_10번_뽑기_무료 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["튜토리얼_용_서포트_카드_뽑기"], 124, 431, 266, 71)
+                count = self.event.튜토리얼_용_서포트_카드_뽑기(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=180, deltaX=5, deltaY=5)
                     print("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
                     self.log("튜토리얼_용_서포트_카드_뽑기 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["육성_화살표"], 350, 712, 117, 172)
+                count = self.event.육성_화살표(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
                     print("육성_화살표 " + str(count) + "개")
                     self.log("육성_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
-                
                 
                 # 이미지 바꿀 예정
-                count = 0
-                count, position = ImageSearch(img, Images["육성_시나리오를_공략하자"], 59, 664, 399, 77)
+                count = self.event.육성_시나리오를_공략하자(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=223, deltaX=5, deltaY=5)
                     print("육성_시나리오를_공략하자 " + str(count) + "개")
                     self.log("육성_시나리오를_공략하자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다음_화살표"])
+                count = self.event.다음_화살표(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다음_화살표 " + str(count) + "개")
                     self.log("다음_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자"], 53, 614, 414, 125)
+                count = self.event.트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=248, deltaX=5, deltaY=5)
                     print("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
                     self.log("트윙클_시리즈에_도전_우마무스메의_꿈을_이뤄주자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["마음에_드는_우마무스메를_육성하자"], 21, 670, 473, 71)
+                count = self.event.마음에_드는_우마무스메를_육성하자(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=217, deltaX=5, deltaY=5)
                     print("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
                     self.log("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다이와_스칼렛_클릭"], 0, 496, 138, 138)
+                count = self.event.다이와_스칼렛_클릭(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
                     print("다이와_스칼렛_클릭 " + str(count) + "개")
                     self.log("다이와_스칼렛_클릭 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다음_화살표_육성_우마무스메_선택"], 212, 747, 91, 116)
+                count = self.event.다음_화살표_육성_우마무스메_선택(img)
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
                     print("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
                     self.log("다음_화살표_육성_우마무스메_선택 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["플러스_계승_우마무스메_선택_화살표"], 19, 520, 103, 152)
+                count = self.event.플러스_계승_우마무스메_선택_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     self.log("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["계승_보드카_선택_화살표"], 209, 496, 93, 161)
+                count = self.event.계승_보드카_선택_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("계승_보드카_선택_화살표 " + str(count) + "개")
                     self.log("계승_보드카_선택_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["보드카_결정_화살표"])
+                count = self.event.보드카_결정_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("보드카_결정_화살표 " + str(count) + "개")
                     self.log("보드카_결정_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["자동_선택_화살표"])
+                count = self.event.자동_선택_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("자동_선택_화살표 " + str(count) + "개")
                     self.log("자동_선택_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["자동_선택_확인_OK_화살표"], 334, 559, 84, 117) # 느림
+                count = self.event.자동_선택_확인_OK_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     self.log("자동_선택_확인_OK_화살표 " + str(count) + "개")
-                    
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["마음을_이어서_꿈을_이루자"], 73, 661, 371, 79)
+                count = self.event.마음을_이어서_꿈을_이루자(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=218, deltaX=5, deltaY=5)
+                    
                     print("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     self.log("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["계승_최종_다음_화살표"])
+                count = self.event.계승_최종_다음_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=35, deltaX=5, deltaY=5)
+                    
                     print("계승_최종_다음_화살표 " + str(count) + "개")
                     self.log("계승_최종_다음_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드를_편성해서_육성_효율_UP"], 67, 615, 383, 120)
+                count = self.event.서포트_카드를_편성해서_육성_효율_UP(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
+                    
                     print("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     self.log("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드의_타입에_주목"], 38, 662, 439, 69)
+                count = self.event.서포트_카드의_타입에_주목(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=225, deltaX=5, deltaY=5)
+                    
                     print("서포트_카드의_타입에_주목 " + str(count) + "개")
                     self.log("서포트_카드의_타입에_주목 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우정_트레이닝이_육성의_열쇠를_쥐고_있다"])
+                count = self.event.우정_트레이닝이_육성의_열쇠를_쥐고_있다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=212, deltaX=5, deltaY=5)
+                    
                     print("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     self.log("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_자동_편성_화살표"])
+                count = self.event.서포트_자동_편성_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("서포트_자동_편성_화살표 " + str(count) + "개")
                     self.log("서포트_자동_편성_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성_시작_화살표"])
+                count = self.event.육성_시작_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성_시작_화살표 " + str(count) + "개")
                     self.log("육성_시작_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["TP를_소비해_육성_시작_화살표"], 305, 816, 142, 119)
+                count = self.event.TP를_소비해_육성_시작_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     self.log("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["초록색_역삼각형"], 440, 850, -1, -1, confidence=0.8) # 역 삼각형
+                count = self.event.초록색_역삼각형(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("초록색_역삼각형 " + str(count) + "개")
                     self.log("초록색_역삼각형 " + str(count) + "개")
                     
                     time.sleep(0.5)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["TAP"], confidence=0.7)
+                count = self.event.TAP(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("TAP " + str(count) + "개")
                     self.log("TAP " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우마무스메에겐_저마다_다른_목표가_있습니다"])
+                count = self.event.우마무스메에겐_저마다_다른_목표가_있습니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     self.log("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["이쪽은_육성을_진행할_때_필요한_커맨드입니다"])
+                count = self.event.이쪽은_육성을_진행할_때_필요한_커맨드입니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     self.log("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["커맨드를_하나_실행하면_턴을_소비합니다"])
+                count = self.event.커맨드를_하나_실행하면_턴을_소비합니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     self.log("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우선_트레이닝을_선택해_보세요"])
+                count = self.event.우선_트레이닝을_선택해_보세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=60, offsetY=178, deltaX=5, deltaY=5)
+                    
                     print("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["이게_실행할_수_있는_트레이닝들입니다"])
+                count = self.event.이게_실행할_수_있는_트레이닝들입니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     self.log("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["한_번_스피드를_골라_보세요"])
+                count = self.event.한_번_스피드를_골라_보세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-143, offsetY=228, deltaX=5, deltaY=5)
+                    
                     print("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     self.log("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["파란색_역삼각형"], 440, 850, -1, -1, confidence=0.9) # 역 삼각형
+                count = self.event.파란색_역삼각형(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("파란색_역삼각형 " + str(count) + "개")
                     self.log("파란색_역삼각형 " + str(count) + "개")
                     
                     time.sleep(0.5)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["약속"], 38, 614, 80, 57)
+                count = self.event.약속(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("약속 " + str(count) + "개")
                     self.log("약속 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["서둘러_가봐"], 38, 617, 132, 53)
+                count = self.event.서둘러_가봐(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("서둘러_가봐 " + str(count) + "개")
                     self.log("서둘러_가봐 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["그때_번뜩였다"], 22, 740, 289, 102)
+                count = self.event.그때_번뜩였다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("그때_번뜩였다 " + str(count) + "개")
                     self.log("그때_번뜩였다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다이와_스칼렛의_성장으로_이어졌다"], 23, 741, 328, 55)
+                count = self.event.다이와_스칼렛의_성장으로_이어졌다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     self.log("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다음으로_육성_우마무스메의_체력에_관해_설명할게요"])
+                count = self.event.다음으로_육성_우마무스메의_체력에_관해_설명할게요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     self.log("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우선_아까처럼_트레이닝을_선택해_보세요"])
+                count = self.event.우선_아까처럼_트레이닝을_선택해_보세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=90, offsetY=173, deltaX=5, deltaY=5)
+                    
                     print("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["여기_실패율에_주목해_주세요"])
+                count = self.event.여기_실패율에_주목해_주세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     self.log("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["남은_체력이_적을수록_실패율이_높아지게_돼요"])
+                count = self.event.남은_체력이_적을수록_실패율이_높아지게_돼요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     self.log("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["트레이닝에_실패하면_능력과_컨디션이"])
+                count = self.event.트레이닝에_실패하면_능력과_컨디션이(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     self.log("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["돌아간다_화살표"], grayscale=False)
+                count = self.event.돌아간다_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("돌아간다_화살표 " + str(count) + "개")
                     self.log("돌아간다_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["체력이_적을_때는_우마무스메를"])
+                count = self.event.체력이_적을_때는_우마무스메를(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-125, offsetY=180, deltaX=5, deltaY=5)
+                    
                     print("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     self.log("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["먼저_여기_스킬을_선택해보세요"])
+                count = self.event.먼저_여기_스킬을_선택해보세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-70, offsetY=170, deltaX=5, deltaY=5)
+                    
                     print("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     self.log("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["다음으로_배울_스킬을_선택하세요"])
+                count = self.event.다음으로_배울_스킬을_선택하세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     self.log("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["이번에는_이_스킬을_습득해_보세요"])
+                count = self.event.이번에는_이_스킬을_습득해_보세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=273, offsetY=183, deltaX=5, deltaY=5)
+                    
                     print("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     self.log("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["스킬_결정_화살표"])
+                count = self.event.스킬_결정_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("스킬_결정_화살표 " + str(count) + "개")
                     self.log("스킬_결정_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["스킬_획득_화살표"])
+                count = self.event.스킬_획득_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("스킬_획득_화살표 " + str(count) + "개")
                     self.log("스킬_획득_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["스킬_획득_돌아간다_화살표"], 1, 857, 100, 115)
+                count = self.event.스킬_획득_돌아간다_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     self.log("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["이졔_준비가_다_끝났어요_레이스에_출전해_봐요"], 85, 621, 191, 69)
+                count = self.event.이졔_준비가_다_끝났어요_레이스에_출전해_봐요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=207, offsetY=168, deltaX=5, deltaY=5)
+                    
                     print("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     self.log("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["출전_화살표"])
+                count = self.event.출전_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("출전_화살표 " + str(count) + "개")
                     self.log("출전_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["숫자1등이_되기_위해서도_말야"], 37, 615, 252, 58)
+                count = self.event.숫자1등이_되기_위해서도_말야(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
-                    print("1등이_되기_위해서도_말야 " + str(count) + "개")
-                    self.log("1등이_되기_위해서도_말야 " + str(count) + "개")
+                    
+                    print("숫자1등이_되기_위해서도_말야 " + str(count) + "개")
+                    self.log("숫자1등이_되기_위해서도_말야 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["패덕에서는_레이스에_출전하는_우마무스메의"])
+                count = self.event.패덕에서는_레이스에_출전하는_우마무스메의(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     self.log("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우선_예상_표시에_관해서_설명할게요"])
+                count = self.event.우선_예상_표시에_관해서_설명할게요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     self.log("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["숫자3개의_표시는_전문가들의_예상을_나타내며"])
+                count = self.event.숫자3개의_표시는_전문가들의_예상을_나타내며(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     self.log("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["능력과_컨디션이_좋을수록_많은_기대를_받게_돼서"])
+                count = self.event.능력과_컨디션이_좋을수록_많은_기대를_받게_돼서(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     self.log("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["물론_반드시_우승하게_되는_건_아니지만"])
+                count = self.event.물론_반드시_우승하게_되는_건_아니지만(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     self.log("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["또_패덕에서는_우마무스메의_작전을"])
+                count = self.event.또_패덕에서는_우마무스메의_작전을(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=210, offsetY=157, deltaX=5, deltaY=5)
+                    
                     print("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     self.log("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["선행A_화살표"])
+                count = self.event.선행A_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("선행A_화살표 " + str(count) + "개")
                     self.log("선행A_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["작전_결정"])
+                count = self.event.작전_결정(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("작전_결정 " + str(count) + "개")
                     self.log("작전_결정 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["이것으로_준비는_다_됐어요"])
+                count = self.event.이것으로_준비는_다_됐어요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=145, offsetY=161, deltaX=5, deltaY=5)
+                    
                     print("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     self.log("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["첫_우승_축하_드려요"])
+                count = self.event.첫_우승_축하_드려요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=847, deltaX=5, deltaY=5)
+                    
                     print("첫_우승_축하_드려요 " + str(count) + "개")
                     self.log("첫_우승_축하_드려요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["좋아"], 37, 613, 80, 59)
+                count = self.event.좋아(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("좋아 " + str(count) + "개")
                     self.log("좋아 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["목표_달성"], 114, 222, 293, 100)
+                count = self.event.목표_달성(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
+                    
                     print("목표_달성 " + str(count) + "개")
                     self.log("목표_달성 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성_목표_달성"], 31, 227, 469, 96)
+                count = self.event.육성_목표_달성(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=578, deltaX=5, deltaY=5)
+                    
                     print("육성_목표_달성 " + str(count) + "개")
                     self.log("육성_목표_달성 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성_수고하셨습니다"])
+                count = self.event.육성_수고하셨습니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성_수고하셨습니다 " + str(count) + "개")
                     self.log("육성_수고하셨습니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["스킬_포인트가_남았다면"])
+                count = self.event.스킬_포인트가_남았다면(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("스킬_포인트가_남았다면 " + str(count) + "개")
                     self.log("스킬_포인트가_남았다면 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성은_이것으로_종료입니다"])
+                count = self.event.육성은_이것으로_종료입니다(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성은_이것으로_종료입니다 " + str(count) + "개")
                     self.log("육성은_이것으로_종료입니다 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["또_연수_기간은_짧았지만"])
+                count = self.event.또_연수_기간은_짧았지만(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("또_연수_기간은_짧았지만 " + str(count) + "개")
                     self.log("또_연수_기간은_짧았지만 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성_완료_화살표"])
+                count = self.event.육성_완료_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=40, deltaX=5, deltaY=5)
+                    
                     print("육성_완료_화살표 " + str(count) + "개")
                     self.log("육성_완료_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성_완료_확인_완료한다_화살표"])
+                count = self.event.육성_완료_확인_완료한다_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     self.log("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후"])
+                count = self.event.육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["최고_랭크를_목표로_힘내세요"])
+                count = self.event.최고_랭크를_목표로_힘내세요(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     self.log("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["랭크_육성"])
+                count = self.event.랭크_육성(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=837, deltaX=5, deltaY=5)
+                    
                     print("랭크_육성 " + str(count) + "개")
                     self.log("랭크_육성 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["육성을_끝낸_우마무스메는_인자를"])
+                count = self.event.육성을_끝낸_우마무스메는_인자를(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["계승_우마무스메로_선택하면_새로운_우마무스메에게"])
+                count = self.event.계승_우마무스메로_선택하면_새로운_우마무스메에게(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     self.log("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["인자획득"])
+                count = self.event.인자획득(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=829, deltaX=5, deltaY=5)
+                    
                     print("인자획득 " + str(count) + "개")
                     self.log("인자획득 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["우마무스메_상세_닫기_화살표"])
+                count = self.event.우마무스메_상세_닫기_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     self.log("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["평가점"], 293, 327, 75, 50)
+                count = self.event.평가점(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=-75, offsetY=552, deltaX=5, deltaY=5)
+                    
                     print("평가점 " + str(count) + "개")
                     self.log("평가점 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["보상획득"], 113, 21, 287, 103)
+                count = self.event.보상획득(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=834, deltaX=5, deltaY=5)
+                    
                     print("보상획득 " + str(count) + "개")
                     self.log("보상획득 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
-                count = 0
-                count, position = ImageSearch(img, Images["강화_편성_화살표"], 0, 910, 97, -1, grayscale=False) # -5, 910, 97, 67
+                count = self.event.강화_편성_화살표(img)
+                
                 if count:
-                    print(position[0])
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("강화_편성_화살표 " + str(count) + "개")
                     self.log("강화_편성_화살표 " + str(count) + "개")
                     
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["레이스_화살표"], 329, 908, 103, -1, grayscale=False) # 329, 908, 103, 71
+                count = self.event.레이스_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("레이스_화살표 " + str(count) + "개")
                     self.log("레이스_화살표 " + str(count) + "개")
                     
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_경기장_화살표"], 82, 542, 130, 83)
+                count = self.event.팀_경기장_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+                    
                     print("팀_경기장_화살표 " + str(count) + "개")
                     self.log("팀_경기장_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["오리지널_팀을_결성_상위_CLASS를_노려라"], 81, 622, 358, 118)
+                count = self.event.오리지널_팀을_결성_상위_CLASS를_노려라(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
+                    
                     print("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     self.log("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["하이스코어를_기록해서_CLASS_승급을_노리자"], 78, 614, 362, 125)
+                count = self.event.하이스코어를_기록해서_CLASS_승급을_노리자(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=250, deltaX=5, deltaY=5)
+                    
                     print("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     self.log("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["기간_중에_개최되는_5개의_레이스에"], 8, 617, 504, 121)
+                count = self.event.기간_중에_개최되는_5개의_레이스에(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=236, deltaX=5, deltaY=5)
+                    
                     print("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     self.log("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드의_Lv을_UP해서"], 61, 630, 396, 111)
+                count = self.event.서포트_카드의_Lv을_UP해서(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=244, deltaX=5, deltaY=5)
+                    
                     print("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     self.log("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_편성"], 264, 699, 126, 72)
+                count = self.event.팀_편성(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+                    
                     print("팀_편성 " + str(count) + "개")
                     self.log("팀_편성 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["전당_입성_우마무스메로_자신만의_팀을_결성"], 59, 616, 395, 122)
+                count = self.event.전당_입성_우마무스메로_자신만의_팀을_결성(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=247, deltaX=5, deltaY=5)
+                    
                     print("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     self.log("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_랭크를_올려서_최강의_팀이_되자"], 128, 616, 262, 122)
+                count = self.event.팀_랭크를_올려서_최강의_팀이_되자(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=238, deltaX=5, deltaY=5)
+                    
                     print("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     self.log("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠"], 84, 619, 352, 123)
+                count = self.event.팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=246, deltaX=5, deltaY=5)
+                    
                     print("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     self.log("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_편성_다이와_스칼렛_화살표_클릭"], 200, 341, 116, 160)
+                count = self.event.팀_편성_다이와_스칼렛_화살표_클릭(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     self.log("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["출전_우마무스메_선택_다이와_스칼렛_화살표"], 0, 591, 121, 138)
+                count = self.event.출전_우마무스메_선택_다이와_스칼렛_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     self.log("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_편성_확정_화살표"], 190, 736, 136, 124)
+                count = self.event.팀_편성_확정_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("팀_편성_확정_화살표 " + str(count) + "개")
                     self.log("팀_편성_확정_화살표 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["편성을_확정합니다_진행하시겠습니까"], 177, 524, 165, 75)
+                count = self.event.편성을_확정합니다_진행하시겠습니까(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=121, offsetY=77, deltaX=5, deltaY=5)
+                    
                     print("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     self.log("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["팀_최고_평가점_갱신_닫기"], 223, 840, 98, 95)
+                count = self.event.팀_최고_평가점_갱신_닫기(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     self.log("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = 0
-                count, position = ImageSearch(img, Images["홈_화살표"], 188, 845, 144, 134)
+                count = self.event.홈_화살표(img)
+                
                 if count:
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+                    
                     print("홈_화살표 " + str(count) + "개")
                     self.log("홈_화살표 " + str(count) + "개")
                     
@@ -1663,11 +1533,6 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
             
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
@@ -1740,7 +1605,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
 
             # 미션 수령
-            if self.isDoneTutorial and self.isMission and self.is미션_이동:
+            if self.isDoneTutorial and self.isMission and self.is미션_이동 and self.is선물_이동 == False:
                 count = self.event.미션_이동(img)
                 if count:
                     updateTime = time.time()
