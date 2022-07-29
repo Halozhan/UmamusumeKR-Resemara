@@ -12,7 +12,7 @@ import pickle
 from 이륙_조건 import 이륙_조건
 from multiprocessing import Queue
 import threading
-from UmaEvent import *
+from UmaEvent import UmaEvent
 
 
 class UmaProcess():
@@ -262,7 +262,7 @@ class UmaProcess():
                 self.is초기화하기 = pickle.load(file) # -- pickle --
                 
                 # 서포트 카드 총 갯수
-                self.Supporter_cards_total = pickle.load(file) # -- pickle --
+                self.Supporter_cards_total: dict = pickle.load(file) # -- pickle --
                 for key, value in self.Supporter_cards_total.items():
                     self.log(key + ": " + str(value))
                 self.log("기존 데이터를 불러옵니다.")
@@ -287,24 +287,7 @@ class UmaProcess():
                 key = key.split('/')
                 self.Supporter_cards_total[key[-2]] = 0
 
-        # Images
-        path = './Images'
-        Images = dict()
-        for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            Images[key[-2]] = imreadUnicode(a)
-
-        # 서포트 카드
-        path = './Supporter_cards'
-        Supporter_cards = dict()
-        for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            Supporter_cards[key[-2]] = imreadUnicode(a)
-
         self.toParent.put(["sendResetCount", self.resetCount]) # 리세 횟수 발신
-        # 타임 = time.time()
         
         updateTime = time.time() # 타임 아웃 터치
 
@@ -1404,31 +1387,20 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
 
             if self.is초기화하기 == False:
-                count = 0
-                count, position = ImageSearch(img, Images["프리티_더비_뽑기"], 154, 551, 175, 93, confidence=0.6)
+                count = self.event.프리티_더비_뽑기(img)
                 if count:
                     updateTime = time.time()
                     # print("프리티_더비_뽑기 " + str(count) + "개")
                     self.log("프리티_더비_뽑기 " + str(count) + "개")
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    if self.isSSR확정_뽑기 == False:
-                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
-                        self.is서포트_뽑기 = True
-                    else:
-                        if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
-                            return True
-                        adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
-                        self.is뽑기_이동 = False
-                        self.is연동하기 = True
                     time.sleep(1)
                     img = screenshotToOpenCVImg(hwndMain)
+                if count == "Exit": # 이륙 조건
+                    return True
 
             if self.is서포트_뽑기:
-                count = 0
-                count, position = ImageSearch(img, Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
+                count = self.event.서포트_카드_뽑기(img)
                 if count:
                     updateTime = time.time()
-                    adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
                     # print("서포트_카드_뽑기 " + str(count) + "개")
                     self.log("서포트_카드_뽑기 " + str(count) + "개")
                     time.sleep(0.5)
@@ -1447,60 +1419,33 @@ class UmaProcess():
                     
                     img = screenshotToOpenCVImg(hwndMain)
                     
-                count = self.event.뽑기_결과(img)
-                if count and self.is뽑기_결과:
-                    updateTime = time.time()
-                    self.is뽑기_결과 = False
-                    # print("뽑기_결과 " + str(count) + "개")
-                    self.log("뽑기_결과 " + str(count) + "개")
-                    
-                    # 서포터 카드 지금 갯수
-                    path = './Supporter_cards'
-                    Supporter_cards_now = dict()
-                    for a in glob.glob(os.path.join(path, '*')):
-                        key = a.replace('.', '/').replace('\\', '/')
-                        key = key.split('/')
-                        Supporter_cards_now[key[-2]] = 0
-                        
-                    for _ in range(2):
+                if self.is뽑기_결과:
+                    count = self.event.뽑기_결과(img)
+                    if count:
                         updateTime = time.time()
-                        time.sleep(0.1)
-                        img = screenshotToOpenCVImg(hwndMain)
+                        # print("뽑기_결과 " + str(count) + "개")
+                        self.log("뽑기_결과 " + str(count) + "개")
                         
-                        for key, value in Supporter_cards.items():
-                            count = 0
-                            count, position = ImageSearch(img, value, 46, 122, 451, 715, grayscale=False)
-                            if count:
-                                if Supporter_cards_now[key] < count:
-                                    Supporter_cards_now[key] = count
-                                # print(key + " " + str(Supporter_cards_now[key]) + "개")
-                                self.log(key + " " + str(Supporter_cards_now[key]) + "개")
-                                
-                                
-                    # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
-                    for key, value in self.Supporter_cards_total.items():
-                        self.Supporter_cards_total[key] += Supporter_cards_now[key]
-                    
-                    # 총 서포터 카드 갯수
-                    total_count = 0
-                    for key, value in self.Supporter_cards_total.items():
-                        if value:
-                            total_count += value
-                    
-                    if total_count:
-                        # print("-"*50)
-                        self.log_main(self.InstanceName, "-"*50)
-                        self.log("-"*50)
-                    
+                        # 총 서포터 카드 갯수
+                        total_count = 0
                         for key, value in self.Supporter_cards_total.items():
                             if value:
-                                # print(key + ": " + str(value))
-                                self.log_main(self.InstanceName, key + ": " + str(value))
-                                self.log(key + ": " + str(value))
-                    
-                        # print("-"*50)
-                        self.log_main(self.InstanceName, "-"*50)
-                        self.log("-"*50)
+                                total_count += value
+                        
+                        if total_count:
+                            # print("-"*50)
+                            self.log_main(self.InstanceName, "-"*50)
+                            self.log("-"*50)
+                        
+                            for key, value in self.Supporter_cards_total.items():
+                                if value:
+                                    # print(key + ": " + str(value))
+                                    self.log_main(self.InstanceName, key + ": " + str(value))
+                                    self.log(key + ": " + str(value))
+                        
+                            # print("-"*50)
+                            self.log_main(self.InstanceName, "-"*50)
+                            self.log("-"*50)
                     
                 if self.isAlive == False: # 중간에 멈춰야 할 경우
                     break
@@ -1514,29 +1459,13 @@ class UmaProcess():
                 
             
             if self.isDoneTutorial and self.is초기화하기 == False:
-                count = 0
-                count, position = ImageSearch(img, Images["쥬얼이_부족합니다"], 165, 586, 207, 41)
+                count = self.event.쥬얼이_부족합니다(img)
+                if count == "Exit": # 이륙 조건
+                    return True
                 if count:
                     updateTime = time.time()
-
-                    if 이륙_조건(self.Supporter_cards_total): # 이륙 조건
-                        return True
-
-                    if self.isSSRGacha:
-                        self.is서포트_뽑기 = False
-                        self.isSSR확정_뽑기 = True
-                    else:
-                        self.is뽑기_이동 = False
-                        self.is연동하기 = True
-                    
-                    adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
-                    time.sleep(0.5)
-                    adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
                     # print("쥬얼이_부족합니다 " + str(count) + "개")
                     self.log("쥬얼이_부족합니다 " + str(count) + "개")
-                    
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
-                    time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.상점_화면을_표시할_수_없습니다(img)
@@ -1547,14 +1476,11 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 if self.isDoneTutorial and self.isSSRGacha and self.isSSR확정_뽑기:
-                    count = 0
-                    count, position = ImageSearch(img, Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
+                    count = self.event.서포트_카드_뽑기(img)
                     if count:
                         updateTime = time.time()
-                        adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
                         # print("서포트_카드_뽑기 " + str(count) + "개")
                         self.log("서포트_카드_뽑기 " + str(count) + "개")
-                        
                         time.sleep(0.8)
                         img = screenshotToOpenCVImg(hwndMain)
                     
