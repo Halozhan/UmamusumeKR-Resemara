@@ -1336,7 +1336,7 @@ class UmaEvent:
         count, position = ImageSearch(img, self.Images["상기의_선물을_수령했습니다"])
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
-            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=105, deltaX=5, deltaY=5)
+            # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=105, deltaX=5, deltaY=5)
             time.sleep(1)
             # print(position)
             return count

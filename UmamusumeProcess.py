@@ -1605,7 +1605,7 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
 
             # 미션 수령
-            if self.isDoneTutorial and self.isMission and self.is미션_이동:
+            if self.isDoneTutorial and self.isMission and self.is미션_이동 and self.is선물_이동 == False:
                 count = self.event.미션_이동(img)
                 if count:
                     updateTime = time.time()
