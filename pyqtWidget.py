@@ -1,6 +1,9 @@
 import sys
+from threading import Event, Thread
+import threading
+import time
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import pyqtSlot, pyqtSignal
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QIcon
@@ -10,6 +13,7 @@ import ASUS_Router_Mac_Change
 from sleepTime import sleepTime
 import mac_address_changer_windows
 import os
+import urllib.request
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
@@ -113,7 +117,33 @@ class WindowClass(QMainWindow):
         self.ManualButton.clicked.connect(self.ManualRadioFunction)
         self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
         self.PythonMACChangerRadioButton.clicked.connect(self.PythonMACChangerRadioFunction)
+
+        self.internetCheckWorkerEvent = Event()
+        self.internetCheckWorker = threading.Thread(target=self.internetCheckThread, daemon=True)
+        self.internetCheckWorker.start()
     
+    def internetCheckThread(self): # 인터넷이 죽으면 다시 맥주소 변경
+        now = time.time()
+        while not self.internetCheckWorkerEvent.isSet():
+            time.sleep(5)
+            if self.internetCheck():
+                # print("connected")
+                now = time.time()
+            else:
+                # print("no connection")
+                if time.time() - now >= 60:
+                    print("인터넷이 죽어서 재연결 시도")
+                    self.MAC_Address_Change()
+                    now = time.time()
+
+    def internetCheck(self):
+        try:
+            urllib.request.urlopen("http://google.com", timeout=3)
+            return True
+        except:
+            return False
+
+
     def AllStopInstance(self):
         for i in self.Tab:
             if i.stopButton.isEnabled(): # 정지 버튼이 켜져있는 인스턴스만
@@ -187,6 +217,7 @@ class WindowClass(QMainWindow):
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
         if self.reply == QMessageBox.Yes:
+            self.internetCheckWorkerEvent.set()
             self.AllStopInstance()
             a0.accept()
         else:
