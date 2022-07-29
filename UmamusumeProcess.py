@@ -1,5 +1,6 @@
 import WindowsAPIInput
 import adbInput
+from OpenCV_imread import imreadUnicode
 from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
@@ -242,7 +243,7 @@ class UmaProcess():
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
         
-        self.event: UmaEvent = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
+        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
         
         # 불러오기
         try:
@@ -666,177 +667,125 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.플러스_계승_우마무스메_선택_화살표(img)
-                
                 if count:
-                    
                     print("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
                     self.log("플러스_계승_우마무스메_선택_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.계승_보드카_선택_화살표(img)
-                
                 if count:
-                    
                     print("계승_보드카_선택_화살표 " + str(count) + "개")
                     self.log("계승_보드카_선택_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.보드카_결정_화살표(img)
-                
                 if count:
-                    
                     print("보드카_결정_화살표 " + str(count) + "개")
                     self.log("보드카_결정_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.자동_선택_화살표(img)
-                
                 if count:
-                    
                     print("자동_선택_화살표 " + str(count) + "개")
                     self.log("자동_선택_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.자동_선택_확인_OK_화살표(img)
-                
                 if count:
-                    
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     self.log("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.마음을_이어서_꿈을_이루자(img)
-                
                 if count:
-                    
                     print("마음을_이어서_꿈을_이루자 " + str(count) + "개")
                     self.log("마음을_이어서_꿈을_이루자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.계승_최종_다음_화살표(img)
-                
                 if count:
-                    
                     print("계승_최종_다음_화살표 " + str(count) + "개")
                     self.log("계승_최종_다음_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.서포트_카드를_편성해서_육성_효율_UP(img)
-                
                 if count:
-                    
                     print("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
                     self.log("서포트_카드를_편성해서_육성_효율_UP " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.서포트_카드의_타입에_주목(img)
-                
                 if count:
-                    
                     print("서포트_카드의_타입에_주목 " + str(count) + "개")
                     self.log("서포트_카드의_타입에_주목 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우정_트레이닝이_육성의_열쇠를_쥐고_있다(img)
-                
                 if count:
-                    
                     print("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
                     self.log("우정_트레이닝이_육성의_열쇠를_쥐고_있다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.서포트_자동_편성_화살표(img)
-                
                 if count:
-                    
                     print("서포트_자동_편성_화살표 " + str(count) + "개")
                     self.log("서포트_자동_편성_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성_시작_화살표(img)
-                
                 if count:
-                    
                     print("육성_시작_화살표 " + str(count) + "개")
                     self.log("육성_시작_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.TP를_소비해_육성_시작_화살표(img)
-                
                 if count:
-                    
                     print("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
                     self.log("TP를_소비해_육성_시작_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.초록색_역삼각형(img)
-                
                 if count:
-                    
                     print("초록색_역삼각형 " + str(count) + "개")
                     self.log("초록색_역삼각형 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                 
                 count = self.event.TAP(img)
-                
                 if count:
-                    
                     print("TAP " + str(count) + "개")
                     self.log("TAP " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우마무스메에겐_저마다_다른_목표가_있습니다(img)
-                
                 if count:
-                    
                     print("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
                     self.log("우마무스메에겐_저마다_다른_목표가_있습니다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.이쪽은_육성을_진행할_때_필요한_커맨드입니다(img)
-                
                 if count:
-                    
                     print("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
                     self.log("이쪽은_육성을_진행할_때_필요한_커맨드입니다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.커맨드를_하나_실행하면_턴을_소비합니다(img)
-                
                 if count:
-                    
                     print("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     self.log("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     
@@ -844,695 +793,486 @@ class UmaProcess():
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우선_트레이닝을_선택해_보세요(img)
-                
                 if count:
-                    
                     print("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_트레이닝을_선택해_보세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.이게_실행할_수_있는_트레이닝들입니다(img)
-                
                 if count:
-                    
                     print("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
                     self.log("이게_실행할_수_있는_트레이닝들입니다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.한_번_스피드를_골라_보세요(img)
-                
                 if count:
-                    
                     print("한_번_스피드를_골라_보세요 " + str(count) + "개")
                     self.log("한_번_스피드를_골라_보세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.파란색_역삼각형(img)
-                
                 if count:
-                    
                     print("파란색_역삼각형 " + str(count) + "개")
                     self.log("파란색_역삼각형 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                 
                 count = self.event.약속(img)
-                
                 if count:
-                    
                     print("약속 " + str(count) + "개")
                     self.log("약속 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.서둘러_가봐(img)
-                
                 if count:
-                    
                     print("서둘러_가봐 " + str(count) + "개")
                     self.log("서둘러_가봐 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.그때_번뜩였다(img)
-                
                 if count:
-                    
                     print("그때_번뜩였다 " + str(count) + "개")
                     self.log("그때_번뜩였다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.다이와_스칼렛의_성장으로_이어졌다(img)
-                
                 if count:
-                    
                     print("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
                     self.log("다이와_스칼렛의_성장으로_이어졌다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.다음으로_육성_우마무스메의_체력에_관해_설명할게요(img)
-                
                 if count:
-                    
                     print("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
                     self.log("다음으로_육성_우마무스메의_체력에_관해_설명할게요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우선_아까처럼_트레이닝을_선택해_보세요(img)
-                
                 if count:
-                    
                     print("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
                     self.log("우선_아까처럼_트레이닝을_선택해_보세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.여기_실패율에_주목해_주세요(img)
-                
                 if count:
-                    
                     print("여기_실패율에_주목해_주세요 " + str(count) + "개")
                     self.log("여기_실패율에_주목해_주세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.남은_체력이_적을수록_실패율이_높아지게_돼요(img)
-                
                 if count:
-                    
                     print("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
                     self.log("남은_체력이_적을수록_실패율이_높아지게_돼요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.트레이닝에_실패하면_능력과_컨디션이(img)
-                
                 if count:
-                    
                     print("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
                     self.log("트레이닝에_실패하면_능력과_컨디션이 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.돌아간다_화살표(img)
-                
                 if count:
-                    
                     print("돌아간다_화살표 " + str(count) + "개")
                     self.log("돌아간다_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.체력이_적을_때는_우마무스메를(img)
-                
                 if count:
-                    
                     print("체력이_적을_때는_우마무스메를 " + str(count) + "개")
                     self.log("체력이_적을_때는_우마무스메를 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.먼저_여기_스킬을_선택해보세요(img)
-                
                 if count:
-                    
                     print("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
                     self.log("먼저_여기_스킬을_선택해보세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.다음으로_배울_스킬을_선택하세요(img)
-                
                 if count:
-                    
                     print("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
                     self.log("다음으로_배울_스킬을_선택하세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.이번에는_이_스킬을_습득해_보세요(img)
-                
                 if count:
-                    
                     print("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
                     self.log("이번에는_이_스킬을_습득해_보세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.스킬_결정_화살표(img)
-                
                 if count:
-                    
                     print("스킬_결정_화살표 " + str(count) + "개")
                     self.log("스킬_결정_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.스킬_획득_화살표(img)
-                
                 if count:
-                    
                     print("스킬_획득_화살표 " + str(count) + "개")
                     self.log("스킬_획득_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.스킬_획득_돌아간다_화살표(img)
-                
                 if count:
-                    
                     print("스킬_획득_돌아간다_화살표 " + str(count) + "개")
                     self.log("스킬_획득_돌아간다_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.이졔_준비가_다_끝났어요_레이스에_출전해_봐요(img)
-                
                 if count:
-                    
                     print("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
                     self.log("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.출전_화살표(img)
-                
                 if count:
-                    
                     print("출전_화살표 " + str(count) + "개")
                     self.log("출전_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.숫자1등이_되기_위해서도_말야(img)
-                
                 if count:
-                    
                     print("숫자1등이_되기_위해서도_말야 " + str(count) + "개")
                     self.log("숫자1등이_되기_위해서도_말야 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.패덕에서는_레이스에_출전하는_우마무스메의(img)
-                
                 if count:
-                    
                     print("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
                     self.log("패덕에서는_레이스에_출전하는_우마무스메의 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우선_예상_표시에_관해서_설명할게요(img)
-                
                 if count:
-                    
                     print("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
                     self.log("우선_예상_표시에_관해서_설명할게요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.숫자3개의_표시는_전문가들의_예상을_나타내며(img)
-                
                 if count:
-                    
                     print("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
                     self.log("3개의_표시는_전문가들의_예상을_나타내며 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.능력과_컨디션이_좋을수록_많은_기대를_받게_돼서(img)
-                
                 if count:
-                    
                     print("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
                     self.log("능력과_컨디션이_좋을수록_많은_기대를_받게_돼서 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.물론_반드시_우승하게_되는_건_아니지만(img)
-                
                 if count:
-                    
                     print("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
                     self.log("물론_반드시_우승하게_되는_건_아니지만 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.또_패덕에서는_우마무스메의_작전을(img)
-                
                 if count:
-                    
                     print("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
                     self.log("또_패덕에서는_우마무스메의_작전을 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.선행A_화살표(img)
-                
                 if count:
-                    
                     print("선행A_화살표 " + str(count) + "개")
                     self.log("선행A_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.작전_결정(img)
-                
                 if count:
-                    
                     print("작전_결정 " + str(count) + "개")
                     self.log("작전_결정 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.이것으로_준비는_다_됐어요(img)
-                
                 if count:
-                    
                     print("이것으로_준비는_다_됐어요 " + str(count) + "개")
                     self.log("이것으로_준비는_다_됐어요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.첫_우승_축하_드려요(img)
-                
                 if count:
-                    
                     print("첫_우승_축하_드려요 " + str(count) + "개")
                     self.log("첫_우승_축하_드려요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.좋아(img)
-                
                 if count:
-                    
                     print("좋아 " + str(count) + "개")
                     self.log("좋아 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.목표_달성(img)
-                
                 if count:
-                    
                     print("목표_달성 " + str(count) + "개")
                     self.log("목표_달성 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성_목표_달성(img)
-                
                 if count:
-                    
                     print("육성_목표_달성 " + str(count) + "개")
                     self.log("육성_목표_달성 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성_수고하셨습니다(img)
-                
                 if count:
-                    
                     print("육성_수고하셨습니다 " + str(count) + "개")
                     self.log("육성_수고하셨습니다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.스킬_포인트가_남았다면(img)
-                
                 if count:
-                    
                     print("스킬_포인트가_남았다면 " + str(count) + "개")
                     self.log("스킬_포인트가_남았다면 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성은_이것으로_종료입니다(img)
-                
                 if count:
-                    
                     print("육성은_이것으로_종료입니다 " + str(count) + "개")
                     self.log("육성은_이것으로_종료입니다 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.또_연수_기간은_짧았지만(img)
-                
                 if count:
-                    
                     print("또_연수_기간은_짧았지만 " + str(count) + "개")
                     self.log("또_연수_기간은_짧았지만 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성_완료_화살표(img)
-                
                 if count:
-                    
                     print("육성_완료_화살표 " + str(count) + "개")
                     self.log("육성_완료_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성_완료_확인_완료한다_화살표(img)
-                
                 if count:
-                    
                     print("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
                     self.log("육성_완료_확인_완료한다_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후(img)
-                
                 if count:
-                    
                     print("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_일정_기준으로_평가받은_후 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.최고_랭크를_목표로_힘내세요(img)
-                
                 if count:
-                    
                     print("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
                     self.log("최고_랭크를_목표로_힘내세요 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.랭크_육성(img)
-                
                 if count:
-                    
                     print("랭크_육성 " + str(count) + "개")
                     self.log("랭크_육성 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.육성을_끝낸_우마무스메는_인자를(img)
-                
                 if count:
-                    
                     print("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
                     self.log("육성을_끝낸_우마무스메는_인자를 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.계승_우마무스메로_선택하면_새로운_우마무스메에게(img)
-                
                 if count:
-                    
                     print("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
                     self.log("계승_우마무스메로_선택하면_새로운_우마무스메에게 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.인자획득(img)
-                
                 if count:
-                    
                     print("인자획득 " + str(count) + "개")
                     self.log("인자획득 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.우마무스메_상세_닫기_화살표(img)
-                
                 if count:
-                    
                     print("우마무스메_상세_닫기_화살표 " + str(count) + "개")
                     self.log("우마무스메_상세_닫기_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.평가점(img)
-                
                 if count:
-                    
                     print("평가점 " + str(count) + "개")
                     self.log("평가점 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.보상획득(img)
-                
                 if count:
-                    
                     print("보상획득 " + str(count) + "개")
                     self.log("보상획득 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
                 count = self.event.강화_편성_화살표(img)
-                
                 if count:
-                    
                     print("강화_편성_화살표 " + str(count) + "개")
                     self.log("강화_편성_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.레이스_화살표(img)
-                
                 if count:
-                    
                     print("레이스_화살표 " + str(count) + "개")
                     self.log("레이스_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_경기장_화살표(img)
-                
                 if count:
-                    
                     print("팀_경기장_화살표 " + str(count) + "개")
                     self.log("팀_경기장_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.오리지널_팀을_결성_상위_CLASS를_노려라(img)
-                
                 if count:
-                    
                     print("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
                     self.log("오리지널_팀을_결성_상위_CLASS를_노려라 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.하이스코어를_기록해서_CLASS_승급을_노리자(img)
-                
                 if count:
-                    
                     print("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
                     self.log("하이스코어를_기록해서_CLASS_승급을_노리자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.기간_중에_개최되는_5개의_레이스에(img)
-                
                 if count:
-                    
                     print("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
                     self.log("기간_중에_개최되는_5개의_레이스에 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.서포트_카드의_Lv을_UP해서(img)
-                
                 if count:
-                    
                     print("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
                     self.log("서포트_카드의_Lv을_UP해서 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_편성(img)
-                
                 if count:
-                    
                     print("팀_편성 " + str(count) + "개")
                     self.log("팀_편성 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.전당_입성_우마무스메로_자신만의_팀을_결성(img)
-                
                 if count:
-                    
                     print("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
                     self.log("전당_입성_우마무스메로_자신만의_팀을_결성 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_랭크를_올려서_최강의_팀이_되자(img)
-                
                 if count:
-                    
                     print("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
                     self.log("팀_랭크를_올려서_최강의_팀이_되자 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠(img)
-                
                 if count:
-                    
                     print("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
                     self.log("팀_평가를_높이는_것이_팀_경기장을_공략하는_열쇠 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_편성_다이와_스칼렛_화살표_클릭(img)
-                
                 if count:
-                    
                     print("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
                     self.log("팀_편성_다이와_스칼렛_화살표_클릭 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.출전_우마무스메_선택_다이와_스칼렛_화살표(img)
-                
                 if count:
-                    
                     print("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
                     self.log("출전_우마무스메_선택_다이와_스칼렛_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_편성_확정_화살표(img)
-                
                 if count:
-                    
                     print("팀_편성_확정_화살표 " + str(count) + "개")
                     self.log("팀_편성_확정_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.편성을_확정합니다_진행하시겠습니까(img)
-                
                 if count:
-                    
                     print("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
                     self.log("편성을_확정합니다_진행하시겠습니까 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.팀_최고_평가점_갱신_닫기(img)
-                
                 if count:
-                    
                     print("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
                     self.log("팀_최고_평가점_갱신_닫기 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
                 count = self.event.홈_화살표(img)
-                
                 if count:
-                    
                     print("홈_화살표 " + str(count) + "개")
                     self.log("홈_화살표 " + str(count) + "개")
-                    
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
-                
-            
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
