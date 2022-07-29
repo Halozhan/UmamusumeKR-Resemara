@@ -1421,19 +1421,34 @@ class UmaEvent:
             return count
         return None
 
-    # def 프리티_더비_뽑기(self, img: screenshotToOpenCVImg) -> int:
-    #     count = 0
-    #     if count:
-    #         # print(position)
-    #         return count
-    #     return None
+    def 프리티_더비_뽑기(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["프리티_더비_뽑기"], 154, 551, 175, 93, confidence=0.6)
+        if count:
+            if self.parent.isSSR확정_뽑기 == False:
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=262, deltaX=5, deltaY=5)
+                self.parent.is서포트_뽑기 = True
+            else:
+                if 이륙_조건(self.parent.Supporter_cards_total): # 이륙 조건
+                    return "Exit"
+                adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
+                self.parent.is뽑기_이동 = False
+                self.parent.is연동하기 = True
+            # print(position)
+            return count
+        return None
 
-    # def 서포트_카드_뽑기(self, img: screenshotToOpenCVImg) -> int:
-    #     count = 0
-    #     if count:
-    #         # print(position)
-    #         return count
-    #     return None
+    def 서포트_카드_뽑기(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["서포트_카드_뽑기"], 160, 552, 154, 94, confidence=0.6) # 돌이 없는거 클릭 해봐야 암
+        if count:
+            if self.parent.is서포트_뽑기:
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
+            if self.parent.isSSRGacha and self.parent.isSSR확정_뽑기:
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
+            # print(position)
+            return count
+        return None
 
     def 무료_쥬얼부터_먼저_사용됩니다(self, img: screenshotToOpenCVImg) -> int:
         count = 0
@@ -1449,6 +1464,31 @@ class UmaEvent:
         count = 0
         count, position = ImageSearch(img, self.Images["뽑기_결과"])
         if count:
+            self.parent.is뽑기_결과 = False
+
+            # 서포터 카드 지금 갯수
+            Supporter_cards_now = dict()
+            for i in self.parent.Supporter_cards_total.keys():
+                Supporter_cards_now[i] = 0
+                
+            for _ in range(2):
+                updateTime = time.time()
+                time.sleep(0.1)
+                img = screenshotToOpenCVImg(self.hwnd)
+                
+                for key, value in self.Supporter_cards.items():
+                    card_count = 0
+                    card_count, position = ImageSearch(img, value, 46, 122, 451, 715, grayscale=False)
+                    if card_count:
+                        if Supporter_cards_now[key] < card_count:
+                            Supporter_cards_now[key] = card_count
+                        # print(key + " " + str(Supporter_cards_now[key]) + "개")
+                        self.parent.log(key + " " + str(Supporter_cards_now[key]) + "개")
+                    
+            # 지금 뽑힌 결과 총 서포터 카드 갯수에 더하기
+            for key, value in self.parent.Supporter_cards_total.items():
+                self.parent.Supporter_cards_total[key] += Supporter_cards_now[key]
+
             # print(position)
             return count
         return None
@@ -1458,6 +1498,28 @@ class UmaEvent:
         count, position = ImageSearch(img, self.Images["한_번_더_뽑기"], 267, 675, 247, 318)
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+            time.sleep(0.5)
+            # print(position)
+            return count
+        return None
+
+    def 쥬얼이_부족합니다(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["쥬얼이_부족합니다"], 165, 586, 207, 41)
+        if count:
+            if 이륙_조건(self.parent.Supporter_cards_total): # 이륙 조건
+                return "Exit"
+
+            if self.parent.isSSRGacha:
+                self.parent.is서포트_뽑기 = False
+                self.parent.isSSR확정_뽑기 = True
+            else:
+                self.parent.is뽑기_이동 = False
+                self.parent.is연동하기 = True
+            
+            adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
+            time.sleep(0.5)
+            adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4")
             time.sleep(0.5)
             # print(position)
             return count
@@ -1598,20 +1660,6 @@ class UmaEvent:
         count, position = ImageSearch(img, self.Images["숫자4080_에러_코드"])
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
-            # print(position)
-            return count
-        return None
-
-    def a(self, img: screenshotToOpenCVImg) -> int:
-        count = 0
-        if count:
-            # print(position)
-            return count
-        return None
-
-    def a(self, img: screenshotToOpenCVImg) -> int:
-        count = 0
-        if count:
             # print(position)
             return count
         return None

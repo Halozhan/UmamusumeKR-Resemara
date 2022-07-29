@@ -15,7 +15,12 @@
     
     
 import glob, os
-from OpenCV_imread import imreadUnicode
+import cv2, numpy as np
+
+def imreadUnicode(file):
+    npFile = np.fromfile(file, np.uint8)
+    img = cv2.imdecode(npFile, cv2.IMREAD_UNCHANGED) # img = array
+    return img
 
 path = './Supporter_cards'
 Supporter_cards = dict()
@@ -24,7 +29,11 @@ for a in glob.glob(os.path.join(path, '*')):
     key = a.replace('.', '/').replace('\\', '/')
     key = key.split('/')
     Supporter_cards[key[-2]] = imreadUnicode(a)
-    
+
+Supporter_cards_now = dict()
+for i in Supporter_cards.keys():
+    Supporter_cards_now[i] = 0
+print(Supporter_cards_now)
     
     # img = imreadUnicode(infile)
     # my_key = i                 # or put here whatever you want as a key
