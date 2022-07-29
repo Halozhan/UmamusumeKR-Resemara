@@ -180,7 +180,8 @@ class UmaEvent:
             return count
         return None
 
-    # 튜토리얼에 쓸 예정
+
+    # 튜토리얼
     def 출전(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(img, self.Images["출전"])
@@ -770,7 +771,7 @@ class UmaEvent:
 
     def 돌아간다_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["돌아간다_화살표"], grayscale=False)
+        count, position = ImageSearch(img, self.Images["돌아간다_화살표"], confidence=1.0, grayscale=False)
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             # print(position)
@@ -1121,7 +1122,7 @@ class UmaEvent:
 
     def 강화_편성_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["강화_편성_화살표"], 0, 910, 97, -1, grayscale=False) # -5, 910, 97, 67
+        count, position = ImageSearch(img, self.Images["강화_편성_화살표"], 0, 910, 97, -1, confidence=1.0, grayscale=False) # -5, 910, 97, 67
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             # print(position)
@@ -1130,7 +1131,7 @@ class UmaEvent:
 
     def 레이스_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["레이스_화살표"], 329, 908, 103, -1, grayscale=False) # 329, 908, 103, 71
+        count, position = ImageSearch(img, self.Images["레이스_화살표"], 329, 908, 103, -1, confidence=1.0, grayscale=False) # 329, 908, 103, 71
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             # print(position)
@@ -1265,9 +1266,9 @@ class UmaEvent:
 
     def 홈_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["홈_화살표"], 188, 845, 144, 134)
+        count, position = ImageSearch(img, self.Images["홈_화살표"], 188, 845, 144, 134, confidence=1.0, grayscale=False)
         if count:
-            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=25, deltaX=5, deltaY=5)
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             # print(position)
             return count
         return None

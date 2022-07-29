@@ -591,7 +591,6 @@ class UmaProcess():
                 if count:
                     print("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
                     self.log("튜토리얼_용_프리티_더비_뽑기 " + str(count) + "개")
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
@@ -712,8 +711,6 @@ class UmaProcess():
                     
                     print("자동_선택_확인_OK_화살표 " + str(count) + "개")
                     self.log("자동_선택_확인_OK_화살표 " + str(count) + "개")
-                    
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                 
@@ -1368,12 +1365,10 @@ class UmaProcess():
                 count = self.event.강화_편성_화살표(img)
                 
                 if count:
-                    print(position[0])
                     
                     print("강화_편성_화살표 " + str(count) + "개")
                     self.log("강화_편성_화살표 " + str(count) + "개")
                     
-                    # print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
@@ -1384,7 +1379,6 @@ class UmaProcess():
                     print("레이스_화살표 " + str(count) + "개")
                     self.log("레이스_화살표 " + str(count) + "개")
                     
-                    print((position[0][0] - 25, position[0][1] - 25, position[0][2] + 25, position[0][3] + 25))
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
                     
