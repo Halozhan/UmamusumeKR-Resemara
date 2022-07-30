@@ -149,11 +149,8 @@ class UmaEvent:
             time.sleep(0.5)
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=555, deltaX=5)
             time.sleep(0.2)
-            for _ in range(10):
-                WindowsAPIInput.WindowsAPIKeyboardInput(self.hwnd, WindowsAPIInput.win32con.VK_BACK)
-            time.sleep(0.2)
-            WindowsAPIInput.WindowsAPIKeyboardInputString(self.hwnd, "UmaPyoi")
-            time.sleep(0.5)
+            WindowsAPIInput.WindowsAPIKeyboardInputString(self.hwnd, "a")
+            time.sleep(0.3)
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             time.sleep(0.5)
             # print(position)
