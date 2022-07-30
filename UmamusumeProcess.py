@@ -1,15 +1,14 @@
 import WindowsAPIInput
 import adbInput
-from OpenCV_imread import imreadUnicode
-from ImageSearch import ImageSearch
+# from OpenCV_imread import imreadUnicode
+# from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
-# from PyQt5.QtCore import QThread, pyqtSignal, QObject
 import glob, os
 import pickle
-from 이륙_조건 import 이륙_조건
+# from 이륙_조건 import 이륙_조건
 from multiprocessing import Queue
 import threading
 from UmaEvent import UmaEvent
@@ -201,11 +200,19 @@ class UmaProcess():
         self.Receiver.join() # 수신 종료 대기
         self.ReceiverEvent.clear()
 
-        # 데이터 저장
-        try:
+        self.saveUma() # Uma 파일 저장
+        
+        while not self.toParent.empty():
+            time.sleep(0.01)
+        self.toParent.close()
+        # 종료됨
+
+    def saveUma(self):
+        """
+        Uma 파일 저장
+        """
+        if not os.path.isdir("./Saved_Data"):
             os.makedirs("./Saved_Data")
-        except:
-            pass
         try:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
@@ -222,29 +229,17 @@ class UmaProcess():
                 
                 # 서포트 카드 총 갯수
                 pickle.dump(self.Supporter_cards_total, file) # -- pickle --
+            return True
         except:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             print(path+"를 저장하는데 실패했습니다.")
             # self.log(path+"를 저장하는데 실패했습니다.")
+            return False
 
-        
-        while not self.toParent.empty():
-            time.sleep(0.01)
-        self.toParent.close()
-        # 종료됨
-
-    def main(self):
-        hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
-        if hwndMain == 0:
-            self.toParent.put(["terminate"])
-            return "Stop"
-        
-        WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
-        self.device = adbInput.AdbConnect(self.InstancePort)
-        
-        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
-        
-        # 불러오기
+    def loadUma(self):
+        """
+        Uma 파일 불러오기
+        """
         try:
             path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path,  mode='rb') as file:
@@ -264,6 +259,7 @@ class UmaProcess():
                 for key, value in self.Supporter_cards_total.items():
                     self.log(key + ": " + str(value))
                 self.log("기존 데이터를 불러옵니다.")
+            return True
         except:
             # self.resetCount = 0 # -- pickle -- 다른건 초기화해도 리세 횟수는 초기화 하는 거 아님
             self.is시작하기 = False # -- pickle --
@@ -283,6 +279,20 @@ class UmaProcess():
                 key = a.replace('.', '/').replace('\\', '/')
                 key = key.split('/')
                 self.Supporter_cards_total[key[-2]] = 0
+            return False
+
+    def main(self):
+        hwndMain = WindowsAPIInput.GetHwnd(self.InstanceName) # hwnd ID 찾기
+        if hwndMain == 0:
+            self.toParent.put(["terminate"])
+            return "Stop"
+        
+        WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
+        self.device = adbInput.AdbConnect(self.InstancePort)
+        
+        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
+        
+        self.loadUma() # Uma 파일 불러오기
 
         self.toParent.put(["sendResetCount", self.resetCount]) # 리세 횟수 발신
         
