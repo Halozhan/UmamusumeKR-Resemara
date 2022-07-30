@@ -12,6 +12,7 @@ import pickle
 from multiprocessing import Queue
 import threading
 from UmaEvent import UmaEvent
+# import tracemalloc 누수 해결방법 찾는 중
 
 
 class UmaProcess():
@@ -84,6 +85,9 @@ class UmaProcess():
         self.toParent.put(["sendLog", str(text)])
 
     def run_a(self, toParent: Queue, toChild: Queue):
+        # tracemalloc.start() 누수 해결방법 찾는 중
+        # self.my_snapshot = None
+
         self.Lock = threading.Lock()
         # 선언
         self.toParent = toParent
@@ -159,6 +163,21 @@ class UmaProcess():
                 except:
                     pass
                 self.resetCount += 1
+                # 누수 해결방법 찾는 중
+                # 값을 계속 사용해야 하므로 전역 변수에 저장한다
+                # if not self.my_snapshot:
+                #     # 최초 메모리 상태를 저장한다
+                #     self.my_snapshot = tracemalloc.take_snapshot()
+                # else:
+                #     lines = []
+                #     # 현재 메모리 상태를 최초와 비교하여 얼마나 차이가 나는지에 대한 통계를 구한다
+                #     top_stats = tracemalloc.take_snapshot().compare_to(self.my_snapshot, 'lineno')
+                #     # 메모리 사용량이 많은 순서대로 10개를 구하여 출력한다
+                #     for stat in top_stats[:10]:
+                #         lines.append(str(stat))
+                #     print('\n'.join(lines), flush=True)
+
+
 
             if isSuccessed == "Stop":
                 # print("This thread was terminated.")
@@ -1587,5 +1606,7 @@ class UmaProcess():
                 self.log("숫자4080_에러_코드 " + str(count) + "개")
                 if self.isDoingMAC_Change == False:
                     return "숫자4080_에러_코드"
+            del img
 
+        del self.event
         return "Stop"

@@ -31,6 +31,7 @@ def screenshot(hwnd, isExport):
             'RGB',
             (bmpinfo['bmWidth'], bmpinfo['bmHeight']),
             bmpstr, 'raw', 'BGRX', 0, 1)
+        im.readonly = False # 파이썬 3.10.5버전에선 누수 일어나고 3.9.9버전에선 누수해결됨
         
         win32gui.DeleteObject(saveBitMap.GetHandle())
         saveDC.DeleteDC()

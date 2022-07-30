@@ -14,7 +14,7 @@ if __name__ == "__main__":
     install("pure-python-adb")
     install("pyqt5")
     install("psutil")
-    install("pillow")
+    install("pillow==9.0.1")
     install("regex")
     # install("wmi")
     # install("pywinauto")
