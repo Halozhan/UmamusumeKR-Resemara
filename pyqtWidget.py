@@ -22,7 +22,7 @@ class WindowClass(QMainWindow):
         self.sleepTime = sleepTime(self)
 
         self.resize(600, 600) # 사이즈 변경
-        self.setWindowTitle("우마뾰이")
+        self.setWindowTitle("우마뾰이 - Github: Halozhan")
         self.setWindowIcon(QIcon("channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget() # 탭 위젯

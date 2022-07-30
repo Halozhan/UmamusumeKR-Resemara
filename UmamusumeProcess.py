@@ -1276,7 +1276,7 @@ class UmaProcess():
                     
                 count = self.event.메인_스토리가_해방되었습니다(img)
                 if count:
-                    updateTime = time.time()
+                    # updateTime = time.time() # 잠수 상태 확인
                     # print("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
                     self.isDoneTutorial = True
@@ -1286,7 +1286,7 @@ class UmaProcess():
                     
                 count = self.event.여러_스토리를_해방할_수_있게_되었습니다(img)
                 if count:
-                    updateTime = time.time()
+                    # updateTime = time.time() # 잠수 상태 확인
                     # print("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                     self.isDoneTutorial = True
