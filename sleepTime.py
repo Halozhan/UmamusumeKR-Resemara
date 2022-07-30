@@ -30,4 +30,4 @@ class sleepTime(QThread):
                 self.sleepTime = round(((self.cpu_load*0.01)**(self.timeRate1*math.exp(1)))*self.timeRate2, 3) # 클수록 빨라짐
                 self.sendSleepTime.emit(self.cpu_load, self.sleepTime)
 
-            time.sleep(0.05)
+            time.sleep(0.1)
