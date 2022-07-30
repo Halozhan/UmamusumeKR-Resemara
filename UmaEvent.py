@@ -1433,7 +1433,7 @@ class UmaEvent:
                     return "Exit"
                 adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
                 self.parent.is뽑기_이동 = False
-                self.parent.is연동하기 = True
+                self.parent.is초기화하기 = True
             # print(position)
             return count
         return None
@@ -1515,7 +1515,7 @@ class UmaEvent:
                 self.parent.isSSR확정_뽑기 = True
             else:
                 self.parent.is뽑기_이동 = False
-                self.parent.is연동하기 = True
+                self.parent.is초기화하기 = True
             
             adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
             time.sleep(0.5)
