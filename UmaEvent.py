@@ -1403,9 +1403,9 @@ class UmaEvent:
 
     def 돌아간다(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["돌아간다"])
+        count, position = ImageSearch(img, self.Images["돌아간다"]) # 바로 뽑기로 이동
         if count:
-            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=423, offsetY=117, deltaX=5, deltaY=5)
             time.sleep(0.5)
             # print(position)
             return count
