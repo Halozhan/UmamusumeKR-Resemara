@@ -149,11 +149,8 @@ class UmaEvent:
             time.sleep(0.5)
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=555, deltaX=5)
             time.sleep(0.2)
-            for _ in range(10):
-                WindowsAPIInput.WindowsAPIKeyboardInput(self.hwnd, WindowsAPIInput.win32con.VK_BACK)
-            time.sleep(0.2)
-            WindowsAPIInput.WindowsAPIKeyboardInputString(self.hwnd, "UmaPyoi")
-            time.sleep(0.5)
+            WindowsAPIInput.WindowsAPIKeyboardInputString(self.hwnd, "a")
+            time.sleep(0.3)
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5)
             time.sleep(0.5)
             # print(position)
@@ -1433,7 +1430,7 @@ class UmaEvent:
                     return "Exit"
                 adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK"
                 self.parent.is뽑기_이동 = False
-                self.parent.is연동하기 = True
+                self.parent.is초기화하기 = True
             # print(position)
             return count
         return None
@@ -1515,7 +1512,7 @@ class UmaEvent:
                 self.parent.isSSR확정_뽑기 = True
             else:
                 self.parent.is뽑기_이동 = False
-                self.parent.is연동하기 = True
+                self.parent.is초기화하기 = True
             
             adbInput.Key_event(self.device, self.InstancePort, key_code="keyevent 4") # "KEYCODE_BACK" 
             time.sleep(0.5)
@@ -1660,6 +1657,15 @@ class UmaEvent:
         count, position = ImageSearch(img, self.Images["숫자4080_에러_코드"])
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
+            # print(position)
+            return count
+        return None
+
+    def 오류코드_451(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["오류코드_451"])
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=145, deltaX=5, deltaY=5)
             # print(position)
             return count
         return None

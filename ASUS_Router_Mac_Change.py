@@ -1,5 +1,8 @@
 from selenium import webdriver
-import chromedriver_autoinstaller
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+# import chromedriver_autoinstaller 구버전
 import os
 import time
 try:
@@ -9,45 +12,53 @@ except:
 
 
 def importChromeDriver() -> webdriver.Chrome:
-    if not os.path.isdir("ChromeDriver"): # 크롬 드라이버 폴더 생성
-        os.makedirs("ChromeDriver")
+    # 구버전
+    # if not os.path.isdir("ChromeDriver"): # 크롬 드라이버 폴더 생성
+    #     os.makedirs("ChromeDriver")
 
-    chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
-    driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
-    if os.path.exists(driver_path):
-        # print("ChromeDriver is installed: " + driver_path)
-        pass
-    else:
-        print("install the ChromeDriver. VER: " + chrome_ver)
-        chromedriver_autoinstaller.install(path="./ChromeDriver")
+    # chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
+    # driver_path = f"./ChromeDriver/{chrome_ver}/chromedriver.exe"
+    # if os.path.exists(driver_path):
+    #     # print("ChromeDriver is installed: " + driver_path)
+    #     pass
+    # else:
+    #     print("install the ChromeDriver. VER: " + chrome_ver)
+    #     chromedriver_autoinstaller.install(path="./ChromeDriver")
     
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
+    options.add_argument("no-sandbox")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     
-    driver = webdriver.Chrome(driver_path, options=options)
+    # driver = webdriver.Chrome(executable_path=driver_path, options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
 
 def ASUS_Change_MAC():
     driver = importChromeDriver()
 
     try:
-        driver.get(GATEWAY_ADDRESS)
+        try:
+            driver.get("http://router.asus.com/")
+        except:
+            driver.get(GATEWAY_ADDRESS)
         driver.implicitly_wait(5)
         
-        id = driver.find_element_by_name("login_username")
+        id = driver.find_element(by=By.NAME, value="login_username")
         id.send_keys(ID)
 
-        pw = driver.find_element_by_name("login_passwd")
+        pw = driver.find_element(by=By.NAME, value="login_passwd")
         pw.send_keys(PW)
 
-        driver.find_element_by_class_name("button").click()
+        driver.find_element(by=By.CLASS_NAME, value="button").click()
 
-        
-        driver.get(GATEWAY_ADDRESS+"Advanced_WAN_Content.asp")
+        try:
+            driver.get("http://router.asus.com/Advanced_WAN_Content.asp")
+        except:
+            driver.get(GATEWAY_ADDRESS+"Advanced_WAN_Content.asp")
         driver.implicitly_wait(5)
         
-        MACAdd = driver.find_element_by_name("wan_hwaddr_x")
+        MACAdd = driver.find_element(by=By.NAME, value="wan_hwaddr_x")
         MAC_Address = MACAdd.get_attribute("value")
 
         MAC_Address = MAC_Address.replace(":", "")
@@ -72,14 +83,15 @@ def ASUS_Change_MAC():
         print("New MAC Address:", MAC_Address)
         MACAdd.clear()
         MACAdd.send_keys(MAC_Address)
-
-        driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
-        
-        time.sleep(7)
+    
+        # driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click() deprecated
+        driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
+        time.sleep(15)
 
         driver.quit()
     except:
         pass
+        
     
 if __name__ == "__main__":
     ASUS_Change_MAC()

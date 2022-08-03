@@ -22,7 +22,7 @@ class WindowClass(QMainWindow):
         self.sleepTime = sleepTime(self)
 
         self.resize(600, 600) # 사이즈 변경
-        self.setWindowTitle("우마뾰이")
+        self.setWindowTitle("우마뾰이 - Github: Halozhan")
         self.setWindowIcon(QIcon("channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget() # 탭 위젯
@@ -253,7 +253,7 @@ class newTab(QMainWindow):
         self.isDoneTutorialCheckBox.setChecked(True)
         self.hbox2.addWidget(self.isDoneTutorialCheckBox)
         self.isMissionCheckBox = QCheckBox("미션 수령", self)
-        self.isMissionCheckBox.setChecked(True)
+        self.isMissionCheckBox.setChecked(False)
         self.hbox2.addWidget(self.isMissionCheckBox)
         self.isSSRGachaCheckBox = QCheckBox("SSR 확정권 사용", self)
         self.isSSRGachaCheckBox.setChecked(False)
