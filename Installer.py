@@ -8,8 +8,9 @@ def install(package):
 if __name__ == "__main__":
     install("pywin32")
     install("opencv-python")
-    install("selenium==4.0.0")
-    install("chromedriver_autoinstaller")
+    install("selenium")
+    install("webdriver_manager")
+    # install("chromedriver_autoinstaller") 구버전, Deprecated
     install("pyautogui")
     install("pure-python-adb")
     install("pyqt5")
