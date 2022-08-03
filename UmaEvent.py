@@ -1660,3 +1660,12 @@ class UmaEvent:
             # print(position)
             return count
         return None
+
+    def 오류코드_451(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["오류코드_451"])
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=145, deltaX=5, deltaY=5)
+            # print(position)
+            return count
+        return None

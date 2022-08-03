@@ -1606,6 +1606,14 @@ class UmaProcess():
                 self.log("숫자4080_에러_코드 " + str(count) + "개")
                 if self.isDoingMAC_Change == False:
                     return "숫자4080_에러_코드"
+            
+            count = self.event.오류코드_451(img)
+            if count:
+                updateTime = time.time()
+                print("오류코드_451 " + str(count) + "개")
+                self.log("오류코드_451 " + str(count) + "개")
+                if self.isDoingMAC_Change == False:
+                    return "숫자4080_에러_코드"
             del img
 
         del self.event
