@@ -331,7 +331,6 @@ class UmaProcess():
                 self.log("60초 정지 앱 강제종료!!! ")
                 # WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
                 adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
-                adbInput.shell(self.device, self.InstancePort, "am force-stop org.mozilla.firefox")
                 time.sleep(2)
                 
             time.sleep(self.sleepTime)
@@ -1614,6 +1613,13 @@ class UmaProcess():
                 self.log("오류코드_451 " + str(count) + "개")
                 if self.isDoingMAC_Change == False:
                     return "숫자4080_에러_코드"
+            
+            count = self.event.오류코드_451_재시작(img)
+            if count:
+                updateTime = time.time()
+                print("오류코드_451_재시작 " + str(count) + "개")
+                self.log("오류코드_451_재시작 " + str(count) + "개")
+                
             del img
 
         del self.event

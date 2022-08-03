@@ -1669,3 +1669,12 @@ class UmaEvent:
             # print(position)
             return count
         return None
+
+    def 오류코드_451_재시작(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["오류코드_451_재시작"])
+        if count:
+            adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
+            # print(position)
+            return count
+        return None
