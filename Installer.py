@@ -8,7 +8,7 @@ def install(package):
 if __name__ == "__main__":
     install("pywin32")
     install("opencv-python")
-    install("selenium")
+    install("selenium==4.0.0")
     install("chromedriver_autoinstaller")
     install("pyautogui")
     install("pure-python-adb")

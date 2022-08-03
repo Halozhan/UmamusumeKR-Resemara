@@ -23,6 +23,7 @@ def importChromeDriver() -> webdriver.Chrome:
     
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
+    options.add_argument("no-sandbox")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     
     driver = webdriver.Chrome(driver_path, options=options)
@@ -75,7 +76,7 @@ def ASUS_Change_MAC():
 
         driver.find_elements_by_xpath('//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
         
-        time.sleep(7)
+        time.sleep(15)
 
         driver.quit()
     except:
