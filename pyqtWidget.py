@@ -190,7 +190,7 @@ class WindowClass(QMainWindow):
     
     @pyqtSlot()
     def MAC_Address_Changer_Worker(self, isReboot=False):
-        MAC_Worker = Thread(target=self.MAC_Address_Change, args=isReboot, daemon=True)
+        MAC_Worker = Thread(target=self.MAC_Address_Change, args=(isReboot, ), daemon=True)
         MAC_Worker.start()
 
     def MAC_Address_Change(self, isReboot=False):
