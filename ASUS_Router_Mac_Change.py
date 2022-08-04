@@ -84,8 +84,8 @@ def ASUS_Change_MAC():
         MACAdd.clear()
         MACAdd.send_keys(MAC_Address)
     
-        # driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click() deprecated
-        driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
+        driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
+        # driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
         time.sleep(15)
 
         driver.quit()

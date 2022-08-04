@@ -13,7 +13,6 @@ import ASUS_Router_Mac_Change
 from sleepTime import sleepTime
 import mac_address_changer_windows
 import os
-import urllib.request
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
@@ -137,10 +136,13 @@ class WindowClass(QMainWindow):
                     now = time.time()
 
     def internetCheck(self):
-        try:
-            urllib.request.urlopen("http://google.com", timeout=3)
+        hostname = "142.250.206.206"
+        # response = os.system("ping -n 1 " + hostname)
+        response = os.system("ping -n 1 " + hostname + " >NUL")
+        if response == 0: # active
             return True
-        except:
+        else: # error
+            print("network connection error")
             return False
 
 
