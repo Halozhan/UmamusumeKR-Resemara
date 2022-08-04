@@ -19,6 +19,7 @@ class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
+        self.isDoingMacChange = False
 
         self.resize(600, 600) # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
@@ -130,9 +131,9 @@ class WindowClass(QMainWindow):
                 now = time.time()
             else:
                 # print("no connection")
-                if time.time() - now >= 60:
+                if time.time() - now >= 120:
                     print("인터넷이 죽어서 재연결 시도")
-                    self.MAC_Address_Change()
+                    self.MAC_Address_Change(isReboot=True)
                     now = time.time()
 
     def internetCheck(self):
@@ -188,32 +189,37 @@ class WindowClass(QMainWindow):
             self.logs.append("PythonMACChangerRadioButton가 활성화됨")
     
     @pyqtSlot()
-    def MAC_Address_Change(self):
-        try:
-            for i in self.Tab:
-                i.umamusume.toChild(["isDoingMAC_Change", True])
-        except:
-            pass
+    def MAC_Address_Changer_Worker(self, isReboot=False):
+        MAC_Worker = Thread(target=self.MAC_Address_Change, args=isReboot, daemon=True)
+        MAC_Worker.start()
 
-        print("-"*50)
-        now = datetime.now()
-        now = now.strftime("%Y-%m-%d %H:%M:%S")
-        self.logs.append(now + " MAC 주소 변경 중")
-        print(now + " MAC 주소 변경 중")
-        if self.ManualButton.isChecked():
-            print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
-            self.AllStopInstance()
-        elif self.ASUSRadioButton.isChecked():
-            ASUS_Router_Mac_Change.ASUS_Change_MAC()
-        elif self.PythonMACChangerRadioButton.isChecked():
-            mac_address_changer_windows.main()
-        try:
-            for i in self.Tab:
-                i.umamusume.toChild(["isDoingMAC_Change", False])
-        except:
-            pass
-        # return super().closeEvent(a0)
-    # def closeEvent(self) -> None:
+    def MAC_Address_Change(self, isReboot=False):
+        if self.isDoingMacChange == False:
+            self.isDoingMacChange = True
+            try:
+                for i in self.Tab:
+                    i.umamusume.toChild(["isDoingMAC_Change", True])
+            except:
+                pass
+            print("-"*50)
+            now = datetime.now()
+            now = now.strftime("%Y-%m-%d %H:%M:%S")
+            self.logs.append(now + " MAC 주소 변경 중")
+            print(now + " MAC 주소 변경 중")
+            if self.ManualButton.isChecked():
+                print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
+                self.AllStopInstance()
+            elif self.ASUSRadioButton.isChecked():
+                ASUS_Router_Mac_Change.ASUS_Change_MAC(isReboot)
+            elif self.PythonMACChangerRadioButton.isChecked():
+                mac_address_changer_windows.main()
+            try:
+                for i in self.Tab:
+                    i.umamusume.toChild(["isDoingMAC_Change", False])
+            except:
+                pass
+            self.isDoingMacChange = False
+
     def closeEvent(self, a0: QCloseEvent) -> None:
         msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
