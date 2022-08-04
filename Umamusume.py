@@ -25,7 +25,7 @@ class Umamusume(QObject):
         # 커스텀 시그널 정의
         self.sendLog.connect(self.parent.recvLog)
         self.sendLog_Main.connect(self.parent.parent.recvLog_Main)
-        self.Error_4080.connect(self.parent.parent.MAC_Address_Change)
+        self.Error_4080.connect(self.parent.parent.MAC_Address_Changer_Worker)
 
     def Receive_Worker(self):
         while self.ReceiverEvent.is_set() == False or self.toParent.empty() == False:

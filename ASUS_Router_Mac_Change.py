@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.alert import Alert
 # import chromedriver_autoinstaller 구버전
 import os
 import time
@@ -34,7 +35,7 @@ def importChromeDriver() -> webdriver.Chrome:
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     return driver
 
-def ASUS_Change_MAC():
+def ASUS_Change_MAC(isReboot=False):
     driver = importChromeDriver()
 
     try:
@@ -52,46 +53,60 @@ def ASUS_Change_MAC():
 
         driver.find_element(by=By.CLASS_NAME, value="button").click()
 
-        try:
-            driver.get("http://router.asus.com/Advanced_WAN_Content.asp")
-        except:
-            driver.get(GATEWAY_ADDRESS+"Advanced_WAN_Content.asp")
-        driver.implicitly_wait(5)
-        
-        MACAdd = driver.find_element(by=By.NAME, value="wan_hwaddr_x")
-        MAC_Address = MACAdd.get_attribute("value")
+        if isReboot:
+            driver.find_element(by=By.XPATH, value='//*[@id="TopBanner"]/div/a[2]/div/span').click()
+            driver.implicitly_wait(0.5)
 
-        MAC_Address = MAC_Address.replace(":", "")
-        asdf = MAC_Address
-        asdf = int("0x"+asdf, 16)
-        asdf = asdf + 1
-        # print(asdf)
-        asdf = hex(asdf)
-        asdf = asdf.replace("0x", "")
-        index = 0
-        address = ""
-        for i in asdf:
-            if index % 2 == 1:
-                address += i
-                address += ":"
-                index += 1
-                continue
-            address += i
-            index += 1
-        MAC_Address = address[:-1]
+            driver.switch_to.alert
+            driver.implicitly_wait(0.5)
+
+            Alert(driver).accept()
+
+            print("Router is rebooted")
+            time.sleep(120)
+
+            driver.quit()
+        else:
+            try:
+                driver.get("http://router.asus.com/Advanced_WAN_Content.asp")
+            except:
+                driver.get(GATEWAY_ADDRESS+"Advanced_WAN_Content.asp")
+            driver.implicitly_wait(5)
             
-        print("New MAC Address:", MAC_Address)
-        MACAdd.clear()
-        MACAdd.send_keys(MAC_Address)
-    
-        # driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click() deprecated
-        driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
-        time.sleep(15)
+            MACAdd = driver.find_element(by=By.NAME, value="wan_hwaddr_x")
+            MAC_Address = MACAdd.get_attribute("value")
 
-        driver.quit()
+            MAC_Address = MAC_Address.replace(":", "")
+            asdf = MAC_Address
+            asdf = int("0x"+asdf, 16)
+            asdf = asdf + 1
+            # print(asdf)
+            asdf = hex(asdf)
+            asdf = asdf.replace("0x", "")
+            index = 0
+            address = ""
+            for i in asdf:
+                if index % 2 == 1:
+                    address += i
+                    address += ":"
+                    index += 1
+                    continue
+                address += i
+                index += 1
+            MAC_Address = address[:-1]
+                
+            print("New MAC Address:", MAC_Address)
+            MACAdd.clear()
+            MACAdd.send_keys(MAC_Address)
+        
+            driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
+            # driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
+            time.sleep(15)
+
+            driver.quit()
     except:
         pass
         
     
 if __name__ == "__main__":
-    ASUS_Change_MAC()
+    ASUS_Change_MAC(False)
