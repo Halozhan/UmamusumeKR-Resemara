@@ -1565,14 +1565,14 @@ class UmaProcess():
                 
             count = self.event.재시도(img)
             if count:
-                updateTime = time.time()
+                # updateTime = time.time()
                 # print("재시도 " + str(count) + "개")
                 self.log("재시도 " + str(count) + "개")
                 continue
             
             count = self.event.타이틀_화면으로(img)
             if count:
-                updateTime = time.time()
+                # updateTime = time.time()
                 # print("타이틀_화면으로 " + str(count) + "개")
                 self.log("타이틀_화면으로 " + str(count) + "개")
                 continue
