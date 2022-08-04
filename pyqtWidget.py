@@ -1,4 +1,5 @@
 import sys
+import os
 from threading import Event, Thread
 import threading
 import time
@@ -8,18 +9,16 @@ from PyQt5.Qt import Qt
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QIcon
 from Umamusume import Umamusume
-from datetime import datetime
-import ASUS_Router_Mac_Change
 from sleepTime import sleepTime
-import mac_address_changer_windows
-import os
+import MAC_Changer_Worker
+
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
-        self.isDoingMacChange = False
+        self.MAC_Worker = MAC_Changer_Worker.Worker(self)
 
         self.resize(600, 600) # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
@@ -189,36 +188,9 @@ class WindowClass(QMainWindow):
             self.logs.append("PythonMACChangerRadioButton가 활성화됨")
     
     @pyqtSlot()
-    def MAC_Address_Changer_Worker(self, isReboot=False):
-        MAC_Worker = Thread(target=self.MAC_Address_Change, args=(isReboot, ), daemon=True)
-        MAC_Worker.start()
-
     def MAC_Address_Change(self, isReboot=False):
-        if self.isDoingMacChange == False:
-            self.isDoingMacChange = True
-            try:
-                for i in self.Tab:
-                    i.umamusume.toChild(["isDoingMAC_Change", True])
-            except:
-                pass
-            print("-"*50)
-            now = datetime.now()
-            now = now.strftime("%Y-%m-%d %H:%M:%S")
-            self.logs.append(now + " MAC 주소 변경 중")
-            print(now + " MAC 주소 변경 중")
-            if self.ManualButton.isChecked():
-                print("수동 조작이 필요합니다. MAC 주소를 변경 후 시작을 눌러주세요.")
-                self.AllStopInstance()
-            elif self.ASUSRadioButton.isChecked():
-                ASUS_Router_Mac_Change.ASUS_Change_MAC(isReboot)
-            elif self.PythonMACChangerRadioButton.isChecked():
-                mac_address_changer_windows.main()
-            try:
-                for i in self.Tab:
-                    i.umamusume.toChild(["isDoingMAC_Change", False])
-            except:
-                pass
-            self.isDoingMacChange = False
+        self.MAC_Worker.isReboot = isReboot
+        self.MAC_Worker.MAC_Change()
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"

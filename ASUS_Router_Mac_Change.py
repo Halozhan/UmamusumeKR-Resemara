@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.alert import Alert
 # import chromedriver_autoinstaller 구버전
-import os
+# import os
 import time
 try:
     from ASUS_ROUTER_CONFIG import *
@@ -27,8 +27,11 @@ def importChromeDriver() -> webdriver.Chrome:
     #     chromedriver_autoinstaller.install(path="./ChromeDriver")
     
     options = webdriver.ChromeOptions()
+    options.add_argument("incognito")
     options.add_argument("headless")
     options.add_argument("no-sandbox")
+    options.add_argument("disable-setuid-sandbox")
+    options.add_argument("disable-dev-shm-usage")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     
     # driver = webdriver.Chrome(executable_path=driver_path, options=options)
