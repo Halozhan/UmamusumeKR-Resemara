@@ -1666,7 +1666,8 @@ class UmaEvent:
         count = 0
         count, position = ImageSearch(img, self.Images["오류코드_451"])
         if count:
-            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=145, deltaX=5, deltaY=5)
+            # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=145, deltaX=5, deltaY=5)
+            adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
             # print(position)
             return count
         return None

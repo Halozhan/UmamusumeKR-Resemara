@@ -129,7 +129,7 @@ class WindowClass(QMainWindow):
                 now = time.time()
             else:
                 # print("no connection")
-                if time.time() - now >= 120:
+                if time.time() - now >= 40:
                     print("인터넷이 죽어서 재연결 시도")
                     self.MAC_Address_Change(isReboot=True)
                     now = time.time()
