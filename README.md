@@ -4,11 +4,7 @@
 
 # Installation
 1. [Python 다운로드](https://www.python.org/) 및 설치  
-2. 모듈 설치 아래의 파일을 찾아서 실행  
-    ```bash
-    ModuleInstaller.bat
-    ```
-3. [ADB 다운로드](https://developer.android.com/studio/releases/platform-tools) 및 platform-tools 이름으로 압축풀기
+2. [ADB 다운로드](https://developer.android.com/studio/releases/platform-tools) 및 platform-tools 이름으로 압축풀기
 
 
 # Initialization

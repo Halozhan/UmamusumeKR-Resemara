@@ -2,6 +2,7 @@ import time
 import random
 from ppadb.client import Client as AdbClient
 import subprocess
+import os
 
 def AdbConnect(InstancePort) -> AdbClient.device:
     try:
@@ -12,7 +13,7 @@ def AdbConnect(InstancePort) -> AdbClient.device:
     except:
         print("Fail to connect to adb, retry")
         
-        subprocess.Popen("platform-tools/adb.exe start-server")
+        subprocess.Popen(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))+"/platform-tools/adb.exe start-server")
         time.sleep(1)
         
         client = AdbClient(host="127.0.0.1", port=5037)

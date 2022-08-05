@@ -4,13 +4,15 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.alert import Alert
 # import chromedriver_autoinstaller 구버전
-import os
+# import os
 import time
+
+import os, sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 try:
     from ASUS_ROUTER_CONFIG import *
 except:
     print("라우터 구성에 필요한 계정 정보가 없습니다.")
-
 
 def importChromeDriver() -> webdriver.Chrome:
     # 구버전
@@ -27,8 +29,11 @@ def importChromeDriver() -> webdriver.Chrome:
     #     chromedriver_autoinstaller.install(path="./ChromeDriver")
     
     options = webdriver.ChromeOptions()
+    options.add_argument("incognito")
     options.add_argument("headless")
     options.add_argument("no-sandbox")
+    options.add_argument("disable-setuid-sandbox")
+    options.add_argument("disable-dev-shm-usage")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     
     # driver = webdriver.Chrome(executable_path=driver_path, options=options)
@@ -62,8 +67,8 @@ def ASUS_Change_MAC(isReboot=False):
 
             Alert(driver).accept()
 
-            print("Router is rebooted")
-            time.sleep(120)
+            print("Router is rebooting")
+            time.sleep(150)
 
             driver.quit()
         else:
@@ -109,4 +114,4 @@ def ASUS_Change_MAC(isReboot=False):
         
     
 if __name__ == "__main__":
-    ASUS_Change_MAC(False)
+    ASUS_Change_MAC(True)

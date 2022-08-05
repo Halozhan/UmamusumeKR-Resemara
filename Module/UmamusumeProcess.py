@@ -1,14 +1,11 @@
 import WindowsAPIInput
 import adbInput
-# from OpenCV_imread import imreadUnicode
-# from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
 import glob, os
 import pickle
-# from 이륙_조건 import 이륙_조건
 from multiprocessing import Queue
 import threading
 from UmaEvent import UmaEvent
@@ -157,8 +154,9 @@ class UmaProcess():
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
 
             if isSuccessed == "Failed": # 리세 실패, 저장된 데이터 삭제
+                root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
                 try:
-                    path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+                    path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
                     os.remove(path)
                 except:
                     pass
@@ -230,10 +228,11 @@ class UmaProcess():
         """
         Uma 파일 저장
         """
-        if not os.path.isdir("./Saved_Data"):
-            os.makedirs("./Saved_Data")
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+        if not root+"/Saved_Data":
+            root+"/Saved_Data"
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
                 pickle.dump(self.resetCount, file) # -- pickle --
                 pickle.dump(self.is시작하기, file) # -- pickle --
@@ -259,8 +258,9 @@ class UmaProcess():
         """
         Uma 파일 불러오기
         """
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path,  mode='rb') as file:
                 self.resetCount = pickle.load(file) # -- pickle --
                 self.is시작하기 = pickle.load(file) # -- pickle --
@@ -292,7 +292,7 @@ class UmaProcess():
             self.is초기화하기 = False # -- pickle --
             
             # 서포트 카드 총 갯수
-            path = './Supporter_cards'
+            path = root+'/Supporter_cards'
             self.Supporter_cards_total = dict() # -- pickle --
             for a in glob.glob(os.path.join(path, '*')):
                 key = a.replace('.', '/').replace('\\', '/')
@@ -1611,8 +1611,8 @@ class UmaProcess():
                 updateTime = time.time()
                 print("오류코드_451 " + str(count) + "개")
                 self.log("오류코드_451 " + str(count) + "개")
-                if self.isDoingMAC_Change == False:
-                    return "숫자4080_에러_코드"
+                # if self.isDoingMAC_Change == False:
+                #     return "숫자4080_에러_코드"
             
             count = self.event.오류코드_451_재시작(img)
             if count:
