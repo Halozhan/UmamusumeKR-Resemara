@@ -22,7 +22,8 @@ class WindowClass(QMainWindow):
 
         self.resize(600, 600) # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
-        self.setWindowIcon(QIcon("channels4_profile.jpg"))
+        root = sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+        self.setWindowIcon(QIcon(str(root)+"/channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget() # 탭 위젯
         self.verticalTabWidget.setMovable(True)
@@ -324,8 +325,10 @@ class newTab(QMainWindow):
         self.InstanceComboBox.clear()
         
         lines = ["선택 안함"]
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            f = open("Instances.txt", "r", encoding="UTF-8")
+            file = root+"/Instances.txt"
+            f = open(file, "r", encoding="UTF-8")
             while True:
                 line = f.readline()
                 if not line:
@@ -359,8 +362,9 @@ class newTab(QMainWindow):
         self.logs.append("-"*50)
         self.logs.append("초기화!!")
         self.logs.append("-"*50)
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
             os.remove(path)
         except:
             pass

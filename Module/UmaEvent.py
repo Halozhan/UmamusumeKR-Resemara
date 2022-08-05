@@ -21,8 +21,9 @@ class UmaEvent:
         self.device: adbInput.AdbConnect = device
         self.InstancePort: int = InstancePort
     
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         # Images
-        path = './Images'
+        path = root+'/Images'
         self.Images = dict()
         for a in glob.glob(os.path.join(path, '*')):
             key = a.replace('.', '/').replace('\\', '/')
@@ -30,7 +31,7 @@ class UmaEvent:
             self.Images[key[-2]] = imreadUnicode(a)
 
         # 서포트 카드
-        path = './Supporter_cards'
+        path = root+'/Supporter_cards'
         self.Supporter_cards = dict()
         for a in glob.glob(os.path.join(path, '*')):
             key = a.replace('.', '/').replace('\\', '/')

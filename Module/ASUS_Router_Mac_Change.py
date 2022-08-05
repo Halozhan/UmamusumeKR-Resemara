@@ -6,11 +6,13 @@ from selenium.webdriver.common.alert import Alert
 # import chromedriver_autoinstaller 구버전
 # import os
 import time
+
+import os, sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 try:
     from ASUS_ROUTER_CONFIG import *
 except:
     print("라우터 구성에 필요한 계정 정보가 없습니다.")
-
 
 def importChromeDriver() -> webdriver.Chrome:
     # 구버전
@@ -112,4 +114,5 @@ def ASUS_Change_MAC(isReboot=False):
         
     
 if __name__ == "__main__":
-    ASUS_Change_MAC(False)
+    # ASUS_Change_MAC(False)
+    pass

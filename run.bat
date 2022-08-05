@@ -1,2 +1,2 @@
-python main.py
+python module/main.py
 PAUSE>NUL
