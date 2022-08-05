@@ -114,5 +114,4 @@ def ASUS_Change_MAC(isReboot=False):
         
     
 if __name__ == "__main__":
-    # ASUS_Change_MAC(False)
-    pass
+    ASUS_Change_MAC(True)

@@ -1,0 +1,12 @@
+numpy>=1.23.1
+opencv-python>=4.6.0.66
+Pillow==9.0.1
+psutil>=5.9.1
+pure-python-adb>=0.3.0.dev0
+PyQt5>=5.15.7
+PyQt5-Qt5>=5.15.2
+PyQt5-sip>=12.11.0
+pywin32>=304
+regex>=2022.7.25
+selenium>=4.3.0
+webdriver-manager>=3.8.3
