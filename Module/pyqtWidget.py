@@ -1,5 +1,4 @@
-import sys
-import os
+import os, sys
 from threading import Event, Thread
 import threading
 import time
@@ -12,7 +11,6 @@ from Umamusume import Umamusume
 from sleepTime import sleepTime
 import MAC_Changer_Worker
 
-
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
     def __init__(self):
@@ -22,8 +20,8 @@ class WindowClass(QMainWindow):
 
         self.resize(600, 600) # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
-        root = sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-        self.setWindowIcon(QIcon(str(root)+"/channels4_profile.jpg"))
+        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+        self.setWindowIcon(QIcon(str(root)+"/Module/channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget() # 탭 위젯
         self.verticalTabWidget.setMovable(True)
