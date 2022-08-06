@@ -68,7 +68,7 @@ def ASUS_Change_MAC(isReboot=False):
             Alert(driver).accept()
 
             print("Router is rebooting")
-            time.sleep(150)
+            time.sleep(210)
 
             driver.quit()
         else:
@@ -106,7 +106,7 @@ def ASUS_Change_MAC(isReboot=False):
         
             driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
             # driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
-            time.sleep(15)
+            time.sleep(60)
 
             driver.quit()
     except:

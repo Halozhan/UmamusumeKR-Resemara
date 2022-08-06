@@ -123,18 +123,21 @@ def enable_adapter(adapter_index):
 
 def main():
     # if random parameter is set, generate a random MAC
-    new_mac_address = get_random_mac_address()
+    try:
+        new_mac_address = get_random_mac_address()
 
-    connected_adapters_mac = get_connected_adapters_mac_address()
-    old_mac_address, target_transport_name = get_user_adapter_choice(connected_adapters_mac)
-    print("[*] Old MAC address:", old_mac_address)
-    adapter_index = change_mac_address(target_transport_name, new_mac_address)
-    print("[+] Changed to:", new_mac_address)
-    disable_adapter(adapter_index)
-    print("[+] Adapter is disabled")
-    enable_adapter(adapter_index)
-    print("[+] Adapter is enabled again")
-    print("변경됨")
+        connected_adapters_mac = get_connected_adapters_mac_address()
+        old_mac_address, target_transport_name = get_user_adapter_choice(connected_adapters_mac)
+        print("[*] Old MAC address:", old_mac_address)
+        adapter_index = change_mac_address(target_transport_name, new_mac_address)
+        print("[+] Changed to:", new_mac_address)
+        disable_adapter(adapter_index)
+        print("[+] Adapter is disabled")
+        enable_adapter(adapter_index)
+        print("[+] Adapter is enabled again")
+        print("변경됨")
+    except:
+        pass
 
 if __name__ == "__main__":
     main()
