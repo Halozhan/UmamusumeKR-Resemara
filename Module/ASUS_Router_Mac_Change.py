@@ -106,7 +106,7 @@ def ASUS_Change_MAC(isReboot=False):
         
             driver.find_elements(by=By.XPATH, value='//*[@id="FormTitle"]/tbody/tr/td/div[7]/input')[0].click()
             # driver.find_elements(by=By.CLASS_NAME, value="button_gen")[1].click()
-            time.sleep(40)
+            time.sleep(60)
 
             driver.quit()
     except:
