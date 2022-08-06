@@ -68,7 +68,7 @@ def ASUS_Change_MAC(isReboot=False):
             Alert(driver).accept()
 
             print("Router is rebooting")
-            time.sleep(150)
+            time.sleep(210)
 
             driver.quit()
         else:
