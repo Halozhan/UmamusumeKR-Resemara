@@ -1655,7 +1655,16 @@ class UmaEvent:
 
     def 숫자4080_에러_코드(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["숫자4080_에러_코드"])
+        count, position = ImageSearch(img, self.Images["숫자4080_에러_코드"], confidence=0.97)
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
+            # print(position)
+            return count
+        return None
+
+    def 오류코드_2002(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["오류코드_2002"], confidence=0.97)
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=156, deltaX=5, deltaY=5)
             # print(position)

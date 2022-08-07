@@ -78,8 +78,8 @@ class WindowClass(QMainWindow):
 
         self.ManualButton = QRadioButton("수동 버전. 직접 MAC주소 초기화하고 각각 시작을 다시 눌러주세요.")
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
-        self.ASUSRadioButton.setChecked(True)
         self.PythonMACChangerRadioButton = QRadioButton("Python MAC Changer 버전")
+        self.PythonMACChangerRadioButton.setChecked(True)
 
         self.logs = QTextBrowser()
 
