@@ -214,7 +214,7 @@ class WindowClass(QMainWindow):
         if not self.PythonMACChangerSelectAdapter.currentIndex() == 0:
             self.selected_adapter = self.PythonMACChangerSelectAdapter.currentIndex() - 1
             self.logs.append(self.adapters[self.selected_adapter][1] + "가 선택됨")
-            self.MAC_Worker.selected_adapter = self.selected_adapter
+            self.MAC_Worker.selected_adapter = self.adapters[self.selected_adapter][1]
     
     @pyqtSlot()
     def MAC_Address_Change(self, isReboot=False):
