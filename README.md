@@ -10,6 +10,7 @@
 # Initialization
 
 ## 공통
+윈도우 화면 및 절전에서 화면 끄기와 절전 상태로 전환을 안 함으로 변경 필수(실제 모니터 전원은 꺼도 됨)  
 ```Instances example.txt``` 파일을 복제하여 ```Instances.txt``` 이름으로 변경  
 ```Instances example.txt``` 파일을 참고하여 윈도우 이름과 ADB 포트를 각각 적어주고 저장합니다.
 
