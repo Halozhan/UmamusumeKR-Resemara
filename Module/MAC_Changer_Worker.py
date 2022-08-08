@@ -14,6 +14,7 @@ class Worker(QThread):
         if parent is not None:
             self.parent: "WindowClass" = parent
         self.isReboot = False
+        self.selected_adapter = None
         self.sendLog_Main.connect(self.parent.recvLog_Main)
 
     def MAC_Change(self) -> None:
@@ -39,7 +40,7 @@ class Worker(QThread):
         elif self.parent.ASUSRadioButton.isChecked():
             ASUS_Router_Mac_Change.ASUS_Change_MAC(self.isReboot)
         elif self.parent.PythonMACChangerRadioButton.isChecked():
-            mac_address_changer_windows.main()
+            mac_address_changer_windows.main(self.selected_adapter)
         try:
             for i in self.parent.Tab:
                 i.umamusume.toChild(["isDoingMAC_Change", False])
