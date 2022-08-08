@@ -6,7 +6,7 @@ import subprocess
 import regex as re
 import string
 import random
-from datetime import datetime
+import time
 
 ENCODING = "cp949" # 인코딩 방식
 
@@ -23,13 +23,11 @@ def get_random_mac_address():
     uppercased_hexdigits = ''.join(set(string.hexdigits.upper()))
     # 2nd character must be 2, 4, A, or E
     return random.choice(uppercased_hexdigits) + random.choice("24AE") + "".join(random.sample(uppercased_hexdigits, k=10))
-    
 
 def clean_mac(mac):
     """Simple function to clean non hexadecimal characters from a MAC address
     mostly used to remove '-' and ':' from MAC addresses and also uppercase it"""
     return "".join(c for c in mac if c in string.hexdigits).upper()    
-
 
 def get_connected_adapters_mac_address():
     # make a list to collect connected adapter's MAC addresses along with the transport name
@@ -45,17 +43,20 @@ def get_connected_adapters_mac_address():
             connected_adapters_mac.append((mac_address.group(), transport_name.group()))
     return connected_adapters_mac
 
-
-def get_user_adapter_choice(connected_adapters_mac):
+def get_user_adapter_choice(connected_adapters_mac, selected_adapter=None):
     # print the available adapters
     for i, option in enumerate(connected_adapters_mac):
         print(f"#{i}: {option[0]}, {option[1]}")
+        if option[1] == selected_adapter:
+            print("지정된 어댑터로 맥 주소를 변경합니다:", option[i]) # UUID로 원하는 어댑터의 맥주소 변경
+            return connected_adapters_mac[i]
+    return None # 못 찾는 경우 어댑터가 비활성화돼 있으므로 예외처리함
     if len(connected_adapters_mac) <= 1:
         # when there is only one adapter, choose it immediately
         return connected_adapters_mac[0]
     # prompt the user to choose a network adapter index
     try:
-        # choice = int(input("Please choose the interface you want to change the MAC address:")) 사용 안함
+        # choice = int(input("Please choose the interface you want to change the MAC address:")) # 사용 안함
         choice = 0 # 기본값 0
         # return the target chosen adapter's MAC and transport name that we'll use later to search for our adapter
         # using the reg QUERY command
@@ -65,7 +66,6 @@ def get_user_adapter_choice(connected_adapters_mac):
         print("Not a valid choice, quitting...")
         # exit()
     
-
 def change_mac_address(adapter_transport_name, new_mac_address):
     # use reg QUERY command to get available adapters from the registry
     output = subprocess.check_output(f"reg QUERY " +  network_interface_reg_path.replace("\\\\", "\\")).decode(encoding=ENCODING)
@@ -85,7 +85,6 @@ def change_mac_address(adapter_transport_name, new_mac_address):
     # return the index of the changed adapter's MAC address
     return adapter_index
       
-
 def disable_adapter(adapter_index):
     # use wmic command to disable our adapter so the MAC address change is reflected
     disable_output = subprocess.check_output(f"wmic path win32_networkadapter where index={adapter_index} call disable").decode(encoding=ENCODING)
@@ -97,6 +96,27 @@ def enable_adapter(adapter_index):
     enable_output = subprocess.check_output(f"wmic path win32_networkadapter where index={adapter_index} call enable").decode(encoding=ENCODING)
     return enable_output
         
+def main(selected_adapter):
+    # if random parameter is set, generate a random MAC
+    try:
+        new_mac_address = get_random_mac_address()
+
+        connected_adapters_mac = get_connected_adapters_mac_address()
+        old_mac_address, target_transport_name = get_user_adapter_choice(connected_adapters_mac, selected_adapter)
+        print("[*] Old MAC address:", old_mac_address)
+        adapter_index = change_mac_address(target_transport_name, new_mac_address)
+        print("[+] Changed to:", new_mac_address)
+        disable_adapter(adapter_index)
+        print("[+] Adapter is disabled")
+        enable_adapter(adapter_index)
+        print("[+] Adapter is enabled again")
+        print("변경됨")
+    except:
+        print("변경취소, 40초 쿨다운")
+        time.sleep(40)
+
+if __name__ == "__main__":
+    main()
 
 # if __name__ == "__main__":
 #     import argparse
@@ -120,24 +140,3 @@ def enable_adapter(adapter_index):
 #     print("[+] Adapter is disabled")
 #     enable_adapter(adapter_index)
 #     print("[+] Adapter is enabled again")
-
-def main():
-    # if random parameter is set, generate a random MAC
-    try:
-        new_mac_address = get_random_mac_address()
-
-        connected_adapters_mac = get_connected_adapters_mac_address()
-        old_mac_address, target_transport_name = get_user_adapter_choice(connected_adapters_mac)
-        print("[*] Old MAC address:", old_mac_address)
-        adapter_index = change_mac_address(target_transport_name, new_mac_address)
-        print("[+] Changed to:", new_mac_address)
-        disable_adapter(adapter_index)
-        print("[+] Adapter is disabled")
-        enable_adapter(adapter_index)
-        print("[+] Adapter is enabled again")
-        print("변경됨")
-    except:
-        pass
-
-if __name__ == "__main__":
-    main()

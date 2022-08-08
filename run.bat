@@ -43,7 +43,7 @@ goto :CheckUAC
 		echo.
 		echo --- 관리자 권한을 취득하였습니다. ---
 		echo 1초후에 다음설치 단계로 이동...
-		timeout 1
+		timeout 0
 
 		::여기서부터 권리자 권한 필요한 명령어 입력
 		pushd %~dp0

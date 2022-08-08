@@ -78,10 +78,32 @@ class WindowClass(QMainWindow):
 
         self.ManualButton = QRadioButton("수동 버전. 직접 MAC주소 초기화하고 각각 시작을 다시 눌러주세요.")
         self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
+        self.PythonMACChangerHBox = QHBoxLayout()
         self.PythonMACChangerRadioButton = QRadioButton("Python MAC Changer 버전")
         self.PythonMACChangerRadioButton.setChecked(True)
+        self.PythonMACChangerSelectAdapter = QComboBox()
+        self.PythonMACChangerSelectAdapter.addItem("네트워크 어댑터를 선택해주세요.")
+        self.adapters = MAC_Changer_Worker.mac_address_changer_windows.get_connected_adapters_mac_address()
+        for i in self.adapters:
+            # print(i)
+            self.PythonMACChangerSelectAdapter.addItem(str(i[0]) + ": " + str(i[1]))
+        self.PythonMACChangerHBox.addWidget(self.PythonMACChangerRadioButton, stretch=3)
+        self.PythonMACChangerHBox.addWidget(self.PythonMACChangerSelectAdapter, stretch=7)
+        # print(self.PythonMACChangerSelectAdapter.currentIndex())
 
         self.logs = QTextBrowser()
+
+        import subprocess
+        ENCODING = "cp949" # 인코딩 방식
+        output = subprocess.check_output("route print -4").decode(encoding=ENCODING).splitlines()
+        print(output)
+        for i in output:
+            if i == "인터페이스 목록" or i == "Interface List":
+                self.logs.append("인터페이스 목록을 보고 변경할 어댑터를 선택해주세요.")
+                continue
+            if i == "IPv4 경로 테이블" or i == "IPv4 Route Table":
+                break
+            self.logs.append(str(i))
 
         self.verticalBox.addLayout(self.MenuHBox)
 
@@ -89,8 +111,8 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.ManualButton)
         self.verticalBox.addWidget(self.ASUSRadioButton)
-        self.verticalBox.addWidget(self.PythonMACChangerRadioButton)
-        
+        self.verticalBox.addLayout(self.PythonMACChangerHBox)
+
         self.verticalBox.addWidget(self.logs)
         
         self.메인페이지.setLayout(self.verticalBox)
@@ -115,14 +137,15 @@ class WindowClass(QMainWindow):
         self.ManualButton.clicked.connect(self.ManualRadioFunction)
         self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
         self.PythonMACChangerRadioButton.clicked.connect(self.PythonMACChangerRadioFunction)
+        self.PythonMACChangerSelectAdapter.currentIndexChanged.connect(self.PythonMACChangerSelectAdapterFunction)
 
         self.internetCheckWorkerEvent = Event()
         self.internetCheckWorker = threading.Thread(target=self.internetCheckThread, daemon=True)
         self.internetCheckWorker.start()
-    
+
     def internetCheckThread(self): # 인터넷이 죽으면 다시 맥주소 변경
         now = time.time()
-        while not self.internetCheckWorkerEvent.isSet():
+        while not self.internetCheckWorkerEvent.is_set():
             time.sleep(5)
             if self.internetCheck():
                 # print("connected")
@@ -185,6 +208,13 @@ class WindowClass(QMainWindow):
     def PythonMACChangerRadioFunction(self):
         if self.PythonMACChangerRadioButton.isChecked():
             self.logs.append("PythonMACChangerRadioButton가 활성화됨")
+
+    @pyqtSlot()
+    def PythonMACChangerSelectAdapterFunction(self):
+        if not self.PythonMACChangerSelectAdapter.currentIndex() == 0:
+            self.selected_adapter = self.PythonMACChangerSelectAdapter.currentIndex() - 1
+            self.logs.append(self.adapters[self.selected_adapter][1] + "가 선택됨")
+            self.MAC_Worker.selected_adapter = self.selected_adapter
     
     @pyqtSlot()
     def MAC_Address_Change(self, isReboot=False):
