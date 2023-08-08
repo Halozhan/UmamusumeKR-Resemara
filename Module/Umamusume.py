@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 class Umamusume(QObject):
     sendLog = pyqtSignal(str)
     sendLog_Main = pyqtSignal(str, str)
-    
+
     def __init__(self, parent: "newTab"=None):
         super().__init__()
         if parent is not None:
@@ -38,7 +38,7 @@ class Umamusume(QObject):
         self.toParent.close()
         # print("부모 수신 종료")
 
-    def Receive(self): # 통신용
+    def Receive(self):  # 통신용
         if self.toParent.empty() == False:
             self.Lock.acquire()
             recv = self.toParent.get()
@@ -55,7 +55,6 @@ class Umamusume(QObject):
             elif recv[0] == "InstanceRefreshButton.setEnabled":
                 self.parent.InstanceRefreshButton.setEnabled(recv[1])
 
-            
             elif recv[0] == "InstanceComboBox.setEnabled":
                 self.parent.InstanceComboBox.setEnabled(recv[1])
             elif recv[0] == "InstanceRefreshButton.setEnabled":
@@ -94,7 +93,7 @@ class Umamusume(QObject):
     def start(self):
         # 초기화
         self.Lock = threading.Lock()
-        self.toParent = mp.Queue() # 다른 프로세스와의 연결고리 생성
+        self.toParent = mp.Queue()  # 다른 프로세스와의 연결고리 생성
         self.toChild = mp.Queue()
 
         self.toChild.put(["InstanceName", self.parent.InstanceName])
@@ -102,7 +101,7 @@ class Umamusume(QObject):
         self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
         self.toChild.put(["isMission", self.parent.isMissionCheckBox.isChecked()])
         self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
-        
+
         self.uma = UmaProcess()
         self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
         self.process.start()
@@ -110,13 +109,13 @@ class Umamusume(QObject):
         self.ReceiverEvent = threading.Event()
         self.Receiver = threading.Thread(target=self.Receive_Worker, daemon=True)
         self.Receiver.start()
-        
+
     def terminate(self):
         self.toChild.put(["terminate"])
         while self.process.is_alive():
             time.sleep(0.01)
         self.ReceiverEvent.set()
-        self.Receiver.join() # 종료 대기
+        self.Receiver.join()  # 종료 대기
         self.ReceiverEvent.clear()
 
         # toChild 비우기
@@ -126,7 +125,7 @@ class Umamusume(QObject):
                 print(recv)
             except:
                 pass
-        self.toChild.close() # 자식 수신 큐도 삭제해야함
+        self.toChild.close()  # 자식 수신 큐도 삭제해야함
 
         # 최종적으로 process 삭제
         self.process.close()
@@ -134,7 +133,7 @@ class Umamusume(QObject):
         # 종료 후 버튼 복구
         self.parent.InstanceComboBox.setEnabled(True)
         self.parent.InstanceRefreshButton.setEnabled(True)
-        
+
         self.parent.startButton.setEnabled(True)
         self.parent.stopButton.setEnabled(False)
         self.parent.resetButton.setEnabled(True)

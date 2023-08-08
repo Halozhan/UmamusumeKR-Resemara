@@ -10,25 +10,26 @@ from PyQt5.QtGui import QIcon
 from Umamusume import Umamusume
 from sleepTime import sleepTime
 
-#화면을 띄우는데 사용되는 Class 선언
+
+# 화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
 
-        self.resize(600, 600) # 사이즈 변경
+        self.resize(600, 600)  # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
         root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         self.setWindowIcon(QIcon(str(root)+"/Module/channels4_profile.jpg"))
 
-        self.verticalTabWidget = QTabWidget() # 탭 위젯
+        self.verticalTabWidget = QTabWidget()  # 탭 위젯
         self.verticalTabWidget.setMovable(True)
-        QMainWindow.setCentralWidget(self, self.verticalTabWidget) # 중앙 위젯에 탭 위젯 추가
+        QMainWindow.setCentralWidget(self, self.verticalTabWidget)  # 중앙 위젯에 탭 위젯 추가
 
-        self.메인페이지 = QWidget() # ---------------------------------
+        self.메인페이지 = QWidget()  # ---------------------------------
         self.verticalBox = QVBoxLayout()
 
-        self.MenuHBox = QHBoxLayout() # --------------
+        self.MenuHBox = QHBoxLayout()  # --------------
 
         self.TaskViewVBox = QVBoxLayout()
         self.CPU_now = QLabel()
@@ -38,9 +39,9 @@ class WindowClass(QMainWindow):
 
         self.AllStopButton = QPushButton("모두 정지")
         self.clearLogsButton = QPushButton("로그 삭제", self)
-        
+
         self.MenuHBox.addLayout(self.TaskViewVBox)
-        self.MenuHBox.addWidget(self.AllStopButton) # ----
+        self.MenuHBox.addWidget(self.AllStopButton)  # ----
         self.MenuHBox.addWidget(self.clearLogsButton)
 
 
@@ -50,13 +51,13 @@ class WindowClass(QMainWindow):
         self.timeRateLabel_help = QLineEdit()
         self.timeRateLabel1 = QLabel()
         self.timeRateLabel2 = QLabel()
-        
+
         self.timeRateSlider1 = QSlider(Qt.Horizontal, self)
         self.timeRateSlider1.setRange(0, 300)
         self.timeRateSlider1.setTickInterval(10)
         self.timeRateSlider1.setSliderPosition(180)
         self.timeRateSlider1.setTickPosition(QSlider.TicksBelow)
-        
+
         self.timeRateSlider2 = QSlider(Qt.Horizontal, self)
         self.timeRateSlider2.setRange(0, 100)
         self.timeRateSlider2.setTickInterval(10)
@@ -64,7 +65,7 @@ class WindowClass(QMainWindow):
         self.timeRateSlider2.setTickPosition(QSlider.TicksBelow)
 
         self.timeRateFunction()
-        
+
         self.timeRateVBox.addWidget(self.timeRateLabel_help)
         self.timeRateVBox.addWidget(self.timeRateLabel1)
         self.timeRateVBox.addWidget(self.timeRateSlider1)
@@ -72,7 +73,7 @@ class WindowClass(QMainWindow):
         self.timeRateVBox.addWidget(self.timeRateLabel2)
         self.timeRateVBox.addWidget(self.timeRateSlider2)
 
-        self.timeRateGroupBox.setLayout(self.timeRateVBox) # --------------------------------
+        self.timeRateGroupBox.setLayout(self.timeRateVBox)  # --------------------------------
 
 
         self.logs = QTextBrowser()
@@ -81,9 +82,9 @@ class WindowClass(QMainWindow):
 
         self.verticalBox.addWidget(self.timeRateGroupBox)
 
-        
+
         self.verticalBox.addWidget(self.logs)
-        
+
         self.메인페이지.setLayout(self.verticalBox)
         self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
 
@@ -91,9 +92,9 @@ class WindowClass(QMainWindow):
         for i in range(10): # 10개의 탭 생성
             self.Tab.append(newTab(self)) # self를 상속받은 newTab
             self.verticalTabWidget.addTab(self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count()))
-        
+
         self.sleepTime.start()
-                
+
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
 
         # Event
@@ -102,8 +103,6 @@ class WindowClass(QMainWindow):
 
         self.AllStopButton.clicked.connect(self.AllStopInstance)
         self.clearLogsButton.clicked.connect(self.logs.clear)
-
-
 
     def AllStopInstance(self):
         for i in self.Tab:
@@ -122,7 +121,7 @@ class WindowClass(QMainWindow):
     @pyqtSlot(str, str)
     def recvLog_Main(self, id, text):
         self.logs.append(id + " " + text)
-        
+
     @pyqtSlot(float, float)
     def SleepTimeFunction(self, cpu_load, Time):
         self.CPU_now.setText("CPU 사용률: " + str(cpu_load) + "%")
@@ -134,12 +133,13 @@ class WindowClass(QMainWindow):
     def closeEvent(self, a0: QCloseEvent) -> None:
         msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
-        
+
         if self.reply == QMessageBox.Yes:
             self.AllStopInstance()
             a0.accept()
         else:
             a0.ignore()
+
 
 class newTab(QMainWindow):
     def __init__(self, parent: "WindowClass"=None):
@@ -150,16 +150,16 @@ class newTab(QMainWindow):
         self.InstanceName = ""
         self.InstancePort = 0
         self.sleepTime = 0.5
-        
+
         # 객체 초기화
-        self.vbox = QVBoxLayout() # --------------------------------
+        self.vbox = QVBoxLayout()  # --------------------------------
 
         self.hbox1 = QHBoxLayout()
         self.InstanceComboBox = QComboBox()
         self.InstanceRefreshButton = QPushButton("새로고침", self)
         self.hbox1.addWidget(self.InstanceComboBox, stretch=2)
         self.hbox1.addWidget(self.InstanceRefreshButton, stretch=1)
-        
+
         self.hbox2 = QHBoxLayout()
         self.startButton = QPushButton("시작", self)
         self.hbox2.addWidget(self.startButton)
@@ -178,28 +178,28 @@ class newTab(QMainWindow):
         self.hbox2.addWidget(self.isSSRGachaCheckBox)
         self.clearLogsButton = QPushButton("로그 삭제", self)
         self.hbox2.addWidget(self.clearLogsButton)
-        
-        
+
+
         self.vbox.addLayout(self.hbox1)
         self.vbox.addLayout(self.hbox2)
 
         self.logs = QTextBrowser()
         self.vbox.addWidget(self.logs)
-        
+
         self.tab = QWidget()
-        self.tab.setLayout(self.vbox) # ------------------------------
+        self.tab.setLayout(self.vbox)  # ------------------------------
 
         # 우마무스메
         self.umamusume = Umamusume(self)
-        
+
         # 함수 초기화 (일회성 실행)
         self.InstanceFunction()
         self.InstanceRefreshFunction()
-        
+
         # 시그널 정의
         self.InstanceComboBox.currentIndexChanged.connect(self.InstanceFunction)
         self.InstanceRefreshButton.clicked.connect(self.InstanceRefreshFunction)
-        
+
         self.startButton.clicked.connect(self.startFunction)
         self.stopButton.clicked.connect(self.stopFunction)
         self.resetButton.clicked.connect(self.resetFunction)
@@ -207,7 +207,7 @@ class newTab(QMainWindow):
         self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaFunction)
         self.isMissionCheckBox.clicked.connect(self.isMissionFunction)
         self.clearLogsButton.clicked.connect(self.logs.clear)
-        
+
         # 커스텀 시그널 정의
         # 없음
 
@@ -225,42 +225,42 @@ class newTab(QMainWindow):
             self.isMissionCheckBox.setEnabled(False)
             self.isSSRGachaCheckBox.setEnabled(False)
             return
-        
+
         self.logs.append("-"*50)
         if self.InstanceComboBox.currentText() == "선택 안함":
             self.logs.append("선택해주세요")
-            
+
             self.startButton.setEnabled(False)
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(False)
             self.isDoneTutorialCheckBox.setEnabled(False)
             self.isMissionCheckBox.setEnabled(False)
             self.isSSRGachaCheckBox.setEnabled(False)
-            
+
         else:
             self.SelectedInstance = self.InstanceComboBox.currentText()
             self.SelectedInstance = self.SelectedInstance.split(",")
             self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
             self.SelectedInstance[1] = self.SelectedInstance[1].strip()
             self.InstanceName, self.InstancePort = self.SelectedInstance
-            
+
             self.InstancePort = int(self.InstancePort)
             self.logs.append(str(self.InstanceName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
-            
+
             self.umamusume = Umamusume(self)
-            
+
             self.startButton.setEnabled(True)
             self.stopButton.setEnabled(False)
             self.resetButton.setEnabled(True)
             self.isDoneTutorialCheckBox.setEnabled(True)
             self.isMissionCheckBox.setEnabled(True)
             self.isSSRGachaCheckBox.setEnabled(True)
-            
+
         self.logs.append("-"*50)
 
     def InstanceRefreshFunction(self):
         self.InstanceComboBox.clear()
-        
+
         lines = ["선택 안함"]
         root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
@@ -278,7 +278,7 @@ class newTab(QMainWindow):
         except:
             self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
             pass
-    
+
     def startFunction(self):
         self.startButton.setEnabled(False)
 
@@ -286,14 +286,14 @@ class newTab(QMainWindow):
         self.logs.append("시작!!")
         self.umamusume.start()
         self.logs.append("-"*50)
-    
+
     def stopFunction(self):
         self.stopButton.setEnabled(False)
         self.logs.append("-"*50)
         self.logs.append("정지 중!!")
         self.umamusume.terminate()
         self.logs.append("-"*50)
-    
+
     def resetFunction(self):
         self.resetButton.setEnabled(False)
         self.logs.append("-"*50)
@@ -305,7 +305,7 @@ class newTab(QMainWindow):
             os.remove(path)
         except:
             pass
-    
+
     def isDoneTutorialFunction(self):
         self.logs.append("-"*50)
         if self.isDoneTutorialCheckBox.isChecked():
@@ -313,7 +313,7 @@ class newTab(QMainWindow):
         else:
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
         self.logs.append("-"*50)
-    
+
     def isMissionFunction(self):
         self.logs.append("-"*50)
         if self.isMissionCheckBox.isChecked():
@@ -329,18 +329,17 @@ class newTab(QMainWindow):
         else:
             self.logs.append("SSR 확정권 사용안함!!")
         self.logs.append("-"*50)
-    
-    
 
-if __name__ =="__main__":
-    #QApplication : 프로그램을 실행시켜주는 클래스
+
+if __name__ == "__main__":
+    # QApplication : 프로그램을 실행시켜주는 클래스
     app = QApplication(sys.argv)
-    
-    #WindowClass의 인스턴스 생성
+
+    # WindowClass의 인스턴스 생성
     myWindow = WindowClass()
 
-    #프로그램 화면을 보여주는 코드
-    myWindow.show()        
+    # 프로그램 화면을 보여주는 코드
+    myWindow.show()
 
-    #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
+    # 프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
     app.exec_()
