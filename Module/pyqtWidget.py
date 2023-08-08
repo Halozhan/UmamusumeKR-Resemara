@@ -9,14 +9,12 @@ from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtGui import QIcon
 from Umamusume import Umamusume
 from sleepTime import sleepTime
-import MAC_Changer_Worker
 
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
-        self.MAC_Worker = MAC_Changer_Worker.Worker(self)
 
         self.resize(600, 600) # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
@@ -76,43 +74,14 @@ class WindowClass(QMainWindow):
 
         self.timeRateGroupBox.setLayout(self.timeRateVBox) # --------------------------------
 
-        self.ManualButton = QRadioButton("수동 버전. 직접 MAC주소 초기화하고 각각 시작을 다시 눌러주세요.")
-        self.ASUSRadioButton = QRadioButton("ASUS 공유기 버전")
-        self.PythonMACChangerHBox = QHBoxLayout()
-        self.PythonMACChangerRadioButton = QRadioButton("Python MAC Changer 버전")
-        self.PythonMACChangerRadioButton.setChecked(True)
-        self.PythonMACChangerSelectAdapter = QComboBox()
-        self.PythonMACChangerSelectAdapter.addItem("네트워크 어댑터를 선택해주세요.")
-        self.adapters = MAC_Changer_Worker.mac_address_changer_windows.get_connected_adapters_mac_address()
-        for i in self.adapters:
-            # print(i)
-            self.PythonMACChangerSelectAdapter.addItem(str(i[0]) + ": " + str(i[1]))
-        self.PythonMACChangerHBox.addWidget(self.PythonMACChangerRadioButton, stretch=3)
-        self.PythonMACChangerHBox.addWidget(self.PythonMACChangerSelectAdapter, stretch=7)
-        # print(self.PythonMACChangerSelectAdapter.currentIndex())
 
         self.logs = QTextBrowser()
-
-        import subprocess
-        ENCODING = "cp949" # 인코딩 방식
-        output = subprocess.check_output("route print -4").decode(encoding=ENCODING).splitlines()
-        print(output)
-        for i in output:
-            if i == "인터페이스 목록" or i == "Interface List":
-                self.logs.append("인터페이스 목록을 보고 변경할 어댑터를 선택해주세요.")
-                continue
-            if i == "IPv4 경로 테이블" or i == "IPv4 Route Table":
-                break
-            self.logs.append(str(i))
 
         self.verticalBox.addLayout(self.MenuHBox)
 
         self.verticalBox.addWidget(self.timeRateGroupBox)
 
-        self.verticalBox.addWidget(self.ManualButton)
-        self.verticalBox.addWidget(self.ASUSRadioButton)
-        self.verticalBox.addLayout(self.PythonMACChangerHBox)
-
+        
         self.verticalBox.addWidget(self.logs)
         
         self.메인페이지.setLayout(self.verticalBox)
@@ -134,38 +103,6 @@ class WindowClass(QMainWindow):
         self.AllStopButton.clicked.connect(self.AllStopInstance)
         self.clearLogsButton.clicked.connect(self.logs.clear)
 
-        self.ManualButton.clicked.connect(self.ManualRadioFunction)
-        self.ASUSRadioButton.clicked.connect(self.ASUSRadioFunction)
-        self.PythonMACChangerRadioButton.clicked.connect(self.PythonMACChangerRadioFunction)
-        self.PythonMACChangerSelectAdapter.currentIndexChanged.connect(self.PythonMACChangerSelectAdapterFunction)
-
-        self.internetCheckWorkerEvent = Event()
-        self.internetCheckWorker = threading.Thread(target=self.internetCheckThread, daemon=True)
-        self.internetCheckWorker.start()
-
-    def internetCheckThread(self): # 인터넷이 죽으면 다시 맥주소 변경
-        now = time.time()
-        while not self.internetCheckWorkerEvent.is_set():
-            time.sleep(5)
-            if self.internetCheck():
-                # print("connected")
-                now = time.time()
-            else:
-                # print("no connection")
-                if time.time() - now >= 40:
-                    print("인터넷이 죽어서 재연결 시도")
-                    self.MAC_Address_Change(isReboot=True)
-                    now = time.time()
-
-    def internetCheck(self):
-        hostname = "142.250.206.206"
-        # response = os.system("ping -n 1 " + hostname)
-        response = os.system("ping -n 1 " + hostname + " >NUL")
-        if response == 0: # active
-            return True
-        else: # error
-            print("network connection error")
-            return False
 
 
     def AllStopInstance(self):
@@ -193,40 +130,12 @@ class WindowClass(QMainWindow):
         for i in self.Tab:
             if i.stopButton.isEnabled():
                 i.umamusume.toChild.put(["sleepTime", float(Time)])
-    
-    @pyqtSlot()
-    def ManualRadioFunction(self):
-        if self.ManualButton.isChecked():
-            self.logs.append("수동 조작이 활성화됨")
-
-    @pyqtSlot()
-    def ASUSRadioFunction(self):
-        if self.ASUSRadioButton.isChecked():
-            self.logs.append("ASUSRadioButton가 활성화됨")
-        
-    @pyqtSlot()
-    def PythonMACChangerRadioFunction(self):
-        if self.PythonMACChangerRadioButton.isChecked():
-            self.logs.append("PythonMACChangerRadioButton가 활성화됨")
-
-    @pyqtSlot()
-    def PythonMACChangerSelectAdapterFunction(self):
-        if not self.PythonMACChangerSelectAdapter.currentIndex() == 0:
-            self.selected_adapter = self.PythonMACChangerSelectAdapter.currentIndex() - 1
-            self.logs.append(self.adapters[self.selected_adapter][1] + "가 선택됨")
-            self.MAC_Worker.selected_adapter = self.adapters[self.selected_adapter][1]
-    
-    @pyqtSlot()
-    def MAC_Address_Change(self, isReboot=False):
-        self.MAC_Worker.isReboot = isReboot
-        self.MAC_Worker.MAC_Change()
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"
         self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
         
         if self.reply == QMessageBox.Yes:
-            self.internetCheckWorkerEvent.set()
             self.AllStopInstance()
             a0.accept()
         else:
