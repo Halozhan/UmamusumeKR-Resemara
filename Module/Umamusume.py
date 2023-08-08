@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 class Umamusume(QObject):
     sendLog = pyqtSignal(str)
     sendLog_Main = pyqtSignal(str, str)
-    Error_4080 = pyqtSignal()
     
     def __init__(self, parent: "newTab"=None):
         super().__init__()
@@ -25,7 +24,6 @@ class Umamusume(QObject):
         # 커스텀 시그널 정의
         self.sendLog.connect(self.parent.recvLog)
         self.sendLog_Main.connect(self.parent.parent.recvLog_Main)
-        self.Error_4080.connect(self.parent.parent.MAC_Address_Change)
 
     def Receive_Worker(self):
         while self.ReceiverEvent.is_set() == False or self.toParent.empty() == False:
@@ -84,9 +82,6 @@ class Umamusume(QObject):
                         if not (i.umamusume.ResetCount == -1):
                             TotalResetCount += i.umamusume.ResetCount
                 self.toChild.put(["sendTotalResetCount", TotalResetCount])
-
-            elif recv[0] == "숫자4080_에러_코드":
-                self.Error_4080.emit()
 
             elif recv[0] == "terminate":
                 th = threading.Thread(target=self.terminate)
