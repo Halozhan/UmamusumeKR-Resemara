@@ -1336,6 +1336,20 @@ class UmaProcess():
                     self.log("상기의_선물을_수령했습니다 " + str(count) + "개")
                     img = screenshotToOpenCVImg(hwndMain)
 
+                count = self.event.의상을_획득했습니다(img)
+                if count:
+                    updateTime = time.time()
+                    # print("의상을_획득했습니다 " + str(count) + "개")
+                    self.log("의상을_획득했습니다 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
+                count = self.event.곡을_획득했습니다(img)
+                if count:
+                    updateTime = time.time()
+                    # print("곡을_획득했습니다 " + str(count) + "개")
+                    self.log("곡을_획득했습니다 " + str(count) + "개")
+                    img = screenshotToOpenCVImg(hwndMain)
+
             count = self.event.받을_수_있는_선물이_없습니다(img)
             if count:
                 updateTime = time.time()

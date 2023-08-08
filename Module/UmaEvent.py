@@ -169,9 +169,15 @@ class UmaEvent:
             return count
         return None
 
-    def 이_내용으로_등록합니다_등록하시겠습니까(self, img: screenshotToOpenCVImg) -> int:
+    def 이_내용으로_등록합니다_등록하시겠습니까(self, img: screenshotToOpenCVImg) -> int:  # 진행하겠습니까?로 바뀜
         count = 0
         count, position = ImageSearch(img, self.Images["이_내용으로_등록합니다_등록하시겠습니까"], 72, 569, 333, 49)
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
+            time.sleep(1)
+            # print(position)
+            return count
+        count, position = ImageSearch(img, self.Images["이_내용으로_등록합니다_진행하시겠습니까"], 91, 588, 314, 32)
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=136, offsetY=54, deltaX=5, deltaY=5)
             time.sleep(1)
@@ -1340,6 +1346,28 @@ class UmaEvent:
             return count
         return None
 
+    def 의상을_획득했습니다(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["의상을_획득했습니다"])
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+            # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=105, deltaX=5, deltaY=5)
+            time.sleep(1)
+            # print(position)
+            return count
+        return None
+
+    def 곡을_획득했습니다(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["곡을_획득했습니다"])
+        if count:
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=50, deltaX=5, deltaY=5)
+            # adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetY=105, deltaX=5, deltaY=5)
+            time.sleep(1)
+            # print(position)
+            return count
+        return None
+
     def 받을_수_있는_선물이_없습니다(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(img, self.Images["받을_수_있는_선물이_없습니다"], 143, 460, 231, 51)
@@ -1446,13 +1474,22 @@ class UmaEvent:
                 adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
             # print(position)
             return count
+        count, position = ImageSearch(img, self.Images["서포트_카드_뽑기2"], 160, 552, 154, 94, confidence=0.6)  # 돌이 없는거 클릭 해봐야 암
+        if count:
+            if self.parent.is서포트_뽑기:
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=199, offsetY=191, deltaX=5, deltaY=5)
+            if self.parent.isSSRGacha and self.parent.isSSR확정_뽑기:
+                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=272, deltaX=5, deltaY=5)
+            # print(position)
+            return count
         return None
 
     def 무료_쥬얼부터_먼저_사용됩니다(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["무료_쥬얼부터_먼저_사용됩니다"], 126, 570, 280, 76)
+        count, position = ImageSearch(img, self.Images["무료_쥬얼부터_먼저_사용됩니다"])
         if count:
             adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=112, offsetY=55, deltaX=5, deltaY=5)
+            adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=position[0], offsetX=131, offsetY=149, deltaX=5, deltaY=5)
             time.sleep(1.5)
             # print(position)
             return count
@@ -1503,7 +1540,8 @@ class UmaEvent:
 
     def 쥬얼이_부족합니다(self, img: screenshotToOpenCVImg) -> int:
         count = 0
-        count, position = ImageSearch(img, self.Images["쥬얼이_부족합니다"], 165, 586, 207, 41)
+        # count, position = ImageSearch(img, self.Images["쥬얼이_부족합니다"], 165, 586, 207, 41)
+        count, position = ImageSearch(img, self.Images["쥬얼이_부족합니다"])
         if count:
             if 이륙_조건(self.parent.Supporter_cards_total):  # 이륙 조건
                 return "Exit"
