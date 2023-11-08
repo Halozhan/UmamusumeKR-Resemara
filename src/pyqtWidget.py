@@ -20,7 +20,7 @@ class WindowClass(QMainWindow):
         self.resize(600, 600)  # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
         root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-        self.setWindowIcon(QIcon(str(root)+"/src/channels4_profile.jpg"))
+        self.setWindowIcon(QIcon(str(root)+"/icon/channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget()  # 탭 위젯
         self.verticalTabWidget.setMovable(True)
