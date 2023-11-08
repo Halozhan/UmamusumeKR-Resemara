@@ -49,7 +49,7 @@ goto :CheckUAC
 		pushd %~dp0
 		pip install -r requirements.txt
 
-		python module/main.py
+		python src/main.py
 		PAUSE>NUL
         
         pause
