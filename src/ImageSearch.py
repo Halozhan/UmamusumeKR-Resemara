@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     hwndMain = win32gui.FindWindow(None, "Bluestacks Dev")  # hwnd ID 찾기
     img = screenshotToOpenCVImg(hwndMain)  # 윈도우의 스크린샷
-    우마 = imreadUnicode("./Images/우마.png")  # 찾을 이미지
+    우마 = imreadUnicode("./images/우마.png")  # 찾을 이미지
     count, position = ImageSearch(img, 우마, roiLeft=206, roiTop=604, roiWidth=52, roiHeight=58,
                                       confidence=0.8, grayscale=False, isExport=False)  # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
     print("갯수는 " + str(count) + "개")  # 찾은 갯수

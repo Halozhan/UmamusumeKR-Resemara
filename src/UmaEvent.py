@@ -24,7 +24,7 @@ class UmaEvent:
 
         root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         # Images
-        path = root+'/Images'
+        path = root+'/images'
         self.Images = dict()
         for a in glob.glob(os.path.join(path, '*')):
             key = a.replace('.', '/').replace('\\', '/')
