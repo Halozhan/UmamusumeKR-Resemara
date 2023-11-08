@@ -42,8 +42,9 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
         self.MenuHBox.addWidget(self.AllStopButton)  # ----
         self.MenuHBox.addWidget(self.clearLogsButton)
 
-
-        self.timeRateGroupBox = QGroupBox("부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐") # ---------
+        self.timeRateGroupBox = QGroupBox(
+            "부하를 정합니다. 1번은 높을수록, 2번은 낮출수록 반응이 빨라짐"
+        )  # ---------
         self.timeRateVBox = QVBoxLayout()
 
         self.timeRateLabel_help = QLineEdit()
@@ -71,8 +72,9 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
         self.timeRateVBox.addWidget(self.timeRateLabel2)
         self.timeRateVBox.addWidget(self.timeRateSlider2)
 
-        self.timeRateGroupBox.setLayout(self.timeRateVBox)  # --------------------------------
-
+        self.timeRateGroupBox.setLayout(
+            self.timeRateVBox
+        )  # --------------------------------
 
         self.logs = QTextBrowser()
 
@@ -80,16 +82,17 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
 
         self.verticalBox.addWidget(self.timeRateGroupBox)
 
-
         self.verticalBox.addWidget(self.logs)
 
         self.메인페이지.setLayout(self.verticalBox)
-        self.verticalTabWidget.addTab(self.메인페이지, "Main") # --------
+        self.verticalTabWidget.addTab(self.메인페이지, "Main")  # --------
 
         self.Tab: list[newTab] = []
-        for i in range(10): # 10개의 탭 생성
-            self.Tab.append(newTab(self)) # self를 상속받은 newTab
-            self.verticalTabWidget.addTab(self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count()))
+        for i in range(10):  # 10개의 탭 생성
+            self.Tab.append(newTab(self))  # self를 상속받은 newTab
+            self.verticalTabWidget.addTab(
+                self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count())
+            )
 
         self.sleepTime.start()
 
@@ -104,17 +107,23 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
 
     def AllStopInstance(self):
         for i in self.Tab:
-            if i.stopButton.isEnabled(): # 정지 버튼이 켜져있는 인스턴스만
-                i.stopFunction() # 종료
+            if i.stopButton.isEnabled():  # 정지 버튼이 켜져있는 인스턴스만
+                i.stopFunction()  # 종료
 
     def timeRateFunction(self):
         value1 = self.timeRateSlider1.value()
         value2 = self.timeRateSlider2.value()
-        self.sleepTime.timeRate1 = value1*0.01
-        self.sleepTime.timeRate2 = value2*0.1
-        self.timeRateLabel1.setText("기울기: " + str(round(value1*0.01, 3)))
-        self.timeRateLabel2.setText("최고 지연: " + str(round(value2*0.1, 3)) + "s")
-        self.timeRateLabel_help.setText("x^{"+str(round(value1*0.01, 3))+"e}\cdot" + str(round(value2*0.1, 3)) +"를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음")
+        self.sleepTime.timeRate1 = value1 * 0.01
+        self.sleepTime.timeRate2 = value2 * 0.1
+        self.timeRateLabel1.setText("기울기: " + str(round(value1 * 0.01, 3)))
+        self.timeRateLabel2.setText("최고 지연: " + str(round(value2 * 0.1, 3)) + "s")
+        self.timeRateLabel_help.setText(
+            "x^{"
+            + str(round(value1 * 0.01, 3))
+            + "e}\cdot"
+            + str(round(value2 * 0.1, 3))
+            + "를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음"
+        )
 
     @pyqtSlot(str, str)
     def recvLog_Main(self, id, text):
@@ -130,7 +139,9 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"
-        self.reply = QMessageBox.question(self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes|QMessageBox.No)
+        self.reply = QMessageBox.question(
+            self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes | QMessageBox.No
+        )
 
         if self.reply == QMessageBox.Yes:
             self.AllStopInstance()
@@ -140,7 +151,7 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
 
 
 class newTab(QMainWindow):
-    def __init__(self, parent: "WindowClass"=None):
+    def __init__(self, parent: "WindowClass" = None):
         super().__init__()
         # 변수 초기화
         self.parent: "WindowClass" = parent
@@ -176,7 +187,6 @@ class newTab(QMainWindow):
         self.hbox2.addWidget(self.isSSRGachaCheckBox)
         self.clearLogsButton = QPushButton("로그 삭제", self)
         self.hbox2.addWidget(self.clearLogsButton)
-
 
         self.vbox.addLayout(self.hbox1)
         self.vbox.addLayout(self.hbox2)
@@ -224,7 +234,7 @@ class newTab(QMainWindow):
             self.isSSRGachaCheckBox.setEnabled(False)
             return
 
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         if self.InstanceComboBox.currentText() == "선택 안함":
             self.logs.append("선택해주세요")
 
@@ -238,12 +248,17 @@ class newTab(QMainWindow):
         else:
             self.SelectedInstance = self.InstanceComboBox.currentText()
             self.SelectedInstance = self.SelectedInstance.split(",")
-            self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', '')
+            self.SelectedInstance[0] = self.SelectedInstance[0].replace('"', "")
             self.SelectedInstance[1] = self.SelectedInstance[1].strip()
             self.InstanceName, self.InstancePort = self.SelectedInstance
 
             self.InstancePort = int(self.InstancePort)
-            self.logs.append(str(self.InstanceName) + " 윈도우, " + str(self.InstancePort) + "번 포트가 선택되었습니다.")
+            self.logs.append(
+                str(self.InstanceName)
+                + " 윈도우, "
+                + str(self.InstancePort)
+                + "번 포트가 선택되었습니다."
+            )
 
             self.umamusume = Umamusume(self)
 
@@ -254,7 +269,7 @@ class newTab(QMainWindow):
             self.isMissionCheckBox.setEnabled(True)
             self.isSSRGachaCheckBox.setEnabled(True)
 
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
     def InstanceRefreshFunction(self):
         self.InstanceComboBox.clear()
@@ -267,7 +282,7 @@ class newTab(QMainWindow):
                 line = f.readline()
                 if not line:
                     break
-                line = line.strip() # 줄 끝의 줄 바꿈 문자를 제거한다.
+                line = line.strip()  # 줄 끝의 줄 바꿈 문자를 제거한다.
                 lines.append(line)
             f.close()
             self.InstanceComboBox.addItems(lines)
@@ -279,52 +294,52 @@ class newTab(QMainWindow):
     def startFunction(self):
         self.startButton.setEnabled(False)
 
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         self.logs.append("시작!!")
         self.umamusume.start()
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
     def stopFunction(self):
         self.stopButton.setEnabled(False)
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         self.logs.append("정지 중!!")
         self.umamusume.terminate()
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
     def resetFunction(self):
         self.resetButton.setEnabled(False)
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         self.logs.append("초기화!!")
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+            path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
             os.remove(path)
         except:
             pass
 
     def isDoneTutorialFunction(self):
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         if self.isDoneTutorialCheckBox.isChecked():
             self.logs.append("튜토리얼 스킵 활성화!!")
         else:
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
     def isMissionFunction(self):
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         if self.isMissionCheckBox.isChecked():
             self.logs.append("미션 수령!!")
         else:
             self.logs.append("미션 수령 안함!!")
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
     def isSSRGachaFunction(self):
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
         if self.isSSRGachaCheckBox.isChecked():
             self.logs.append("SSR 확정권 사용!!")
         else:
             self.logs.append("SSR 확정권 사용안함!!")
-        self.logs.append("-"*50)
+        self.logs.append("-" * 50)
 
 
 if __name__ == "__main__":

@@ -51,8 +51,12 @@ def WindowsAPIMouseClick(hwnd, x, y):  # 미구현
         print(hwndChild)
 
         position = win32api.MAKELONG(x, y)
-        win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, position)
-        win32gui.PostMessage(hwndChild, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, position)
+        win32gui.PostMessage(
+            hwndChild, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, position
+        )
+        win32gui.PostMessage(
+            hwndChild, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, position
+        )
     except:
         pass
 

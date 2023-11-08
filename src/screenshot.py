@@ -29,9 +29,14 @@ def screenshot(hwnd, isExport):
         bmpstr = saveBitMap.GetBitmapBits(True)
 
         im = Image.frombuffer(
-            'RGB',
-            (bmpinfo['bmWidth'], bmpinfo['bmHeight']),
-            bmpstr, 'raw', 'BGRX', 0, 1)
+            "RGB",
+            (bmpinfo["bmWidth"], bmpinfo["bmHeight"]),
+            bmpstr,
+            "raw",
+            "BGRX",
+            0,
+            1,
+        )
 
         win32gui.DeleteObject(saveBitMap.GetHandle())
         saveDC.DeleteDC()
@@ -53,8 +58,9 @@ def screenshot(hwnd, isExport):
 if __name__ == "__main__":  # 이미지 추출 테스트
     hwndMain = win32gui.FindWindow(None, "Bluestacks 5")
     import time
+
     now = time.time()
     while True:
         screenshot(hwndMain, False)
-        print(str(round((time.time() - now)*1000, 6)) + "ms")
+        print(str(round((time.time() - now) * 1000, 6)) + "ms")
         now = time.time()

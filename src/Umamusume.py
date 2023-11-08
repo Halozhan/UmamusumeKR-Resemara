@@ -6,6 +6,7 @@ import time
 from UmamusumeProcess import UmaProcess
 
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from pyqtWidget import *
 
@@ -14,7 +15,7 @@ class Umamusume(QObject):
     sendLog = pyqtSignal(str)
     sendLog_Main = pyqtSignal(str, str)
 
-    def __init__(self, parent: "newTab"=None):
+    def __init__(self, parent: "newTab" = None):
         super().__init__()
         if parent is not None:
             self.parent: "newTab" = parent
@@ -98,12 +99,22 @@ class Umamusume(QObject):
 
         self.toChild.put(["InstanceName", self.parent.InstanceName])
         self.toChild.put(["InstancePort", self.parent.InstancePort])
-        self.toChild.put(["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()])
+        self.toChild.put(
+            ["isDoneTutorial", self.parent.isDoneTutorialCheckBox.isChecked()]
+        )
         self.toChild.put(["isMission", self.parent.isMissionCheckBox.isChecked()])
         self.toChild.put(["isSSRGacha", self.parent.isSSRGachaCheckBox.isChecked()])
 
         self.uma = UmaProcess()
-        self.process = mp.Process(name=str(self.parent.InstancePort), target=self.uma.run_a, args=(self.toParent, self.toChild, ), daemon=True)
+        self.process = mp.Process(
+            name=str(self.parent.InstancePort),
+            target=self.uma.run_a,
+            args=(
+                self.toParent,
+                self.toChild,
+            ),
+            daemon=True,
+        )
         self.process.start()
 
         self.ReceiverEvent = threading.Event()

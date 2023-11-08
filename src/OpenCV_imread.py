@@ -7,4 +7,5 @@ def imreadUnicode(file):
     img = cv2.imdecode(npFile, cv2.IMREAD_UNCHANGED)  # img = array
     return img
 
+
 # reference: https://kst1.tistory.com/39

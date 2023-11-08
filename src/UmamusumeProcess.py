@@ -9,10 +9,11 @@ import pickle
 from multiprocessing import Queue
 import threading
 from UmaEvent import UmaEvent
+
 # import tracemalloc 누수 해결방법 찾는 중
 
 
-class UmaProcess():
+class UmaProcess:
     def __init__(self):
         pass
 
@@ -117,10 +118,10 @@ class UmaProcess():
         # 서포트 카드 총 갯수
         path = "./images/서포트_카드"
         self.Supporter_cards_total = dict()
-        for a in glob.glob(os.path.join(path, '*')):
+        for a in glob.glob(os.path.join(path, "*")):
             if os.path.isfile(a):
-                key = a.replace('.', '/').replace('\\', '/')
-                key = key.split('/')
+                key = a.replace(".", "/").replace("\\", "/")
+                key = key.split("/")
                 self.Supporter_cards_total[key[-2]] = 0
         # --------------------------------
 
@@ -154,8 +155,8 @@ class UmaProcess():
             isSuccessed = self.main()
 
             # print("-"*50)
-            self.log_main(self.InstanceName, "-"*50)
-            self.log("-"*50)
+            self.log_main(self.InstanceName, "-" * 50)
+            self.log("-" * 50)
 
             now = datetime.now()
             # print(now.strftime("%Y-%m-%d %H:%M:%S"))
@@ -164,7 +165,7 @@ class UmaProcess():
 
             if isSuccessed == "Failed":  # 리세 실패, 저장된 데이터 삭제
                 try:
-                    path = "./Saved_Data/"+str(self.InstancePort)+".uma"
+                    path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
                     os.remove(path)
                 except:
                     pass
@@ -201,9 +202,9 @@ class UmaProcess():
 
             if isSuccessed == True:
                 self.isAlive = False
-                print("리세 성공 "*5)
-                self.log_main(self.InstanceName, "리세 성공 "*5)
-                self.log("리세 성공 "*5)
+                print("리세 성공 " * 5)
+                self.log_main(self.InstanceName, "리세 성공 " * 5)
+                self.log("리세 성공 " * 5)
 
                 self.toParent.put(["terminate"])
 
@@ -212,8 +213,8 @@ class UmaProcess():
                 time.sleep(30)
 
             # print("-"*50)
-            self.log_main(self.InstanceName, "-"*50)
-            self.log("-"*50)
+            self.log_main(self.InstanceName, "-" * 50)
+            self.log("-" * 50)
 
         # print("리세 종료")
         self.log_main(self.InstanceName, "리세 종료")
@@ -235,8 +236,8 @@ class UmaProcess():
         Uma 파일 저장
         """
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            with open(file=path, mode='wb') as file:
+            path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
+            with open(file=path, mode="wb") as file:
                 pickle.dump(self.resetCount, file)  # -- pickle --
                 pickle.dump(self.is시작하기, file)  # -- pickle --
                 pickle.dump(self.isPAUSED, file)  # -- pickle --
@@ -252,8 +253,8 @@ class UmaProcess():
                 pickle.dump(self.Supporter_cards_total, file)  # -- pickle --
             return True
         except:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            print(path+"를 저장하는데 실패했습니다.")
+            path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
+            print(path + "를 저장하는데 실패했습니다.")
             # self.log(path+"를 저장하는데 실패했습니다.")
             return False
 
@@ -262,8 +263,8 @@ class UmaProcess():
         Uma 파일 불러오기
         """
         try:
-            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
-            with open(file=path,  mode='rb') as file:
+            path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
+            with open(file=path, mode="rb") as file:
                 self.resetCount = pickle.load(file)  # -- pickle --
                 self.is시작하기 = pickle.load(file)  # -- pickle --
                 self.isPAUSED = pickle.load(file)  # -- pickle --
@@ -296,9 +297,9 @@ class UmaProcess():
             # 서포트 카드 총 갯수
             path = "./Supporter_cards"
             self.Supporter_cards_total = dict()  # -- pickle --
-            for a in glob.glob(os.path.join(path, '*')):
-                key = a.replace('.', '/').replace('\\', '/')
-                key = key.split('/')
+            for a in glob.glob(os.path.join(path, "*")):
+                key = a.replace(".", "/").replace("\\", "/")
+                key = key.split("/")
                 self.Supporter_cards_total[key[-2]] = 0
             return False
 
@@ -311,7 +312,12 @@ class UmaProcess():
         WindowsAPIInput.SetWindowSize(hwndMain, 574, 994)
         self.device = adbInput.AdbConnect(self.InstancePort)
 
-        self.event = UmaEvent(hwnd=hwndMain, device=self.device, InstancePort=self.InstancePort, parent=self)
+        self.event = UmaEvent(
+            hwnd=hwndMain,
+            device=self.device,
+            InstancePort=self.InstancePort,
+            parent=self,
+        )
 
         self.loadUma()  # Uma 파일 불러오기
 
@@ -324,7 +330,13 @@ class UmaProcess():
             if self.isDoneTutorial and time.time() >= updateTime + 20:
                 # print("20초 정지 터치락 해제!!! "*3)
                 self.log("20초 정지 터치락 해제!!! ")
-                adbInput.BlueStacksSwipe(self.device, self.InstancePort, position=(509, 66, 0, 0), deltaX=0, deltaY=0)
+                adbInput.BlueStacksSwipe(
+                    self.device,
+                    self.InstancePort,
+                    position=(509, 66, 0, 0),
+                    deltaX=0,
+                    deltaY=0,
+                )
                 time.sleep(2)
 
             # 잠수 클릭 60초 이상 앱정지
@@ -332,7 +344,11 @@ class UmaProcess():
                 # print("60초 정지 앱 강제종료!!! "*3)
                 self.log("60초 정지 앱 강제종료!!! ")
                 # WindowsAPIInput.WindowsAPIKeyboardInput(hwndMain, WindowsAPIInput.win32con.VK_SCROLL)
-                adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
+                adbInput.shell(
+                    self.device,
+                    self.InstancePort,
+                    "am force-stop com.kakaogames.umamusume",
+                )
                 time.sleep(2)
 
             time.sleep(self.sleepTime)
@@ -434,7 +450,7 @@ class UmaProcess():
                 self.log("이_내용으로_등록합니다_등록하시겠습니까 " + str(count) + "개")
                 img = screenshotToOpenCVImg(hwndMain)
 
-            if self.isAlive == False: # 중간에 멈춰야 할 경우
+            if self.isAlive == False:  # 중간에 멈춰야 할 경우
                 break
 
             # 튜토리얼 진행, 귀찮아서 튜토리얼 멈추면 알아서 하셈
@@ -606,8 +622,8 @@ class UmaProcess():
 
                 count = self.event.서포트_카드_화살표(img)
                 if count:
-                    print("서포트_카드_화살표 " + str(count) + "개") # 느림
-                    self.log("서포트_카드_화살표 " + str(count) + "개") # 느림
+                    print("서포트_카드_화살표 " + str(count) + "개")  # 느림
+                    self.log("서포트_카드_화살표 " + str(count) + "개")  # 느림
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
@@ -797,7 +813,7 @@ class UmaProcess():
                 if count:
                     print("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
                     self.log("커맨드를_하나_실행하면_턴을_소비합니다 " + str(count) + "개")
- 
+
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
@@ -1319,7 +1335,6 @@ class UmaProcess():
 
             # 선물 수령
             if self.isDoneTutorial and self.is선물_이동 == True:
-
                 count = self.event.선물_이동(img)
                 if count:
                     updateTime = time.time()
@@ -1364,7 +1379,12 @@ class UmaProcess():
                 img = screenshotToOpenCVImg(hwndMain)
 
             # 미션 수령
-            if self.isDoneTutorial and self.isMission and self.is미션_이동 and self.is선물_이동 == False:
+            if (
+                self.isDoneTutorial
+                and self.isMission
+                and self.is미션_이동
+                and self.is선물_이동 == False
+            ):
                 count = self.event.미션_이동(img)
                 if count:
                     updateTime = time.time()
@@ -1469,18 +1489,20 @@ class UmaProcess():
 
                         if total_count:
                             # print("-"*50)
-                            self.log_main(self.InstanceName, "-"*50)
-                            self.log("-"*50)
+                            self.log_main(self.InstanceName, "-" * 50)
+                            self.log("-" * 50)
 
                             for key, value in self.Supporter_cards_total.items():
                                 if value:
                                     # print(key + ": " + str(value))
-                                    self.log_main(self.InstanceName, key + ": " + str(value))
+                                    self.log_main(
+                                        self.InstanceName, key + ": " + str(value)
+                                    )
                                     self.log(key + ": " + str(value))
 
                             # print("-"*50)
-                            self.log_main(self.InstanceName, "-"*50)
-                            self.log("-"*50)
+                            self.log_main(self.InstanceName, "-" * 50)
+                            self.log("-" * 50)
 
                 if self.isAlive == False:  # 중간에 멈춰야 할 경우
                     break
@@ -1555,9 +1577,17 @@ class UmaProcess():
                         img = screenshotToOpenCVImg(hwndMain)
 
                 if self.is초기화하기:
-                    adbInput.shell(self.device, self.InstancePort, "am force-stop com.kakaogames.umamusume")
+                    adbInput.shell(
+                        self.device,
+                        self.InstancePort,
+                        "am force-stop com.kakaogames.umamusume",
+                    )
                     time.sleep(1)
-                    adbInput.shell(self.device, self.InstancePort, "/system/xbin/bstk/su -c rm -rf /data/data/com.kakaogames.umamusume/shared_prefs")
+                    adbInput.shell(
+                        self.device,
+                        self.InstancePort,
+                        "/system/xbin/bstk/su -c rm -rf /data/data/com.kakaogames.umamusume/shared_prefs",
+                    )
                     self.log("삭제_완료")
                     return "Failed"
 
