@@ -120,7 +120,7 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
         self.timeRateLabel_help.setText(
             "x^{"
             + str(round(value1 * 0.01, 3))
-            + "e}\cdot"
+            + "e}\\cdot"
             + str(round(value2 * 0.1, 3))
             + "를 https://www.desmos.com/calculator/ifg3mwmqun에 붙여넣기하면 그래프를 볼 수 있음"
         )

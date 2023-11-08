@@ -19,7 +19,9 @@ def 이륙_조건(Support_Cards):
     # if SCT["SSR_비코_페가수스"] >= 2 and (SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
     #     return True
 
-    # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]):
+    # if SCT["SSR_사쿠라_바쿠신_오"] >= 2 and (
+    #     SCT["SSR_파인_모션"] or SCT["SSR_슈퍼_크릭"] or SCT["SSR_하야카와_타즈나"]
+    # ):
     #     return True
 
     if SCT["SSR_파인_모션"] >= 4:
