@@ -1,7 +1,6 @@
-import os, sys
-from threading import Event, Thread
-import threading
-import time
+import os
+import sys
+import PyQt5.QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.Qt import Qt
@@ -12,15 +11,14 @@ from sleepTime import sleepTime
 
 
 # 화면을 띄우는데 사용되는 Class 선언
-class WindowClass(QMainWindow):
+class WindowClass(PyQt5.QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
 
         self.resize(600, 600)  # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-        self.setWindowIcon(QIcon(str(root)+"/icon/channels4_profile.jpg"))
+        self.setWindowIcon(QIcon("./icon/channels4_profile.jpg"))
 
         self.verticalTabWidget = QTabWidget()  # 탭 위젯
         self.verticalTabWidget.setMovable(True)
@@ -262,9 +260,8 @@ class newTab(QMainWindow):
         self.InstanceComboBox.clear()
 
         lines = ["선택 안함"]
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            file = root+"/Instances.txt"
+            file = "./Instances.txt"
             f = open(file, "r", encoding="UTF-8")
             while True:
                 line = f.readline()
@@ -299,9 +296,8 @@ class newTab(QMainWindow):
         self.logs.append("-"*50)
         self.logs.append("초기화!!")
         self.logs.append("-"*50)
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
+            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             os.remove(path)
         except:
             pass

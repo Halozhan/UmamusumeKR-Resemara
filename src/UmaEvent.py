@@ -22,22 +22,23 @@ class UmaEvent:
         self.device: adbInput.AdbConnect = device
         self.InstancePort: int = InstancePort
 
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         # Images
-        path = root+'/images'
+        path = "./images"
         self.Images = dict()
         for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            self.Images[key[-2]] = imreadUnicode(a)
+            if os.path.isfile(a):
+                key = a.replace('.', '/').replace('\\', '/')
+                key = key.split('/')
+                self.Images[key[-2]] = imreadUnicode(a)
 
         # 서포트 카드
-        path = root+'/Supporter_cards'
+        path = "./images/서포트_카드"
         self.Supporter_cards = dict()
         for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            self.Supporter_cards[key[-2]] = imreadUnicode(a)
+            if os.path.isfile(a):
+                key = a.replace('.', '/').replace('\\', '/')
+                key = key.split('/')
+                self.Supporter_cards[key[-2]] = imreadUnicode(a)
 
     def 탈출(self):
         if self.parent.isAlive == False:

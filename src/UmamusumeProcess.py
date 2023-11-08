@@ -104,14 +104,24 @@ class UmaProcess():
 
         # 기본 값 - pickle 불러오기 전 ---
         self.resetCount = 0
+        self.is시작하기 = False  # -- pickle --
+        self.isPAUSED = False  # -- pickle --
+        self.is선물_이동 = True  # -- pickle --
+        self.is미션_이동 = True  # -- pickle --
+        self.is뽑기_이동 = True  # -- pickle --
+        self.is서포트_뽑기 = False  # -- pickle --
+        self.isSSR확정_뽑기 = False  # -- pickle --
+        self.is뽑기_결과 = True  # -- pickle --
+        self.is초기화하기 = False  # -- pickle --
 
         # 서포트 카드 총 갯수
-        path = './Supporter_cards'
+        path = "./images/서포트_카드"
         self.Supporter_cards_total = dict()
         for a in glob.glob(os.path.join(path, '*')):
-            key = a.replace('.', '/').replace('\\', '/')
-            key = key.split('/')
-            self.Supporter_cards_total[key[-2]] = 0
+            if os.path.isfile(a):
+                key = a.replace('.', '/').replace('\\', '/')
+                key = key.split('/')
+                self.Supporter_cards_total[key[-2]] = 0
         # --------------------------------
 
         # 수신
@@ -152,10 +162,9 @@ class UmaProcess():
             self.log_main(self.InstanceName, now.strftime("%Y-%m-%d %H:%M:%S"))
             self.log(now.strftime("%Y-%m-%d %H:%M:%S"))
 
-            if isSuccessed == "Failed": # 리세 실패, 저장된 데이터 삭제
-                root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+            if isSuccessed == "Failed":  # 리세 실패, 저장된 데이터 삭제
                 try:
-                    path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
+                    path = "./Saved_Data/"+str(self.InstancePort)+".uma"
                     os.remove(path)
                 except:
                     pass
@@ -225,11 +234,8 @@ class UmaProcess():
         """
         Uma 파일 저장
         """
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-        if not root+"/Saved_Data":
-            root+"/Saved_Data"
         try:
-            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
+            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path, mode='wb') as file:
                 pickle.dump(self.resetCount, file)  # -- pickle --
                 pickle.dump(self.is시작하기, file)  # -- pickle --
@@ -255,9 +261,8 @@ class UmaProcess():
         """
         Uma 파일 불러오기
         """
-        root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
         try:
-            path = root+"/Saved_Data/"+str(self.InstancePort)+".uma"
+            path = "./Saved_Data/"+str(self.InstancePort)+".uma"
             with open(file=path,  mode='rb') as file:
                 self.resetCount = pickle.load(file)  # -- pickle --
                 self.is시작하기 = pickle.load(file)  # -- pickle --
@@ -277,7 +282,7 @@ class UmaProcess():
                 self.log("기존 데이터를 불러옵니다.")
             return True
         except:
-            # self.resetCount = 0  # -- pickle -- 다른건 초기화해도 리세 횟수는 초기화 하는 거 아님
+            self.resetCount = 0  # -- pickle --
             self.is시작하기 = False  # -- pickle --
             self.isPAUSED = False  # -- pickle --
             self.is선물_이동 = True  # -- pickle --
@@ -289,7 +294,7 @@ class UmaProcess():
             self.is초기화하기 = False  # -- pickle --
 
             # 서포트 카드 총 갯수
-            path = root+'/Supporter_cards'
+            path = "./Supporter_cards"
             self.Supporter_cards_total = dict()  # -- pickle --
             for a in glob.glob(os.path.join(path, '*')):
                 key = a.replace('.', '/').replace('\\', '/')
