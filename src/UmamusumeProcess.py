@@ -136,17 +136,6 @@ class UmaProcess:
         while self.InstancePort == 0:
             time.sleep(0.001)
 
-        # 시작 후 버튼 잠금
-        self.toParent.put(["InstanceComboBox.setEnabled", False])
-        self.toParent.put(["InstanceRefreshButton.setEnabled", False])
-
-        # self.toParent.put(["startButton.setEnabled", False])
-        self.toParent.put(["stopButton.setEnabled", True])
-        self.toParent.put(["resetButton.setEnabled", False])
-        self.toParent.put(["isDoneTutorialCheckBox.setEnabled", False])
-        self.toParent.put(["isMissionCheckBox.setEnabled", False])
-        self.toParent.put(["isSSRGachaCheckBox.setEnabled", False])
-
         while self.isAlive:
             isSuccessed = self.main()
 
@@ -1296,9 +1285,6 @@ class UmaProcess:
                     img = screenshotToOpenCVImg(hwndMain)
             # ------------------------------ 리세 -----------------------------
             # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
-            # ------------------------------ 리세 -----------------------------
             count = self.event.공지사항_X(img)
             if count:
                 updateTime = time.time()
@@ -1306,7 +1292,6 @@ class UmaProcess:
                 self.log("공지사항_X " + str(count) + "개")
                 self.isDoneTutorial = True
                 self.toParent.put(["isDoneTutorial", True])
-                # self.parent.isDoneTutorialCheckBox.setChecked(True)
                 img = screenshotToOpenCVImg(hwndMain)
 
             count = self.event.메인_스토리가_해방되었습니다(img)
@@ -1316,7 +1301,6 @@ class UmaProcess:
                 self.log("메인_스토리가_해방되었습니다 " + str(count) + "개")
                 self.isDoneTutorial = True
                 self.toParent.put(["isDoneTutorial", True])
-                # self.parent.isDoneTutorialCheckBox.setChecked(True)
                 img = screenshotToOpenCVImg(hwndMain)
 
             count = self.event.여러_스토리를_해방할_수_있게_되었습니다(img)
@@ -1326,7 +1310,6 @@ class UmaProcess:
                 self.log("여러_스토리를_해방할_수_있게_되었습니다 " + str(count) + "개")
                 self.isDoneTutorial = True
                 self.toParent.put(["isDoneTutorial", True])
-                # self.parent.isDoneTutorialCheckBox.setChecked(True)
                 img = screenshotToOpenCVImg(hwndMain)
 
             # 선물 수령

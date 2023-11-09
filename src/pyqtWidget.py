@@ -1,7 +1,21 @@
 import os
-import sys
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import (
+    QMainWindow,
+    QMessageBox,
+    QTabWidget,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QGroupBox,
+    QSlider,
+    QTextBrowser,
+    QPushButton,
+    QLabel,
+    QComboBox,
+    QCheckBox,
+    QLineEdit,
+    QTextEdit,
+)
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QCloseEvent
@@ -15,6 +29,7 @@ class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
+        self.sleepTime.start()
 
         self.resize(600, 600)  # 사이즈 변경
         self.setWindowTitle("우마뾰이 - Github: Halozhan")
@@ -30,8 +45,8 @@ class WindowClass(QMainWindow):
         self.MenuHBox = QHBoxLayout()  # --------------
 
         self.TaskViewVBox = QVBoxLayout()
-        self.CPU_now = QLabel()
-        self.Latency = QLabel()
+        self.CPU_now = QLabel("CPU_now")
+        self.Latency = QLabel("Latency")
         self.TaskViewVBox.addWidget(self.CPU_now)
         self.TaskViewVBox.addWidget(self.Latency)
 
@@ -94,8 +109,6 @@ class WindowClass(QMainWindow):
                 self.Tab[i].tab, "탭 %d" % (self.verticalTabWidget.count())
             )
 
-        self.sleepTime.start()
-
         self.verticalTabWidget.addTab(QTextEdit("미구현"), "+")
 
         # Event
@@ -108,7 +121,7 @@ class WindowClass(QMainWindow):
     def AllStopInstance(self):
         for i in self.Tab:
             if i.stopButton.isEnabled():  # 정지 버튼이 켜져있는 인스턴스만
-                i.stopFunction()  # 종료
+                i.stopButtonFunction()  # 종료
 
     def timeRateFunction(self):
         value1 = self.timeRateSlider1.value()
@@ -210,12 +223,12 @@ class newTab(QMainWindow):
         self.InstanceComboBox.currentIndexChanged.connect(self.InstanceFunction)
         self.InstanceRefreshButton.clicked.connect(self.InstanceRefreshFunction)
 
-        self.startButton.clicked.connect(self.startFunction)
-        self.stopButton.clicked.connect(self.stopFunction)
-        self.resetButton.clicked.connect(self.resetFunction)
-        self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialFunction)
-        self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaFunction)
-        self.isMissionCheckBox.clicked.connect(self.isMissionFunction)
+        self.startButton.clicked.connect(self.startButtonFunction)
+        self.stopButton.clicked.connect(self.stopButtonFunction)
+        self.resetButton.clicked.connect(self.resetButtonFunction)
+        self.isDoneTutorialCheckBox.clicked.connect(self.isDoneTutorialCheckBoxFunction)
+        self.isSSRGachaCheckBox.clicked.connect(self.isSSRGachaCheckBoxFunction)
+        self.isMissionCheckBox.clicked.connect(self.isMissionCheckBoxFunction)
         self.clearLogsButton.clicked.connect(self.logs.clear)
 
         # 커스텀 시그널 정의
@@ -293,22 +306,46 @@ class newTab(QMainWindow):
             self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
             pass
 
-    def startFunction(self):
+    def startButtonFunction(self):
         self.startButton.setEnabled(False)
 
         self.logs.append("-" * 50)
         self.logs.append("시작!!")
         self.umamusume.start()
+        self.lockButtonFunction()
         self.logs.append("-" * 50)
 
-    def stopFunction(self):
+    def lockButtonFunction(self):
+        # 시작 후 버튼 잠금
+        self.InstanceComboBox.setEnabled(False)
+        self.InstanceRefreshButton.setEnabled(False)
+
+        self.stopButton.setEnabled(True)
+        self.resetButton.setEnabled(False)
+        self.isDoneTutorialCheckBox.setEnabled(False)
+        self.isMissionCheckBox.setEnabled(False)
+        self.isSSRGachaCheckBox.setEnabled(False)
+
+    def stopButtonFunction(self):
         self.stopButton.setEnabled(False)
         self.logs.append("-" * 50)
         self.logs.append("정지 중!!")
         self.umamusume.terminate()
         self.logs.append("-" * 50)
 
-    def resetFunction(self):
+    def restoreButtonFunction(self):
+        # 종료 후 버튼 복구
+        self.InstanceComboBox.setEnabled(True)
+        self.InstanceRefreshButton.setEnabled(True)
+
+        self.startButton.setEnabled(True)
+        self.stopButton.setEnabled(False)
+        self.resetButton.setEnabled(True)
+        self.isDoneTutorialCheckBox.setEnabled(True)
+        self.isMissionCheckBox.setEnabled(True)
+        self.isSSRGachaCheckBox.setEnabled(True)
+
+    def resetButtonFunction(self):
         self.resetButton.setEnabled(False)
         self.logs.append("-" * 50)
         self.logs.append("초기화!!")
@@ -319,7 +356,7 @@ class newTab(QMainWindow):
         except:
             pass
 
-    def isDoneTutorialFunction(self):
+    def isDoneTutorialCheckBoxFunction(self):
         self.logs.append("-" * 50)
         if self.isDoneTutorialCheckBox.isChecked():
             self.logs.append("튜토리얼 스킵 활성화!!")
@@ -327,7 +364,7 @@ class newTab(QMainWindow):
             self.logs.append("튜토리얼 진행 (다소 렉 유발)")
         self.logs.append("-" * 50)
 
-    def isMissionFunction(self):
+    def isMissionCheckBoxFunction(self):
         self.logs.append("-" * 50)
         if self.isMissionCheckBox.isChecked():
             self.logs.append("미션 수령!!")
@@ -335,7 +372,7 @@ class newTab(QMainWindow):
             self.logs.append("미션 수령 안함!!")
         self.logs.append("-" * 50)
 
-    def isSSRGachaFunction(self):
+    def isSSRGachaCheckBoxFunction(self):
         self.logs.append("-" * 50)
         if self.isSSRGachaCheckBox.isChecked():
             self.logs.append("SSR 확정권 사용!!")

@@ -51,27 +51,8 @@ class Umamusume(QObject):
             elif recv[0] == "isDoneTutorial":
                 self.parent.isDoneTutorialCheckBox.setChecked(recv[1])
 
-            elif recv[0] == "InstanceComboBox.setEnabled":
-                self.parent.InstanceComboBox.setEnabled(recv[1])
-            elif recv[0] == "InstanceRefreshButton.setEnabled":
-                self.parent.InstanceRefreshButton.setEnabled(recv[1])
-
-            elif recv[0] == "InstanceComboBox.setEnabled":
-                self.parent.InstanceComboBox.setEnabled(recv[1])
-            elif recv[0] == "InstanceRefreshButton.setEnabled":
-                self.parent.InstanceRefreshButton.setEnabled(recv[1])
             elif recv[0] == "startButton.setEnabled":
                 self.parent.startButton.setEnabled(recv[1])
-            elif recv[0] == "stopButton.setEnabled":
-                self.parent.stopButton.setEnabled(recv[1])
-            elif recv[0] == "resetButton.setEnabled":
-                self.parent.resetButton.setEnabled(recv[1])
-            elif recv[0] == "isDoneTutorialCheckBox.setEnabled":
-                self.parent.isDoneTutorialCheckBox.setEnabled(recv[1])
-            elif recv[0] == "isMissionCheckBox.setEnabled":
-                self.parent.isMissionCheckBox.setEnabled(recv[1])
-            elif recv[0] == "isSSRGachaCheckBox.setEnabled":
-                self.parent.isSSRGachaCheckBox.setEnabled(recv[1])
 
             elif recv[0] == "sendResetCount":
                 self.ResetCount = recv[1]
@@ -142,12 +123,4 @@ class Umamusume(QObject):
         self.process.close()
 
         # 종료 후 버튼 복구
-        self.parent.InstanceComboBox.setEnabled(True)
-        self.parent.InstanceRefreshButton.setEnabled(True)
-
-        self.parent.startButton.setEnabled(True)
-        self.parent.stopButton.setEnabled(False)
-        self.parent.resetButton.setEnabled(True)
-        self.parent.isDoneTutorialCheckBox.setEnabled(True)
-        self.parent.isMissionCheckBox.setEnabled(True)
-        self.parent.isSSRGachaCheckBox.setEnabled(True)
+        self.parent.restoreButtonFunction()

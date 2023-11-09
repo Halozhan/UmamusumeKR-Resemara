@@ -1,5 +1,6 @@
-from pyqtWidget import QApplication, WindowClass, sys
-
+from PyQt5.QtWidgets import QApplication
+import sys
+from pyqtWidget import WindowClass
 
 if __name__ == "__main__":
     # QApplication : 프로그램을 실행시켜주는 클래스
