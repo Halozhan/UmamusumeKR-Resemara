@@ -1,6 +1,15 @@
 # 이륙 조건식 -----------------------------------------------
-def 이륙_조건(Support_Cards):
+def 이륙_조건(Support_Cards: dict):
     SCT = Support_Cards
+
+    # SSR이 중복 포함 6장 이상이면 이륙
+    count = 0
+    for key, value in SCT.items():
+        if key.startswith("SSR"):
+            count += value
+    if count > 6:
+        return True
+
     if SCT["SSR_파인_모션"] and SCT["SSR_슈퍼_크릭"] and SCT["SSR_하야카와_타즈나"]:
         return True
 
@@ -52,7 +61,7 @@ def 이륙_조건(Support_Cards):
     ):
         return True
 
-    if SCT["SSR_키타산_블랙"] >= 4:
+    if SCT["SSR_키타산_블랙"] >= 3:
         return True
 
     return False
