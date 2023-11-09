@@ -43,7 +43,7 @@ class Umamusume(QObject):
         if self.toParent.empty() == False:
             self.Lock.acquire()
             recv = self.toParent.get()
-            # print(recv)
+
             if recv[0] == "sendLog":
                 self.sendLog.emit(str(recv[1]))
             elif recv[0] == "sendLog_main":

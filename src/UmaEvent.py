@@ -721,6 +721,16 @@ class UmaEvent:
             return count
         return None
 
+    def 처음_육성은_우선_우마무스메들을_더욱_잘_알_수_있는(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(img, self.Images["처음_육성은_우선_우마무스메들을_더욱_잘_알_수_있는"], 24, 772, 399, 100)
+        if count:
+            adbInput.BlueStacksSwipe(
+                self.device, self.InstancePort, position=position[0], offsetX=50, offsetY=120, deltaX=5, deltaY=5
+            )
+            # print(position)
+            return count
+
     def 마음에_드는_우마무스메를_육성하자(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
@@ -771,7 +781,7 @@ class UmaEvent:
     def 플러스_계승_우마무스메_선택_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
-            img, self.Images["플러스_계승_우마무스메_선택_화살표"], 19, 520, 103, 152
+            img, self.Images["플러스_계승_우마무스메_선택_화살표"], 34, 576, 96, 101
         )
         if count:
             adbInput.BlueStacksSwipe(
@@ -1190,7 +1200,7 @@ class UmaEvent:
     def 돌아간다_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
-            img, self.Images["돌아간다_화살표"], confidence=1.0, grayscale=False
+            img, self.Images["돌아간다_화살표"], confidence=0.99, grayscale=False
         )
         if count:
             adbInput.BlueStacksSwipe(
@@ -1302,10 +1312,10 @@ class UmaEvent:
             return count
         return None
 
-    def 이졔_준비가_다_끝났어요_레이스에_출전해_봐요(self, img: screenshotToOpenCVImg) -> int:
+    def 이제_준비가_다_끝났어요_레이스에_출전해_봐요(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
-            img, self.Images["이졔_준비가_다_끝났어요_레이스에_출전해_봐요"], 85, 621, 191, 69
+            img, self.Images["이제_준비가_다_끝났어요_레이스에_출전해_봐요"], 104, 644, 172, 48
         )
         if count:
             adbInput.BlueStacksSwipe(
@@ -1316,6 +1326,21 @@ class UmaEvent:
                 offsetY=168,
                 deltaX=5,
                 deltaY=5,
+            )
+            # print(position)
+            return count
+        return None
+
+    def 출전할_수_있는_레이스가_있으면(self, img: screenshotToOpenCVImg) -> int:
+        count = 0
+        count, position = ImageSearch(
+            img, self.Images["출전할_수_있는_레이스가_있으면"], 11, 558, 514, 117
+        )
+        if count:
+            adbInput.BlueStacksSwipe(
+                self.device,
+                self.InstancePort,
+                position=position[0]
             )
             # print(position)
             return count
@@ -1726,13 +1751,9 @@ class UmaEvent:
         count, position = ImageSearch(
             img,
             self.Images["강화_편성_화살표"],
-            0,
-            910,
-            97,
-            -1,
-            confidence=1.0,
-            grayscale=False,
-        )  # -5, 910, 97, 67
+            19, 928, 73, 50,
+            confidence=0.99,
+        )
         if count:
             adbInput.BlueStacksSwipe(
                 self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5
@@ -1746,18 +1767,14 @@ class UmaEvent:
         count, position = ImageSearch(
             img,
             self.Images["레이스_화살표"],
-            329,
-            908,
-            103,
-            -1,
-            confidence=1.0,
-            grayscale=False,
-        )  # 329, 908, 103, 71
+            350, 939, 83, 42,
+            confidence=0.99,
+        )
         if count:
             adbInput.BlueStacksSwipe(
                 self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5
             )
-            # print(position)
+            print(position)
             return count
         return None
 
@@ -1917,14 +1934,13 @@ class UmaEvent:
     def 팀_편성_다이와_스칼렛_화살표_클릭(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
-            img, self.Images["팀_편성_다이와_스칼렛_화살표_클릭"], 200, 341, 116, 160
+            img, self.Images["팀_편성_다이와_스칼렛_화살표_클릭"], 225, 419, 89, 77
         )
         if count:
             adbInput.BlueStacksSwipe(
                 self.device,
                 self.InstancePort,
                 position=position[0],
-                offsetY=25,
                 deltaX=5,
                 deltaY=5,
             )
@@ -1935,14 +1951,13 @@ class UmaEvent:
     def 출전_우마무스메_선택_다이와_스칼렛_화살표(self, img: screenshotToOpenCVImg) -> int:
         count = 0
         count, position = ImageSearch(
-            img, self.Images["출전_우마무스메_선택_다이와_스칼렛_화살표"], 0, 591, 121, 138
+            img, self.Images["출전_우마무스메_선택_다이와_스칼렛_화살표"], 25, 666, 79, 66
         )
         if count:
             adbInput.BlueStacksSwipe(
                 self.device,
                 self.InstancePort,
                 position=position[0],
-                offsetY=25,
                 deltaX=5,
                 deltaY=5,
             )
@@ -2014,8 +2029,7 @@ class UmaEvent:
             845,
             144,
             134,
-            confidence=1.0,
-            grayscale=False,
+            confidence=0.99
         )
         if count:
             adbInput.BlueStacksSwipe(

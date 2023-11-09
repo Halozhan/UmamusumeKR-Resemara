@@ -11,8 +11,6 @@ from multiprocessing import Queue
 import threading
 from UmaEvent import UmaEvent
 
-# import tracemalloc 누수 해결방법 찾는 중
-
 
 class UmaProcess:
     def __init__(self):
@@ -20,10 +18,9 @@ class UmaProcess:
 
     def Receive_Worker(self):
         while self.ReceiverEvent.is_set() == False or self.toChild.empty() == False:
-            # self.lock.acquire()
             if not self.Receive():
                 time.sleep(0.01)
-            # self.lock.release()
+
         while not self.toChild.empty():
             try:
                 recv = self.toChild.get(timeout=0.001)
@@ -36,38 +33,28 @@ class UmaProcess:
     def Receive(self) -> bool:  # 통신용
         if self.toChild.empty() == False:
             self.Lock.acquire()
+
             recv = self.toChild.get()
-            # print(recv)
+
             if recv[0] == "sleepTime":
                 self.sleepTime = recv[1]
-                # print(recv[1])
-            elif recv[0] == "terminate":
-                # print("종료 신호")
-                # th = threading.Thread(target=self.terminate)
-                # th.start()
+            elif recv[0] == "terminate": # 종료 신호
                 self.isAlive = False
-                # print(recv[1])
 
             elif recv[0] == "InstanceName":
                 self.InstanceName = recv[1]
-                # print(recv[1])
             elif recv[0] == "InstancePort":
                 self.InstancePort = recv[1]
-                # print(recv[1])
             elif recv[0] == "isDoneTutorial":
                 self.isDoneTutorial = recv[1]
-                # print(recv[1])
             elif recv[0] == "isMission":
                 self.isMission = recv[1]
-                # print(recv[1])
             elif recv[0] == "isSSRGacha":
                 self.isSSRGacha = recv[1]
-                # print(recv[1])
 
             elif recv[0] == "sendTotalResetCount":
                 self.totalResetCount = recv[1]
                 self.waiting = False
-                # print(recv[1])
 
             self.Lock.release()
             return True
@@ -81,9 +68,6 @@ class UmaProcess:
         self.toParent.put(["sendLog", str(text)])
 
     def run_a(self, toParent: Queue, toChild: Queue):
-        # tracemalloc.start() 누수 해결방법 찾는 중
-        # self.my_snapshot = None
-
         self.Lock = threading.Lock()
         # 선언
         self.toParent = toParent
@@ -155,26 +139,11 @@ class UmaProcess:
                 except:
                     pass
                 self.resetCount += 1
-                # 누수 해결방법 찾는 중
-                # 값을 계속 사용해야 하므로 전역 변수에 저장한다
-                # if not self.my_snapshot:
-                #     # 최초 메모리 상태를 저장한다
-                #     self.my_snapshot = tracemalloc.take_snapshot()
-                # else:
-                #     lines = []
-                #     # 현재 메모리 상태를 최초와 비교하여 얼마나 차이가 나는지에 대한 통계를 구한다
-                #     top_stats = tracemalloc.take_snapshot().compare_to(self.my_snapshot, 'lineno')
-                #     # 메모리 사용량이 많은 순서대로 10개를 구하여 출력한다
-                #     for stat in top_stats[:10]:
-                #         lines.append(str(stat))
-                #     print('\n'.join(lines), flush=True)
 
             if isSuccessed == "Stop":
-                # print("This thread was terminated.")
                 self.log_main(str(self.InstanceName), " thread was terminated.")
                 self.log("This thread was terminated.")
 
-            # print("리세 횟수:", self.resetCount)
             self.log_main(self.InstanceName, "리세 횟수: " + str(int(self.resetCount)))
             self.log("리세 횟수: " + str(int(self.resetCount)))
             self.toParent.put(["sendResetCount", self.resetCount])
@@ -280,7 +249,7 @@ class UmaProcess:
             self.is초기화하기 = False  # -- pickle --
 
             # 서포트 카드 총 갯수
-            path = "./Supporter_cards"
+            path = "./images/서포트_카드"
             self.Supporter_cards_total = dict()  # -- pickle --
             for a in glob.glob(os.path.join(path, "*")):
                 key = a.replace(".", "/").replace("\\", "/")
@@ -655,6 +624,13 @@ class UmaProcess:
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
+                count = self.event.처음_육성은_우선_우마무스메들을_더욱_잘_알_수_있는(img)
+                if count:
+                    print("처음_육성은_우선_우마무스메들을_더욱_잘_알_수_있는 " + str(count) + "개")
+                    self.log("처음_육성은_우선_우마무스메들을_더욱_잘_알_수_있는 " + str(count) + "개")
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain)
+
                 count = self.event.마음에_드는_우마무스메를_육성하자(img)
                 if count:
                     print("마음에_드는_우마무스메를_육성하자 " + str(count) + "개")
@@ -948,10 +924,17 @@ class UmaProcess:
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
-                count = self.event.이졔_준비가_다_끝났어요_레이스에_출전해_봐요(img)
+                count = self.event.이제_준비가_다_끝났어요_레이스에_출전해_봐요(img)
                 if count:
-                    print("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
-                    self.log("이졔_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
+                    print("이제_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
+                    self.log("이제_준비가_다_끝났어요_레이스에_출전해_봐요 " + str(count) + "개")
+                    time.sleep(0.5)
+                    img = screenshotToOpenCVImg(hwndMain)
+
+                count = self.event.출전할_수_있는_레이스가_있으면(img)
+                if count:
+                    print("출전할_수_있는_레이스가_있으면 " + str(count) + "개")
+                    self.log("출전할_수_있는_레이스가_있으면 " + str(count) + "개")
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
