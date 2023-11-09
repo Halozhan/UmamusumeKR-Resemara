@@ -4,7 +4,8 @@ from ImageSearch import screenshotToOpenCVImg
 import time
 from datetime import datetime
 from PyQt5.QtWidgets import *
-import glob, os
+import glob
+import os
 import pickle
 from multiprocessing import Queue
 import threading
@@ -68,9 +69,6 @@ class UmaProcess:
                 self.waiting = False
                 # print(recv[1])
 
-            elif recv[0] == "isDoingMAC_Change":
-                self.isDoingMAC_Change = recv[1]
-                # print(recv[1])
             self.Lock.release()
             return True
 
@@ -100,8 +98,6 @@ class UmaProcess:
 
         self.isAlive = False
         self.sleepTime = 0.5
-
-        self.isDoingMAC_Change = False
 
         # 기본 값 - pickle 불러오기 전 ---
         self.resetCount = 0
