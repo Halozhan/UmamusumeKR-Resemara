@@ -4,7 +4,8 @@ from ImageSearch import ImageSearch
 from ImageSearch import screenshotToOpenCVImg
 from OpenCV_imread import imreadUnicode
 import time
-import glob, os
+import glob
+import os
 from 이륙_조건 import 이륙_조건
 
 from typing import TYPE_CHECKING

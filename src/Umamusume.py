@@ -15,7 +15,7 @@ class Umamusume(QObject):
     sendLog = pyqtSignal(str)
     sendLog_Main = pyqtSignal(str, str)
 
-    def __init__(self, parent: "newTab" = None):
+    def __init__(self, parent: "newTab"):
         super().__init__()
         if parent is not None:
             self.parent: "newTab" = parent

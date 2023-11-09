@@ -1,6 +1,6 @@
 import os
 import sys
-import PyQt5.QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.Qt import Qt
@@ -11,7 +11,7 @@ from sleepTime import sleepTime
 
 
 # 화면을 띄우는데 사용되는 Class 선언
-class WindowClass(PyQt5.QtWidgets.QMainWindow):
+class WindowClass(QMainWindow):
     def __init__(self):
         super().__init__()
         self.sleepTime = sleepTime(self)
@@ -138,12 +138,14 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
                 i.umamusume.toChild.put(["sleepTime", float(Time)])
 
     def closeEvent(self, a0: QCloseEvent) -> None:
-        msg = "정말 종료하시겠습니까?\n(정지하지 않은 인스턴스는 정지됩니다.)"
-        self.reply = QMessageBox.question(
-            self, "너 지금 딸들과의 추억을 버리려는거야?", msg, QMessageBox.Yes | QMessageBox.No
+        reply = QMessageBox.question(
+            self,
+            "너 지금 딸들과의 추억을 버리려는거야?",
+            "정말 종료하시겠습니까?\n(인스턴스를 정지합니다.)",
+            QMessageBox.Yes | QMessageBox.No,
         )
 
-        if self.reply == QMessageBox.Yes:
+        if reply == QMessageBox.Yes:
             self.AllStopInstance()
             a0.accept()
         else:
@@ -151,10 +153,10 @@ class WindowClass(PyQt5.QtWidgets.QMainWindow):
 
 
 class newTab(QMainWindow):
-    def __init__(self, parent: "WindowClass" = None):
+    def __init__(self, parent: "QMainWindow"):
         super().__init__()
         # 변수 초기화
-        self.parent: "WindowClass" = parent
+        self.parent: "QMainWindow" = parent
 
         self.InstanceName = ""
         self.InstancePort = 0
@@ -340,17 +342,3 @@ class newTab(QMainWindow):
         else:
             self.logs.append("SSR 확정권 사용안함!!")
         self.logs.append("-" * 50)
-
-
-if __name__ == "__main__":
-    # QApplication : 프로그램을 실행시켜주는 클래스
-    app = QApplication(sys.argv)
-
-    # WindowClass의 인스턴스 생성
-    myWindow = WindowClass()
-
-    # 프로그램 화면을 보여주는 코드
-    myWindow.show()
-
-    # 프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
-    app.exec_()
