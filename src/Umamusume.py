@@ -1,4 +1,3 @@
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal, QObject
 import multiprocessing as mp
 import threading
