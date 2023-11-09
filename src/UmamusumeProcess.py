@@ -85,26 +85,6 @@ class UmaProcess:
         self.isAlive = False
         self.sleepTime = 0.5
 
-        # 기본 값 - pickle 불러오기 전 ---
-        self.resetCount = 0
-        self.is시작하기 = False  # -- pickle --
-        self.isPAUSED = False  # -- pickle --
-        self.is선물_이동 = True  # -- pickle --
-        self.is미션_이동 = True  # -- pickle --
-        self.is뽑기_이동 = True  # -- pickle --
-        self.is서포트_뽑기 = False  # -- pickle --
-        self.isSSR확정_뽑기 = False  # -- pickle --
-        self.is뽑기_결과 = True  # -- pickle --
-        self.is초기화하기 = False  # -- pickle --
-
-        # 서포트 카드 총 갯수
-        path = "./images/서포트_카드"
-        self.Supporter_cards_total = dict()
-        for a in glob.glob(os.path.join(path, "*")):
-            if os.path.isfile(a):
-                key = a.replace(".", "/").replace("\\", "/")
-                key = key.split("/")
-                self.Supporter_cards_total[key[-2]] = 0
         # --------------------------------
 
         # 수신
@@ -173,18 +153,18 @@ class UmaProcess:
         self.log_main(self.InstanceName, "리세 종료")
         self.log("리세 종료")
 
+        self.saveUma()  # Uma 파일 저장
+
         self.ReceiverEvent.set()  # Receiver 스레드 종료 준비
         self.Receiver.join()  # 수신 종료 대기
         self.ReceiverEvent.clear()
-
-        self.saveUma()  # Uma 파일 저장
 
         while not self.toParent.empty():
             time.sleep(0.01)
         self.toParent.close()
         # 종료됨
 
-    def saveUma(self):
+    def saveUma(self) -> bool:
         """
         Uma 파일 저장
         """
@@ -211,7 +191,7 @@ class UmaProcess:
             # self.log(path+"를 저장하는데 실패했습니다.")
             return False
 
-    def loadUma(self):
+    def loadUma(self) -> bool:
         """
         Uma 파일 불러오기
         """
@@ -236,7 +216,8 @@ class UmaProcess:
                 self.log("기존 데이터를 불러옵니다.")
             return True
         except:
-            self.resetCount = 0  # -- pickle --
+            if not self.resetCount:
+                self.resetCount = 0  # -- pickle --
             self.is시작하기 = False  # -- pickle --
             self.isPAUSED = False  # -- pickle --
             self.is선물_이동 = True  # -- pickle --
