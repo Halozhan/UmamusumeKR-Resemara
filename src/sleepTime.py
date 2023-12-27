@@ -3,14 +3,18 @@ import time
 import psutil
 import math
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pyqtWidget import WindowClass
+
 
 class sleepTime(QThread):
     sendSleepTime = pyqtSignal(float, float)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: "WindowClass"):
         super().__init__()
-        if parent is not None:
-            self.parent = parent
+        self.parent = parent
 
         self.isAlive = True
         self.sleepTime = 0.5

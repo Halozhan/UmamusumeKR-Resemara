@@ -216,7 +216,7 @@ class UmaProcess:
                 self.log("기존 데이터를 불러옵니다.")
             return True
         except:
-            if not self.resetCount:
+            if "self.resetCount" not in locals():
                 self.resetCount = 0  # -- pickle --
             self.is시작하기 = False  # -- pickle --
             self.isPAUSED = False  # -- pickle --
@@ -2057,7 +2057,7 @@ class UmaProcess:
                     adbInput.BlueStacksSwipe(
                         self.device, self.InstancePort, position=position[0], deltaX=5, deltaY=5
                     )
-                    print(position)
+                    # print(position)
                     time.sleep(0.5)
                     img = screenshotToOpenCVImg(hwndMain)
 
@@ -2713,7 +2713,7 @@ class UmaProcess:
                             for key, value in Supporter_cards.items():
                                 card_count = 0
                                 card_count, position = ImageSearch(
-                                    img, value, 46, 122, 451, 715, grayscale=False
+                                    img, value, 46, 122, 451, 715
                                 )
                                 if card_count:
                                     if Supporter_cards_now[key] < card_count:
