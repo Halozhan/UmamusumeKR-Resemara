@@ -3,14 +3,17 @@ import numpy as np
 from screenshot import screenshot
 
 
-def screenshotToOpenCVImg(hwnd):  # PIL image to OpenCV
+def screenshot_to_opencv_img(hwnd):  # PIL image to OpenCV
+    """
+    reference: https://www.zinnunkebi.com/python-opencv-pil-convert/
+    """
     try:
         img = np.array(screenshot(hwnd, isExport=False))
         img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)  # RGB순의 이미지를 OpenCV에 맞게 BGR순으로 변경
         return img
-    except:
-        pass
-    # reference: https://www.zinnunkebi.com/python-opencv-pil-convert/
+    except Exception as e:
+        print(f"Error in screenshot_to_opencv_img: {e}")
+        return None
 
 
 def ImageSearch(
@@ -74,36 +77,36 @@ def ImageSearch(
 
         return count, position  # 갯수와 좌표 반환
 
-    except:
+    except Exception:
         return False, False  # 예외 처리
 
 
 if __name__ == "__main__":
+    """TEST CODE"""
     import win32gui
     from OpenCV_imread import imreadUnicode
-    import adbInput
+    from AdbInput import AdbInput
 
-    hwndMain = win32gui.FindWindow(None, "Bluestacks Dev")  # hwnd ID 찾기
-    img = screenshotToOpenCVImg(hwndMain)  # 윈도우의 스크린샷
-    우마 = imreadUnicode("./images/우마.png")  # 찾을 이미지
+    hwnd = win32gui.FindWindow(None, "BlueStacks 1")  # hwnd ID 찾기
+    screenshotImage = screenshot_to_opencv_img(hwnd)  # 윈도우의 스크린샷
+    findImage = imreadUnicode("./findImage.png")  # 찾을 이미지
     count, position = ImageSearch(
-        img,
-        우마,
-        roiLeft=206,
-        roiTop=604,
-        roiWidth=52,
-        roiHeight=58,
+        screenshotImage,
+        findImage,
+        roiLeft=0,
+        roiTop=0,
+        roiWidth=-1,
+        roiHeight=-1,
         confidence=0.8,
-        grayscale=False,
-        isExport=False,
+        grayscale=True,
+        isExport=True,
     )  # 스크린샷, 찾을 이미지, ROI, 정확도, 명암 변화, 추출
     print("갯수는 " + str(count) + "개")  # 찾은 갯수
     print(position)  # 박스 위치 출력
 
-    instancePort = 6205  # adb instance 포트
-    device = adbInput.AdbConnect(instancePort)  # 연결
+    device = AdbInput(port=13350)
     while 1:
-        adbInput.BlueStacksSwipe(device, position[0], 5, 5)
+        device.swipe(position[0][0], position[0][1], position[0][0], position[0][1], 200)
 
 
 # reference: https://stackoverflow.com/questions/7853628/how-do-i-find-an-image-contained-within-an-image

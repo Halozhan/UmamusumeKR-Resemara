@@ -302,7 +302,7 @@ class newTab(QMainWindow):
             f.close()
             self.InstanceComboBox.addItems(lines)
             self.logs.append("불러오기 성공")
-        except:
+        except Exception:
             self.logs.append("불러올 수 없습니다. Instance.txt 파일을 다시 확인해주세요")
             pass
 
@@ -353,7 +353,7 @@ class newTab(QMainWindow):
         try:
             path = "./Saved_Data/" + str(self.InstancePort) + ".uma"
             os.remove(path)
-        except:
+        except Exception:
             pass
 
     def isDoneTutorialCheckBoxFunction(self):

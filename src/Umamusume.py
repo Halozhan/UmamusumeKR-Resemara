@@ -33,7 +33,7 @@ class Umamusume(QObject):
             try:
                 recv = self.toParent.get(timeout=0.001)
                 print(recv)
-            except:
+            except Exception:
                 pass
         self.toParent.close()
         # print("부모 수신 종료")
@@ -114,7 +114,7 @@ class Umamusume(QObject):
             try:
                 recv = self.toChild.get(timeout=0.001)
                 print(recv)
-            except:
+            except Exception:
                 pass
         self.toChild.close()  # 자식 수신 큐도 삭제해야함
 

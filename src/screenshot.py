@@ -4,7 +4,7 @@ from ctypes import windll
 from PIL import Image
 
 
-def screenshot(hwnd, isExport):
+def screenshot(hwnd: int, isExport: bool = False):
     try:
         # Change the line below depending on whether you want the whole window
         # or just the client area.
@@ -51,16 +51,19 @@ def screenshot(hwnd, isExport):
             return im
         else:
             return False
-    except:
+    except Exception:
         return False
 
 
-if __name__ == "__main__":  # 이미지 추출 테스트
-    hwndMain = win32gui.FindWindow(None, "Bluestacks 5")
+if __name__ == "__main__":
+    """
+    TEST CODE
+    이미지 추출 테스트
+    """
+    hwndMain = win32gui.FindWindow(None, "BlueStacks 1")
+    print(hwndMain)
     import time
 
     now = time.time()
-    while True:
-        screenshot(hwndMain, False)
-        print(str(round((time.time() - now) * 1000, 6)) + "ms")
-        now = time.time()
+    print(screenshot(hwndMain, True))
+    print(str(round((time.time() - now) * 1000, 6)) + "ms")
